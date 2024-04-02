@@ -97,11 +97,11 @@ const brands = [
     alt: "Pureco",
     href: "/shop?page=1&search=pureco",
   },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/10.png",
-    alt: "Cocoa",
-    href: "/shop?page=1&search=cocoa",
-  },
+  // {
+  //   src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/10.png",
+  //   alt: "Cocoa",
+  //   href: "/shop?page=1&search=cocoa",
+  // },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/11.png",
     alt: "Choci Logo",

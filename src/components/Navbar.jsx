@@ -180,81 +180,81 @@ const Links = [
 //   //   location: "/home-care",
 //   // },
 // ];
-const mainLinks = [
-  {
-    name: "Gifting",
-    categoryId: 288,
-  },
-  {
-    name: "GIR Gau Products",
-    categoryId: 278,
-  },
-  {
-    name: "Health Care",
-    categoryId: 281,
-  },
-  {
-    name: "Personal Care",
-    categoryId: 344,
-  },
-  {
-    name: "Nutrition",
-    categoryId: 788,
-  },
+// const mainLinks = [
+//   {
+//     name: "Gifting",
+//     categoryId: 288,
+//   },
+//   {
+//     name: "GIR Gau Products",
+//     categoryId: 278,
+//   },
+//   {
+//     name: "Health Care",
+//     categoryId: 281,
+//   },
+//   {
+//     name: "Personal Care",
+//     categoryId: 344,
+//   },
+//   {
+//     name: "Nutrition",
+//     categoryId: 788,
+//   },
 
-  {
-    name: "Grocery",
-    categoryId: 291,
-  },
-  {
-    name: "Healthy Breakfast",
-    categoryId: 775,
-  },
-  {
-    name: "Healthy Snacks",
-    categoryId: 317,
-  },
-  {
-    name: "Healthy Powder",
-    categoryId: 716,
-  },
-  {
-    name: "Chocolate & Bars",
-    categoryId: 773,
-  },
-  {
-    name: "Tea & Coffee",
-    categoryId: 769,
-  },
-  {
-    name: "Beverages",
-    categoryId: 772,
-  },
-  {
-    name: "Seasonal Foods",
-    categoryId: 290,
-  },
-  {
-    name: "World Foods",
-    categoryId: 771,
-  },
-  {
-    name: "Home Care",
-    categoryId: 347,
-  },
+//   {
+//     name: "Grocery",
+//     categoryId: 291,
+//   },
+//   {
+//     name: "Healthy Breakfast",
+//     categoryId: 775,
+//   },
+//   {
+//     name: "Healthy Snacks",
+//     categoryId: 317,
+//   },
+//   {
+//     name: "Healthy Powder",
+//     categoryId: 716,
+//   },
+//   {
+//     name: "Chocolate & Bars",
+//     categoryId: 773,
+//   },
+//   {
+//     name: "Tea & Coffee",
+//     categoryId: 769,
+//   },
+//   {
+//     name: "Beverages",
+//     categoryId: 772,
+//   },
+//   {
+//     name: "Seasonal Foods",
+//     categoryId: 290,
+//   },
+//   {
+//     name: "World Foods",
+//     categoryId: 771,
+//   },
+//   {
+//     name: "Home Care",
+//     categoryId: 347,
+//   },
 
-  // {
-  //   name: "Super Food",
-  //   categoryId: 601,
-  // },
+//   // {
+//   //   name: "Super Food",
+//   //   categoryId: 601,
+//   // },
 
-  // {
-  //   name: "Sweetener",
-  //   categoryId: 774,
-  // },
+//   // {
+//   //   name: "Sweetener",
+//   //   categoryId: 774,
+//   // },
 
-  ,
-];
+//   ,
+// ];
 
 export default function Navbar() {
   let { search } = useLocation();
@@ -387,7 +387,7 @@ export default function Navbar() {
 
     if (response.data.status === true) {
       setCategories(response.data.categories);
-      // setTopCategory(mergeArraysById(mainLinks, response.data.categories));
+       setTopCategory(mergeArraysById(mainLinks, response.data.categories));
     }
   };
 
@@ -964,6 +964,207 @@ export default function Navbar() {
             <GridItem
               colSpan={7}
               display={"flex"}
+              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            >
+              <Flex
+                as={"nav"}
+                gap={{ md: 6, lg: 4, xl: 5 }}
+                display={{ base: "flex", lg: "flex" }}
+                fontSize={{ lg: 11, xl: 14, md: 9 }}
+                alignItems={"center"}
+              >
+                <Link
+                  as={ReactRouterLink}
+                  to={"/"}
+                  _hover={{
+                    textDecoration: "none",
+                    color: "brand.900",
+                  }}
+                  // fontWeight={600}
+                  onMouseEnter={handleClose}
+                >
+                  Home
+                </Link>
+                {/* <Menu isOpen={Open} onClose={handleClose1}>
+                  <MenuButton
+                    //color="text.500"
+                    mb={0.5}
+                    onMouseEnter={handleHover1}
+                    // onMouseLeave={handleClose}
+                    onClick={() => navigate("/shop")}
+                  >
+                    Shop
+                  </MenuButton>
+                  <MenuList
+                    as={Grid}
+                    width={500}
+                    height={400}
+                    overflowY={"auto"}
+                    templateColumns="repeat(9, 1fr)"
+                    onMouseLeave={handleClose1}
+                    zIndex={9999}
+                  >
+                    <GridItem colSpan={3} overflow="auto">
+                      {megaCategories?.map((section, index) => (
+                        <>
+                          <MenuItem
+                            icon={
+                              <img
+                                src={"./himalayan_logo.jpg"}
+                                width={25}
+                                alt=""
+                              />
+                            }
+                            fontSize={"14"}
+                            key={index}
+                            onMouseEnter={() => handleShow1(section.children)}
+                            onClick={() =>
+                              navigate(`/shop?category=${section.id}`)
+                            }
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "brand.500",
+                                color: "white",
+                              },
+                            }}
+                          >
+                            {" "}
+                            {section?.name}
+                          </MenuItem>
+
+                          <Divider />
+                        </>
+                      ))}
+                      .
+                    </GridItem>
+                    <GridItem colSpan={3} overflow="auto">
+                      {megaSubCategories?.map((item, subIndex) => (
+                        <MenuItem
+                          fontSize={"14"}
+                          key={subIndex}
+                          onClick={() => navigate(`/shop?category=${item.id}`)}
+                          onMouseEnter={() => handleShow2(item.children)}
+                          sx={{
+                            "&:hover": {
+                              backgroundColor: "brand.500",
+                              color: "white",
+                            },
+                          }}
+                        >
+                          {item?.name}
+                        </MenuItem>
+                      ))}
+                    </GridItem>
+                    <GridItem colSpan={3} overflow="auto">
+                      {nestedCategories?.map((item, nestedIndex) => (
+                        <MenuItem
+                          fontSize={"14"}
+                          key={nestedIndex}
+                          onClick={() => navigate(`/shop?category=${item.id}`)}
+                          sx={{
+                            "&:hover": {
+                              backgroundColor: "brand.500",
+                              color: "white",
+                            },
+                          }}
+                        >
+                          {item?.name}
+                        </MenuItem>
+                      ))}
+                    </GridItem>
+                  </MenuList>
+                </Menu> */}
+                {Links.map((link) => (
+                  <Link
+                    as={ReactRouterLink}
+                    to={link.location}
+                    className={link.name === "SOSE Elite" ? "new-link" : ""}
+                    _hover={{
+                      textDecoration: "none",
+                      color: "brand.900",
+                    }}
+                    // fontWeight={600}
+                    onMouseEnter={handleClose}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </Flex>
+            </GridItem>
+           
+
+            <GridItem
+              colSpan={3}
+              display={"flex"}
+              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+              justifyContent={"end"}
+            >
+              <Flex
+                as={"nav"}
+                gap={{ md: 6, lg: 5 }}
+                display={{ base: "flex", lg: "flex" }}
+                fontSize={{ xl: 16, lg: 14 }}
+                alignItems={"center"}
+              >
+                <CartAndWishlistButtons />
+                {checkLogin().isLoggedIn ? (
+                  <Menu>
+                    <MenuButton aria-label="User profile menu">
+                      <Avatar
+                        size="sm"
+                        name={name.trim() !== "" ? name : null}
+                        src={null}
+                        color={"white"}
+                        background={"brand.500"}
+                      />
+                    </MenuButton>
+                    {checkLogin().isLoggedIn ? (
+                      <MenuList zIndex={999}>
+                        <MenuItem as={ReactRouterLink} to="/profile">
+                          My account
+                        </MenuItem>
+
+                        <MenuDivider />
+                        <MenuItem onClick={() => Logout()}>Logout</MenuItem>
+                      </MenuList>
+                    ) : (
+                      <></>
+                    )}
+                  </Menu>
+                ) : (
+                  <>
+                    <Link
+                      className={"new-link"}
+                      _hover={{
+                        textDecoration: "none",
+                        color: "brand.900",
+                      }}
+                      fontWeight={500}
+                      fontSize={{ md: "16px" }}
+                      onClick={() => navigate("/login")}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      onClick={() => navigate("/signup")}
+                      className={"new-link"}
+                      _hover={{
+                        textDecoration: "none",
+                        color: "brand.900",
+                      }}
+                      fontWeight={500}
+                      fontSize={{ md: "16px" }}
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
+              </Flex>
+            </GridItem>
+
+            <GridItem
+              colSpan={7}
+              display={"flex"}
               alignItems={"center"}
               // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
@@ -1079,208 +1280,8 @@ export default function Navbar() {
                 )
               ) : null}
             </GridItem>
-
             <GridItem
               colSpan={3}
-              display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-              justifyContent={"end"}
-            >
-              <Flex
-                as={"nav"}
-                gap={{ md: 6, lg: 5 }}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={{ xl: 16, lg: 14 }}
-                alignItems={"center"}
-              >
-                <CartAndWishlistButtons />
-                {checkLogin().isLoggedIn ? (
-                  <Menu>
-                    <MenuButton aria-label="User profile menu">
-                      <Avatar
-                        size="sm"
-                        name={name.trim() !== "" ? name : null}
-                        src={null}
-                        color={"white"}
-                        background={"brand.500"}
-                      />
-                    </MenuButton>
-                    {checkLogin().isLoggedIn ? (
-                      <MenuList zIndex={999}>
-                        <MenuItem as={ReactRouterLink} to="/profile">
-                          My account
-                        </MenuItem>
-
-                        <MenuDivider />
-                        <MenuItem onClick={() => Logout()}>Logout</MenuItem>
-                      </MenuList>
-                    ) : (
-                      <></>
-                    )}
-                  </Menu>
-                ) : (
-                  <>
-                    <Link
-                      className={"new-link"}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "brand.900",
-                      }}
-                      fontWeight={500}
-                      fontSize={{ md: "16px" }}
-                      onClick={() => navigate("/login")}
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      onClick={() => navigate("/signup")}
-                      className={"new-link"}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "brand.900",
-                      }}
-                      fontWeight={500}
-                      fontSize={{ md: "16px" }}
-                    >
-                      Sign up
-                    </Link>
-                  </>
-                )}
-              </Flex>
-            </GridItem>
-
-            <GridItem
-              colSpan={8}
-              display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-            >
-              <Flex
-                as={"nav"}
-                gap={{ md: 6, lg: 4, xl: 5 }}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl: 14, md: 9 }}
-                alignItems={"center"}
-              >
-                <Link
-                  as={ReactRouterLink}
-                  to={"/"}
-                  _hover={{
-                    textDecoration: "none",
-                    color: "brand.900",
-                  }}
-                  // fontWeight={600}
-                  onMouseEnter={handleClose}
-                >
-                  Home
-                </Link>
-                <Menu isOpen={Open} onClose={handleClose1}>
-                  <MenuButton
-                    //color="text.500"
-                    mb={0.5}
-                    onMouseEnter={handleHover1}
-                    // onMouseLeave={handleClose}
-                    onClick={() => navigate("/shop")}
-                  >
-                    Shop
-                  </MenuButton>
-                  <MenuList
-                    as={Grid}
-                    width={500}
-                    height={400}
-                    overflowY={"auto"}
-                    templateColumns="repeat(9, 1fr)"
-                    onMouseLeave={handleClose1}
-                    zIndex={9999}
-                  >
-                    <GridItem colSpan={3} overflow="auto">
-                      {megaCategories?.map((section, index) => (
-                        <>
-                          <MenuItem
-                            icon={
-                              <img
-                                src={"./himalayan_logo.jpg"}
-                                width={25}
-                                alt=""
-                              />
-                            }
-                            fontSize={"14"}
-                            key={index}
-                            onMouseEnter={() => handleShow1(section.children)}
-                            onClick={() =>
-                              navigate(`/shop?category=${section.id}`)
-                            }
-                            sx={{
-                              "&:hover": {
-                                backgroundColor: "brand.500",
-                                color: "white",
-                              },
-                            }}
-                          >
-                            {" "}
-                            {section?.name}
-                          </MenuItem>
-
-                          <Divider />
-                        </>
-                      ))}
-                      .
-                    </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {megaSubCategories?.map((item, subIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={subIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
-                          onMouseEnter={() => handleShow2(item.children)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {nestedCategories?.map((item, nestedIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={nestedIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
-                  </MenuList>
-                </Menu>
-                {Links.map((link) => (
-                  <Link
-                    as={ReactRouterLink}
-                    to={link.location}
-                    className={link.name === "SOSE Elite" ? "new-link" : ""}
-                    _hover={{
-                      textDecoration: "none",
-                      color: "brand.900",
-                    }}
-                    // fontWeight={600}
-                    onMouseEnter={handleClose}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </Flex>
-            </GridItem>
-            <GridItem
-              colSpan={2}
               
               display={"flex"}
               justifyContent={"end"}
@@ -1361,6 +1362,140 @@ export default function Navbar() {
             >
               <FaApple fontSize={22} />
             </Link>
+            </GridItem>
+            <GridItem
+              colSpan={12}
+              display={"flex"}
+              justifyContent={{
+                center: "center",
+                lg: "start",
+              }}
+              alignItems={"center"}
+              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+              gap={0.5}
+              fontSize={15}
+              py={2}
+              overflowX={"scroll"}
+              // maxWidth={"95vw"}
+            >
+              {/* <Link
+              _hover={{
+                textDecoration: "none",
+                color: "brand.900",
+              }}
+              fontWeight={600}
+              href={`/shop?page=1&category=${288}&category_name=Gifting`}
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Gifting
+            </Link> */}
+              {categories?.map((data, index) => (
+                <>
+                  <Menu
+                    isOpen={openCategory === index}
+                    onClose={() => handleCloseCategory()}
+                  >
+                    <MenuButton
+                      onMouseEnter={() => handleHoverCategory(index)}
+                      _hover={{ color: "brand.500", bg: "transparent" }}
+                      _active={{ color: "brand.500", bg: "transparent" }}
+                      _focusVisible={{
+                        color: "brand.500",
+                        bg: "transparent",
+                        outline: "none",
+                      }}
+                      width={"fit-content"}
+                      fontSize={"12px"}
+                      cursor={"pointer"}
+                      variant={"ghost"}
+                      // onMouseLeave={() => handleCloseCategory(index)}
+                      // fontWeight={600}
+
+                      px={2}
+                      onClick={() => {
+                        handleHoverCategory(index),
+                          navigate(
+                            `/shop?page=1&category=${
+                              data.id
+                            }&category_name=${encodeURIComponent(data?.name)}`
+                          );
+                      }}
+                    >
+                      <Flex
+                        w={"max-content"}
+                        gap={0.5}
+                        alignItems={"center"}
+                        fontSize={"12px"}
+                      >
+                        {data.name}
+                        {data?.children.length > 0 && <IoIosArrowDown />}
+                      </Flex>
+                    </MenuButton>
+                    {data?.children.length > 0 ? (
+                      <MenuList
+                        as={Flex}
+                        direction={"column"}
+                        maxH={"70vh"}
+                        wrap={"wrap"}
+                        onMouseEnter={() => handleHoverCategory(index)}
+                        onMouseLeave={handleCloseCategory}
+                        sx={{ placement: "center" }}
+                        zIndex={9999}
+                        p={2}
+                        boxShadow={
+                          "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px"
+                        }
+                      >
+                        {data?.children?.map((section, index) => (
+                          <>
+                            <GridItem spacing={3} p={2}>
+                              <Text
+                                as="b"
+                                cursor={"pointer"}
+                                _hover={{ color: "brand.500" }}
+                                fontSize={"12px"}
+                                onClick={() => {
+                                  handleCloseCategory(index);
+                                  navigate(
+                                    `/shop?page=1&category=${
+                                      section.id
+                                    }&category_name=${encodeURIComponent(
+                                      section?.name
+                                    )}`
+                                  );
+                                }}
+                              >
+                                {section.name}
+                              </Text>
+                              {section?.children?.map((section, index) => (
+                                <Text
+                                  fontSize={"12px"}
+                                  cursor={"pointer"}
+                                  _hover={{ color: "brand.500" }}
+                                  onClick={() => {
+                                    handleCloseCategory(index);
+                                    navigate(
+                                      `/shop?page=1&category=${
+                                        section.id
+                                      }&category_name=${encodeURIComponent(
+                                        section?.name
+                                      )}`
+                                    );
+                                  }}
+                                >
+                                  {section.name}
+                                </Text>
+                              ))}
+                            </GridItem>
+                          </>
+                        ))}
+                      </MenuList>
+                    ) : (
+                      <></>
+                    )}
+                  </Menu>
+                </>
+              ))}
             </GridItem>
           </Grid>
         </Container>

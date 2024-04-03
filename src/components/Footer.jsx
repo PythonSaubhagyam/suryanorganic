@@ -17,7 +17,7 @@ import { useNavigate, NavLink as RouterLink } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
 const ListHeader = ({ children }) => {
   return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={1} color="brand.100">
+    <Text fontWeight={"500"}  fontSize={"lg"} mb={1} color="brand.100">
       {children}
     </Text>
   );
@@ -76,8 +76,11 @@ export default function Footer() {
           </Text>
         </Box>
         <Container as={Stack} maxW={"7xl"} pt={10} pb={2}>
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 5 }}
+          <Grid
+            templateColumns={{
+              md: "repeat(5, 1fr)",
+              base: "repeat(1, 1fr)",
+            }}
             // spacing={8}
             spacingY="8px"
           >
@@ -145,22 +148,7 @@ export default function Footer() {
             </Stack>
             <Stack align={"flex-start"} color="text.300">
               {!isMobile && <ListHeader>&nbsp;</ListHeader>}
-              {/* <Link
-                textDecoration="none"
-                _hover={{ color: "text.500" }}
-                as={RouterLink}
-                to={"/store-locator"}
-              >
-                Store Locator
-              </Link>
-              <Link
-                textDecoration="none"
-                _hover={{ color: "text.500" }}
-                as={RouterLink}
-                to={"/contact-us"}
-              >
-                Contact Us
-              </Link> */}
+           
 
               <>
                 {isMobiles ? (
@@ -439,7 +427,7 @@ export default function Footer() {
                 />
               </Link> */}
             </Stack>
-          </SimpleGrid>
+          </Grid>
         </Container>
         <Box py={4}>
           <Text pt={6} fontSize={"sm"} textAlign={"center"} color={"brand.100"}>

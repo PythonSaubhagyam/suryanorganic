@@ -17,7 +17,7 @@ import { useNavigate, NavLink as RouterLink } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
 const ListHeader = ({ children }) => {
   return (
-    <Text fontWeight={"500"}  fontSize={"lg"} mb={1} color="brand.100">
+    <Text fontWeight={"500"} fontSize={"lg"} mb={1} color="brand.100">
       {children}
     </Text>
   );
@@ -87,8 +87,13 @@ export default function Footer() {
             {/* <Stack align={"flex-start"} color="brand.900"> */}
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
-            <Stack align={"flex-start"} color="text.300">
-              <ListHeader style={{ color: "#436131" }}>Quick Links</ListHeader>
+            <Stack color="text.300">
+              <Stack align={{ md: "flex-start", base: "center" }}>
+                <ListHeader style={{ color: "#436131" }}>
+                  Quick Links
+                </ListHeader>
+              </Stack>
+
               <Link
                 textDecoration="none"
                 _hover={{ color: "text.500" }}
@@ -148,7 +153,6 @@ export default function Footer() {
             </Stack>
             <Stack align={"flex-start"} color="text.300">
               {!isMobile && <ListHeader>&nbsp;</ListHeader>}
-           
 
               <>
                 {isMobiles ? (
@@ -292,7 +296,12 @@ export default function Footer() {
             {/* </Stack> */}
             <Stack color="text.300" mt={{ md: 3 }}>
               <Stack>
-                <ListHeader gap={"3"}>Partner With Us</ListHeader>
+                {" "}
+                <Stack align={{ md: "flex-start", base: "center" }}>
+                  <ListHeader style={{ color: "#436131" }}>
+                    Partner With Us
+                  </ListHeader>
+                </Stack>
                 <Link
                   textDecoration="none"
                   _hover={{ color: "text.500" }}
@@ -348,8 +357,13 @@ export default function Footer() {
                 </Flex>
               </Stack> */}
             </Stack>
-            <Stack align={"flex-start"} color="text.300" mt={{ md: 3 }} >
-              <ListHeader align={"flex-start"}>Customer Support</ListHeader>
+            <Stack color="text.300" mt={{ md: 3 }}>
+              <Stack align={{ md: "flex-start", base: "center" }}>
+                <ListHeader style={{ color: "#436131" }}>
+                  Customer Support
+                </ListHeader>
+              </Stack>
+
               <Link
                 textDecoration="none"
                 _hover={{ color: "text.500" }}
@@ -382,8 +396,11 @@ export default function Footer() {
                 care@suryanorganic.com
               </Link>
             </Stack>
-            <Stack mt={{ md: 3 }} ml={{md:6}}>
-              <ListHeader align={"flex-start"}>Talk To Our Vaidya</ListHeader>
+            <Stack mt={{ md: 3 }} ml={{ md: 6 }}>
+              <Stack align={{ md: "flex-start", base: "center" }}>
+                <ListHeader gap={"3"}>Talk To Our Vaidya</ListHeader>
+              </Stack>
+
               <Link
                 textDecoration="none"
                 _hover={{ color: "text.500" }}
@@ -411,10 +428,15 @@ export default function Footer() {
               {/* </Stack>
 
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
-              <ListHeader align={"flex-start"} marginBottom={5}>
-                We Accepts Payments via
-              </ListHeader>
-              <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/footer/payment method.png hnghngh.png"} />
+
+              <Stack align={{ md: "flex-start", base: "center" }}>
+                <ListHeader gap={"3"}>We Accepts Payments via</ListHeader>
+              </Stack>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/footer/payment method.png hnghngh.png"
+                }
+              />
               {/* <ListHeader>Download App</ListHeader>
               <Link
                 target="blank"

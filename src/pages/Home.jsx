@@ -139,7 +139,6 @@ const brands = [
   },
 ];
 
-
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
@@ -338,7 +337,11 @@ export default function Home() {
         />
       </Container>
 
-      <Container maxW={"container.xl"} mb={5} px={{ base: 2, md: 6, lg: "10%" }}>
+      <Container
+        maxW={"container.xl"}
+        mb={5}
+        px={{ base: 2, md: 6, lg: "10%" }}
+      >
         <Grid
           templateColumns={{
             md: "repeat(2, 1fr)",
@@ -479,22 +482,22 @@ export default function Home() {
         <Image src="./Suryan Organic/home/sweet_banner.jpg" alt="" />
       </Container> */}
 
-<Container maxW={"container.xl"} px={0}>
+      <Container maxW={"container.xl"} px={0}>
         <Carousel
           banners={[
             {
-              image:"./Suryan Organic/home/gulkand_dry_fruit.jpg",
+              image: "./Suryan Organic/home/gulkand_dry_fruit.jpg",
               alt_text: "sweet1",
               image_url: "/shop?page=1&category=492",
             },
             {
-              image:"./Suryan Organic/home/kaju-katari.webp",
+              image: "./Suryan Organic/home/kaju-katari.webp",
               alt_text: "sweet2",
               image_url: "/shop?page=1&category=492",
             },
-           
+
             {
-              image:"./Suryan Organic/home/sugarFree.jpg",
+              image: "./Suryan Organic/home/sugarFree.jpg",
               alt_text: "sweet4",
               image_url: "/shop?page=1&category=492",
             },
@@ -568,8 +571,8 @@ export default function Home() {
         products={homeData?.best_of_the_year}
       />
 
-      <Container maxW={"container.xl"} px={"3.8%"} >
-        <Image  src="./Suryan Organic/home/masala-suryan-organic.jpg" alt="" />
+      <Container maxW={"container.xl"} px={"3.8%"}>
+        <Image src="./Suryan Organic/home/masala-suryan-organic.jpg" alt="" />
       </Container>
 
       <Container maxW={"6xl"} centerContent>
@@ -651,35 +654,31 @@ export default function Home() {
           {!isMobile ? (
             <>
               <GridItem>
-                <Text  mt={3} fontWeight={600} fontSize={24}>
+                <Text mt={3} fontWeight={600} fontSize={24}>
                   We welcome you to visit our stores or website for products
                   that support 'Go Adharit Jeevan Shailee'
                 </Text>
                 <Text
                   // color={"text.300"}
-                  fontSize={18  }
+                  fontSize={18}
                   align={{ base: "justify" }}
                   mt={3}
                 >
                   SOSE is inspired by the mission of @bansigir which is working
                   to revive Bharat's ancient 'Go Sanskriti', and regain its past
                   glory. <br />
-                  A Go Adharit Jeevan Shailee can bring changes in the
-                  fields of nutrition, health, agriculture and education. <br />
-                  
+                  A Go Adharit Jeevan Shailee can bring changes in the fields of
+                  nutrition, health, agriculture and education. <br />
                   At our gaushala, we aim to make sure that our Mother and her
                   calf are given enough respect and care so that they are able
                   to live in utmost bliss. <br />
-                  
                   They are provided the best and nutritious food and that too
                   with free feeding which in turn ensures that the milk we are
                   consuming via them is also full of nutrients and doesn’t have
                   any preservatives. <br />
-                 
                   The milking process is also done in such a Vedic,
                   non-exploitative manner there is enough for her child too.
                   <br />
-                  
                   The Jeevans Shailee is centred around promoting and placing
                   emphasis on Go Adharit Ahar (Food & Nutrition), Go Adharit
                   Krishi (Agriculture & Environment) Go Adharit Chikitsa (Health
@@ -771,7 +770,7 @@ export default function Home() {
             ></iframe>
           </GridItem>
           <GridItem>
-            <Text  fontWeight={600} fontSize={24} mt={1}>
+            <Text fontWeight={600} fontSize={24} mt={1}>
               From Bharat (India) to your homes, Sidha <br /> Kisan Se...
             </Text>
             <Text fontSize={18} align={{ base: "justify" }} mt={2}>
@@ -831,7 +830,7 @@ export default function Home() {
 
           <Stat>
             <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
-            70000+
+              70000+
             </StatNumber>
             <StatHelpText color="gray.600">Satisfied Clients</StatHelpText>
           </Stat>
@@ -858,7 +857,7 @@ export default function Home() {
           </Stat>
         </SimpleGrid>
       </Container>
-      <Container maxW={{ base: "100vw", md: "container.xl" }} >
+      <Container maxW={{ base: "100vw", md: "container.xl" }}>
         <Box
         /*  w="100%"
           backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
@@ -890,7 +889,7 @@ export default function Home() {
           px={{ base: 15, md: 20, lg: 20 }}
         >
           {brands?.map((brand, index) => (
-            <GridItem >
+            <GridItem>
               <Image
                 as={LazyLoadImage}
                 key={index}
@@ -928,11 +927,7 @@ export default function Home() {
             OUR CERTIFICATIONS & AWARDS
           </Heading>
         </Box>
-        <Text
-          mb={9}
-          textAlign={"center"}
-          color={"text.300"}
-        >
+        <Text mb={9} textAlign={"center"} color={"text.300"}>
           We are committed to quality and each of our facility is independently
           certified by an industry-accredited agency.
         </Text>
@@ -980,13 +975,13 @@ export default function Home() {
             mb={"5"}
             pb={"10px"}
           >
-         LICENCES & AFFILIATIONS
+            LICENCES & AFFILIATIONS
           </Heading>
         </Box>
         <Flex justify="center" align="center" gap={10} pb={10}>
           <LazyLoadImage
             src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/licence_logo.jpg"
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/license.jpg"
             }
             width={"85%"}
             alt="Coffee Board"
@@ -997,18 +992,17 @@ export default function Home() {
           />
         </Flex>
         <Image
-         w={"70%"}
-         mx={"auto"}
-         mt={10}
-         mb={20}
-         src={"./Suryan Organic/home/suryan_organic.jpg"}
+          w={"70%"}
+          mx={"auto"}
+          mt={10}
+          mb={20}
+          src={"./Suryan Organic/home/suryan_organic.jpg"}
           style={{
             opacity: 1,
             transition: "opacity 0.7s",
-            
           }}
         />
-       
+
         <Box
           w="100%"
           /* backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
@@ -1023,17 +1017,16 @@ export default function Home() {
             mx="auto"
             align={"center"}
             mt={17}
-           
           >
             SERVING TO THE COUNTRIES
           </Heading>
         </Box>
-        <Container maxW={"container.xl"}  px={0}>
+        <Container maxW={"container.xl"} px={0}>
           <Image
             src={
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/Map.webp"
             }
-           w={"100%"}
+            w={"100%"}
             alt=""
             py={4}
             style={{

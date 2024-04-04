@@ -387,7 +387,7 @@ export default function Navbar() {
 
     if (response.data.status === true) {
       setCategories(response.data.categories);
-       setTopCategory(mergeArraysById(mainLinks, response.data.categories));
+      setTopCategory(mergeArraysById(mainLinks, response.data.categories));
     }
   };
 
@@ -482,155 +482,150 @@ export default function Navbar() {
 
   return (
     <>
-    
-        <Flex justify="center" display={isMobile ? "flex" : "none"}>
-          <Link as={ReactRouterLink} to="/">
-            <Image
-              // width="100px"
-              // height="50px"
-              boxSize="110px"
-              objectFit="contain"
-              src="/Suryan Organic/Suryan Organic.png"
-              alt="SOSE Logo"
-            />
-          </Link>
-        </Flex>
-        <Container
-          maxW={"container.xl"}
-          my={2}
-          display={isMobile ? "" : "none"}
+      <Flex justify="center" display={isMobile ? "flex" : "none"}>
+        <Link as={ReactRouterLink} to="/">
+          <Image
+            // width="100px"
+            // height="50px"
+            boxSize="110px"
+            objectFit="contain"
+            src="/Suryan Organic/Suryan Organic.png"
+            alt="SOSE Logo"
+          />
+        </Link>
+      </Flex>
+      <Container maxW={"container.xl"} my={2} display={isMobile ? "" : "none"}>
+        <Flex
+          h={16}
+          alignItems={"center"}
+          justifyContent={{
+            base: "space-between",
+            md: "space-between",
+            xl: "space-between",
+          }}
+          gap={{ base: 2, xl: 10, "2xl": 20 }}
         >
-          <Flex
-            h={16}
-            alignItems={"center"}
-            justifyContent={{
-              base: "space-between",
-              md: "space-between",
-              xl: "space-between",
-            }}
-            gap={{ base: 2, xl: 10, "2xl": 20 }}
-          >
-            <IconButton
-              size={"md"}
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label={"Open Menu"}
-              display={{ lg: "none" }}
-              onClick={isOpen ? onClose : onOpen}
-              ref={menuButtonRef}
-            />
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ lg: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+            ref={menuButtonRef}
+          />
 
-            <HStack spacing={{ base: 4, md: 6 }}>
-              <Flex gap={4} align="center">
-                <Flex direction="column" position={"relative"}>
-                  <InputGroup size="sm" width={"auto"} me={6}>
-                    <Input
-                      w={{ base: "25vw", md: "auto" }}
-                      placeholder="Search"
-                      focusBorderColor="brand.500"
-                      onChange={handleInputChange}
-                    />
-                    <InputRightElement
-                      children={
-                        <SearchIcon
-                          color="brand.100"
-                          h={"100%"}
-                          _hover={{
-                            color: "brand.900",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            navigate(`/shop?page=1&search=${searchQuery}`);
-                          }}
-                          aria-label="Search products"
-                        />
-                      }
-                    />
-                  </InputGroup>
-                  {searchResults !== null ? (
-                    searchResults.length > 0 ? (
-                      <Flex
-                        direction="column"
-                        zIndex={99}
-                        w={{ base: "65vw", lg: "22.5vw" }}
-                        position="absolute"
-                        top={10}
-                      >
-                        {searchResults?.slice(0, 4).map((result) => (
-                          <LinkBox
-                            as={Flex}
-                            border="1px"
-                            borderColor="gray.400"
-                            p={4}
-                            justify="space-between"
-                            align="center"
-                            bg="bg.100"
-                            gap={4}
-                          >
-                            <Image src={result.image1} boxSize="10" />
-                            <Text
-                              fontSize={"sm"}
-                              fontWeight="700"
-                              w={{
-                                base: "100%",
-                                lg: "75%",
-                              }}
-                            >
-                              <LinkOverlay href={`/products/${result.id}`}>
-                                {result.name}
-                              </LinkOverlay>
-                            </Text>
-                            <Text fontSize="sm" fontWeight="600">
-                              ₹{result.base_price}
-                            </Text>
-                          </LinkBox>
-                        ))}
-                      </Flex>
-                    ) : (
-                      <Box
-                        zIndex={99}
-                        w={{ base: "65vw", lg: "22.5vw" }}
-                        position="absolute"
-                        top={10}
-                        p={4}
-                        bg="bg.100"
-                        border="1px"
-                        borderColor="gray.400"
-                      >
-                        <Text fontSize="sm" fontWeight="600">
-                          No products found
-                        </Text>
-                      </Box>
-                    )
-                  ) : null}
-                </Flex>
-                <CartAndWishlistButtons />
-              </Flex>
-              <Menu>
-                <MenuButton aria-label="User profile menu">
-                  <Avatar
-                    size="sm"
-                    name={name.trim() !== "" ? name : null}
-                    src={null}
-                    color={"white"}
-                    background={"brand.500"}
+          <HStack spacing={{ base: 4, md: 6 }}>
+            <Flex gap={4} align="center">
+              <Flex direction="column" position={"relative"}>
+                <InputGroup size="sm" width={"auto"} me={6}>
+                  <Input
+                    w={{ base: "25vw", md: "auto" }}
+                    placeholder="Search"
+                    focusBorderColor="brand.500"
+                    onChange={handleInputChange}
                   />
-                </MenuButton>
-                {checkLogin().isLoggedIn ? (
-                  <MenuList zIndex={999}>
-                    <MenuItem as={ReactRouterLink} to="/profile">
-                      My account
+                  <InputRightElement
+                    children={
+                      <SearchIcon
+                        color="brand.100"
+                        h={"100%"}
+                        _hover={{
+                          color: "brand.900",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          navigate(`/shop?page=1&search=${searchQuery}`);
+                        }}
+                        aria-label="Search products"
+                      />
+                    }
+                  />
+                </InputGroup>
+                {searchResults !== null ? (
+                  searchResults.length > 0 ? (
+                    <Flex
+                      direction="column"
+                      zIndex={99}
+                      w={{ base: "65vw", lg: "22.5vw" }}
+                      position="absolute"
+                      top={10}
+                    >
+                      {searchResults?.slice(0, 4).map((result) => (
+                        <LinkBox
+                          as={Flex}
+                          border="1px"
+                          borderColor="gray.400"
+                          p={4}
+                          justify="space-between"
+                          align="center"
+                          bg="bg.100"
+                          gap={4}
+                        >
+                          <Image src={result.image1} boxSize="10" />
+                          <Text
+                            fontSize={"sm"}
+                            fontWeight="700"
+                            w={{
+                              base: "100%",
+                              lg: "75%",
+                            }}
+                          >
+                            <LinkOverlay href={`/products/${result.id}`}>
+                              {result.name}
+                            </LinkOverlay>
+                          </Text>
+                          <Text fontSize="sm" fontWeight="600">
+                            ₹{result.base_price}
+                          </Text>
+                        </LinkBox>
+                      ))}
+                    </Flex>
+                  ) : (
+                    <Box
+                      zIndex={99}
+                      w={{ base: "65vw", lg: "22.5vw" }}
+                      position="absolute"
+                      top={10}
+                      p={4}
+                      bg="bg.100"
+                      border="1px"
+                      borderColor="gray.400"
+                    >
+                      <Text fontSize="sm" fontWeight="600">
+                        No products found
+                      </Text>
+                    </Box>
+                  )
+                ) : null}
+              </Flex>
+              <CartAndWishlistButtons />
+            </Flex>
+            <Menu>
+              <MenuButton aria-label="User profile menu">
+                <Avatar
+                  size="sm"
+                  name={name.trim() !== "" ? name : null}
+                  src={null}
+                  color={"white"}
+                  background={"brand.500"}
+                />
+              </MenuButton>
+              {checkLogin().isLoggedIn ? (
+                <MenuList zIndex={999}>
+                  <MenuItem as={ReactRouterLink} to="/profile">
+                    My account
+                  </MenuItem>
+                  {localStorage.getItem("access") === "true" ? (
+                    <MenuItem as={"a"} href="/dashboard">
+                      Dashboard
                     </MenuItem>
-                    {localStorage.getItem("access") === "true" ? (
-                      <MenuItem as={"a"} href="/dashboard">
-                        Dashboard
-                      </MenuItem>
-                    ) : null}
-                    <MenuDivider />
-                    <MenuItem onClick={() => Logout()}>Logout</MenuItem>
-                  </MenuList>
-                ) : (
-                  <MenuList zIndex={999}>
-                    {/* <MenuItem
+                  ) : null}
+                  <MenuDivider />
+                  <MenuItem onClick={() => Logout()}>Logout</MenuItem>
+                </MenuList>
+              ) : (
+                <MenuList zIndex={999}>
+                  {/* <MenuItem
                     as={Link}
                     bg={{ base: "none", md: "brand.500" }}
                     href="/login"
@@ -642,76 +637,41 @@ export default function Navbar() {
                     borderRadius={{ base: 0, md: "md" }}
                     _hover={{ bg: "brand.500" }}
                   > */}
-                    <MenuItem
-                      as={Link}
-                      href="/login"
-                      cursor={"pointer"}
-                      _hover={{ textDecoration: "none" }}
-                    >
-                      Login
-                    </MenuItem>
-                  </MenuList>
-                )}
-              </Menu>
-            </HStack>
-          </Flex>
-          <Drawer
-            isOpen={isOpen}
-            onClose={onClose}
-            placement="left"
-            finalFocusRef={menuButtonRef}
-          >
-            <DrawerOverlay backdropFilter="auto" backdropBlur="2px" />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader as={Flex} justify="center">
-                <Link as={ReactRouterLink} to="/">
-                  <Image
-                    boxSize="105px"
-                    objectFit="contain"
-                    src="/Suryan Organic/Suryan Organic.png"
-                    alt="SOSE Logo"
-                  />
-                </Link>
-              </DrawerHeader>
+                  <MenuItem
+                    as={Link}
+                    href="/login"
+                    cursor={"pointer"}
+                    _hover={{ textDecoration: "none" }}
+                  >
+                    Login
+                  </MenuItem>
+                </MenuList>
+              )}
+            </Menu>
+          </HStack>
+        </Flex>
+        <Drawer
+          isOpen={isOpen}
+          onClose={onClose}
+          placement="left"
+          finalFocusRef={menuButtonRef}
+        >
+          <DrawerOverlay backdropFilter="auto" backdropBlur="2px" />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader as={Flex} justify="center">
+              <Link as={ReactRouterLink} to="/">
+                <Image
+                  boxSize="105px"
+                  objectFit="contain"
+                  src="/Suryan Organic/Suryan Organic.png"
+                  alt="SOSE Logo"
+                />
+              </Link>
+            </DrawerHeader>
 
-              <DrawerBody p={0}>
-                <Flex direction="column" gap={2}>
-                  <LinkBox w="100%">
-                    <LinkOverlay href={"/shop"}>
-                      <Text
-                        color="brand.900"
-                        _hover={{ textDecoration: "none" }}
-                        ms={4}
-                      >
-                        Shop
-                      </Text>
-                    </LinkOverlay>
-                  </LinkBox>
-                  {Links.map((link) => (
-                    // <LinkBox w="100%" key={link.name}>
-                    //     <LinkOverlay
-                    //         as={ReactRouterLink}
-                    //         to={link.location}
-                    //     >
-                    <Fragment key={link.name}>
-                      <Link
-                        as={ReactRouterLink}
-                        color="brand.900"
-                        _hover={{
-                          textDecoration: "none",
-                        }}
-                        ms={4}
-                      >
-                        {link.name}
-                      </Link>
-                      {/* </LinkOverlay> */}
-                      <Divider h={"1px"} bg="gray.200" />
-                    </Fragment>
-                    // </LinkBox>
-                  ))}
-                </Flex>
-
+            <DrawerBody p={0}>
+              <Flex direction="column" gap={2}>
                 <Accordion width={"100%"} onClose={handleClose}>
                   <AccordionItem isOpen={Open}>
                     <AccordionButton
@@ -919,73 +879,92 @@ export default function Navbar() {
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
-                {/* </Link> */}
-              </DrawerBody>
-              <DrawerFooter></DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        </Container>
-        <Container
-          maxW={"container.xl"}
-          px={0}
-          style={{
-            boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
-            position: "sticky",
-            overFlow: "hidden",
-            backgroundColor: "white",
-            top: 0,
-            zIndex: 9,
-            
-           
-          }}
-          display={isMobile ? "none" : "block"}
-        >
-          <Grid
-            templateRows="repeat(2, 1fr)"
-            templateColumns={"repeat(12, 1fr)"}
+                {Links.map((link) => (
+                  // <LinkBox w="100%" key={link.name}>
+                  //     <LinkOverlay
+                  //         as={ReactRouterLink}
+                  //         to={link.location}
+                  //     >
+                  <Fragment key={link.name}>
+                    <Link
+                      as={ReactRouterLink}
+                      color="brand.900"
+                      _hover={{
+                        textDecoration: "none",
+                      }}
+                      ms={4}
+                    >
+                      {link.name}
+                    </Link>
+                    {/* </LinkOverlay> */}
+                    <Divider h={"1px"} bg="gray.200" />
+                  </Fragment>
+                  // </LinkBox>
+                ))}
+              </Flex>
+
+              {/* </Link> */}
+            </DrawerBody>
+            <DrawerFooter></DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </Container>
+      <Container
+        maxW={"container.xl"}
+        px={0}
+        style={{
+          boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
+          position: "sticky",
+          overFlow: "hidden",
+          backgroundColor: "white",
+          top: 0,
+          zIndex: 9,
+        }}
+        display={isMobile ? "none" : "block"}
+      >
+        <Grid templateRows="repeat(2, 1fr)" templateColumns={"repeat(12, 1fr)"}>
+          <GridItem
+            rowSpan={2}
+            colSpan={2}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
           >
-            <GridItem
-              rowSpan={2}
-              colSpan={2}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            <Link as={ReactRouterLink} to="/">
+              <Image
+                boxSize="100px"
+                objectFit="contain"
+                src="/Suryan Organic/Suryan Organic.png"
+                alt="SOSE Logo"
+                size={"lg"}
+                w={"100%"}
+                mt={4}
+              />
+            </Link>
+          </GridItem>
+          <GridItem
+            colSpan={7}
+            display={"flex"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+          >
+            <Flex
+              as={"nav"}
+              gap={{ md: 6, lg: 4, xl: 5 }}
+              display={{ base: "flex", lg: "flex" }}
+              fontSize={{ lg: 11, xl: 14, md: 9 }}
+              alignItems={"center"}
             >
-              <Link as={ReactRouterLink} to="/">
-                <Image
-                  boxSize="100px"
-                  objectFit="contain"
-                  src="/Suryan Organic/Suryan Organic.png"
-                  alt="SOSE Logo"
-                  size={"lg"}
-                  w={"100%"}
-                  mt={4}
-                />
-              </Link>
-            </GridItem>
-            <GridItem
-              colSpan={7}
-              display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-            >
-              <Flex
-                as={"nav"}
-                gap={{ md: 6, lg: 4, xl: 5 }}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl: 14, md: 9 }}
-                alignItems={"center"}
+              <Link
+                as={ReactRouterLink}
+                to={"/"}
+                _hover={{
+                  textDecoration: "none",
+                  color: "brand.900",
+                }}
+                // fontWeight={600}
+                onMouseEnter={handleClose}
               >
-                <Link
-                  as={ReactRouterLink}
-                  to={"/"}
-                  _hover={{
-                    textDecoration: "none",
-                    color: "brand.900",
-                  }}
-                  // fontWeight={600}
-                  onMouseEnter={handleClose}
-                >
-                  Home
-                </Link>
-                {/* <Menu isOpen={Open} onClose={handleClose1}>
+                Home
+              </Link>
+              {/* <Menu isOpen={Open} onClose={handleClose1}>
                   <MenuButton
                     //color="text.500"
                     mb={0.5}
@@ -1074,257 +1053,255 @@ export default function Navbar() {
                     </GridItem>
                   </MenuList>
                 </Menu> */}
-                {Links.map((link) => (
+              {Links.map((link) => (
+                <Link
+                  as={ReactRouterLink}
+                  to={link.location}
+                  className={link.name === "SOSE Elite" ? "new-link" : ""}
+                  _hover={{
+                    textDecoration: "none",
+                    color: "brand.900",
+                  }}
+                  // fontWeight={600}
+                  onMouseEnter={handleClose}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </Flex>
+          </GridItem>
+
+          <GridItem
+            colSpan={3}
+            display={"flex"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            justifyContent={"end"}
+          >
+            <Flex
+              as={"nav"}
+              gap={{ md: 6, lg: 5 }}
+              display={{ base: "flex", lg: "flex" }}
+              fontSize={{ xl: 16, lg: 14 }}
+              alignItems={"center"}
+            >
+              <CartAndWishlistButtons />
+              {checkLogin().isLoggedIn ? (
+                <Menu>
+                  <MenuButton aria-label="User profile menu">
+                    <Avatar
+                      size="sm"
+                      name={name.trim() !== "" ? name : null}
+                      src={null}
+                      color={"white"}
+                      background={"brand.500"}
+                    />
+                  </MenuButton>
+                  {checkLogin().isLoggedIn ? (
+                    <MenuList zIndex={999}>
+                      <MenuItem as={ReactRouterLink} to="/profile">
+                        My account
+                      </MenuItem>
+
+                      <MenuDivider />
+                      <MenuItem onClick={() => Logout()}>Logout</MenuItem>
+                    </MenuList>
+                  ) : (
+                    <></>
+                  )}
+                </Menu>
+              ) : (
+                <>
                   <Link
-                    as={ReactRouterLink}
-                    to={link.location}
-                    className={link.name === "SOSE Elite" ? "new-link" : ""}
+                    className={"new-link"}
                     _hover={{
                       textDecoration: "none",
                       color: "brand.900",
                     }}
-                    // fontWeight={600}
-                    onMouseEnter={handleClose}
+                    fontWeight={500}
+                    fontSize={{ md: "16px" }}
+                    onClick={() => navigate("/login")}
                   >
-                    {link.name}
+                    Login
                   </Link>
-                ))}
-              </Flex>
-            </GridItem>
-           
-
-            <GridItem
-              colSpan={3}
-              display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-              justifyContent={"end"}
-            >
-              <Flex
-                as={"nav"}
-                gap={{ md: 6, lg: 5 }}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={{ xl: 16, lg: 14 }}
-                alignItems={"center"}
-              >
-                <CartAndWishlistButtons />
-                {checkLogin().isLoggedIn ? (
-                  <Menu>
-                    <MenuButton aria-label="User profile menu">
-                      <Avatar
-                        size="sm"
-                        name={name.trim() !== "" ? name : null}
-                        src={null}
-                        color={"white"}
-                        background={"brand.500"}
-                      />
-                    </MenuButton>
-                    {checkLogin().isLoggedIn ? (
-                      <MenuList zIndex={999}>
-                        <MenuItem as={ReactRouterLink} to="/profile">
-                          My account
-                        </MenuItem>
-
-                        <MenuDivider />
-                        <MenuItem onClick={() => Logout()}>Logout</MenuItem>
-                      </MenuList>
-                    ) : (
-                      <></>
-                    )}
-                  </Menu>
-                ) : (
-                  <>
-                    <Link
-                      className={"new-link"}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "brand.900",
-                      }}
-                      fontWeight={500}
-                      fontSize={{ md: "16px" }}
-                      onClick={() => navigate("/login")}
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      onClick={() => navigate("/signup")}
-                      className={"new-link"}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "brand.900",
-                      }}
-                      fontWeight={500}
-                      fontSize={{ md: "16px" }}
-                    >
-                      Sign up
-                    </Link>
-                  </>
-                )}
-              </Flex>
-            </GridItem>
-
-            <GridItem
-              colSpan={7}
-              display={"flex"}
-              alignItems={"center"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-            >
-              <InputGroup size="sm" width={"100%"}>
-                <Input
-                  variant="outline"
-                  w={{ base: "25vw", md: "100%" }}
-                  placeholder="Search for Natural Products "
-                  defaultValue={prod_search}
-                  onChange={handleInputChange}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      navigate(
-                        searchQuery.length > 0
-                          ? `/shop?page=1&search=${searchQuery}`
-                          : `/shop?page=1&`
-                      );
-                    }
-                  }}
-                />
-                {/* <InputRightElement children={<></>} /> */}
-                <Button
-                  size="sm"
-                  variant={"outline"}
-                  background={"brand.500"}
-                  color="white"
-                  _hover={{
-                    background: "brand.400",
-                  }}
-                  px={4}
-                  onClick={() => {
-                    searchQuery.length > 0 &&
-                      navigate(`/shop?page=1&search=${searchQuery}`);
-                  }}
-                >
-                  <SearchIcon
-                    mr={2}
-                    color="white"
-                    h={"100%"}
+                  <Link
+                    onClick={() => navigate("/signup")}
+                    className={"new-link"}
                     _hover={{
-                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "brand.900",
                     }}
-                    aria-label="Search products"
-                  />
-                  Search
-                </Button>
-              </InputGroup>
-              {searchResults !== null ? (
-                searchResults.length > 0 ? (
-                  <Flex
-                    ref={flexRef}
-                    direction="column"
-                    zIndex={99}
-                    w={{ base: "65vw", lg: "50.5vw" }}
-                    position="absolute"
-                    top={24}
-                    bg={"white"}
-                    borderRadius={6}
-                    boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
-                    display={isFlexVisible ? "flex" : "none"}
+                    fontWeight={500}
+                    fontSize={{ md: "16px" }}
                   >
-                    {searchResults?.slice(0, 4).map((result) => (
-                      <LinkBox
-                        as={Flex}
-                        // border="1px"
-                        borderColor="gray.400"
-                        p={4}
-                        justify="space-between"
-                        align="center"
-                        gap={4}
-                        _hover={{
-                          bg: "gray.100",
-                          borderRadius: 6,
-                          cursor: "pointer",
+                    Sign up
+                  </Link>
+                </>
+              )}
+            </Flex>
+          </GridItem>
+
+          <GridItem
+            colSpan={7}
+            display={"flex"}
+            alignItems={"center"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+          >
+            <InputGroup size="sm" width={"100%"}>
+              <Input
+                variant="outline"
+                w={{ base: "25vw", md: "100%" }}
+                placeholder="Search for Natural Products "
+                defaultValue={prod_search}
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(
+                      searchQuery.length > 0
+                        ? `/shop?page=1&search=${searchQuery}`
+                        : `/shop?page=1&`
+                    );
+                  }
+                }}
+              />
+              {/* <InputRightElement children={<></>} /> */}
+              <Button
+                size="sm"
+                variant={"outline"}
+                background={"brand.500"}
+                color="white"
+                _hover={{
+                  background: "brand.400",
+                }}
+                px={4}
+                onClick={() => {
+                  searchQuery.length > 0 &&
+                    navigate(`/shop?page=1&search=${searchQuery}`);
+                }}
+              >
+                <SearchIcon
+                  mr={2}
+                  color="white"
+                  h={"100%"}
+                  _hover={{
+                    cursor: "pointer",
+                  }}
+                  aria-label="Search products"
+                />
+                Search
+              </Button>
+            </InputGroup>
+            {searchResults !== null ? (
+              searchResults.length > 0 ? (
+                <Flex
+                  ref={flexRef}
+                  direction="column"
+                  zIndex={99}
+                  w={{ base: "65vw", lg: "50.5vw" }}
+                  position="absolute"
+                  top={24}
+                  bg={"white"}
+                  borderRadius={6}
+                  boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
+                  display={isFlexVisible ? "flex" : "none"}
+                >
+                  {searchResults?.slice(0, 4).map((result) => (
+                    <LinkBox
+                      as={Flex}
+                      // border="1px"
+                      borderColor="gray.400"
+                      p={4}
+                      justify="space-between"
+                      align="center"
+                      gap={4}
+                      _hover={{
+                        bg: "gray.100",
+                        borderRadius: 6,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {/* <Image src={result.image1} boxSize="10" /> */}
+                      <Text
+                        fontSize={"sm"}
+                        fontWeight="700"
+                        w={{
+                          base: "100%",
+                          lg: "75%",
                         }}
                       >
-                        {/* <Image src={result.image1} boxSize="10" /> */}
-                        <Text
-                          fontSize={"sm"}
-                          fontWeight="700"
-                          w={{
-                            base: "100%",
-                            lg: "75%",
-                          }}
-                        >
-                          <LinkOverlay href={`/products/${result.id}`}>
-                            {result.name}
-                          </LinkOverlay>
-                        </Text>
-                        <Text fontSize="sm" fontWeight="600">
-                          ₹{result.base_price}
-                        </Text>
-                      </LinkBox>
-                    ))}
-                  </Flex>
-                ) : (
-                  <Box
-                    ref={flexRef}
-                    zIndex={99}
-                    w="50.5vw"
-                    position="absolute"
-                    top={24}
-                    p={4}
-                    bg={"white"}
-                    borderRadius={6}
-                    boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
-                    display={isFlexVisible ? "flex" : "none"}
-                  >
-                    <Text fontSize="sm" fontWeight="600">
-                      No products found
-                    </Text>
-                  </Box>
-                )
-              ) : null}
-            </GridItem>
-            <GridItem
-              colSpan={3}
-              
-              display={"flex"}
-              justifyContent={"end"}
-              alignItems={"center"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-              gap={5}
-              fontSize={15}
+                        <LinkOverlay href={`/products/${result.id}`}>
+                          {result.name}
+                        </LinkOverlay>
+                      </Text>
+                      <Text fontSize="sm" fontWeight="600">
+                        ₹{result.base_price}
+                      </Text>
+                    </LinkBox>
+                  ))}
+                </Flex>
+              ) : (
+                <Box
+                  ref={flexRef}
+                  zIndex={99}
+                  w="50.5vw"
+                  position="absolute"
+                  top={24}
+                  p={4}
+                  bg={"white"}
+                  borderRadius={6}
+                  boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
+                  display={isFlexVisible ? "flex" : "none"}
+                >
+                  <Text fontSize="sm" fontWeight="600">
+                    No products found
+                  </Text>
+                </Box>
+              )
+            ) : null}
+          </GridItem>
+          <GridItem
+            colSpan={3}
+            display={"flex"}
+            justifyContent={"end"}
+            alignItems={"center"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            gap={5}
+            fontSize={15}
+          >
+            <Link
+              isExternal={true}
+              _hover={{ color: "text.500" }}
+              as={ReactRouterLink}
+              to={"https://www.facebook.com/suryanorganicstore/"}
             >
-              <Link
-                isExternal={true}
-                _hover={{ color: "text.500" }}
-                as={ReactRouterLink}
-                to={"https://www.facebook.com/suryanorganicstore/"}
-              >
-                <FaFacebookF fontSize={20} />
-              </Link>
-              <Link
-                _hover={{ color: "text.500" }}
-                isExternal={true}
-                as={ReactRouterLink}
-                to={"https://www.instagram.com/suryanorganic/"}
-              >
-                <FiInstagram fontSize={20} />
-              </Link>
-              <Link
-                _hover={{ color: "text.500" }}
-                isExternal={true}
-                as={ReactRouterLink}
-                to={
-                  "https://api.whatsapp.com/send/?phone=7405095969&text&type=phone_number&app_absent=0"
-                }
-              >
-                <FaWhatsapp fontSize={20} />
-              </Link>
-              <Link
-                _hover={{ color: "text.500" }}
-                isExternal={true}
-                as={ReactRouterLink}
-                to={"https://www.youtube.com/@suryanorganic"}
-              >
-                <TfiYoutube fontSize={20} />
-              </Link>
-              {/* <Link
+              <FaFacebookF fontSize={20} />
+            </Link>
+            <Link
+              _hover={{ color: "text.500" }}
+              isExternal={true}
+              as={ReactRouterLink}
+              to={"https://www.instagram.com/suryanorganic/"}
+            >
+              <FiInstagram fontSize={20} />
+            </Link>
+            <Link
+              _hover={{ color: "text.500" }}
+              isExternal={true}
+              as={ReactRouterLink}
+              to={
+                "https://api.whatsapp.com/send/?phone=7405095969&text&type=phone_number&app_absent=0"
+              }
+            >
+              <FaWhatsapp fontSize={20} />
+            </Link>
+            <Link
+              _hover={{ color: "text.500" }}
+              isExternal={true}
+              as={ReactRouterLink}
+              to={"https://www.youtube.com/@suryanorganic"}
+            >
+              <TfiYoutube fontSize={20} />
+            </Link>
+            {/* <Link
               className={"SOSE Elite"}
               _hover={{ textDecoration: "none", color: "brand.900" }}
               fontWeight={600}
@@ -1342,43 +1319,41 @@ export default function Navbar() {
                 new
               </Badge>
             </Link> */}
-              <Link
-                _hover={{ color: "text.500" }}
-                isExternal={true}
-                as={ReactRouterLink}
-                to={
-                  "https://play.google.com/store/apps/dev?id=4638256468061256127&hl=en&gl=US"
-                }
-              >
-                <FaGooglePlay fontSize={20} />
-              </Link>
-              <Link
+            <Link
               _hover={{ color: "text.500" }}
               isExternal={true}
               as={ReactRouterLink}
               to={
-                "https://apps.apple.com/in/app/suryan-oganic/id6477915182"
+                "https://play.google.com/store/apps/dev?id=4638256468061256127&hl=en&gl=US"
               }
+            >
+              <FaGooglePlay fontSize={20} />
+            </Link>
+            <Link
+              _hover={{ color: "text.500" }}
+              isExternal={true}
+              as={ReactRouterLink}
+              to={"https://apps.apple.com/in/app/suryan-oganic/id6477915182"}
             >
               <FaApple fontSize={22} />
             </Link>
-            </GridItem>
-            <GridItem
-              colSpan={12}
-              display={"flex"}
-              justifyContent={{
-                center: "center",
-                lg: "start",
-              }}
-              alignItems={"center"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-              gap={0.5}
-              fontSize={15}
-              py={2}
-              overflowX={"scroll"}
-              // maxWidth={"95vw"}
-            >
-              {/* <Link
+          </GridItem>
+          <GridItem
+            colSpan={12}
+            display={"flex"}
+            justifyContent={{
+              center: "center",
+              lg: "start",
+            }}
+            alignItems={"center"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            gap={0.5}
+            fontSize={15}
+            py={2}
+            overflowX={"scroll"}
+            // maxWidth={"95vw"}
+          >
+            {/* <Link
               _hover={{
                 textDecoration: "none",
                 color: "brand.900",
@@ -1389,71 +1364,89 @@ export default function Navbar() {
             >
               Gifting
             </Link> */}
-              {categories?.map((data, index) => (
-                <>
-                  <Menu
-                    isOpen={openCategory === index}
-                    onClose={() => handleCloseCategory()}
-                  >
-                    <MenuButton
-                      onMouseEnter={() => handleHoverCategory(index)}
-                      _hover={{ color: "brand.500", bg: "transparent" }}
-                      _active={{ color: "brand.500", bg: "transparent" }}
-                      _focusVisible={{
-                        color: "brand.500",
-                        bg: "transparent",
-                        outline: "none",
-                      }}
-                      width={"fit-content"}
-                      fontSize={"12px"}
-                      cursor={"pointer"}
-                      variant={"ghost"}
-                      // onMouseLeave={() => handleCloseCategory(index)}
-                      // fontWeight={600}
+            {categories?.map((data, index) => (
+              <>
+                <Menu
+                  isOpen={openCategory === index}
+                  onClose={() => handleCloseCategory()}
+                >
+                  <MenuButton
+                    onMouseEnter={() => handleHoverCategory(index)}
+                    _hover={{ color: "brand.500", bg: "transparent" }}
+                    _active={{ color: "brand.500", bg: "transparent" }}
+                    _focusVisible={{
+                      color: "brand.500",
+                      bg: "transparent",
+                      outline: "none",
+                    }}
+                    width={"fit-content"}
+                    fontSize={"12px"}
+                    cursor={"pointer"}
+                    variant={"ghost"}
+                    // onMouseLeave={() => handleCloseCategory(index)}
+                    // fontWeight={600}
 
-                      px={2}
-                      onClick={() => {
-                        handleHoverCategory(index),
-                          navigate(
-                            `/shop?page=1&category=${
-                              data.id
-                            }&category_name=${encodeURIComponent(data?.name)}`
-                          );
-                      }}
+                    px={2}
+                    onClick={() => {
+                      handleHoverCategory(index),
+                        navigate(
+                          `/shop?page=1&category=${
+                            data.id
+                          }&category_name=${encodeURIComponent(data?.name)}`
+                        );
+                    }}
+                  >
+                    <Flex
+                      w={"max-content"}
+                      gap={0.5}
+                      alignItems={"center"}
+                      fontSize={"12px"}
                     >
-                      <Flex
-                        w={"max-content"}
-                        gap={0.5}
-                        alignItems={"center"}
-                        fontSize={"12px"}
-                      >
-                        {data.name}
-                        {data?.children.length > 0 && <IoIosArrowDown />}
-                      </Flex>
-                    </MenuButton>
-                    {data?.children.length > 0 ? (
-                      <MenuList
-                        as={Flex}
-                        direction={"column"}
-                        maxH={"70vh"}
-                        wrap={"wrap"}
-                        onMouseEnter={() => handleHoverCategory(index)}
-                        onMouseLeave={handleCloseCategory}
-                        sx={{ placement: "center" }}
-                        zIndex={9999}
-                        p={2}
-                        boxShadow={
-                          "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px"
-                        }
-                      >
-                        {data?.children?.map((section, index) => (
-                          <>
-                            <GridItem spacing={3} p={2}>
+                      {data.name}
+                      {data?.children.length > 0 && <IoIosArrowDown />}
+                    </Flex>
+                  </MenuButton>
+                  {data?.children.length > 0 ? (
+                    <MenuList
+                      as={Flex}
+                      direction={"column"}
+                      maxH={"70vh"}
+                      wrap={"wrap"}
+                      onMouseEnter={() => handleHoverCategory(index)}
+                      onMouseLeave={handleCloseCategory}
+                      sx={{ placement: "center" }}
+                      zIndex={9999}
+                      p={2}
+                      boxShadow={
+                        "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px"
+                      }
+                    >
+                      {data?.children?.map((section, index) => (
+                        <>
+                          <GridItem spacing={3} p={2}>
+                            <Text
+                              as="b"
+                              cursor={"pointer"}
+                              _hover={{ color: "brand.500" }}
+                              fontSize={"12px"}
+                              onClick={() => {
+                                handleCloseCategory(index);
+                                navigate(
+                                  `/shop?page=1&category=${
+                                    section.id
+                                  }&category_name=${encodeURIComponent(
+                                    section?.name
+                                  )}`
+                                );
+                              }}
+                            >
+                              {section.name}
+                            </Text>
+                            {section?.children?.map((section, index) => (
                               <Text
-                                as="b"
+                                fontSize={"12px"}
                                 cursor={"pointer"}
                                 _hover={{ color: "brand.500" }}
-                                fontSize={"12px"}
                                 onClick={() => {
                                   handleCloseCategory(index);
                                   navigate(
@@ -1467,39 +1460,20 @@ export default function Navbar() {
                               >
                                 {section.name}
                               </Text>
-                              {section?.children?.map((section, index) => (
-                                <Text
-                                  fontSize={"12px"}
-                                  cursor={"pointer"}
-                                  _hover={{ color: "brand.500" }}
-                                  onClick={() => {
-                                    handleCloseCategory(index);
-                                    navigate(
-                                      `/shop?page=1&category=${
-                                        section.id
-                                      }&category_name=${encodeURIComponent(
-                                        section?.name
-                                      )}`
-                                    );
-                                  }}
-                                >
-                                  {section.name}
-                                </Text>
-                              ))}
-                            </GridItem>
-                          </>
-                        ))}
-                      </MenuList>
-                    ) : (
-                      <></>
-                    )}
-                  </Menu>
-                </>
-              ))}
-            </GridItem>
-          </Grid>
-        </Container>
-     
+                            ))}
+                          </GridItem>
+                        </>
+                      ))}
+                    </MenuList>
+                  ) : (
+                    <></>
+                  )}
+                </Menu>
+              </>
+            ))}
+          </GridItem>
+        </Grid>
+      </Container>
     </>
   );
 }

@@ -29,11 +29,17 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Checkbox,
+
 } from "@chakra-ui/react";
+import moment from "moment";
 import { AddIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { FaCrown } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { RiCloseCircleFill } from "react-icons/ri";
 import Loader from "../components/Loader";
 
 export default function CustomerProfile() {
@@ -42,6 +48,7 @@ export default function CustomerProfile() {
   const [mobile, setMobile] = useState([]);
   const [loading, setLoading] = useState(false);
   const [orderData, setOrderData] = useState([]);
+  const [eliteData, setEliteData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const toast = useToast();
@@ -54,18 +61,17 @@ export default function CustomerProfile() {
 
     getDetails();
     getOrderData();
-    if (is_sose_elite_user === "true") {
-      getSubscriptionData();
-    } // eslint-disable-next-line
+    getSubscriptionData();
+    // eslint-disable-next-line
   }, []);
   async function getSubscriptionData() {
     setLoading(true);
     try {
-      const response = await client.get("/user/user_subscriptions/", {
+      const response = await client.get("/user/profile_elite_users/", {
         headers: { Authorization: `token ${loginInfo.token}` },
       });
       response.data.status
-        ? setOrderData(response.data.data)
+        ? setEliteData(response.data.data)
         : toast({
             title: `${response.message}`,
             description:
@@ -91,7 +97,7 @@ export default function CustomerProfile() {
   async function getOrderData() {
     setLoading(true);
     try {
-      const response = await client.get("web/orders/list", {
+      const response = await client.get("/web/orders/list", {
         headers: { Authorization: `token ${loginInfo.token}` },
       });
       response.data.status
@@ -157,7 +163,42 @@ export default function CustomerProfile() {
       setLoading(false);
     }
   }
+  const subscriptionColumns = [
+    {
+      name: "Name",
+      selector: (row) => (row.user_data?.name ? row.user_data?.name : "-"),
+      sortable: true,
+    },
+    {
+      name: "Start Date",
+      selector: (row) => moment(row.start_date).format("DD-MM-YYYY"),
+      sortable: true,
+    },
+    {
+      name: "End Date",
+      selector: (row) => moment(row.end_date).format("DD-MM-YYYY"),
+      sortable: true,
+    },
 
+    {
+      name: "Expire",
+      selector: (row) => (row.is_expired ? row.is_expired : "-"),
+      sortable: true,
+      maxWidth:"300px",
+      minWidth:"300px"
+    },
+    {
+      name: "Is Active",
+      selector: (row) => row.is_active,
+      sortable: true,
+      cell: (row) => (
+        <>
+        {row.is_active ? <FaCheckCircle color="#436131" fontSize={16} /> : <RiCloseCircleFill color="#A52A2A" fontSize={18} />}
+          
+        </>
+      ),
+    },
+  ];
   const columns = [
     {
       name: "Order ID",
@@ -230,11 +271,10 @@ export default function CustomerProfile() {
             <Tab fontSize={{ base: "sm", md: "md" }} me={4}>
               My Orders
             </Tab>
-            {is_sose_elite_user === "true" && (
-              <Tab fontSize={{ base: "sm", md: "md" }} me={4}>
-                Subscription
-              </Tab>
-            )}
+
+            <Tab fontSize={{ base: "sm", md: "md" }} me={4}>
+              Subscription
+            </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -269,7 +309,7 @@ export default function CustomerProfile() {
                               " "
                             )}
                             {details?.is_subscribed && (
-                              <Icon as={BsPatchCheckFill} color="brand.500" />
+                              <sup><FaCrown color="#436131" fontSize={"1.7rem"}/></sup>
                             )}
                           </Flex>
                           <Text fontSize="md" opacity="0.75">
@@ -415,7 +455,44 @@ export default function CustomerProfile() {
               </>
             </TabPanel>
             <TabPanel>
-              <Heading>Subscription</Heading>
+              <>
+                {loading ? (
+                  <Box textAlign="center">
+                    <Loader />
+                  </Box>
+                ) : (
+                  <>
+                    {(!details?.is_subscribed && eliteData?.length > 0) && (
+                      <Button
+                        bg={"brand.500"}
+                        color={"white"}
+                        //w={"100%"}
+                        ml={4}
+                        size="sm"
+                        _hover={{ bg: "brand.500" }}
+                        onClick={() => navigate("/subscription-plans")}
+                      >
+                        Renew/Buy Subscription
+                      </Button>
+                    )}
+                    {eliteData?.length > 0 ? (
+                      <Table
+                        columns={subscriptionColumns}
+                        data={eliteData}
+                        selectable={false}
+                        // onRowClick={(row, event) =>
+                        //   navigate(`/orders/${row.id}`)
+                        // }
+                        displayExtensions={false}
+                      />
+                    ) : (
+                      <Heading size="md" fontWeight={600} align="center" mt={5}>
+                        Subscription Not Found
+                      </Heading>
+                    )}
+                  </>
+                )}
+              </>
             </TabPanel>
           </TabPanels>
         </Tabs>

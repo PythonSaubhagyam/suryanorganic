@@ -74,7 +74,18 @@ const Links = [
   //   name: "Products",
   //   location: "/",
   // },
-
+  {
+    name: "Consult Our Vaidya",
+    location: "/consult-our-vaidya",
+  },
+  {
+    name: "SOSE Elite",
+    location: "/subscription-plans",
+  },
+  {
+    name: "Gift Voucher",
+    location: "/gift-voucher",
+  },
   {
     name: "About us",
     location: "/about-us",
@@ -103,10 +114,7 @@ const Links = [
     name: "Store Locator",
     location: "/store-locator",
   },
-  {
-    name: "Consult Our Vaidya",
-    location: "/consult-our-vaidya",
-  },
+ 
   {
     name: "Blogs",
     location: "/blogs?page=1",
@@ -941,29 +949,18 @@ export default function Navbar() {
             </Link>
           </GridItem>
           <GridItem
-            colSpan={7}
+            colSpan={8}
             display={"flex"}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
           >
             <Flex
               as={"nav"}
-              gap={{ md: 6, lg: 4, xl: 5 }}
+              gap={{ md: 6, lg: 4, xl: 4 }}
               display={{ base: "flex", lg: "flex" }}
               fontSize={{ lg: 11, xl: 14, md: 9 }}
               alignItems={"center"}
             >
-              <Link
-                as={ReactRouterLink}
-                to={"/"}
-                _hover={{
-                  textDecoration: "none",
-                  color: "brand.900",
-                }}
-                // fontWeight={600}
-                onMouseEnter={handleClose}
-              >
-                Home
-              </Link>
+             
               {/* <Menu isOpen={Open} onClose={handleClose1}>
                   <MenuButton
                     //color="text.500"
@@ -1072,7 +1069,7 @@ export default function Navbar() {
           </GridItem>
 
           <GridItem
-            colSpan={3}
+            colSpan={2}
             display={"flex"}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             justifyContent={"end"}
@@ -1118,7 +1115,7 @@ export default function Navbar() {
                       color: "brand.900",
                     }}
                     fontWeight={500}
-                    fontSize={{ md: "16px" }}
+                    fontSize={{ md: "14px" }}
                     onClick={() => navigate("/login")}
                   >
                     Login
@@ -1131,7 +1128,7 @@ export default function Navbar() {
                       color: "brand.900",
                     }}
                     fontWeight={500}
-                    fontSize={{ md: "16px" }}
+                    fontSize={{ md: "14px" }}
                   >
                     Sign up
                   </Link>

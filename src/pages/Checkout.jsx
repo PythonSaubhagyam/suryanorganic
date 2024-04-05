@@ -37,12 +37,11 @@ export default function Checkout({ getDetails }) {
       state: { address: address },
     });
   }
-  const [showPremiunDeliveryOption, setShowPremiunDeliveryOption] = useState(
-    localStorage.getItem("is_sose_elite_user") === "true" ? true : false
-  );
-  const [showAllDeliveryOptions, setShowAllDeliveryOptions] = useState(
-    localStorage.getItem("has_active_sub") === "true" ? true : false
-  );
+
+  // const [showPremiunDeliveryOption, setShowPremiunDeliveryOption] = useState(
+  //   localStorage.getItem("is_sose_elite_user") === "true" ? true : false
+  // );
+  // const [showAllDeliveryOptions, setShowAllDeliveryOptions] = useState();
   const initialFormData = Object.freeze({
     billingAddress: null,
     full_name: "",
@@ -57,15 +56,14 @@ export default function Checkout({ getDetails }) {
     country: "India",
     pay_type: null,
     shipping_amt:
-      localStorage.getItem("is_sose_elite_user") === "true" ? 0 : showAllDeliveryOptions ? 100 :0,
+      localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
   });
- 
+
   const [addresses, setAddresses] = useState([]);
   const [formData, setFormData] = useState(initialFormData);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true);
   console.log("formdata", formData);
-  
 
   const [paymentInProgress, setPaymentInProgress] = useState(false);
 
@@ -89,6 +87,7 @@ export default function Checkout({ getDetails }) {
       const response = await client.get("/user/address/", {
         headers: { Authorization: `token ${loginInfo.token}` },
       });
+      console.log(response);
       if (response.data.status) {
         setAddresses(response.data.data);
         const defaultAddress = response.data.data.filter(
@@ -101,9 +100,13 @@ export default function Checkout({ getDetails }) {
         });
 
         if (response.data.data[0]?.city_obj.name === "Ahmedabad") {
-          setShowAllDeliveryOptions(true);
+          setFormData({ ...formData, shipping_amt: 0 });
         } else {
-          setShowAllDeliveryOptions(false);
+          setFormData({
+            ...formData,
+            shipping_amt:
+              localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
+          });
         }
       } else {
         toast({
@@ -187,21 +190,20 @@ export default function Checkout({ getDetails }) {
     let selectedAddress = addresses.find(
       (address) => address.id === parseInt(addressId)
     );
-   if(showPremiunDeliveryOption){
-    setFormData({ ...formData, billingAddress: addressId, shipping_amt: 0 });
-   }
-   else{ if (selectedAddress.city_obj.name === "Ahmedabad") {
-      setShowAllDeliveryOptions(true);
-      setFormData({ ...formData, billingAddress: addressId, shipping_amt: 0 });
-    } else {
-      setShowAllDeliveryOptions(false);
+
+    if (selectedAddress.city_obj.name === "Ahmedabad") {
       setFormData({
         ...formData,
         billingAddress: addressId,
-        shipping_amt: 100,
+        shipping_amt: 0,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        billingAddress: addressId,
+        shipping_amt: localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
       });
     }
-   }
   }
 
   async function handleOnlinePayment() {
@@ -440,32 +442,28 @@ export default function Checkout({ getDetails }) {
                 </Heading>
                 <RadioGroup
                   name="delivery-options"
-                  value={formData.shipping_amt}
-                  onChange={(shippingCost) => {
-                    setFormData({
-                      ...formData,
-                      shipping_amt: parseInt(shippingCost),
-                    });
-                  }}
+                  value={parseInt(formData.shipping_amt)}
+                  // onChange={(shippingCost) => {
+                  //   setFormData({
+                  //     ...formData,
+                  //     shipping_amt: parseInt(shippingCost),
+                  //   });
+                  // }}
                 >
-                 
                   <Flex gap={5} direction="column">
-                   {(!showPremiunDeliveryOption && !showAllDeliveryOptions) && <Radio colorScheme="brand" value={100}>
-                      Normal Delivery{" "}
-                      <Text fontWeight="bolder" display="inline">
-                        (₹ 100)
-                      </Text>
-                    </Radio>}
-
-                    <Radio
-                      colorScheme="brand"
-                      value={0}
-                      display={showAllDeliveryOptions ? "block" : "none"}
-                    >
-                      Free Home Delivery (Elite / within Ahmedabad)
-                    </Radio>
+                    {formData.shipping_amt === 0 ? (
+                      <Radio colorScheme="brand" value={0}>
+                        Free Home Delivery (Elite / within Ahmedabad)
+                      </Radio>
+                    ) : (
+                      <Radio colorScheme="brand" value={100}>
+                        Normal Delivery{" "}
+                        <Text fontWeight="bolder" display="inline">
+                          (₹ 100)
+                        </Text>{" "}
+                      </Radio>
+                    )}
                   </Flex>
-  
                 </RadioGroup>
               </FormControl>
             </Flex>

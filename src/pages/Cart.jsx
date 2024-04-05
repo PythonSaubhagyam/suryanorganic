@@ -157,6 +157,8 @@ export default function Cart() {
         duration: 4000,
         isClosable: true,
       });
+      setVoucherCode("")
+      setVoucherApplied(false);
   };
 
   async function handleQuantityChange(
@@ -192,6 +194,8 @@ export default function Cart() {
             isClosable: true,
           });
         }
+        setVoucherCode("")
+        setVoucherApplied(false);
         getCart();
       } else {
         toast({
@@ -355,7 +359,7 @@ export default function Cart() {
                 </Tr>
               </Tbody>
             </Table>
-            <Checkbox
+            {/* <Checkbox
               colorScheme="brand"
               ps={6}
               pt={4}
@@ -368,7 +372,7 @@ export default function Cart() {
               <Text fontSize="sm">
                 Send as a gift. <br /> Include custom gift message
               </Text>
-            </Checkbox>
+            </Checkbox> */}
             {localStorage.getItem("token") && (
               <form onSubmit={checkVoucherCodeAvailability} display={{}}>
                 <FormControl as={Flex} direction="column" my={6} px={4}>

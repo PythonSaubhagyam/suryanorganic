@@ -395,7 +395,7 @@ export default function Navbar() {
 
     if (response.data.status === true) {
       setCategories(response.data.categories);
-      setTopCategory(mergeArraysById(mainLinks, response.data.categories));
+      //setTopCategory(mergeArraysById(mainLinks, response.data.categories));
     }
   };
 

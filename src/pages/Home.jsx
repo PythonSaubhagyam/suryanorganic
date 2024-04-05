@@ -180,63 +180,72 @@ export default function Home() {
       src: "./Suryan Organic/home/Grain & Daliya.jpg",
       alt: "Grains Daliya",
       title: "Grains Daliya",
+      href: "/shop?page=1&category=585&category_name=Grains Daliya",
     },
 
     {
       src: "./Suryan Organic/home/Flours - Atta.jpg",
       alt: "Flours - Atta",
       title: "Flours - Atta",
+      href: "/shop?page=1&category=587&category_name=Flours - Atta",
     },
 
     {
       src: "./Suryan Organic/home/Pulses & Dals.jpg",
       alt: "Pulses Dals",
       title: "Pulses Dals",
+      href: "/shop?page=1&category=589&category_name=Pulses Dals",
     },
 
     {
       src: "./Suryan Organic/home/Ghee & Oils.jpg",
       alt: "Ghee Oils",
       title: "Ghee Oils",
+      href: "/shop?page=1&category=591&category_name=Ghee Oils",
     },
 
     {
       src: "./Suryan Organic/home/Handmade Masala.jpg",
       alt: "Handmade Masala",
       title: "Handmade Masala",
+      href: "/shop?page=1&category=595&category_name=Handmade Masala",
     },
 
     {
       src: "./Suryan Organic/home/Nuts & Dryfruits.jpg",
       alt: "Nuts Dryfruits",
       title: "Nuts Dryfruits",
+      href: "/shop?page=1&category=760&category_name=Nuts Dryfruits",
     },
 
     {
       src: "./Suryan Organic/home/Caramel & Muesli.jpg",
       alt: "Caramel Muesli",
       title: "Caramel Muesli",
+      href: "/shop?page=1&category=626&category_name=Caramel Muesli",
     },
 
     {
       src: "./Suryan Organic/home/Ayurvedic Herbs.jpg",
       alt: "Ayurvedic Herbs",
       title: "Ayurvedic Herbs",
+      href: "/shop?page=1&category=767&category_name=Ayurvedic Herbs",
     },
 
     {
       src: "./Suryan Organic/home/Health Sweetener.jpg",
       alt: "Healthy Sweetener",
       title: "Healthy Sweetener",
+      href: "/shop?page=1&category=789&category_name=Healthy Sweetener",
     },
 
     {
       src: "./Suryan Organic/home/Super Foods.jpg",
       alt: "Super Foods",
       title: "Super Foods",
+      href: "/shop?page=1&category=448&category_name=Super Foods",
     },
   ];
-
   const journalImage = [
     {
       src: "./Suryan Organic/home/farming education.png",
@@ -519,7 +528,7 @@ export default function Home() {
             md: "repeat(4, 1fr)",
           }}
         >
-          {NaturalProduct?.map((data) => (
+        {NaturalProduct?.map((data) => (
             <>
               <GridItem cursor={"pointer"} align={"center"}>
                 <Image
@@ -531,7 +540,7 @@ export default function Home() {
                   //   transform: "scale(1.1)",
                   // }}
                   src={data.src}
-                  // onClick={() => navigate(data?.href)}
+                  onClick={() => navigate(data?.href)}
                 />
                 <GridItem
                   align={"center"}

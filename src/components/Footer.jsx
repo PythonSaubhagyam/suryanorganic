@@ -76,19 +76,16 @@ export default function Footer() {
           </Text>
         </Box>
         <Container as={Stack} maxW={"7xl"} pt={10} pb={2}>
-          <Grid
-            templateColumns={{
-              md: "repeat(5, 1fr)",
-              base: "repeat(1, 1fr)",
-            }}
+        <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 5 }}
             // spacing={8}
             spacingY="8px"
           >
             {/* <Stack align={"flex-start"} color="brand.900"> */}
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
-            <Stack color="text.300">
-              <Stack align={{ md: "flex-start", base: "center" }}>
+            <Stack color="text.300"  >
+              <Stack ml={{md:"50%"}} >
                 <ListHeader style={{ color: "#436131" }}>
                   Quick Links
                 </ListHeader>
@@ -99,6 +96,7 @@ export default function Footer() {
                 _hover={{ color: "text.500" }}
                 as={RouterLink}
                 to={"/shop"}
+                
               >
                 Shop
               </Link>
@@ -151,20 +149,11 @@ export default function Footer() {
                 Testimonials
               </Link>
             </Stack>
-            <Stack align={"flex-start"} color="text.300">
+            <Stack align={{md:"flex-start"}}   color="text.300">
               {!isMobile && <ListHeader>&nbsp;</ListHeader>}
 
-              <>
-                {isMobiles ? (
-                  <>
-                    <Grid
-                      align={"flex"}
-                      position={"absolute"}
-                      marginTop={"-220px"}
-                      marginLeft={"140px"}
-                      flexDirection={"column"}
-                    >
-                      {!isMobile && <ListHeader>&nbsp;</ListHeader>}
+            
+                     
                       <Link
                         textDecoration="none"
                         _hover={{ color: "text.500" }}
@@ -172,7 +161,7 @@ export default function Footer() {
                         marginTop={2}
                         to={"/store-locator"}
                       >
-                        tore Locate
+                        Store Locate
                       </Link>
                       <Link
                         textDecoration="none"
@@ -228,76 +217,15 @@ export default function Footer() {
                       >
                         Inspire & Support
                       </Link>
-                    </Grid>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/store-locator"}
-                    >
-                      Store Locato
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/contact-us"}
-                    >
-                      Contact Us
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/faq"}
-                    >
-                      FAQ
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/terms-and-conditions"}
-                    >
-                      Terms & Conditions
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/shipping-policy"}
-                    >
-                      Shipping Policy
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/return-and-refund-policy"}
-                    >
-                      Return & Refund Policy
-                    </Link>
-                    <Link
-                      textDecoration="none"
-                      _hover={{ color: "text.500" }}
-                      as={RouterLink}
-                      to={"/inspire-and-support"}
-                    >
-                      Inspire & Support
-                    </Link>
-                  </>
-                )}
-              </>
+                  
+             
             </Stack>
             {/* </SimpleGrid> */}
             {/* </Stack> */}
-            <Stack color="text.300" mt={{ md: 3 }}>
+            <Stack color="text.300"  mt={{ md: 3 }}>
               <Stack>
                 {" "}
-                <Stack align={{ md: "flex-start", base: "center" }}>
+                <Stack align={{ md: "flex-start" }}>
                   <ListHeader style={{ color: "#436131" }}>
                     Partner With Us
                   </ListHeader>
@@ -357,8 +285,8 @@ export default function Footer() {
                 </Flex>
               </Stack> */}
             </Stack>
-            <Stack color="text.300" mt={{ md: 3 }}>
-              <Stack align={{ md: "flex-start", base: "center" }}>
+            <Stack color="text.300"  mt={{ md: 3 }} >
+              <Stack align={{ md: "flex-start" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Customer Support
                 </ListHeader>
@@ -396,10 +324,10 @@ export default function Footer() {
                 care@suryanorganic.com
               </Link>
             </Stack>
-            <Stack mt={{ md: 3 }} ml={{ md: 6 }}>
-              <Stack align={{ md: "flex-start", base: "center" }}>
-                <ListHeader gap={"3"}>Talk To Our Vaidya</ListHeader>
-              </Stack>
+            <Stack mt={{ md: 3 }} align={{md:"center"}}  >
+            
+                <ListHeader >Talk To Our Vaidya</ListHeader>
+              
 
               <Link
                 textDecoration="none"
@@ -449,7 +377,7 @@ export default function Footer() {
                 />
               </Link> */}
             </Stack>
-          </Grid>
+          </SimpleGrid>
         </Container>
         <Box py={4}>
           <Text pt={6} fontSize={"sm"} textAlign={"center"} color={"brand.100"}>

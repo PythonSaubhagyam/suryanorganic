@@ -37,7 +37,12 @@ export default function Checkout({ getDetails }) {
       state: { address: address },
     });
   }
-
+  const [showPremiunDeliveryOption, setShowPremiunDeliveryOption] = useState(
+    localStorage.getItem("is_sose_elite_user") === "true" ? true : false
+  );
+  const [showAllDeliveryOptions, setShowAllDeliveryOptions] = useState(
+    localStorage.getItem("has_active_sub") === "true" ? true : false
+  );
   const initialFormData = Object.freeze({
     billingAddress: null,
     full_name: "",
@@ -51,16 +56,17 @@ export default function Checkout({ getDetails }) {
     postal_code: "",
     country: "India",
     pay_type: null,
-    shipping_amt: localStorage.getItem("has_active_sub") === "true" ? 0 : 100,
+    shipping_amt:
+      localStorage.getItem("is_sose_elite_user") === "true" ? 0 : showAllDeliveryOptions ? 100 :0,
   });
-
+ 
   const [addresses, setAddresses] = useState([]);
   const [formData, setFormData] = useState(initialFormData);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showAllDeliveryOptions, setShowAllDeliveryOptions] = useState(
-    localStorage.getItem("has_active_sub") === "true" ? true : false
-  );
+  console.log("formdata", formData);
+  
+
   const [paymentInProgress, setPaymentInProgress] = useState(false);
 
   const location = useLocation();
@@ -177,16 +183,25 @@ export default function Checkout({ getDetails }) {
 
   async function updateDeliveryOptions(addressId) {
     console.log("test ");
-    setFormData({ ...formData, billingAddress: addressId });
+
     let selectedAddress = addresses.find(
       (address) => address.id === parseInt(addressId)
     );
-
-    if (selectedAddress.city_obj.name === "Ahmedabad") {
+   if(showPremiunDeliveryOption){
+    setFormData({ ...formData, billingAddress: addressId, shipping_amt: 0 });
+   }
+   else{ if (selectedAddress.city_obj.name === "Ahmedabad") {
       setShowAllDeliveryOptions(true);
+      setFormData({ ...formData, billingAddress: addressId, shipping_amt: 0 });
     } else {
       setShowAllDeliveryOptions(false);
+      setFormData({
+        ...formData,
+        billingAddress: addressId,
+        shipping_amt: 100,
+      });
     }
+   }
   }
 
   async function handleOnlinePayment() {
@@ -433,15 +448,15 @@ export default function Checkout({ getDetails }) {
                     });
                   }}
                 >
+                 
                   <Flex gap={5} direction="column">
-                    {localStorage.getItem("has_active_sub") !== "true" && (
-                      <Radio colorScheme="brand" value={100}>
-                        Normal Delivery{" "}
-                        <Text fontWeight="bolder" display="inline">
-                          (₹ 100)
-                        </Text>
-                      </Radio>
-                    )}
+                   {(!showPremiunDeliveryOption && !showAllDeliveryOptions) && <Radio colorScheme="brand" value={100}>
+                      Normal Delivery{" "}
+                      <Text fontWeight="bolder" display="inline">
+                        (₹ 100)
+                      </Text>
+                    </Radio>}
+
                     <Radio
                       colorScheme="brand"
                       value={0}
@@ -450,6 +465,7 @@ export default function Checkout({ getDetails }) {
                       Free Home Delivery (Elite / within Ahmedabad)
                     </Radio>
                   </Flex>
+  
                 </RadioGroup>
               </FormControl>
             </Flex>

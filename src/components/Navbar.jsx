@@ -919,7 +919,7 @@ export default function Navbar() {
       </Container>
       <Container
         maxW={"container.xl"}
-        px={0}
+        px={1}
         style={{
           boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
           position: "sticky",

@@ -371,7 +371,7 @@ export default function Cart() {
             </Checkbox>
             {localStorage.getItem("token") && (
               <form onSubmit={checkVoucherCodeAvailability} display={{}}>
-                {/* <FormControl as={Flex} direction="column" my={6} px={4}>
+                <FormControl as={Flex} direction="column" my={6} px={4}>
                   <FormLabel fontSize="sm" fontWeight={600}>
                     Have a voucher code?
                   </FormLabel>
@@ -423,7 +423,7 @@ export default function Cart() {
                       Apply code
                     </Button>
                   )}
-                </FormControl> */}
+                </FormControl>
               </form>
             )}
 

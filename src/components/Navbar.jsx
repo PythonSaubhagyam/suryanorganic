@@ -1049,7 +1049,7 @@ export default function Navbar() {
           </GridItem>
 
           <GridItem
-            colSpan={7}
+            colSpan={8}
             display={"flex"}
             alignItems={"center"}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}

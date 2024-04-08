@@ -19,8 +19,8 @@ export default function Franchise() {
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Franchise"} secondUrl={"/franchise"} />
       </Container>
-      <Container maxW={"container.xl"} py={8} px={{ base: 4, lg: 0 }}>
-        <Box
+      <Container maxW={"container.xl"} px={0}>
+      <Box
           w={"100%"}
           bgImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg"}
           bgSize="cover"
@@ -46,8 +46,11 @@ export default function Franchise() {
             SOSE Franchise
           </Text>
         </Box>
+      </Container>
+      <Container maxW={"6xl"} py={8} >
+       
         <Center flexDir="column">
-          <Heading
+          {/* <Heading
             size={"xl"}
             textAlign="center"
             textDecor={"underline"}
@@ -56,7 +59,7 @@ export default function Franchise() {
             textTransform={"uppercase"}
           >
             SOSE Franchise
-          </Heading>
+          </Heading> */}
           <Image
             src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Gir Cycle.png"}
             w={{ base: "70vw", lg: "500px" }}

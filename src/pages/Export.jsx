@@ -581,7 +581,7 @@ export default function Export() {
             as={Flex}
             direction={{ base: "column", md: "row" }}
             align="center"
-            mt="5"
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -720,7 +720,7 @@ export default function Export() {
             as={Flex}
             direction={{ base: "column", md: "row" }}
             align="center"
-            mt="5"
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -1469,7 +1469,9 @@ export default function Export() {
               render={({ field }) => (
                 <Checkbox
                   {...field}
-                  size="sm"
+                  size="md"
+                  colorScheme="brand"
+                  borderColor={"brand.500"}
                   onChange={() => setIsAgree(!isAgree)}
                 >
                   By submitting this form, you agree to our Privacy Policy and

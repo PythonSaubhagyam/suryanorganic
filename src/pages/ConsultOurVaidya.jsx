@@ -19,6 +19,7 @@ import CarouselItem from "../components/CarouselItem";
 import { HiInformationCircle } from "react-icons/hi";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import { useState } from "react";
+import CarouselOurVaidhya from "../components/CarouselOurVaidhya";
 
 export default function ConsultOurVaidya() {
   const toast = useToast();
@@ -113,7 +114,7 @@ export default function ConsultOurVaidya() {
           secondUrl={"/consult-our-vaidya"}
         />
       </Container>
-      <Container maxW="container.xl">
+      <Container maxW="container.xl"   px={0}>
         <Box
           bgImage={
             "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/vaidh-cover.webp"
@@ -126,10 +127,11 @@ export default function ConsultOurVaidya() {
           mt={"-10px"}
           py={20}
           boxShadow={"0px 0px 0px 0px"}
-          h={"700px"}
+        
+          h={"550px"}
           mb={10}
-          filter="brightness(50%)"
-          style={{ backdropFilter: "blur(10px)" }}
+          // filter="brightness(50%)"
+          // style={{ backdropFilter: "blur(10px)" }}
         >
           <Text
             pb={2}
@@ -143,7 +145,7 @@ export default function ConsultOurVaidya() {
           </Text>
         </Box>
       </Container>
-      <Container maxW={"container.xl"} py={15} px={16}>
+      <Container maxW={"6xl"} py={15}>
         <Flex>
           <Flex direction={"column"} justify={"center"}>
             <Box my="1">
@@ -201,7 +203,7 @@ export default function ConsultOurVaidya() {
         <Box>
           <Text fontSize={"2xl"}>Consult With our Specialist Vaidya</Text>
 
-          <Container maxW={"container.xl"} px={12} centerContent>
+          <Container maxW={"6xl"}  centerContent>
             {loading === true ? (
               <Skeleton h={489}></Skeleton>
             ) : (
@@ -210,22 +212,22 @@ export default function ConsultOurVaidya() {
           </Container>
         </Box>
         {/* <Carousel /> */}
-        <Flex justify={"center"} m={"8"}>
+        <Flex justify={"center"} my={"8"}>
           <Box>
             <Text fontSize={"3xl"}>
               How does online appointment system work?
             </Text>
           </Box>
         </Flex>
-        <Flex p="8">
-          <Box p="3">
+        <Flex py="8">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Illustration2.jpg"
               }
             />
           </Box>
-          <Box p="3">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Step1_info.jpg"
@@ -233,15 +235,15 @@ export default function ConsultOurVaidya() {
             />
           </Box>
         </Flex>
-        <Flex p="8">
-          <Box p="3">
+        <Flex py="8">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Step2_info.jpg"
               }
             />
           </Box>
-          <Box p="3">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Illustration3.jpg"
@@ -249,15 +251,15 @@ export default function ConsultOurVaidya() {
             />
           </Box>
         </Flex>
-        <Flex p="8">
-          <Box p="3">
+        <Flex py="8">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Illustration4.jpg"
               }
             />
           </Box>
-          <Box p="3">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Step3_info.jpg"
@@ -265,15 +267,15 @@ export default function ConsultOurVaidya() {
             />
           </Box>
         </Flex>
-        <Flex p="8">
-          <Box p="3">
+        <Flex py="8">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Step4_info.jpg"
               }
             />
           </Box>
-          <Box p="3">
+          <Box py="3">
             <Image
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Illustration5.jpg"
@@ -292,7 +294,7 @@ export default function ConsultOurVaidya() {
           }}
           gap={7}
           my={6}
-          mx={{ md: 20, base: 3 }}
+         
         >
           <GridItem>
             <iframe
@@ -339,13 +341,18 @@ export default function ConsultOurVaidya() {
             </Button>
           </GridItem>
         </Grid>
-        <Flex m={"10"}>
+        <Flex my={"10"}>
           <Image
             src={
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/ConsultOurvaidya/Statistics.png"
             }
           />
         </Flex>
+        </Container>
+        <Container maxW={"container.xl"}  px={0}>
+        <CarouselOurVaidhya />
+        </Container>
+        <Container maxW={"7xl"} py={15} >
         <Flex my={"10"} align="center" justify="center">
           <Box>
             <Image

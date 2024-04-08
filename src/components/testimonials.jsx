@@ -164,7 +164,13 @@ const Testimonials = () => {
   return (
     <>
       <Container maxW={"container.xl"} pt={3}>
-       
+      <Box
+         w="100%"
+          backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundSize="100%"
+          backgroundPosition="50% 100%"
+          backgroundRepeat={"no-repeat"} 
+        >
           <Heading
             color="brand.500"
             fontSize={33}
@@ -176,7 +182,7 @@ const Testimonials = () => {
           >
             TESTIMONIALS
           </Heading>
-      
+      </Box>
         <Box px={10} maxW={"100%"} h={"100%"}>
           <Slider {...settings}>
             {testimonialsData?.testimonials.map((testimonial, index) => (

@@ -55,8 +55,7 @@ export default function Footer() {
             fontSize={{ base: "sm", lg: "md" }}
             className="scrolling-text"
           >
-            For Deliveries in America, Canada, Europe, UAE, Singapore, etc Email
-            us on
+            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia, email us at 
             <Link
               target="_blank"
               href="mailto:export@suryanorganic.com"
@@ -65,7 +64,7 @@ export default function Footer() {
             >
               export@suryanorganic.com
             </Link>{" "}
-            or Whatsapp on{" "}
+            or Whatsapp us at{" "}
             <Link
               target="_blank"
               href="https://wa.me/+916354800089?text=Hello%2C%20this%20is%20a%20test%20message"
@@ -75,17 +74,18 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
-        <Container as={Stack} maxW={"7xl"} pt={10} pb={2}>
+        <Container  maxW={"7xl"} pt={10} pb={2}>
         <SimpleGrid
             columns={{ base: 1, md: 2, lg: 5 }}
             // spacing={8}
             spacingY="8px"
+            spacingX={"8px"}
           >
             {/* <Stack align={"flex-start"} color="brand.900"> */}
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
             <Stack color="text.300"  >
-              <Stack ml={{md:"50%"}} >
+              <Stack ml={{md:"auto"}} >
                 <ListHeader style={{ color: "#436131" }}>
                   Quick Links
                 </ListHeader>
@@ -161,7 +161,7 @@ export default function Footer() {
                         marginTop={2}
                         to={"/store-locator"}
                       >
-                        Store Locate
+                        Store Locator
                       </Link>
                       <Link
                         textDecoration="none"
@@ -285,7 +285,7 @@ export default function Footer() {
                 </Flex>
               </Stack> */}
             </Stack>
-            <Stack color="text.300"  mt={{ md: 3 }} >
+            <Stack color="text.300" ml={{md:"-37px"}}  mt={{ md: 3 }} >
               <Stack align={{ md: "flex-start" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Customer Support
@@ -324,10 +324,10 @@ export default function Footer() {
                 care@suryanorganic.com
               </Link>
             </Stack>
-            <Stack mt={{ md: 3 }} align={{md:"center"}}  >
-            
+            <Stack mt={{ md: 3 }}   >
+              <Stack ml={{md:3}}>
                 <ListHeader >Talk To Our Vaidya</ListHeader>
-              
+                </Stack>
 
               <Link
                 textDecoration="none"
@@ -337,6 +337,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
+                ml={{md:3}}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} /> +91 6351
                 9797 06
@@ -349,6 +350,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
+                ml={{md:3}}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} />
                 +91 6351 9797 12
@@ -357,8 +359,8 @@ export default function Footer() {
 
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
 
-              <Stack align={{ md: "flex-start", base: "center" }}>
-                <ListHeader gap={"3"}>We Accepts Payments via</ListHeader>
+              <Stack align={{ md: "center", base: "center" }}>
+                <ListHeader gap={"3"}>We accept payments via</ListHeader>
               </Stack>
               <Image
                 src={

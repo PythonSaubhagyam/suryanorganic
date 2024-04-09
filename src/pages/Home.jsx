@@ -386,7 +386,7 @@ export default function Home() {
               ancient & vibrant cultural traditions holds the key to solving the
               problems facing the country as well as humanity as a whole.
               <br />
-              <br />
+             
               Suryan Organic is inspired by <b>
                 {" "}
                 "​Bansi​​ Gir​​ Gaushala​"{" "}
@@ -398,13 +398,13 @@ export default function Home() {
             </Text>
 
             <Button
-              mt={8}
+              mt={4}
               variant={"outline"}
               border={"1px"}
               borderColor={"text.500"}
               color="text.500"
               backgroundColor="white"
-              borderRadius={"25px"}
+              borderRadius={"10px"}
               size={"md"}
               onClick={() => navigate("/about-us")}
               alignItems={"center"}
@@ -432,7 +432,7 @@ export default function Home() {
             <Text
               fontWeight={400}
               align={{ base: "justify" }}
-              mt={4}
+              mt={3}
               fontSize={{ base: "14px", lg: "16px" }}
             >
               <b>​Bansi Gir Gaushala​ </b> was established in 2006 by{" "}
@@ -468,7 +468,7 @@ export default function Home() {
             <Text
               fontWeight={400}
               align={{ base: "justify" }}
-              mt={4}
+              mt={3}
               fontSize={{ base: "14", lg: "16" }}
             >
               Supporting <b>'SOSE-Sidha Kisan Se' </b> : ‘Samruddh Kisan,
@@ -478,7 +478,6 @@ export default function Home() {
               helps farmers to find a ready market with steady revenue, while
               consumers can find authentic natural farm products at a reasonable
               price.
-              <br />
               <br />
               Supporting <b>'Gir Gauveda' </b> : ‘Swasth Parivar, Swasth Bharat’
               ( Healthy family, healthy Bharat) - Gir Gauveda exploits the
@@ -1028,10 +1027,10 @@ export default function Home() {
         />
 
         <Image
-          w={"4xl"}
+          w={"6xl"}
           mx={"auto"}
-          mt={10}
-          px={3}
+          mt={12}
+          
           mb={20}
           src={"./Suryan Organic/home/suryan_organic.jpg"}
           style={{
@@ -1055,7 +1054,7 @@ export default function Home() {
             fontWeight={500}
             mx="auto"
             align={"center"}
-            mt={17}
+            mt={10}
           >
             OUR SERVICES ARE AVAILABLE IN 
           </Heading>

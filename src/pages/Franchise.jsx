@@ -6,6 +6,8 @@ import {
   Center,
   Flex,
   Box,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import Navbar from "../components/Navbar";
@@ -47,7 +49,7 @@ export default function Franchise() {
           </Text>
         </Box>
       </Container>
-      <Container maxW={"6xl"} py={8} >
+      <Container maxW={"container.xl"} py={8} px={{ base: 4, md: "10%" }}>
        
         <Center flexDir="column">
           {/* <Heading
@@ -320,7 +322,7 @@ export default function Franchise() {
               </Box>
             </Flex>
           </Container>
-          <Flex
+          {/* <Flex
             gap={8}
             shrink={0}
             pt={4}
@@ -328,17 +330,47 @@ export default function Franchise() {
           >
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
-          </Flex>
+          </Flex> */}
+            <Grid
+            templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+            gap={6}
+            pt={4}
+          >
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+          </Grid>
           <Flex py={6} gap={8} direction={{ base: "column", lg: "row" }}>
             <Box>
               <Heading

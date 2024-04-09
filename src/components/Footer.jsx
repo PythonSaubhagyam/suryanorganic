@@ -55,7 +55,7 @@ export default function Footer() {
             fontSize={{ base: "sm", lg: "md" }}
             className="scrolling-text"
           >
-            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia, email us at 
+            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia, email us at {" "}
             <Link
               target="_blank"
               href="mailto:export@suryanorganic.com"
@@ -285,7 +285,7 @@ export default function Footer() {
                 </Flex>
               </Stack> */}
             </Stack>
-            <Stack color="text.300" ml={{md:"-37px"}}  mt={{ md: 3 }} >
+            <Stack color="text.300" ml={{lg:"-37px"}}  mt={{ md: 3 }} >
               <Stack align={{ md: "flex-start" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Customer Support
@@ -325,7 +325,7 @@ export default function Footer() {
               </Link>
             </Stack>
             <Stack mt={{ md: 3 }}   >
-              <Stack ml={{md:3}}>
+              <Stack ml={{lg:3}}>
                 <ListHeader >Talk To Our Vaidya</ListHeader>
                 </Stack>
 
@@ -337,7 +337,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
-                ml={{md:3}}
+                ml={{lg:3}}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} /> +91 6351
                 9797 06
@@ -350,7 +350,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
-                ml={{md:3}}
+                ml={{lg:3}}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} />
                 +91 6351 9797 12
@@ -359,7 +359,7 @@ export default function Footer() {
 
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
 
-              <Stack align={{ md: "center", base: "center" }}>
+              <Stack ml={{lg:3}}>
                 <ListHeader gap={"3"}>We accept payments via</ListHeader>
               </Stack>
               <Image

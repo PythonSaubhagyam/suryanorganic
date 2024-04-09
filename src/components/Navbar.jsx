@@ -895,6 +895,7 @@ export default function Navbar() {
                   <Fragment key={link.name}>
                     <Link
                       as={ReactRouterLink}
+                      to={link.location}
                       color="brand.900"
                       _hover={{
                         textDecoration: "none",

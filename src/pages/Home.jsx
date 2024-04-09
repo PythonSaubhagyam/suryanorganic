@@ -219,7 +219,7 @@ export default function Home() {
       src: "./Suryan Organic/home/Nuts & Dryfruits.jpg",
       alt: "Nuts Dryfruits",
       title: "Nuts Dryfruits",
-      href: "/shop?page=1&category=760&category_name=Nuts Dryfruits",
+      href: "/shop?page=1&category=759&category_name=Nuts Dryfruits",
     },
 
     {
@@ -247,7 +247,7 @@ export default function Home() {
       src: "./Suryan Organic/home/Super Foods.jpg",
       alt: "Super Foods",
       title: "Super Foods",
-      href: "/shop?page=1&category=448&category_name=Super Foods",
+      href: "/shop?page=1&category=830&category_name=Super Foods",
     },
   ];
   const journalImage = [

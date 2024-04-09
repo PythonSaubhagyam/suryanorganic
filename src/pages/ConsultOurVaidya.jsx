@@ -349,9 +349,9 @@ export default function ConsultOurVaidya() {
           />
         </Flex>
         </Container>
-        <Container maxW={"container.xl"}  px={0}>
+       
         <CarouselOurVaidhya />
-        </Container>
+        
         <Container maxW={"7xl"} py={15} >
         <Flex my={"10"} align="center" justify="center">
           <Box>

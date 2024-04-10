@@ -87,25 +87,27 @@ export default function Checkout({ getDetails }) {
       const response = await client.get("/user/address/", {
         headers: { Authorization: `token ${loginInfo.token}` },
       });
-      console.log(response);
+
       if (response.data.status) {
         setAddresses(response.data.data);
         const defaultAddress = response.data.data.filter(
           (address) => address.is_default === true
         );
-        setFormData({
-          ...formData,
-          full_name: formData?.full_name ?? "",
-          billingAddress: response.data.data[0]?.id,
-        });
 
         if (response.data.data[0]?.city_obj.name === "Ahmedabad") {
-          setFormData({ ...formData, shipping_amt: 0 });
+          setFormData({
+            ...formData,
+            shipping_amt: 0,
+            full_name: formData?.full_name ?? "",
+            billingAddress: response.data.data[0]?.id,
+          });
         } else {
           setFormData({
             ...formData,
             shipping_amt:
               localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
+            full_name: formData?.full_name ?? "",
+            billingAddress: response.data.data[0]?.id,
           });
         }
       } else {
@@ -201,7 +203,8 @@ export default function Checkout({ getDetails }) {
       setFormData({
         ...formData,
         billingAddress: addressId,
-        shipping_amt: localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
+        shipping_amt:
+          localStorage.getItem("is_sose_elite_user") === "true" ? 0 : 100,
       });
     }
   }

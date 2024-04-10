@@ -86,7 +86,7 @@ export default function Footer() {
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
             <Stack color="text.300">
-              <Stack ml={{ md: "auto" }}>
+              <Stack ml={{ lg: "auto",md:"50%"}}>
                 <ListHeader style={{ color: "#436131" }}>
                   Quick Links
                 </ListHeader>
@@ -352,6 +352,7 @@ export default function Footer() {
                 <ListHeader gap={"3"}>We accept payments via</ListHeader>
               </Stack>
               <Image
+               ml={{ base: "-15px",md:"-15px",lg:0 }}
                 src={
                   "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/footer/payment method.png hnghngh.png"
                 }

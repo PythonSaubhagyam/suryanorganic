@@ -21,33 +21,24 @@ export default function Franchise() {
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Franchise"} secondUrl={"/franchise"} />
       </Container>
-      <Container maxW={"container.xl"} px={0}>
-      <Box
-          w={"100%"}
-          bgImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg"}
-          bgSize="cover"
-          bgPosition="center"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt={"-10px"}
-          py={20}
-          boxShadow={"0px 0px 0px 0px"}
-          height={"550px"}
-          mb={10}
-          // filter="brightness(200%)"
-          // style={{ backdropFilter: "blur(10px)" }}
+      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg" />
+
+        <Text
+          pb={2}
+          color={"brand.100"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "4xl", base: "xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+          // Optional: Add background to improve text readability
         >
-          <Text
-            pb={2}
-            color={"brand.100"}
-            textAlign={"center"}
-            fontSize="7xl"
-            fontWeight="600"
-          >
-            SOSE Franchise
-          </Text>
-        </Box>
+           SOSE Franchise
+        </Text>
       </Container>
       <Container maxW={"container.xl"} py={8} px={{ base: 4, md: "10%" }}>
        

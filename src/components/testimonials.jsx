@@ -173,7 +173,7 @@ const Testimonials = () => {
         >
           <Heading
             color="brand.500"
-            fontSize={33}
+            fontSize={{md:33,base:24}}
             fontWeight={500}
             mx="auto"
             align={"center"}

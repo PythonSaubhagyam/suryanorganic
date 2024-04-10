@@ -518,7 +518,7 @@ export default function Home() {
       </Container>
 
       <Container maxW={"container.xl"} centerContent>
-        <Text align="center" color={"text.500"} fontSize={38} mt={4}>
+        <Text align="center" color={"text.500"} fontSize={{md:38,base:24}} mt={4}>
           {" "}
           Our Natural Product Range
         </Text>
@@ -625,7 +625,7 @@ export default function Home() {
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             mx="auto"
             align={"center"}
@@ -890,7 +890,7 @@ export default function Home() {
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             mx="auto"
             mt={8}
@@ -943,7 +943,7 @@ export default function Home() {
         >
           <Heading
             color="text.500"
-            fontSize={33}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             mx="auto"
             align={"center"}
@@ -997,7 +997,7 @@ export default function Home() {
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             align={"center"}
             mb={"5"}
@@ -1025,20 +1025,20 @@ export default function Home() {
             "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
           }
         />
-
+<Container maxW={"container.xl"} centerContent >
         <Image
-          w={"6xl"}
-          mx={"auto"}
+          w={{md:"70%"}}
+          
           mt={12}
           
-          mb={20}
+          mb={12}
           src={"./Suryan Organic/home/suryan_organic.jpg"}
           style={{
             opacity: 1,
             transition: "opacity 0.7s",
           }}
         />
-
+</Container>
         <Box
           w="100%"
           backgroundImage={
@@ -1050,7 +1050,7 @@ export default function Home() {
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:20}}
             fontWeight={500}
             mx="auto"
             align={"center"}
@@ -1075,14 +1075,14 @@ export default function Home() {
         </Container>
         <Box
           w="100%"
-          /* backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"} 
         >
           <Heading
             color="brand.500"
-            fontSize={33}
+            fontSize={{md:33,base:24}}
             fontWeight={500}
             mx="auto"
             align={"center"}

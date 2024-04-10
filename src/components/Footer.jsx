@@ -55,7 +55,8 @@ export default function Footer() {
             fontSize={{ base: "sm", lg: "md" }}
             className="scrolling-text"
           >
-            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia, email us at {" "}
+            For deliveries in the USA, UAE, UK, Singapore, Canada and Australia,
+            email us at{" "}
             <Link
               target="_blank"
               href="mailto:export@suryanorganic.com"
@@ -74,8 +75,8 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
-        <Container  maxW={"7xl"} pt={10} pb={2}>
-        <SimpleGrid
+        <Container maxW={"7xl"} pt={10} pb={2}>
+          <SimpleGrid
             columns={{ base: 1, md: 2, lg: 5 }}
             // spacing={8}
             spacingY="8px"
@@ -84,8 +85,8 @@ export default function Footer() {
             {/* <Stack align={"flex-start"} color="brand.900"> */}
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
-            <Stack color="text.300"  >
-              <Stack ml={{md:"auto"}} >
+            <Stack color="text.300">
+              <Stack ml={{ md: "auto" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Quick Links
                 </ListHeader>
@@ -96,7 +97,6 @@ export default function Footer() {
                 _hover={{ color: "text.500" }}
                 as={RouterLink}
                 to={"/shop"}
-                
               >
                 Shop
               </Link>
@@ -149,80 +149,69 @@ export default function Footer() {
                 Testimonials
               </Link>
             </Stack>
-            <Stack align={{md:"flex-start"}}   color="text.300">
+            <Stack align={{ md: "flex-start" }} color="text.300">
               {!isMobile && <ListHeader>&nbsp;</ListHeader>}
 
-            
-                     
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/store-locator"}
-                      >
-                        Store Locator
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/contact-us"}
-                      >
-                        Contact Us
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/faq"}
-                      >
-                        FAQ
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/terms-and-conditions"}
-                      >
-                        Terms & Conditions
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/shipping-policy"}
-                      >
-                        Shipping Policy
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/return-and-refund-policy"}
-                      >
-                        Return & Refund Policy
-                      </Link>
-                      <Link
-                        textDecoration="none"
-                        _hover={{ color: "text.500" }}
-                        as={RouterLink}
-                        marginTop={2}
-                        to={"/inspire-and-support"}
-                      >
-                        Inspire & Support
-                      </Link>
-                  
-             
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/store-locator"}
+              >
+                Store Locator
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/contact-us"}
+              >
+                Contact Us
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/faq"}
+              >
+                FAQ
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/terms-and-conditions"}
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/shipping-policy"}
+              >
+                Shipping Policy
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/return-and-refund-policy"}
+              >
+                Return & Refund Policy
+              </Link>
+              <Link
+                textDecoration="none"
+                _hover={{ color: "text.500" }}
+                as={RouterLink}
+                to={"/inspire-and-support"}
+              >
+                Inspire & Support
+              </Link>
             </Stack>
             {/* </SimpleGrid> */}
             {/* </Stack> */}
-            <Stack color="text.300"  mt={{ md: 3 }}>
+            <Stack color="text.300" mt={{ md: 3 }}>
               <Stack>
                 {" "}
                 <Stack align={{ md: "flex-start" }}>
@@ -285,7 +274,7 @@ export default function Footer() {
                 </Flex>
               </Stack> */}
             </Stack>
-            <Stack color="text.300" ml={{lg:"-37px"}}  mt={{ md: 3 }} >
+            <Stack color="text.300" ml={{ lg: "-37px" }} mt={{ md: 3 }}>
               <Stack align={{ md: "flex-start" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Customer Support
@@ -324,10 +313,10 @@ export default function Footer() {
                 care@suryanorganic.com
               </Link>
             </Stack>
-            <Stack mt={{ md: 3 }}   >
-              <Stack ml={{lg:3}}>
-                <ListHeader >Talk To Our Vaidya</ListHeader>
-                </Stack>
+            <Stack mt={{ md: 3 }}>
+              <Stack ml={{ lg: 3 }}>
+                <ListHeader>Talk To Our Vaidya</ListHeader>
+              </Stack>
 
               <Link
                 textDecoration="none"
@@ -337,7 +326,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
-                ml={{lg:3}}
+                ml={{ lg: 3 }}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} /> +91 6351
                 9797 06
@@ -350,7 +339,7 @@ export default function Footer() {
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
-                ml={{lg:3}}
+                ml={{ lg: 3 }}
               >
                 <FaPhoneAlt size={16} style={{ marginRight: 8 }} />
                 +91 6351 9797 12
@@ -359,7 +348,7 @@ export default function Footer() {
 
             <Stack align={"flex-start"} gap={"3"} ml={{ lg: 10 }} color="brand.900"> */}
 
-              <Stack ml={{lg:3}}>
+              <Stack ml={{ lg: 3 }}>
                 <ListHeader gap={"3"}>We accept payments via</ListHeader>
               </Stack>
               <Image

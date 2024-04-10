@@ -11,6 +11,7 @@ import {
   Checkbox,
   useToast,
   FormErrorMessage,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import Navbar from "../components/Navbar";
@@ -54,6 +55,8 @@ export default function Bussiness() {
   const [cities, setCities] = useState([]);
   const [isAgree, setIsAgree] = useState(true);
   const loginInfo = checkLogin();
+
+  const width = useBreakpointValue({md:"375px",base:"300px"})
 
   const toast = useToast();
   const onSubmit = async (e) => {
@@ -223,7 +226,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -258,7 +261,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -293,7 +296,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -328,7 +331,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -362,7 +365,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -383,7 +386,7 @@ export default function Bussiness() {
                   chakraStyles={{
                     inputContainer: (provided) => ({
                       ...provided,
-                      width: "375px",
+                      width : width
                     }),
                   }}
                   variant="outline"
@@ -439,7 +442,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -459,7 +462,7 @@ export default function Bussiness() {
                   chakraStyles={{
                     inputContainer: (provided) => ({
                       ...provided,
-                      width: "375px",
+                      width : width
                     }),
                   }}
                   size="sm"
@@ -491,7 +494,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -508,7 +511,7 @@ export default function Bussiness() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width : width
                 }),
               }}
               variant={"outline"}
@@ -524,7 +527,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -540,7 +543,7 @@ export default function Bussiness() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width : width
                 }),
               }}
               value={formData?.state}
@@ -560,8 +563,8 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
-            mt="5"
+           align={{base:"start",md:"center"}}
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -576,7 +579,7 @@ export default function Bussiness() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width : width
                 }),
               }}
               value={formData?.city}
@@ -592,7 +595,8 @@ export default function Bussiness() {
             ) : null}
           </FormControl>
           <Text
-            py={2}
+           py={2}
+         
             size="xl"
             fontSize="2xl"
             fontWeight="medium"
@@ -603,7 +607,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -637,7 +641,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -671,7 +675,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -705,8 +709,8 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
-            mt="5"
+           align={{base:"start",md:"center"}}
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -748,7 +752,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -794,7 +798,7 @@ export default function Bussiness() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -822,7 +826,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -856,7 +860,7 @@ export default function Bussiness() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -884,7 +888,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -918,7 +922,7 @@ export default function Bussiness() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -945,7 +949,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -980,7 +984,7 @@ export default function Bussiness() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1007,7 +1011,7 @@ export default function Bussiness() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.answer4) }}
@@ -1040,7 +1044,7 @@ export default function Bussiness() {
               )}
             />
           </FormControl>
-          <FormControl as={Flex} align="center" mb={4}>
+          <FormControl as={Flex}align={{base:"start",md:"center"}} mb={4}>
             <Controller
               name=""
               control={control}
@@ -1048,7 +1052,10 @@ export default function Bussiness() {
               render={({ field }) => (
                 <Checkbox
                   {...field}
-                  size="sm"
+                  size="md"
+                  colorScheme="brand"
+                  borderColor={"brand.500"}
+                 
                   onChange={() => setIsAgree(!isAgree)}
                 >
                   By submitting this form, you agree to our Privacy Policy and

@@ -6,6 +6,8 @@ import {
   Center,
   Flex,
   Box,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import Navbar from "../components/Navbar";
@@ -19,35 +21,29 @@ export default function Franchise() {
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Franchise"} secondUrl={"/franchise"} />
       </Container>
-      <Container maxW={"container.xl"} py={8} px={{ base: 4, lg: 0 }}>
-        <Box
-          w={"100%"}
-          bgImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg"}
-          bgSize="cover"
-          bgPosition="center"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt={"-10px"}
-          py={20}
-          boxShadow={"0px 0px 0px 0px"}
-          height={"550px"}
-          mb={10}
-          // filter="brightness(200%)"
-          // style={{ backdropFilter: "blur(10px)" }}
+      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg" />
+
+        <Text
+          pb={2}
+          color={"brand.100"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "4xl", base: "xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+          // Optional: Add background to improve text readability
         >
-          <Text
-            pb={2}
-            color={"brand.100"}
-            textAlign={"center"}
-            fontSize="7xl"
-            fontWeight="600"
-          >
-            SOSE Franchise
-          </Text>
-        </Box>
+           SOSE Franchise
+        </Text>
+      </Container>
+      <Container maxW={"container.xl"} py={8} px={{ base: 4, md: "10%" }}>
+       
         <Center flexDir="column">
-          <Heading
+          {/* <Heading
             size={"xl"}
             textAlign="center"
             textDecor={"underline"}
@@ -56,7 +52,7 @@ export default function Franchise() {
             textTransform={"uppercase"}
           >
             SOSE Franchise
-          </Heading>
+          </Heading> */}
           <Image
             src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Gir Cycle.png"}
             w={{ base: "70vw", lg: "500px" }}
@@ -317,7 +313,7 @@ export default function Franchise() {
               </Box>
             </Flex>
           </Container>
-          <Flex
+          {/* <Flex
             gap={8}
             shrink={0}
             pt={4}
@@ -325,17 +321,47 @@ export default function Franchise() {
           >
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
             <Image
               src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"}
-              maxW="350px"
+              maxW="450px"
             ></Image>
-          </Flex>
+          </Flex> */}
+            <Grid
+            templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+            gap={6}
+            pt={4}
+          >
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+            <GridItem>
+              <Image
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"
+                }
+                //maxW="350px"
+              />
+            </GridItem>
+          </Grid>
           <Flex py={6} gap={8} direction={{ base: "column", lg: "row" }}>
             <Box>
               <Heading

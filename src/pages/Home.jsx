@@ -59,18 +59,22 @@ const brands = [
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/01.png",
     alt: "Gir Gauveda",
+    href: "/shop?page=1&category=278",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/02.png",
     alt: "So Good",
+    href: "/shop?page=1&category=317",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/03.png",
     alt: "Spices Board",
+    href: "/shop?page=1&category=716",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/04.png",
     alt: "Himalayan Mountain",
+    href: "/shop?page=1&category=330",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/05.png",
@@ -215,7 +219,7 @@ export default function Home() {
       src: "./Suryan Organic/home/Nuts & Dryfruits.jpg",
       alt: "Nuts Dryfruits",
       title: "Nuts Dryfruits",
-      href: "/shop?page=1&category=760&category_name=Nuts Dryfruits",
+      href: "/shop?page=1&category=759&category_name=Nuts Dryfruits",
     },
 
     {
@@ -243,7 +247,7 @@ export default function Home() {
       src: "./Suryan Organic/home/Super Foods.jpg",
       alt: "Super Foods",
       title: "Super Foods",
-      href: "/shop?page=1&category=448&category_name=Super Foods",
+      href: "/shop?page=1&category=830&category_name=Super Foods",
     },
   ];
   const journalImage = [
@@ -347,9 +351,9 @@ export default function Home() {
       </Container>
 
       <Container
-        maxW={"container.xl"}
+        maxW={"6xl"}
         mb={5}
-        px={{ base: 2, md: 6, lg: "10%" }}
+        
       >
         <Grid
           templateColumns={{
@@ -382,7 +386,7 @@ export default function Home() {
               ancient & vibrant cultural traditions holds the key to solving the
               problems facing the country as well as humanity as a whole.
               <br />
-              <br />
+             
               Suryan Organic is inspired by <b>
                 {" "}
                 "​Bansi​​ Gir​​ Gaushala​"{" "}
@@ -394,13 +398,13 @@ export default function Home() {
             </Text>
 
             <Button
-              mt={8}
+              mt={4}
               variant={"outline"}
               border={"1px"}
               borderColor={"text.500"}
               color="text.500"
               backgroundColor="white"
-              borderRadius={"25px"}
+              borderRadius={"10px"}
               size={"md"}
               onClick={() => navigate("/about-us")}
               alignItems={"center"}
@@ -428,7 +432,7 @@ export default function Home() {
             <Text
               fontWeight={400}
               align={{ base: "justify" }}
-              mt={4}
+              mt={3}
               fontSize={{ base: "14px", lg: "16px" }}
             >
               <b>​Bansi Gir Gaushala​ </b> was established in 2006 by{" "}
@@ -464,7 +468,7 @@ export default function Home() {
             <Text
               fontWeight={400}
               align={{ base: "justify" }}
-              mt={4}
+              mt={3}
               fontSize={{ base: "14", lg: "16" }}
             >
               Supporting <b>'SOSE-Sidha Kisan Se' </b> : ‘Samruddh Kisan,
@@ -474,7 +478,6 @@ export default function Home() {
               helps farmers to find a ready market with steady revenue, while
               consumers can find authentic natural farm products at a reasonable
               price.
-              <br />
               <br />
               Supporting <b>'Gir Gauveda' </b> : ‘Swasth Parivar, Swasth Bharat’
               ( Healthy family, healthy Bharat) - Gir Gauveda exploits the
@@ -515,7 +518,7 @@ export default function Home() {
       </Container>
 
       <Container maxW={"container.xl"} centerContent>
-        <Text align="center" color={"text.500"} fontSize={38} mt={4}>
+        <Text align="center" color={"text.500"} fontSize={{md:38,base:24}} mt={4}>
           {" "}
           Our Natural Product Range
         </Text>
@@ -528,7 +531,7 @@ export default function Home() {
             md: "repeat(4, 1fr)",
           }}
         >
-        {NaturalProduct?.map((data) => (
+          {NaturalProduct?.map((data) => (
             <>
               <GridItem cursor={"pointer"} align={"center"}>
                 <Image
@@ -557,28 +560,28 @@ export default function Home() {
       </Container>
 
       <ProductListSection
-        title="New Arrival Gir Gauveda"
+        title=" New Arrivals : Gir Gauveda"
         loading={loading}
         products={homeData?.new_arrival_gir_gauveda}
       />
 
       <ProductListSection
-        title="Must Try Gir Gau Ayurvedic Products"
+        title="Must Try: Gir Gau Ayurvedic Products"
         loading={loading}
         products={homeData?.must_try_gir_gau_ayurvedic_products}
       />
 
       <ProductListSection
-        title="Must Try Natural Products"
+        title="Must Try: Natural Products"
         loading={loading}
         products={homeData?.must_try_natural_products}
       />
 
-      <ProductListSection
+      {/* <ProductListSection
         title="Best Of The Year"
         loading={loading}
         products={homeData?.best_of_the_year}
-      />
+      /> */}
 
       <Container maxW={"container.xl"} px={"3.8%"}>
         <Image src="./Suryan Organic/home/masala-suryan-organic.jpg" alt="" />
@@ -593,13 +596,13 @@ export default function Home() {
         >
           {journalImage?.map((data) => (
             <>
-              <GridItem cursor={"pointer"} align={"center"}>
+              <GridItem align={"center"}>
                 <Image
                   h={"50%"}
                   mt={8}
-                  cursor={"pointer"}
+                  //cursor={"pointer"}
                   src={data.src}
-                  onClick={() => navigate(data?.href)}
+                  //onClick={() => navigate(data?.href)}
                 />
                 <GridItem align={"center"} mt={2} fontSize={"22"}>
                   {data.title}
@@ -611,18 +614,27 @@ export default function Home() {
       </Container>
 
       <Container className="container" maxW="container.xl" centerContent>
-        <Heading
-          color="text.500"
-          fontSize={"33"}
-          fontWeight={"500"}
-          mx="auto"
-          align={"center"}
-          mt={3}
-          pb={"10px"}
+        <Box
+          w="100%"
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
+          backgroundSize="100%"
+          backgroundPosition="50% 100%"
+          backgroundRepeat={"no-repeat"}
         >
-          OUR VIDEOS
-        </Heading>
-
+          <Heading
+            color="text.500"
+            fontSize={{md:33,base:24}}
+            fontWeight={"500"}
+            mx="auto"
+            align={"center"}
+            mt={3}
+            pb={"10px"}
+          >
+            OUR VIDEOS
+          </Heading>
+        </Box>
         <Grid
           templateColumns={{
             md: "repeat(2, 1fr)",
@@ -868,15 +880,17 @@ export default function Home() {
       </Container>
       <Container maxW={{ base: "100vw", md: "container.xl" }}>
         <Box
-        /*  w="100%"
-          backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          w="100%"
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"}
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             mx="auto"
             mt={8}
@@ -898,7 +912,7 @@ export default function Home() {
           px={{ base: 15, md: 20, lg: 20 }}
         >
           {brands?.map((brand, index) => (
-            <GridItem>
+            <GridItem as={RouterLink} to={brand?.href ?? "#"}>
               <Image
                 as={LazyLoadImage}
                 key={index}
@@ -909,6 +923,7 @@ export default function Home() {
                   lg: "180px",
                 }}
                 alt={brand.alt}
+                cursor={"pointer"}
                 style={{
                   opacity: 1,
                   transition: "opacity 0.7s", // Note the corrected syntax here
@@ -919,14 +934,16 @@ export default function Home() {
         </Grid>
         <Box
           w="100%"
-          // backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
           backgroundSize="100%"
           backgroundPosition="50% 100%"
           backgroundRepeat={"no-repeat"}
         >
           <Heading
             color="text.500"
-            fontSize={33}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             mx="auto"
             align={"center"}
@@ -936,9 +953,9 @@ export default function Home() {
             OUR CERTIFICATIONS & AWARDS
           </Heading>
         </Box>
-        <Text mb={9} textAlign={"center"} color={"text.300"}>
-          We are committed to quality and each of our facility is independently
-          certified by an industry-accredited agency.
+        <Text mb={9} mt={3} textAlign={"center"} color={"text.300"}>
+        “We are committed to quality and each of our facilities is independently certified by an industry-accredited agency.”
+
         </Text>
         <Flex
           justifyContent="space-evenly"
@@ -971,20 +988,22 @@ export default function Home() {
         </Flex>
         <Box
           w="100%"
-          /*   backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"}
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:24}}
             fontWeight={"500"}
             align={"center"}
             mb={"5"}
             pb={"10px"}
           >
-            LICENCES & AFFILIATIONS
+            LICENSES & AFFILIATIONS
           </Heading>
         </Box>
         <Flex justify="center" align="center" gap={10} pb={10}>
@@ -1001,33 +1020,43 @@ export default function Home() {
           />
         </Flex>
         <Image
-          w={"70%"}
-          mx={"auto"}
-          mt={10}
-          mb={20}
+          w="100%"
+          src={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
+        />
+<Container maxW={"container.xl"} centerContent >
+        <Image
+          w={{md:"70%"}}
+          
+          mt={12}
+          
+          mb={12}
           src={"./Suryan Organic/home/suryan_organic.jpg"}
           style={{
             opacity: 1,
             transition: "opacity 0.7s",
           }}
         />
-
+</Container>
         <Box
           w="100%"
-          /* backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"}
         >
           <Heading
             color="text.500"
-            fontSize={"33"}
+            fontSize={{md:33,base:20}}
             fontWeight={500}
             mx="auto"
             align={"center"}
-            mt={17}
+            mt={10}
           >
-            SERVING TO THE COUNTRIES
+            OUR SERVICES ARE AVAILABLE IN 
           </Heading>
         </Box>
         <Container maxW={"container.xl"} px={0}>
@@ -1046,14 +1075,14 @@ export default function Home() {
         </Container>
         <Box
           w="100%"
-          /* backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+          backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"} 
         >
           <Heading
             color="brand.500"
-            fontSize={33}
+            fontSize={{md:33,base:24}}
             fontWeight={500}
             mx="auto"
             align={"center"}

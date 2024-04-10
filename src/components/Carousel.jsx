@@ -20,9 +20,10 @@ export default function Carousel({
   textBanners = false,
 }) {
   const navigate = useNavigate();
+  const showDots = useBreakpointValue({ base: false, md: true });
   // Settings for the slider
   const settings = {
-    dots: true,
+    dots: showDots,
     arrows: false,
     infinite: true,
     autoplay: autoplay ?? true,
@@ -30,6 +31,7 @@ export default function Carousel({
     autoplaySpeed: autoplaySpeed ?? 10000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    
   };
 
   // As we have used custom buttons, we need a reference variable to

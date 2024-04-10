@@ -64,16 +64,7 @@ import { TfiYoutube } from "react-icons/tfi";
 import { FaApple, FaFacebookF, FaGooglePlay, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
-
 const Links = [
-  // {
-  //   name: "Home",
-  //   location: "/",
-  // },
-  // {
-  //   name: "Products",
-  //   location: "/",
-  // },
   {
     name: "Consult Our Vaidya",
     location: "/consult-our-vaidya",
@@ -98,31 +89,27 @@ const Links = [
     name: "Organic Living",
     location: "/organic-living",
   },
-  // {
-  //   name: "Exports",
-  //   location: "/exports",
-  // },
-  // {
-  //   name: "B2B",
-  //   location: "/bussiness",
-  // },
-  // {
-  //   name: "Franchise",
-  //   location: "/franchise",
-  // },
+  {
+    name: "Exports",
+    location: "/exports",
+  },
+  {
+    name: "B2B",
+    location: "/bussiness",
+  },
+  {
+    name: "Franchise",
+    location: "/franchise",
+  },
   {
     name: "Store Locator",
     location: "/store-locator",
-  },
- 
-  {
-    name: "Blogs",
-    location: "/blogs?page=1",
   },
   {
     name: "Contact Us",
     location: "/contact-us",
   },
+
   // { name: "Natural Products", location: "/shop" },
 
   // {
@@ -188,81 +175,93 @@ const Links = [
 //   //   location: "/home-care",
 //   // },
 // ];
-// const mainLinks = [
-//   {
-//     name: "Gifting",
-//     categoryId: 288,
-//   },
-//   {
-//     name: "GIR Gau Products",
-//     categoryId: 278,
-//   },
-//   {
-//     name: "Health Care",
-//     categoryId: 281,
-//   },
-//   {
-//     name: "Personal Care",
-//     categoryId: 344,
-//   },
-//   {
-//     name: "Nutrition",
-//     categoryId: 788,
-//   },
+const mainLinks = [
+  {
+    name: "Ethically Grown Mango",
+    categoryId: 253,
+  },
+  {
+    name: "Gifting",
+    categoryId: 288,
+  },
+  {
+    name: "Sugar Free - Healthy Sweets",
+    categoryId: 791,
+  },
+  {
+    name: "GIR Gau Products",
+    categoryId: 278,
+  },
+  {
+    name: "Health Care",
+    categoryId: 281,
+  },
+  {
+    name: "Personal Care",
+    categoryId: 344,
+  },
+  {
+    name: "Nutrition",
+    categoryId: 788,
+  },
 
-//   {
-//     name: "Grocery",
-//     categoryId: 291,
-//   },
-//   {
-//     name: "Healthy Breakfast",
-//     categoryId: 775,
-//   },
-//   {
-//     name: "Healthy Snacks",
-//     categoryId: 317,
-//   },
-//   {
-//     name: "Healthy Powder",
-//     categoryId: 716,
-//   },
-//   {
-//     name: "Chocolate & Bars",
-//     categoryId: 773,
-//   },
-//   {
-//     name: "Tea & Coffee",
-//     categoryId: 769,
-//   },
-//   {
-//     name: "Beverages",
-//     categoryId: 772,
-//   },
-//   {
-//     name: "Seasonal Foods",
-//     categoryId: 290,
-//   },
-//   {
-//     name: "World Foods",
-//     categoryId: 771,
-//   },
-//   {
-//     name: "Home Care",
-//     categoryId: 347,
-//   },
+  {
+    name: "Grocery",
+    categoryId: 291,
+  },
+  {
+    name: "Healthy Breakfast",
+    categoryId: 775,
+  },
+  {
+    name: "Healthy Snacks",
+    categoryId: 317,
+  },
+  {
+    name: "Healthy Powder",
+    categoryId: 716,
+  },
+  {
+    name: "Chocolate & Bars",
+    categoryId: 773,
+  },
+  {
+    name: "Tea & Coffee",
+    categoryId: 769,
+  },
+  // {
+  //   name: "Beverages",
+  //   categoryId: 772,
+  // },
+  {
+    name: "Seasonal Foods",
+    categoryId: 290,
+  },
+  {
+    name: "World Foods",
+    categoryId: 771,
+  },
+  {
+    name: "Natural Utensils",
+    categoryId: 354,
+  },
+  {
+    name: "Home Care",
+    categoryId: 347,
+  },
 
-//   // {
-//   //   name: "Super Food",
-//   //   categoryId: 601,
-//   // },
+  // {
+  //   name: "Super Food",
+  //   categoryId: 601,
+  // },
 
-//   // {
-//   //   name: "Sweetener",
-//   //   categoryId: 774,
-//   // },
+  // {
+  //   name: "Sweetener",
+  //   categoryId: 774,
+  // },
 
-//   ,
-// ];
+  ,
+];
 
 export default function Navbar() {
   let { search } = useLocation();
@@ -395,7 +394,7 @@ export default function Navbar() {
 
     if (response.data.status === true) {
       setCategories(response.data.categories);
-      //setTopCategory(mergeArraysById(mainLinks, response.data.categories));
+      setTopCategory(mergeArraysById(mainLinks, response.data.categories));
     }
   };
 
@@ -896,6 +895,7 @@ export default function Navbar() {
                   <Fragment key={link.name}>
                     <Link
                       as={ReactRouterLink}
+                      to={link.location}
                       color="brand.900"
                       _hover={{
                         textDecoration: "none",
@@ -919,7 +919,7 @@ export default function Navbar() {
       </Container>
       <Container
         maxW={"container.xl"}
-        px={1}
+       
         style={{
           boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
           position: "sticky",
@@ -933,140 +933,52 @@ export default function Navbar() {
         <Grid templateRows="repeat(2, 1fr)" templateColumns={"repeat(12, 1fr)"}>
           <GridItem
             rowSpan={2}
-            colSpan={2}
+            colSpan={1}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
           >
             <Link as={ReactRouterLink} to="/">
-              <Image
-                boxSize="100px"
-                objectFit="contain"
-                src="/Suryan Organic/Suryan Organic.png"
-                alt="SOSE Logo"
-                size={"lg"}
-                w={"100%"}
-                mt={4}
-              />
+            <Image
+                  boxSize="100px"
+                  objectFit="contain"
+                  src="/Suryan Organic/Suryan Organic.png"
+                  alt="SOSE Logo"
+                  w={"100%"}
+                  mt={4}
+                />
             </Link>
           </GridItem>
           <GridItem
-            colSpan={8}
-            display={"flex"}
-            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-          >
-            <Flex
-              as={"nav"}
-              gap={{ md: 6, lg: 4, xl: 4 }}
-              display={{ base: "flex", lg: "flex" }}
-              fontSize={{ lg: 11, xl: 14, md: 9 }}
-              alignItems={"center"}
+              colSpan={9}
+              display={"flex"}
+              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
-             
-              {/* <Menu isOpen={Open} onClose={handleClose1}>
-                  <MenuButton
-                    //color="text.500"
-                    mb={0.5}
-                    onMouseEnter={handleHover1}
-                    // onMouseLeave={handleClose}
-                    onClick={() => navigate("/shop")}
-                  >
-                    Shop
-                  </MenuButton>
-                  <MenuList
-                    as={Grid}
-                    width={500}
-                    height={400}
-                    overflowY={"auto"}
-                    templateColumns="repeat(9, 1fr)"
-                    onMouseLeave={handleClose1}
-                    zIndex={9999}
-                  >
-                    <GridItem colSpan={3} overflow="auto">
-                      {megaCategories?.map((section, index) => (
-                        <>
-                          <MenuItem
-                            icon={
-                              <img
-                                src={"./himalayan_logo.jpg"}
-                                width={25}
-                                alt=""
-                              />
-                            }
-                            fontSize={"14"}
-                            key={index}
-                            onMouseEnter={() => handleShow1(section.children)}
-                            onClick={() =>
-                              navigate(`/shop?category=${section.id}`)
-                            }
-                            sx={{
-                              "&:hover": {
-                                backgroundColor: "brand.500",
-                                color: "white",
-                              },
-                            }}
-                          >
-                            {" "}
-                            {section?.name}
-                          </MenuItem>
-
-                          <Divider />
-                        </>
-                      ))}
-                      .
-                    </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {megaSubCategories?.map((item, subIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={subIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
-                          onMouseEnter={() => handleShow2(item.children)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
-                    <GridItem colSpan={3} overflow="auto">
-                      {nestedCategories?.map((item, nestedIndex) => (
-                        <MenuItem
-                          fontSize={"14"}
-                          key={nestedIndex}
-                          onClick={() => navigate(`/shop?category=${item.id}`)}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "brand.500",
-                              color: "white",
-                            },
-                          }}
-                        >
-                          {item?.name}
-                        </MenuItem>
-                      ))}
-                    </GridItem>
-                  </MenuList>
-                </Menu> */}
-              {Links.map((link) => (
-                <Link
-                  as={ReactRouterLink}
-                  to={link.location}
-                  className={link.name === "SOSE Elite" ? "new-link" : ""}
-                  _hover={{
-                    textDecoration: "none",
-                    color: "brand.900",
-                  }}
-                  // fontWeight={600}
-                  onMouseEnter={handleClose}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </Flex>
-          </GridItem>
+              <Flex
+                as={"nav"}
+                gap={4}
+                display={{ base: "flex", lg: "flex" }}
+                fontSize={{ lg: 11, xl:13, md: 9 }}
+                alignItems={"center"}
+               
+              >
+                {Links.map((link) => (
+                  <>
+                    <Link
+                      as={ReactRouterLink}
+                      to={link.location}
+                      className={link.name === "SOSE Elite" ? "new-link" : ""}
+                      _hover={{
+                        textDecoration: "none",
+                        color: "brand.900",
+                      }}
+                      // fontWeight={600}
+                      onMouseEnter={handleClose}
+                    >
+                      {link.name}
+                    </Link>
+                  </>
+                ))}
+              </Flex>
+            </GridItem>
 
           <GridItem
             colSpan={2}
@@ -1076,7 +988,7 @@ export default function Navbar() {
           >
             <Flex
               as={"nav"}
-              gap={{ md: 6, lg: 5 }}
+             gap={3}
               display={{ base: "flex", lg: "flex" }}
               fontSize={{ xl: 16, lg: 14 }}
               alignItems={"center"}
@@ -1138,7 +1050,7 @@ export default function Navbar() {
           </GridItem>
 
           <GridItem
-            colSpan={7}
+            colSpan={8}
             display={"flex"}
             alignItems={"center"}
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
@@ -1361,7 +1273,7 @@ export default function Navbar() {
             >
               Gifting
             </Link> */}
-            {categories?.map((data, index) => (
+            {topCategory?.map((data, index) => (
               <>
                 <Menu
                   isOpen={openCategory === index}

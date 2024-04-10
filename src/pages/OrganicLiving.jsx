@@ -457,10 +457,10 @@ export default function OrganicLiving() {
 
                 <Box
           w="100%"
-       /*    backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+        backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
           backgroundSize="100%"
           backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
+          backgroundRepeat={"no-repeat"} 
         >
           <Heading
             color="brand.500"

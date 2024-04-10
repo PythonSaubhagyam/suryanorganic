@@ -11,33 +11,27 @@ const Aboutus = () => {
     <>
       <Navbar />
 
+      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/aboutUs.jpg" />
 
-      <Container maxW={"container.xl"} mb={4} px={0} centerContent>
-        <Box
-          w={"100%"}
-          bgImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/aboutUs.jpg"}
-          bgSize="cover"
-          bgPosition="center"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt={"-10px"}
-          py={20}
-          boxShadow={"0px 0px 0px 0px"}
-          height={"550px"}
-          mb={10}
-          filter="brightness(100%)"
-          style={{ backdropFilter: "blur(10px)" }}
+        <Text
+          pb={2}
+          color={"brand.100"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "5xl", base: "xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+          // Optional: Add background to improve text readability
         >
-          <Text
-            pb={2}
-            color={"text.100"}
-            textAlign={"center"}
-            fontSize={"7xl"}
-            fontWeight="700"
-          >
-            About Us
-          </Text>
+          About Us
+        </Text>
+      </Container>
+      <Container maxW={"container.xl"} mb={4} px={0} centerContent>
+       
 
           {/* <Text
             pb={2}
@@ -49,10 +43,10 @@ const Aboutus = () => {
           >
             About us
           </Text> */}
-        </Box>
+        {/* </Box> */}
 
         <Container maxW={"container.xl"} centerContent pt={{ base: 2, md: 6, lg: 12 }} >
-          <Image src="./Suryan Organic/about-us/banner dada.jpg" alt="" w={"90%"} />
+          <Image src="./Suryan Organic/about-us/banner dada.jpg" alt="" w={{md:"90%"}} />
 
         </Container>
         <Container maxW="6xl" >

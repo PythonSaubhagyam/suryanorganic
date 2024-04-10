@@ -11,6 +11,7 @@ import {
   Checkbox,
   useToast,
   FormErrorMessage,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import Navbar from "../components/Navbar";
@@ -72,7 +73,7 @@ export default function Export() {
   const [cities, setCities] = useState([]);
   const [isAgree, setIsAgree] = useState(true);
   const loginInfo = checkLogin();
-
+  const width = useBreakpointValue({md:"375px",base:"300px"})
   const toast = useToast();
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -226,7 +227,7 @@ export default function Export() {
     <>
       <Navbar />
       <Container maxW="container.xl">
-        <BreadCrumbCom second={"Bussiness"} secondUrl={"/bussiness"} />
+        <BreadCrumbCom second={"Exports"} secondUrl={"/exports"} />
       </Container>
       <Container maxW="container.lg" pb={10}>
         <Text
@@ -243,7 +244,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+            align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -278,7 +279,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+            align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -313,7 +314,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -348,7 +349,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -382,7 +383,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -403,7 +404,7 @@ export default function Export() {
                   chakraStyles={{
                     inputContainer: (provided) => ({
                       ...provided,
-                      width: "375px",
+                      width:width,
                     }),
                   }}
                   variant="outline"
@@ -459,7 +460,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -479,7 +480,7 @@ export default function Export() {
                   chakraStyles={{
                     inputContainer: (provided) => ({
                       ...provided,
-                      width: "375px",
+                      width:width,
                     }),
                   }}
                   size="sm"
@@ -511,7 +512,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -528,7 +529,7 @@ export default function Export() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width:width,
                 }),
               }}
               variant={"outline"}
@@ -544,7 +545,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -560,7 +561,7 @@ export default function Export() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width:width,
                 }),
               }}
               value={formData?.state}
@@ -580,8 +581,8 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
-            mt="5"
+           align={{base:"start",md:"center"}}
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -596,7 +597,7 @@ export default function Export() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  width: "375px",
+                  width: width,
                 }),
               }}
               value={formData?.city}
@@ -617,7 +618,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -651,7 +652,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -685,7 +686,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
           >
             <FormLabel
@@ -719,8 +720,8 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
-            mt="5"
+           align={{base:"start",md:"center"}}
+            my="5"
           >
             <FormLabel
               fontSize="sm"
@@ -758,7 +759,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -786,7 +787,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -804,7 +805,7 @@ export default function Export() {
                 <Input
                   {...field}
                   maxW={"md"}
-                  size="sm"
+                  size={"sm"}
                   border={"1px"}
                   borderColor="gray.300"
                   variant="outline"
@@ -820,7 +821,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -848,7 +849,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -882,7 +883,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -909,7 +910,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
           >
@@ -948,7 +949,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -975,7 +976,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.answer5) }}
@@ -1012,7 +1013,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1039,7 +1040,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.question5) }}
@@ -1075,7 +1076,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1102,7 +1103,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.question6) }}
@@ -1142,7 +1143,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1169,7 +1170,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.answer7) }}
@@ -1206,7 +1207,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1233,7 +1234,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.question8) }}
@@ -1269,7 +1270,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1296,7 +1297,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.question9) }}
@@ -1336,7 +1337,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1363,7 +1364,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.answer10) }}
@@ -1400,7 +1401,7 @@ export default function Export() {
           <Text
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb="5"
           >
@@ -1427,7 +1428,7 @@ export default function Export() {
           <FormControl
             as={Flex}
             direction={{ base: "column", md: "row" }}
-            align="center"
+           align={{base:"start",md:"center"}}
             mt="5"
             mb={"5"}
             style={{ height: calculateHeight(formData?.question11) }}
@@ -1453,6 +1454,7 @@ export default function Export() {
                   variant="outline"
                   _focus={{ borderColor: "brand.500" }}
                   value={formData?.answer11}
+                 
                   onChange={(e) => {
                     setFormData({ ...formData, answer11: e.target.value });
                   }}
@@ -1461,7 +1463,7 @@ export default function Export() {
             />
           </FormControl>
 
-          <FormControl as={Flex} align="center" mb={4}>
+          <FormControl as={Flex}align={{base:"start",md:"center"}} mb={4}>
             <Controller
               name=""
               control={control}
@@ -1469,7 +1471,9 @@ export default function Export() {
               render={({ field }) => (
                 <Checkbox
                   {...field}
-                  size="sm"
+                  size="md"
+                  colorScheme="brand"
+                  borderColor={"brand.500"}
                   onChange={() => setIsAgree(!isAgree)}
                 >
                   By submitting this form, you agree to our Privacy Policy and

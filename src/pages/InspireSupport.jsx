@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ReadMorePost from "../components/ReadMorePost";
-import { Box, Container, Text,Image } from "@chakra-ui/react";
+import { Box, Container, Text,Image,Heading } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 
 const Posts = [
@@ -81,20 +81,29 @@ export default function InspireSupport() {
           <ReadMorePost postAlign="horizontal" postDetails={postDetails} />
         ))}
         </Container>
-        <Container maxW={"6xl"} pb={4} px={10}>
+        <Container maxW={"container.xl"} pb={4} px={0}>
         <Box
-          fontWeight={"500"}
-          fontSize={{ base: "20px", lg: "30px" }}
-          mt={2}
-          mb={4}
-          color={"text.300"}
-          textAlign={"center"}
+           w="100%"
+           backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
+             backgroundSize="100%"
+             backgroundPosition="50% 100%"
+             backgroundRepeat={"no-repeat"} 
         >
+           <Heading
+            color="brand.500"
+            size="lg"
+            mx="auto"
+            align={"center"}
+            my={"5"}
+            pb={"10px"}
+          >
           Available At
+          </Heading>
         </Box>
         <Box>
           <Image
             src={"./Suryan Organic/inspire-support/download.jpg"}
+            w={"100%"}
             alt="Ayurveda"
           />
         </Box>

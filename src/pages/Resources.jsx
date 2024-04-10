@@ -5,6 +5,7 @@ import {
     Text,
     Container,
     useBreakpointValue,
+    Image
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -20,30 +21,25 @@ const Resources = () => {
             <Container maxW="container.xl">
                 <BreadCrumbCom second={"Resource"} secondUrl={"/resources"} />
             </Container>
-            <Box
-                w={"100%"}
-                bgImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/resources.webp"}
-                bgSize="cover"
-                bgPosition="center"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt={"-10px"}
-                py={20}
-                height={"550px"}
-                mb={10}
-            >
-                <Text
-                    pb={2}
-                    color={"brand.100"}
-                    textAlign={"center"}
-                    // textShadow={"1px 1px 5px lightgreen"}
-                    fontSize="7xl"
-                    fontWeight="600"
-                >
-                    Resources
-                </Text>
-            </Box>
+            <Container maxW={"container.xl"} py={8} px={0} position="relative">
+        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/resources.webp" />
+
+        <Text
+          pb={2}
+          color={"brand.100"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "4xl", base: "2xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+          // Optional: Add background to improve text readability
+        >
+          Resources
+        </Text>
+      </Container>
 
             <Container maxW="container.xl" py={10}>
                 <Flex

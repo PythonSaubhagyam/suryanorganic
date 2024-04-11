@@ -42,6 +42,7 @@ import LoginSystem from "../pages/LoginSystem";
 import Bussiness from "../pages/Bussiness";
 import Export from "../pages/Export";
 import Gifting from "../pages/Gifting";
+import PrivacyPolicy from "../pages/PrivacyPolicy"
 
 const Router = createBrowserRouter([
   {
@@ -92,6 +93,11 @@ const Router = createBrowserRouter([
   {
     path: "/inspire-and-support",
     element: <InspireSupport />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
     errorElement: <ErrorPage />,
   },
   {

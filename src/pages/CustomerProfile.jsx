@@ -222,7 +222,7 @@ export default function CustomerProfile() {
     },
     {
       name: "Status",
-      selector: (row) => row.order_status,
+      selector: (row) => row.sale_status,
       sortable: true,
     },
   ];

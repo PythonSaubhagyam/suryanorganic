@@ -38,21 +38,27 @@ import Testimonials from "../components/testimonials";
 
 const productItems = [
   {
-    id: 7665,
+    id: 1275,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/lip_balm.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
+  },
+  {
+    //id: 7663,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/01+(4).jpg",
   },
 
   {
-    id: 7664,
+    //id: 7664,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/lavenderrose.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/02+(2).jpg",
   },
   {
-    id: 7663,
+    //id: 7665,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/cocoa_vanilla.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/03+(3).jpg",
   },
+  
 ];
 
 const brands = [
@@ -313,7 +319,8 @@ export default function Home() {
         <Grid
           templateColumns={{
             base: "repeat(1, 1fr)",
-            md: "repeat(3, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
           }}
           gap={6}
           my={6}

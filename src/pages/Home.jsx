@@ -329,8 +329,8 @@ export default function Home() {
           {productItems?.map((product) => (
             <GridItem
               key={product.id}
-              onClick={() => navigate(`/products/${product.id}`)}
-              cursor={"pointer"}
+              onClick={() => {if(product.id){navigate(`/products/${product.id}`)};}}
+              cursor={product.id ? "pointer" : "default"}
             >
               <LazyLoadImage
                 src={product.imageSrc}
@@ -584,7 +584,7 @@ export default function Home() {
         products={homeData?.must_try_natural_products}
       />
       <ProductListSection
-        title="New Arrivals"
+        title="Try Our New Products"
         loading={loading}
         products={homeData?.new_arrival}
       />

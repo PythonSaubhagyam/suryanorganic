@@ -34,7 +34,7 @@ export default function ShopProductCard({
       borderColor="gray.300"
       cursor={"pointer"}
     >
-      <CardBody align="center" py={4} flex={"none"}>
+      <CardBody align="center" h={{md:280}} py={4} flex={"none"}>
         <Image
           src={productDetails.image1}
           alt={productDetails.name}

@@ -1079,7 +1079,7 @@ export default function Navbar() {
                 background={"brand.500"}
                 color="white"
                 _hover={{
-                  background: "brand.400",
+                  background: "brand.900",
                 }}
                 px={4}
                 onClick={() => {

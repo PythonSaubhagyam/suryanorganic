@@ -347,7 +347,7 @@ export default function Shop() {
                   ]}
                 ></Select>
 
-                {/* <Heading size="sm" my={2} fontFamily={"inter"}>
+                <Heading size="sm" my={2} fontFamily={"inter"}>
                   Brand Wise
                 </Heading>
                 <Select
@@ -378,7 +378,7 @@ export default function Shop() {
                   variant={"outline"}
                   onChange={(e) => setBrandWise(e)}
                   options={brandArray}
-                ></Select> */}
+                ></Select>
                 <Heading size="sm" my={2} fontFamily={"inter"}>
                   Tag wise
                 </Heading>

@@ -629,11 +629,13 @@ export default function Home() {
                 <Image
                   h={"50%"}
                   mt={8}
+                  border={"1px"}
+                  borderColor={"text.500"}
                   //cursor={"pointer"}
                   src={data.src}
                   //onClick={() => navigate(data?.href)}
                 />
-                <GridItem align={"center"} mt={2} fontSize={"22"}>
+                <GridItem align={"center"} mt={2} fontSize={18}>
                   {data.title}
                 </GridItem>
               </GridItem>
@@ -860,7 +862,86 @@ export default function Home() {
           </GridItem>
         </Grid>
       </Container>
-
+      <Container maxW={"container.xl"}>
+      <Box
+          w="100%"
+          backgroundImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+          }
+          backgroundSize="100%"
+          backgroundPosition="50% 100%"
+          backgroundRepeat={"no-repeat"}
+        >
+        <Heading
+          color="brand.500"
+          fontSize={{ md: 33, base: 24 }}
+          fontWeight={"500"}
+          mx="auto"
+          align={"center"}
+          mt={3}
+          pb={"10px"}
+        >
+          BLOGS
+        </Heading>
+        </Box>  
+        <Grid
+          templateColumns={{
+            base: "repeat(1,1fr)",
+            md: "repeat(2,1fr)",
+            lg: "repeat(4,1fr)",
+          }}
+          px={2}
+          py={3}
+          spacing="40px"
+        >
+          {blogs?.slice(0, 8).map((blog) => (
+            <GridItem key={blog.id} m={4}>
+              <Card>
+                <LinkBox h={400}>
+                  <Image
+                    src={blog.banner}
+                    w="100%"
+                    h="300px"
+                    loading="lazy"
+                    objectFit={"cover"}
+                    borderRadius={5}
+                    style={{
+                      opacity: 1,
+                      transition: "opacity 0.7s", // Note the corrected syntax here
+                    }}
+                  />
+                  <LinkOverlay
+                    _hover={{ color: "text.500" }}
+                    href={`/blogs/${blog.id}/`}
+                  >
+                    <Heading size="sm" fontWeight={500} m={2}>
+                      {blog.title}
+                    </Heading>
+                  </LinkOverlay>
+                </LinkBox>
+                <Flex m={2} justifyContent={"space-between"}>
+                  <Text fontSize={"sm"} color="gray.500">
+                    {new Intl.DateTimeFormat("en-CA", {
+                      dateStyle: "long",
+                      timeZone: "Asia/Kolkata",
+                    }).format(new Date(blog.published_at))}
+                  </Text>
+                  <Text
+                    fontSize={"sm"}
+                    fontWeight={600}
+                    color={"brand.500"}
+                    onClick={() => navigate(`/blogs/${blog.id}/`)}
+                    cursor={"pointer"}
+                  >
+                    Read more
+                    <ChevronRightIcon />
+                  </Text>
+                </Flex>
+              </Card>
+            </GridItem>
+          ))}
+        </Grid>
+      </Container>
       <Testimonials />
       <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
         <SimpleGrid

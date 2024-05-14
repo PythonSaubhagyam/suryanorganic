@@ -59,7 +59,7 @@ function SubscriptionPayment() {
       }
     );
     if (res.data.status === true) {
-      window.open(res.data.payment_url);
+      window.open(res.data.payment_url, "_self");
       setPaymentInProgress(true);
     }
   }

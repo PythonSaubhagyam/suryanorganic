@@ -13,7 +13,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
-const Aboutus = () => {
+const AboutUs = () => {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
@@ -410,4 +410,4 @@ const Aboutus = () => {
   );
 };
 
-export default Aboutus;
+export default AboutUs;

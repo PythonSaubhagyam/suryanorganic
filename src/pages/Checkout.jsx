@@ -246,7 +246,7 @@ export default function Checkout({ getDetails }) {
       if (res.data.status === true) {
         setTxt_new_id(res.data.txn_id);
         // setPaymentInProgress(true);
-        window.open(res.data.payment_url, "_blank");
+        window.open(res.data.payment_url, "_self");
         // const checkPayment = setInterval(async function () {
         //   const res = await getPaymentDetails(txt_new);
         //   if (res.data.status === true) {

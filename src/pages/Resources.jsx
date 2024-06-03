@@ -10,6 +10,7 @@ import {
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BreadCrumbCom from "../components/BreadCrumbCom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Resources = () => {
     const width = useBreakpointValue({ base: "100%", lg: "540" });
@@ -223,6 +224,7 @@ const Resources = () => {
                     </Flex>
                 </Flex>
             </Container>
+            <ScrollToTop/>
             <Footer />
         </>
     );

@@ -41,6 +41,7 @@ import axios from "axios";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { RiCloseCircleFill } from "react-icons/ri";
 import Loader from "../components/Loader";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function CustomerProfile() {
   const [details, setDetails] = useState([]);
@@ -497,6 +498,7 @@ export default function CustomerProfile() {
           </TabPanels>
         </Tabs>
       </Container>
+      <ScrollToTop/>
       <Footer />
     </>
   );

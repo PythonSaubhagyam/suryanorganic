@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import CapitalizeLetter from "../utils/CommanFunction";
 import checkLogin from "../utils/checkLogin";
 import { AsyncSelect, Select } from "chakra-react-select";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function Export() {
   const { handleSubmit, control, formState } = useForm();
@@ -1490,6 +1491,7 @@ export default function Export() {
           </Container>
         </form>
       </Container>
+      <ScrollToTop/>
       <Footer />
     </>
   );

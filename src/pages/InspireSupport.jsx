@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import ReadMorePost from "../components/ReadMorePost";
 import { Box, Container, Text,Image,Heading } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
+import ScrollToTop from "../components/ScrollToTop";
+
 
 const Posts = [
   {
@@ -108,6 +110,7 @@ export default function InspireSupport() {
           />
         </Box>
       </Container>
+      <ScrollToTop/>
       <Footer />
     </>
   );

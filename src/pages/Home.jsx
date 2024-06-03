@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
 import {
   Container,
@@ -38,25 +38,26 @@ import Testimonials from "../components/testimonials";
 
 const productItems = [
   {
-    id: 1275,
+    id: 8660,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/dent+oil.jpg",
   },
   {
-    //id: 7663,
+    id: 8673,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/01+(4).jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Sunscreen+Lotion.jpg",
   },
 
   {
-    //id: 7664,
+    id: 8661,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/02+(2).jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
   },
+  
   {
-    //id: 7665,
+    id: 1275,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/newarrival/03+(3).jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
   },
   
 ];
@@ -1216,6 +1217,7 @@ export default function Home() {
           />
         </Container>
       </Container>
+      <ScrollToTop/>
       <Footer />
     </>
   );

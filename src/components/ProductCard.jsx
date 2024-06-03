@@ -23,12 +23,13 @@ export default function ProductCard({ product }) {
       borderColor="text.300"
       borderRadius={"lg"}
       onClick={() => {
-        navigate(`/products/${product.id}`),
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          });
+        window.location.href = `/products/${product.id}`;
+        // navigate(),
+        //   window.scrollTo({
+        //     top: 0,
+        //     left: 0,
+        //     behavior: "smooth",
+        //   });
       }}
       cursor={"pointer"}
     >

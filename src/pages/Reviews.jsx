@@ -19,6 +19,7 @@ import {
 import { AiFillStar } from "react-icons/ai";
 import ReactStars from "react-stars";
 import client from "../setup/axiosClient";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function Reviews() {
   const initialProductData = Object.freeze({
@@ -140,6 +141,7 @@ export default function Reviews() {
             ))}
         </Flex>
       </Container>
+      <ScrollToTop/>
       <Footer />
     </>
   );

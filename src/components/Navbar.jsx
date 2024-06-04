@@ -64,6 +64,8 @@ import { TfiYoutube } from "react-icons/tfi";
 import { FaApple, FaFacebookF, FaGooglePlay, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
+import CartEmitter from "./EventEmitter";
+
 const Links = [
   
   {
@@ -476,6 +478,8 @@ export default function Navbar() {
   }, []);
   const Logout = () => {
     localStorage.clear();
+    CartEmitter.emit("updateCartCount", 0);
+    CartEmitter.emit("updateProductTotal",0);
     toast({
       title: "Logged out successfully!",
       status: "success",

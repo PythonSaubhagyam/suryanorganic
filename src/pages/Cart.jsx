@@ -86,6 +86,7 @@ export default function Cart() {
       setTaxes(response.data.data.gst_amt);
       setGrandTotal(response.data.data.final_total);
       localStorage.setItem("cart_counter", response.data.data.cart_counter);
+      localStorage.setItem("product_total", response.data.data.final_total);
       if (
         loginInfo.isLoggedIn === true &&
         response.data.data.cart_counter > 0
@@ -151,6 +152,8 @@ export default function Cart() {
       setDiscount(response.data.discount_amt);
       setGrandTotal(response.data.final_total);
       localStorage.setItem("cart_counter", response.data.cart_counter);
+      localStorage.setItem("product_total", response.data.final_total);
+
     } else
       toast({
         title: response.data.error,

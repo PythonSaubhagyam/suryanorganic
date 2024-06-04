@@ -364,11 +364,11 @@ export default function ProductDetails() {
                     <Link
                       pt={0.5}
                       //pl={2}
-                      fontWeight={400}
+                      fontWeight={500}
                       fontSize={"lg"}
-                      color={"dimgray"}
+                      color={"brand.50"}
                       textDecoration="none"
-                      _hover={{ color: "text.500" }}
+                      _hover={{ color: "text.50" }}
                       //as={RouterLink}
                       to={"/products"}
                       // onClick={() => {

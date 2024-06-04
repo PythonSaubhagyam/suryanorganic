@@ -77,6 +77,10 @@ export default function Login() {
                             response.data.data?.cart_counter
                         );
                         localStorage.setItem(
+                            "product_total",
+                            response.data.data?.cart_totals?.final_total
+                          );
+                        localStorage.setItem(
                             "wishlist_counter",
                             response.data.data?.wishlist_counter
                         );

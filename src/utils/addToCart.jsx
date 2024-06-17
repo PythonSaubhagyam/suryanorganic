@@ -30,6 +30,8 @@ export default async function AddToCart(product_id, quantity) {
       }
     );
     if (response.data.status === true) {
+      CartEmitter.emit("updateProductTotal", true);
+      localStorage.setItem("cart_counter", response.data.cart_counter);
       toast({
         title: "Product added to cart!",
         status: "success",
@@ -37,25 +39,6 @@ export default async function AddToCart(product_id, quantity) {
         duration: 3000,
         isClosable: true,
       });
-      localStorage.setItem("cart_counter", response.data.cart_counter);
-      CartEmitter.emit("updateCartCount", response.data.cart_counter);
-      if (localStorage.getItem("product_total") === null ||localStorage.getItem("product_total") === undefined) {
-        localStorage.setItem("product_total",0) 
-      }
-      console.log("product-total",localStorage.getItem("product_total") )
-
-
-      let finalTotal =
-        parseInt(localStorage.getItem("product_total")) + parseInt(response.data.data?.selling_price) * parseInt(response.data.data?.quantity);
-        console.log("finalTotal",finalTotal )
-      localStorage.setItem("product_total", finalTotal);
-
-      CartEmitter.emit("updateProductTotal", finalTotal);
-      // if (window.location.pathname === "/cart") {
-      //   window.location.reload();
-      // } else {
-      //   // Router.navigate("/cart");
-      // }
     } else {
       toast({
         description:

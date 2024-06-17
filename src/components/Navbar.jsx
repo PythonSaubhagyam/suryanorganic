@@ -961,7 +961,7 @@ export default function Navbar() {
                 as={"nav"}
                 gap={4}
                 display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl:13, md: 9 }}
+                fontSize={{ lg: 11, xl:14, md: 9 }}
                 alignItems={"center"}
                
               >

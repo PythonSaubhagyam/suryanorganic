@@ -54,11 +54,11 @@ const productItems = [
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
   },
   
-  {
-    id: 1275,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
-  },
+  // {
+  //   id: 1275,
+  //   imageSrc:
+  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
+  // },
   
 ];
 
@@ -321,7 +321,7 @@ export default function Home() {
           templateColumns={{
             base: "repeat(1, 1fr)",
             md: "repeat(2, 1fr)",
-            lg: "repeat(4, 1fr)",
+            lg: "repeat(3, 1fr)",
           }}
           gap={6}
           my={6}

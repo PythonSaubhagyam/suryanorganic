@@ -40,14 +40,18 @@ export default function CreateAddress() {
     address_line_1: existingAddress?.address_line_1 ?? null,
     address_line_2: existingAddress?.address_line_2 ?? null,
     landmark: existingAddress?.landmark ?? null,
-    city: {
-      value: existingAddress?.city_obj.id ?? 117,
-      label: existingAddress?.city_obj.name ?? "Ahmedabad",
-    },
-    state: {
-      value: existingAddress?.state_obj.id ?? 1198,
-      label: existingAddress?.state_obj.name ?? "Gujarat",
-    },
+    city: existingAddress
+      ? {
+          value: existingAddress?.city_obj.id,
+          label: existingAddress?.city_obj.name,
+        }
+      : null,
+    state: existingAddress
+      ? {
+          value: existingAddress?.state_obj.id,
+          label: existingAddress?.state_obj.name,
+        }
+      : null,
     postal_code: existingAddress?.postal_code ?? null,
     country: {
       value: existingAddress?.country_obj.id ?? 104,
@@ -121,7 +125,7 @@ export default function CreateAddress() {
   }
   useEffect(() => {
     getCountries();
-    if (existingAddress !== null || existingAddress === undefined) {
+    if (existingAddress) {
       getStates(formData.country.value);
       getCities(formData.state.value);
     } // eslint-disable-next-line

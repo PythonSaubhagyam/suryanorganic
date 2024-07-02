@@ -126,10 +126,14 @@ export default function CreateAddress() {
   useEffect(() => {
     getCountries();
     if (existingAddress) {
-      getStates(formData.country.value);
       getCities(formData.state.value);
     } // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+  
+      getStates(formData.country.value);
+  }, [formData?.country?.value]);
 
   const countryOptions = async (inputValue) => {
     let Options = [];

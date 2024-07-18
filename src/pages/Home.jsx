@@ -568,7 +568,7 @@ export default function Home() {
       </Container>
 
       <ProductListSection
-        title=" New Arrivals : Gir Gauveda"
+        title="New Arrival : VAMA - Herbal & Natural Beauty Care"
         loading={loading}
         products={homeData?.new_arrival_gir_gauveda}
       />

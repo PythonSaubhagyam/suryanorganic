@@ -38,20 +38,14 @@ import Testimonials from "../components/testimonials";
 
 const productItems = [
   {
-    id: 8660,
+    id: 8663,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/dent+oil.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_website.jpg",
   },
   {
-    id: 8673,
+    id: 8859,
     imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Sunscreen+Lotion.jpg",
-  },
-
-  {
-    id: 8661,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_image.jpg",
   },
   
   // {
@@ -321,7 +315,7 @@ export default function Home() {
           templateColumns={{
             base: "repeat(1, 1fr)",
             md: "repeat(2, 1fr)",
-            lg: "repeat(3, 1fr)",
+            lg: "repeat(2, 1fr)",
           }}
           gap={6}
           my={6}

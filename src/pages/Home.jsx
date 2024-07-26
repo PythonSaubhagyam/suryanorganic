@@ -38,6 +38,11 @@ import Testimonials from "../components/testimonials";
 
 const productItems = [
   {
+    id: 7565,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/rakhi.jpg",
+  },
+  {
     id: 8663,
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_website.jpg",
@@ -314,8 +319,8 @@ export default function Home() {
         <Grid
           templateColumns={{
             base: "repeat(1, 1fr)",
-            md: "repeat(2, 1fr)",
-            lg: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(3, 1fr)",
           }}
           gap={6}
           my={6}

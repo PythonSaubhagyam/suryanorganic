@@ -52,13 +52,56 @@ const productItems = [
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_image.jpg",
   },
-  
+  {
+    id: 8924,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/baby_cream.jpg",
+  },
+
   // {
-  //   id: 1275,
+  //   id: 8661,
   //   imageSrc:
-  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_Mango.jpg",
+  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
   // },
-  
+];
+
+const rakhiItems = [
+  {
+    id: 9232,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-01.jpg",
+  },
+  {
+    id: 9231,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-02.jpg",
+  },
+  {
+    id: 9233,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-03.jpg",
+  },
+  {
+    id: 9230,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-04.jpg",
+  },
+  {
+    id: 9237,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-05.jpg",
+  },
+  {
+    id: 9241,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-06.jpg",
+  },
+
+  // {
+  //   id: 8661,
+  //   imageSrc:
+  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
+  // },
 ];
 
 const brands = [
@@ -304,6 +347,68 @@ export default function Home() {
           <Carousel banners={banners} />
         )}
       </Container>
+      <Container maxW={"container.xl"} mb={5} centerContent>
+        <LazyLoadImage
+          src={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Rakhi+Hamper-02.jpg"
+          }
+          alt=""
+          style={{
+            opacity: 1,
+            transition: "opacity 0.7s", // Note the corrected syntax here
+          }}
+        />
+        <Grid
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            md: "repeat(3, 1fr)",
+          }}
+          gap={6}
+          my={6}
+          px={15}
+        >
+          {rakhiItems?.map((product) => (
+            <GridItem
+              key={product.id}
+              onClick={() => {
+                if (product.id) {
+                  navigate(`/products/${product.id}`);
+                }
+              }}
+              cursor={product.id ? "pointer" : "default"}
+            >
+              <LazyLoadImage
+                src={product.imageSrc}
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s",
+                }}
+              />
+            </GridItem>
+          ))}
+        </Grid>
+        <Button
+          as={Link}
+          mb={8}
+          mt={3}
+          size={"lg"}
+          border={"1px"}
+          borderRadius={"8px"}
+          variant='solid'
+          colorScheme="brand"
+          _hover={{
+             color:"brand.500",
+             bgColor:"#fff",
+             border:"1px",
+             borderColor:"brand.500",
+            textDecoration: "none",
+          }}
+          href={"/shop?page=1&category=277&category_name=Rakhi%20Festival"}
+        >
+          View more 
+        </Button>
+      </Container>
+
 
       <Container maxW={"container.xl"} mb={5} centerContent>
         <LazyLoadImage

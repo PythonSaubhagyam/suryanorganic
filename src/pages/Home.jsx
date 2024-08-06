@@ -602,6 +602,17 @@ export default function Home() {
       </Container> */}
 
       <Container maxW={"container.xl"} px={0}>
+      <Text
+          fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
+          bgColor={"bg.500"}
+          px={{ base: 2, md: 8 }}
+          py={4}
+          mb={8}
+          textAlign={{ base: "center", md: "start" }}
+          fontWeight={500}
+        >
+          {"Rakshabandhan Special"}
+        </Text>
         <Carousel
           banners={[
             {

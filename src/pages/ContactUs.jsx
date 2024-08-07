@@ -126,7 +126,7 @@ export default function ContactUs() {
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Contact Us"} secondUrl={"/contact-us"} />
       </Container>
-      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+      <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/contact.jpg" />
 
         <Text
@@ -155,7 +155,7 @@ export default function ContactUs() {
         >
           Contact Us
         </Text> */}
-        <Text pb={2}>
+        <Text pb={2} pt={2}>
           Contact us about anything related to our company or services.
         </Text>
         <Text pb={8}>
@@ -197,6 +197,7 @@ export default function ContactUs() {
             align={{md:"center",base:"start"}}
             isRequired
             mt="5"
+            mb={"5"}
           >
             <FormLabel
               fontSize="sm"

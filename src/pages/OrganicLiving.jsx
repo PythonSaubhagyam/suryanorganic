@@ -241,7 +241,7 @@ export default function OrganicLiving() {
             Mother of all Creation.
           </Text>
         </Container>
-        <Container maxW={"container.xl"} px={0} py={8}>
+        <Container maxW={"container.xl"} px={0} py={1}>
           <Image
             src={
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/gaushala.jpg"

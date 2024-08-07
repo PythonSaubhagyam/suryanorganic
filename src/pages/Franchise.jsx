@@ -6,61 +6,79 @@ import {
   Center,
   Flex,
   Box,
-  Grid,
-  GridItem
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import { useLocation } from "react-router-dom";
 
 export default function Franchise() {
+  let { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const IsMobileView = searchParams.get("mobile") ?? "false";
+
   return (
     <>
-      <Navbar />
+      {IsMobileView !== "true" && <Navbar />}
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Franchise"} secondUrl={"/franchise"} />
       </Container>
-      <Container maxW={"container.xl"} py={8} px={0} position="relative">
-        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg" />
-
-        <Text
-          pb={2}
-          color={"brand.100"}
-          textAlign={"center"}
-          fontSize={{ lg: "7xl", md: "4xl", base: "xl" }}
-          fontWeight="600"
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          zIndex="1"
-          // Optional: Add background to improve text readability
+      <Container maxW={"container.xl"} py={1} px={{ base: 4, lg: 0 }}>
+        <Box
+          w={"100%"}
+          bgImage={
+            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchisee.jpg"
+          }
+          bgSize="cover"
+          bgPosition="center"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          mt={"-10px"}
+          py={20}
+          boxShadow={"0px 0px 0px 0px"}
+          height={"550px"}
+          mb={10}
+          // filter="brightness(200%)"
+          // style={{ backdropFilter: "blur(10px)" }}
         >
-           SOSE Franchise
-        </Text>
-      </Container>
-      <Container maxW={"container.xl"} py={8} px={{ base: 4, md: "10%" }}>
-       
-        <Center flexDir="column">
-          {/* <Heading
+          <Text
+            pb={2}
+            color={"brand.500"}
+            textAlign={"center"}
+            fontSize="7xl"
+            fontWeight="600"
+          >
+            SOSE Franchise
+          </Text>
+        </Box>
+        <Container maxW={"container.xl"} px={20}>
+          <Heading
             size={"xl"}
             textAlign="center"
             textDecor={"underline"}
             fontWeight={"600"}
-            color="#436131"
+            color="brand.500"
             textTransform={"uppercase"}
           >
             SOSE Franchise
-          </Heading> */}
+          </Heading>
           <Image
-            src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Gir Cycle.png"}
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Gir Cycle.png"
+            }
             w={{ base: "70vw", lg: "500px" }}
             maxW="500px"
-            py={8}
+            py={1}
+            mx={"auto"}
           />
-          <Heading size="xs" py={5} textAlign={{ base: "center", lg: "start" }}>
+          <Heading
+            size="xs"
+            py={5}
+            textAlign={{ base: "center", lg: "center" }}
+          >
             SOSE Franchisee - Unique opportunity to earn 'Shubh Lakshmi' and
             undertake 'Gau Seva', and contribute to the revival of Bharat's
             ancient 'Gau Sanskriti.
@@ -70,8 +88,8 @@ export default function Franchise() {
             textDecor={"underline"}
             py={5}
             fontWeight={"600"}
-            color="#436131"
-            textAlign={{ base: "center", lg: "start" }}
+            color="brand.500"
+            textAlign={{ base: "center", lg: "center" }}
           >
             Gau Sanskriti and Gau Adharit Vyapar
           </Heading>
@@ -92,9 +110,9 @@ export default function Franchise() {
             size="lg"
             textDecor={"underline"}
             py={10}
-            textAlign={{ base: "center", lg: "start" }}
+            textAlign={{ base: "center", lg: "center" }}
             fontWeight={"600"}
-            color="#436131"
+            color="brand.500"
           >
             SOSE Franchise Store concept is built on the following sutras:
           </Heading>
@@ -105,7 +123,9 @@ export default function Franchise() {
               justify="center"
             >
               <Image
-                src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/farmer.jpeg"}
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/farmer.jpeg"
+                }
                 rounded
                 boxSize={{ base: "75%", lg: "275px" }}
                 mx="auto"
@@ -116,9 +136,9 @@ export default function Franchise() {
                   py={5}
                   textAlign={{ base: "center", lg: "start" }}
                   fontWeight={"600"}
-                  color="#436131"
+                  color="brand.500"
                 >
-                  SOSE Organic & Natural - “Samruddh Kissan, Samruddh Bharat”
+                  SOSE Ethical & Natural - “Samruddh Kissan, Samruddh Bharat”
                 </Heading>
                 <Text textAlign={"justify"} pb={8} fontSize="sm">
                   Under our ‘Seedha Kissan Se’ initiative we can facilitate
@@ -146,7 +166,9 @@ export default function Franchise() {
             </Flex>
             <Flex direction={{ base: "column", lg: "row" }} justify="center">
               <Image
-                src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/gaumata.jpeg"}
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/gaumata.jpeg"
+                }
                 boxSize={{ base: "75%", lg: "275px" }}
                 mx="auto"
               ></Image>
@@ -156,7 +178,7 @@ export default function Franchise() {
                   py={3}
                   textAlign={{ base: "center", lg: "start" }}
                   fontWeight={"600"}
-                  color="#436131"
+                  color="brand.500"
                 >
                   Gir Gauveda Gau Adharit Aushadhi - “Svasth Nagarik, Svasth
                   Parivar, Svasth Bharat”
@@ -178,11 +200,13 @@ export default function Franchise() {
               </Box>
             </Flex>
           </Container>
-          <Container maxW="100%" py={4}>
+          <Container maxW="container.xl" py={4}>
             <Flex flexDir="column" gap={4}>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/PureProduct.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/PureProduct.jpeg"
+                  }
                   size="lg"
                   boxSize="65px"
                 ></Image>
@@ -191,7 +215,7 @@ export default function Franchise() {
                     fontSize="lg"
                     pb={2}
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                   >
                     Pure & Authentic Products
                   </Heading>
@@ -204,7 +228,9 @@ export default function Franchise() {
               </Box>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/StoreDesign.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/StoreDesign.jpeg"
+                  }
                   size="lg"
                   boxSize="60px"
                 ></Image>
@@ -213,7 +239,7 @@ export default function Franchise() {
                     fontSize="lg"
                     pb={2}
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                   >
                     Store Design
                   </Heading>
@@ -226,14 +252,16 @@ export default function Franchise() {
               </Box>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/BusinessSupport.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/BusinessSupport.jpeg"
+                  }
                   size="lg"
                   boxSize="60px"
                 ></Image>
                 <Box as="span">
                   <Heading
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                     fontSize="lg"
                     pb={2}
                   >
@@ -248,14 +276,16 @@ export default function Franchise() {
               </Box>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Marketing.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Marketing.jpeg"
+                  }
                   size="lg"
                   boxSize="60px"
                 ></Image>
                 <Box as="span">
                   <Heading
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                     fontSize="lg"
                     pb={2}
                   >
@@ -270,14 +300,16 @@ export default function Franchise() {
               </Box>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/StaffTraining.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/StaffTraining.jpeg"
+                  }
                   size="lg"
                   boxSize="60px"
                 ></Image>
                 <Box as="span">
                   <Heading
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                     fontSize="lg"
                     pb={2}
                   >
@@ -292,14 +324,16 @@ export default function Franchise() {
               </Box>
               <Box py={2} as={Flex} gap={6} align="center">
                 <Image
-                  src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/IT.jpeg"}
+                  src={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/IT.jpeg"
+                  }
                   size="lg"
                   boxSize="60px"
                 ></Image>
                 <Box as="span">
                   <Heading
                     fontWeight={"600"}
-                    color="#436131"
+                    color="brand.500"
                     fontSize="lg"
                     pb={2}
                   >
@@ -314,73 +348,65 @@ export default function Franchise() {
               </Box>
             </Flex>
           </Container>
-          {/* <Flex
+          <Flex
             gap={8}
             shrink={0}
             pt={4}
             direction={{ base: "column", lg: "row" }}
           >
             <Image
-              src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"}
-              maxW="450px"
+              src={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"
+              }
+              maxW="350px"
             ></Image>
             <Image
-              src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"}
-              maxW="450px"
+              src={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"
+              }
+              maxW="350px"
             ></Image>
             <Image
-              src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"}
-              maxW="450px"
+              src={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"
+              }
+              maxW="350px"
             ></Image>
-          </Flex> */}
-            <Grid
-            templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
-            gap={6}
-            pt={4}
-          >
-            <GridItem>
-              <Image
-                src={
-                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store1.jpeg"
-                }
-                //maxW="350px"
-              />
-            </GridItem>
-            <GridItem>
-              <Image
-                src={
-                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store2.jpeg"
-                }
-                //maxW="350px"
-              />
-            </GridItem>
-            <GridItem>
-              <Image
-                src={
-                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/franchise/Store3.jpeg"
-                }
-                //maxW="350px"
-              />
-            </GridItem>
-          </Grid>
-          <Flex py={6} gap={8} direction={{ base: "column", lg: "row" }}>
+          </Flex>
+          <Flex py={6} gap={8} direction={{ base: "column", lg: "column" }}>
             <Box>
               <Heading
                 size="sm"
                 pb={3}
                 fontWeight={"600"}
-                color="#436131"
+                color="brand.500"
                 textAlign={{ base: "center", lg: "start" }}
               >
                 SOSE 'Sidha Kisan Se' Products Range
               </Heading>
-              <Text fontSize="sm">
-                • Grains & Dailya • Edible Oils • Pulses & Lentils • Flours •
-                Masala (whole & powders) • Traditional Masala Mixes • Super
-                Foods • Jaggery • Sugar • Salt • Healthy Seeds • Dry Fruits &
-                Nuts • Healthy Sweetener • International Cuisine • Seasoning &
-                Dressings • Health Bars • Muesli & Cereals • Healthy Ready Mixes
-                • Healthy Beverages • Healthy Snacks - Fried{" "}
+              <Text fontSize="sm" textAlign={{ base: "center", lg: "start" }}>
+                <ul>
+                  <li>
+                    {" "}
+                    Grains & Dailya • Edible Oils • Pulses & Lentils • Flours
+                    •Masala (whole & powders)
+                  </li>
+                  <li>
+                    {" "}
+                    Traditional Masala Mixes • Super Foods • Jaggery • Sugar •
+                    Salt • Healthy Seeds • Dry Fruits & Nuts{" "}
+                  </li>
+                  <li>
+                    {" "}
+                    Healthy Sweetener • International Cuisine • Seasoning &
+                    Dressings • Health Bars • Muesli & Cereals
+                  </li>
+                  <li>
+                    {" "}
+                    Healthy Ready Mixes • Healthy Beverages • Healthy Snacks -
+                    Fried
+                  </li>
+                </ul>
               </Text>
             </Box>
             <Box>
@@ -388,20 +414,33 @@ export default function Franchise() {
                 size="sm"
                 pb={3}
                 fontWeight={"600"}
-                color="#436131"
+                color="brand.500"
                 textAlign={{ base: "center", lg: "start" }}
               >
                 Gir Gauveda Product Range
               </Heading>
               <Text textAlign={"justify"} fontSize="sm">
-                • Gir Ahinsak Gau Ghee • Gir Aushadhiya Ghee • Gir Herbal
-                Supplements • Gir Churna • Gir Gau Ark & Syrups • Gir Healthy
-                Foods • Gir Beauty Care • Gir Ayurvedic Oils • Gir Home Care
-                Products{" "}
+                <ul>
+                  <li>
+                    {" "}
+                    Gir Ahinsak Gau Ghee • Gir Aushadhiya Ghee • Gir Herbal
+                    Supplements • Gir Churna{" "}
+                  </li>
+                  <li>
+                    {" "}
+                    Gir Gau Ark & Syrups • Gir Healthy Foods • Gir Beauty Care
+                  </li>
+                  <li> Gir Ayurvedic Oils • Gir Home Care Products </li>
+                </ul>
               </Text>
             </Box>
           </Flex>
-          <Flex py={4} direction={{ base: "column", lg: "row" }} gap={4}>
+          <Flex
+            py={4}
+            justifyContent={"center"}
+            direction={{ base: "column", lg: "row" }}
+            gap={4}
+          >
             <Box>
               <PhoneIcon
                 color={"white"}
@@ -426,10 +465,10 @@ export default function Franchise() {
               organic@suryan.in
             </Box>
           </Flex>
-        </Center>
+        </Container>
       </Container>
-      <ScrollToTop/>
-      <Footer />
+      <ScrollToTop />
+      {IsMobileView !== "true" && <Footer />}
     </>
   );
 }

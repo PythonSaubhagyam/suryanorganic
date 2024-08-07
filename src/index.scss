@@ -294,6 +294,21 @@ div[class$="TableCol_Sortable"] {
   color: rgb(0, 0, 0) !important;
   font-size: 12px !important;
 }
+@media (max-width: 480px ) { /* For mobile phones */
+  .slick-dots {
+    margin-bottom: 10px !important; /* Further reduce margin for mobile */
+  }
+
+  .slick-dots li {
+    width: 10px !important; /* Adjust the width of each dot container */
+    height: 40px !important; /* Adjust the height of each dot container */
+  }
+
+  .slick-dots li button:before {
+    font-size: 8px !important; /* Even smaller dots for mobile */
+  }
+}
+
 
 .scrolling-text {
   animation: slideIn 80s linear infinite;

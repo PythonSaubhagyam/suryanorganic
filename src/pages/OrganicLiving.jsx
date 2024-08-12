@@ -12,6 +12,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import BreadCrumbCom from "../components/BreadCrumbCom";
+import { IoMdOpen } from "react-icons/io";
 import ScrollToTop from "../components/ScrollToTop";
 
 export default function OrganicLiving() {
@@ -61,14 +62,16 @@ export default function OrganicLiving() {
         {/* {" "} */}
         <Carousel banners={banners} transparentBtn={false}></Carousel>{" "}
         {/* </Container> */}
-        <Container maxW={"6xl"} pb={10}>
+        <Container maxW={"6xl"} >
           <Image
             maxW={"6xl"}
-            src={"./Suryan Organic/organic-living/suryan_logo_icons.jpg"}
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/suryan_logo_icons.jpg"
+            }
           ></Image>
           <Heading
             textAlign={"justify"}
-            size="xl"
+            size="lg"
             pt={8}
             pb={3}
             maxW={"6xl"}
@@ -76,31 +79,13 @@ export default function OrganicLiving() {
           >
             Bansi Prerna Upvan - Overview
           </Heading>
-          <Heading
-            textAlign={"justify"}
-            size="md"
-            py={2}
-            maxW={"6xl"}
-            color={"brand.500"}
-          >
+          <Heading textAlign={"justify"} size="sm" py={2} maxW={"6xl"}>
             “Lakeside Forest Living”
           </Heading>
-          <Heading
-            textAlign={"justify"}
-            size="md"
-            py={2}
-            maxW={"6xl"}
-            color={"brand.500"}
-          >
+          <Heading textAlign={"justify"} size="sm" py={2} maxW={"6xl"}>
             “Organic & Ayurvedic Lifestyle”
           </Heading>
-          <Text
-            textAlign={"justify"}
-            color={"brand.500"}
-            fontSize={17}
-            maxW={"6xl"}
-            pb={8}
-          >
+          <Text textAlign={"justify"} maxW={"6xl"} pb={8}>
             Bansi Prerna Upvan is a unique project that is close to Ahmedabad,
             and yet right in the middle of verdant Nature. This project is
             blessed to sit on a land that has for many years been considered
@@ -112,40 +97,33 @@ export default function OrganicLiving() {
           <Heading
             textAlign={"justify"}
             maxW={"6xl"}
-            size="xl"
+            size="lg"
             py={2}
             color={"brand.500"}
           >
             Bansi Prerna Upvan - 5 Cornerstones
           </Heading>
-          <Heading
-            textAlign={"justify"}
-            maxW={"6xl"}
-            size="md"
-            py={2}
-            color={"brand.500"}
-          >
+          <Heading textAlign={"justify"} maxW={"6xl"} size="sm" py={2}>
             A natural & divine living experience
           </Heading>
           <Image
             src={
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/five point BPU image.jpg"
             }
-            w="3xl"
+            w="6xl"
             mx={"auto"}
           ></Image>
           <Heading
             textAlign={"justify"}
             maxW={"6xl"}
-            fontWeight={500}
-            size="lg"
+            size="md"
             pt={12}
             pb={2}
             color={"brand.500"}
           >
             Natural Lake - 1000 Acre
           </Heading>
-          <Text textAlign={"justify"} fontWeight={500} size="md" maxW={"6xl"}>
+          <Text textAlign={"justify"} maxW={"6xl"}>
             Mainly inhabited by migratory birds in winter and spring, it is the
             Finest Wetland Bird Sanctuary in South Ahmedabad, and one of the
             Largest Lake near Sardar Patel Ring Road.Finest Wetland Bird
@@ -155,15 +133,14 @@ export default function OrganicLiving() {
           <Heading
             textAlign={"justify"}
             maxW={"6xl"}
-            fontWeight={500}
-            size="lg"
+            size="md"
             pt={10}
             pb={2}
             color={"brand.500"}
           >
             Wild Forest - 2000 Acre
           </Heading>
-          <Text maxW={"6xl"} fontWeight={500} size="lg" textAlign={"justify"}>
+          <Text maxW={"6xl"} textAlign={"justify"}>
             The 20.60 Lac sq.yd. The area of Dry Mixed Deciduous Forest is
             ebulliently green between July and December after the monsoon rains
             when the lake is full. The land is extremely fertile and boasts of
@@ -179,15 +156,14 @@ export default function OrganicLiving() {
           <Heading
             maxW={"6xl"}
             textAlign={"justify"}
-            fontWeight={500}
-            size="lg"
+            size="md"
             pt={10}
             pb={2}
             color={"brand.500"}
           >
             Natural Hills - 70 ft height
           </Heading>
-          <Text maxW={"6xl"} fontWeight={500} size="lg" textAlign={"justify"}>
+          <Text maxW={"6xl"} textAlign={"justify"}>
             Inhabited by a plethora of Wildlife and Plant Life, the uneven
             sloping terrain has a calm lake and is a beautifully scenic spot to
             revel in. the area surrounding the project site, the land gradually
@@ -195,8 +171,7 @@ export default function OrganicLiving() {
             level into a verdant hilly forest terrain.
           </Text>
           <Heading
-            fontWeight={500}
-            size="lg"
+            size="md"
             maxW={"6xl"}
             textAlign={"justify"}
             pt={10}
@@ -205,7 +180,7 @@ export default function OrganicLiving() {
           >
             Land of Divinity - 'Kalki Avatar'
           </Heading>
-          <Text maxW={"6xl"} fontWeight={500} size="lg" textAlign={"justify"}>
+          <Text maxW={"6xl"} textAlign={"justify"}>
             Bansi Prerna Upvan is blessed to be close to an ancient and
             extremely revered place of worship called Satpanth Prernapeeth
             Temple. Legend suggests that this land, which includes the project
@@ -226,51 +201,42 @@ export default function OrganicLiving() {
           <Heading
             textAlign={"justify"}
             maxW={"6xl"}
-            fontWeight={500}
-            size="lg"
+            size="md"
             pt={10}
             pb={2}
             color={"brand.500"}
           >
             Bansi Gir Gaumata Tapobhumi - Since 2006
           </Heading>
-          <Text textAlign={"justify"} maxW={"6xl"} fontWeight={500} size="lg">
+          <Text textAlign={"justify"} maxW={"6xl"}>
             This sacred land has been graced by the presence of the Divine Gir
             Gaumata of Bansi Gir Gaushala. Hence the locals often refer to this
             area as a "Tapobhumi", a place of penance blessed by the Divine
             Mother of all Creation.
           </Text>
         </Container>
-        <Container maxW={"container.xl"} px={0} py={1}>
+        <Container maxW={"6xl"} py={3}>
           <Image
             src={
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/gaushala.jpg"
             }
           ></Image>
-
           <Flex
             p={{ base: 4, lg: 8 }}
             direction={{ base: "column", md: "row" }}
             gap={{ base: 4, lg: 8 }}
           >
             <Image
-              alt=""
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/krishna.jpg"
               }
-              w={{ base: "100%", lg: "641.5px" }}
+              w={{ base: "100%", lg: "650px" }}
             />
             <Box maxW={"6xl"} textAlign={"justify"}>
               <Heading size="lg" pb={4} color={"brand.500"}>
                 Inspired by Divinity
               </Heading>
-              <Text
-                textAlign={"justify"}
-                color={"brand.500"}
-                maxW={"6xl"}
-                fontWeight={400}
-                fontSize={16}
-              >
+              <Text textAlign={"justify"}>
                 Bansi Prerna Upvan is blessed to be close to an ancient and
                 extremely revered place of worship called Satpanth Prernapeeth
                 Temple. Legend suggests that this land, which includes the
@@ -343,7 +309,7 @@ export default function OrganicLiving() {
             <br />
           </Text>
         </Container>
-        <Container maxW={"Container.xl"} pb={8}>
+        <Container maxW={"6xl"} pb={8}>
           <Heading size="lg" pb={4} color={"brand.500"}>
             Lakeside Forest Living
           </Heading>
@@ -352,25 +318,25 @@ export default function OrganicLiving() {
               "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/lakeside forest living.jpg"
             }
           ></Image>
-          <Box align="center" maxW={"7xl"} mx={"auto"} color={"brand.500"}>
-            <Text textAlign={"justify"} fontSize="lg" py={6}>
+          <Box align="center" maxW={"6xl"} mx={"auto"}>
+            <Text textAlign={"justify"} fontSize="md" py={6}>
               Bansi Prerna Upvan sits right in the middle of a Lush Green Forest
               and is adjacent to an expansive Natural Lake. Mainly inhabited by
               migratory birds in winter and spring, it is the Finest Wetland
               Bird Sanctuary in South Ahmedabad, and one of the Largest Lake
               near Sardar Patel Ring Road.
             </Text>
-            <Text fontSize={21} py={2}>
+            <Text fontSize="xl" py={2}>
               Finest Wetland Bird Sanctuary in South Ahmedabad, and one of the
               Largest Natural Lake
             </Text>
-            <Text fontSize={23} py={2} fontWeight={700}>
+            <Text fontSize="2xl" py={2} fontWeight={700}>
               1000 Acre
             </Text>
-            <Text fontSize="xl" py={2}>
+            <Text fontSize="md" py={2}>
               near Sardar Patel Ring Road
             </Text>
-            <Text textAlign={"justify"} fontSize="lg" py={6}>
+            <Text py={6} textAlign={"justify"}>
               Inhabited by a plethora of Wildlife and Plant Life, the uneven
               sloping terrain has a calm lake and is a beautifully scenic spot
               to revel in. The 20.60 Lac sq.yd. Area of Dry Mixed Deciduous
@@ -382,12 +348,12 @@ export default function OrganicLiving() {
               Dry Mixed Deciduous Forest
             </Text>
             <Text fontSize="2xl" py={2} fontWeight={700}>
-              2000 Acre
+              1000 Acre
             </Text>
             <Text fontSize="md" py={2}>
               near Sardar Patel Ring Road
             </Text>
-            <Text textAlign={"justify"} fontSize="lg" py={6}>
+            <Text fontSize="md" textAlign={"justify"} py={6}>
               At any time of the year it provides a rich wildlife experience,
               with over 100 Species of Birds and 200 Species of Medicinal
               Plants. These virgin green surroundings are home to Deer, Monkeys,
@@ -397,8 +363,8 @@ export default function OrganicLiving() {
               season, there are wetland birds.
             </Text>
           </Box>
-          <Heading size="lg" pb={4} color={"brand.500"}>
-            Bansi Prerna Upvan - Arial View
+          <Heading size="lg" py={4} color={"brand.500"}>
+            Bansi Prerna Upvan - Aerial View
           </Heading>
           <Image
             src={
@@ -410,9 +376,9 @@ export default function OrganicLiving() {
               src={
                 "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/button more information.jpg"
               }
-              mx="20"
+              mx="auto"
               w="550px"
-              py={"5"}
+              py={10}
             ></Image>
           </Link>
         </Container>
@@ -437,41 +403,8 @@ export default function OrganicLiving() {
             Contact us : +91 93138 02226 / 27 / 28
           </Text>
         </Container>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="brand.500"
-            size="lg"
-            mx="auto"
-            align={"center"}
-            my={"5"}
-            pb={"10px"}
-          >
-            AVAILABLE AT
-          </Heading>
-        </Box>
-        <Container maxW={"container.xl"} mb={5} px={0} centerContent>
-          <Image
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/01.jpg"
-            }
-            w={"container.xl"}
-            alt=""
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s", // Note the corrected syntax here
-            }}
-          />
-        </Container>
       </Container>
-      <ScrollToTop />
+      <ScrollToTop/>
       <Footer />
     </>
   );

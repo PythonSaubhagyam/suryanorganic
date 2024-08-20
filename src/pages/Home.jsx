@@ -611,7 +611,7 @@ export default function Home() {
           textAlign={{ base: "center", md: "start" }}
           fontWeight={500}
         >
-          {"Rakshabandhan Special"}
+          {"Ethical and Natural Sweets"}
         </Text>
         <Carousel
           banners={[

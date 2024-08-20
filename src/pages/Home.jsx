@@ -37,11 +37,11 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
 
 const productItems = [
-  {
-    id: 7565,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/rakhi.jpg",
-  },
+  // {
+  //   id: 7565,
+  //   imageSrc:
+  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/rakhi.jpg",
+  // },
   {
     id: 8663,
     imageSrc:

@@ -118,7 +118,7 @@ const brands = [
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/03.png",
     alt: "Spices Board",
-    href: "/shop?page=1&category=716",
+    href: "/shop?page=1&category=975",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/04.png",
@@ -158,12 +158,12 @@ const brands = [
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/11.png",
     alt: "Choci Logo",
-    href: "/shop?page=1&search=choci",
+    href: "/shop?page=1&search=choci=758",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/12.png",
     alt: "D'SOSE Logo",
-    href: "/shop?page=1&search=d%27sose",
+    href: "/shop?page=1&search=d%27sose=771",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/18.webp",
@@ -178,7 +178,7 @@ const brands = [
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/15.png",
     alt: "Sidha Kisan Se",
-    href: "/shop?page=1&search=Sidha%20kisan%20se",
+    href: "/shop?page=1&search=Sidha%20kisan%20se=767",
   },
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/16.png",
@@ -188,7 +188,7 @@ const brands = [
   {
     src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/17.png",
     alt: "Sweekies Logo",
-    href: "/shop?page=1&search=sweekies",
+    href: "/shop?page=1&search=sweekies=896",
   },
 ];
 
@@ -651,7 +651,7 @@ export default function Home() {
         <Grid
           templateColumns={{
             base: "repeat(1, 1fr)",
-            md: "repeat(4, 1fr)",
+            md: "repeat(5, 1fr)",
           }}
         >
           {NaturalProduct?.map((data) => (

@@ -23,8 +23,14 @@ import { useState } from "react";
 import CarouselOurVaidhya from "../components/CarouselOurVaidhya";
 import ScrollToTop from "../components/ScrollToTop";
 
+import { useLocation } from "react-router-dom";
+
 
 export default function ConsultOurVaidya() {
+  let { search } = useLocation();
+    const searchParams = new URLSearchParams(search);
+     const IsMobileView = searchParams.get("mobile") ?? "false";
+
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -112,7 +118,8 @@ export default function ConsultOurVaidya() {
   const [banners, setBanners] = useState(SecondCarousel);
   return (
     <>
-      <Navbar />
+      {IsMobileView !== "true" && <Navbar />}
+
       <Container maxW="container.xl">
         <BreadCrumbCom
           second={"Consult Our Vaidya"}
@@ -469,7 +476,8 @@ export default function ConsultOurVaidya() {
         />
       </Container>
       <ScrollToTop/>
-      <Footer />
+      {IsMobileView !== "true" && <Footer />}
+
     </>
   );
 }

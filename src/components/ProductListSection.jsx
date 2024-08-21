@@ -1,3 +1,4 @@
+
 import {
   Container,
   Text,
@@ -99,6 +100,7 @@ export default function ProductListSection({ title, products, loading, type }) {
         >
           {title}
         </Text>
+
         {type === "carousal" && products.length > 4 ? (
           <Slider {...settings}>
             {loading === true
@@ -131,13 +133,14 @@ export default function ProductListSection({ title, products, loading, type }) {
               md: "repeat(3, 1fr)",
               xl: "repeat(5, 1fr)",
             }}
-            //justify={ "start"}
+            px={4}
+            // justify={ "start"}
             justify="center"
             align="center"
             direction={{ base: "column", md: "row" }}
             // wrap={"wrap"}
             wrap={{ md: "wrap", lg: "nowrap" }}
-            px={5}
+            gap={3}
           >
             {loading === true ? (
               <>

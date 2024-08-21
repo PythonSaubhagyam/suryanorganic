@@ -30,7 +30,13 @@ import { FaStreetView } from "react-icons/fa";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
 
+import { useLocation } from "react-router-dom";
+
 export default function StoreLocator() {
+  let { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+   const IsMobileView = searchParams.get("mobile") ?? "false";
+
   const [storeData, setStoreData] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
@@ -59,13 +65,15 @@ export default function StoreLocator() {
 
   return (
     <>
-      <Navbar />
+       {IsMobileView !== "true" && <Navbar />}
+
+
 
       <Container maxW="container.xl" alignContent={"flex-start"}>
         <BreadCrumbCom second={"Store Locator"} secondUrl={"/store-locator"} />
       </Container>
 
-      <Container maxW={"container.xl"} py={8} px={0} position="relative">
+      <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/store-locator.webp" />
 
         <Text
@@ -386,7 +394,8 @@ export default function StoreLocator() {
         </Flex>
       </Container>
       <ScrollToTop/>
-      <Footer />
+      {IsMobileView !== "true" && <Footer />}
+
     </>
   );
 }

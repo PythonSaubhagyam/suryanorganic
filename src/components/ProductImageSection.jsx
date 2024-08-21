@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Grid, GridItem, Image } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Image,  useMediaQuery, } from "@chakra-ui/react";
 import ReactImageZoom from "react-image-zoom";
 
 function ImageContainer({ children }) {
@@ -18,6 +18,7 @@ function ProductImageSection({ images }) {
   if (!images) {
     return <ImageContainer />;
   }
+  const [isMobile] = useMediaQuery("(max-width: 480px)");
 
   return (
     <>
@@ -52,11 +53,18 @@ function ProductImageSection({ images }) {
             ))}
           </Grid>
         </Box>
-        <ReactImageZoom
-          width={400}
-          zoomWidth={500}
-          img={images?.[selectedImageIndex]}
-        />
+        {!isMobile ? (
+          <ReactImageZoom
+            width={500}
+            zoomWidth={500}
+            img={images?.[selectedImageIndex]}
+            //img={require("../assets/pulav_front.jpg")}
+          />
+        ) : (
+          <>
+            <Image width={"300px"} src={images?.[selectedImageIndex]} />
+          </>
+        )}
       </Flex>
     </>
   );

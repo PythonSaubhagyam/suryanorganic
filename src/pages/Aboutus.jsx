@@ -20,7 +20,7 @@ const AboutUs = () => {
   const IsMobileView = searchParams.get("mobile") ?? "false";
   return (
     <>
-      <Navbar />
+   {IsMobileView !== "true" && <Navbar />}
 
       <Container maxW={"container.xl"} py={8} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/aboutUs.jpg" />
@@ -407,7 +407,9 @@ const AboutUs = () => {
         </Container>
       </Container>
       <ScrollToTop/>
-      <Footer />
+      
+     {IsMobileView !== "true" && <Footer />}
+
     </>
   );
 };

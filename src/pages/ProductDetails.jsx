@@ -267,29 +267,37 @@ export default function ProductDetails() {
             </Box>
           </Container>
 
-          <Container maxW={"6xl"} mb={0} alignItems={"baseline"}>
+          <Container maxW={"8xl"} alignItems={"baseline"}>
             <Flex
               position={"relative"}
               direction={{ base: "column", sm: "row" }}
-              gap={{ base: 8, md: 10 }}
-              pt={{ base: 18, md: 10 }}
-              pb={{ base: 18, md: 0 }}
-              alignItems={{ base: "center" }}
+              justify-content= {"space-between" }
+              gap={15}
+              mb={8}
+             
+                //gap={{ base: 30, md: 20 }}
+              // pt={{ base: 18, md: 10 }}
+              // pb={{ base: 18, md: 0 }}
+              alignItems={{ base: "center",md:"flex-start" }}
             >
-              <Box width={"50%"}>
-                <Skeleton isLoaded={!loading}>
+              <Box width={{md:"50%"}} >
+                <Skeleton isLoaded={!loading} >
                   <ProductImageSection images={productData?.images ?? []} />
                 </Skeleton>
               </Box>
 
-              <Stack spacing={{ base: 6, md: 10 }} width={"50%"}>
+              <Stack spacing={{ base: 6, md: 10 }} width={{md:"50%"}} >
                 <Flex
                   justify="center"
                   direction={"column"}
                   gap={2}
-                  align={{ base: "center", lg: "flex-start" }}
+                  align={{ base: "flex-start", md: "flex-start" }}
+                  //mt={{md:16}}
+                  
                 >
                   <Heading
+                  
+                  // mb={2}
                     as={"header"}
                     lineHeight={1.1}
                     fontWeight={"normal"}
@@ -483,15 +491,15 @@ export default function ProductDetails() {
                     </Text>
                   </Skeleton>
 
-                  <SimpleGrid spacing={{ base: 8, md: 10 }} zIndex={0}>
+                  <SimpleGrid spacing={{ base: 8, md: 10 }} zIndex={0} pb={3} pt={5}>
                     {totalQuantity?.Quantity !== 0 && (
                       <ButtonGroup
                         as={Flex}
                         p={0}
                         alignItems="center"
                         justifyContent={{
-                          base: "center",
-                          lg: "start",
+                          base: "start",
+                          md: "start",
                         }}
                       >
                         <ButtonDecrement onClickFunc={decrementCounter} />
@@ -509,6 +517,7 @@ export default function ProductDetails() {
                     <ButtonGroup
                       as={"Flex"}
                       gap={{ base: 3 }}
+                      alignItems={"flex-start"}
                       flexDirection={{ base: "column", md: "row" }}
                     >
                       {totalQuantity?.Quantity === 0 ? (
@@ -549,8 +558,9 @@ export default function ProductDetails() {
                       <Button
                         colorScheme={isWished ? "red" : "brand"}
                         as={Flex}
-                        gap={1}
+                        gap={3}
                         size="sm"
+                        style={{marginLeft:0}}
                         _hover={
                           isWished
                             ? {
@@ -574,7 +584,7 @@ export default function ProductDetails() {
                 </Flex>
               </Stack>
             </Flex>
-            <Box pr={10} mx={8}>
+            <Box pr={{md:10}} mx={{md:8,base:3}}>
               <Skeleton isLoaded={!loading}>
                 <Box
                   //whiteSpace={"pre-line"}
@@ -589,19 +599,19 @@ export default function ProductDetails() {
               </Skeleton>
             </Box>
             {/* </Container> */}
-            {reviews && (
+           
+          </Container>
+          {reviews && (
               <Container
-                maxW="container.xl"
-                centerContent
+              mt={3}
+                maxW="8xl"
                 id="review-area"
-                display={"flex"}
-                justifyContent={{ base: "center", lg: "start" }}
                 px={0}
               >
-                <Box width={"container.lg"} mt={7}>
+             
                   <Text
                     fontSize={{ base: "xl", sm: "2xl" }}
-                    bgColor={"bg.100"}
+                    bgColor={"bg.500"}
                     px={{ base: 2, md: 8 }}
                     py={4}
                   >
@@ -655,10 +665,10 @@ export default function ProductDetails() {
                       </Button>
                     )}
                   </Flex>
-                </Box>
+               
               </Container>
             )}
-          </Container>
+
 
           <ProductListSection
             title="Related Products"

@@ -607,7 +607,7 @@ export default function Home() {
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
           py={4}
-          mb={8}
+          mb={2}
           textAlign={{ base: "center", md: "start" }}
           fontWeight={500}
         >

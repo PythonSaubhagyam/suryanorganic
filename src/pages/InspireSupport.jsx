@@ -88,7 +88,7 @@ export default function InspireSupport() {
         <Image src={"./Suryan Organic/inspire-support/inspire.jpg"} />
     
       </Container>
-      <Container maxW={"6xl"} py={4}>
+      <Container maxW={"6xl"} >
         {Posts.map((postDetails) => (
           <ReadMorePost postAlign="horizontal" postDetails={postDetails} />
         ))}

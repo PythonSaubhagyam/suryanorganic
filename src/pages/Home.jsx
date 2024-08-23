@@ -43,12 +43,12 @@ const productItems = [
   //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/rakhi.jpg",
   // },
   {
-    id: 8663,
+    id: 8659,
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_website.jpg",
   },
   {
-    id: 8859,
+    id: 9249,
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_image.jpg",
   },
@@ -403,7 +403,7 @@ export default function Home() {
              borderColor:"brand.500",
             textDecoration: "none",
           }}
-          href={"/shop?page=1&category=277&category_name=Rakhi%20Festival"}
+          href={"/shop?page=1&category=492&category_name=Sugar%20Free"}
         >
           View more 
         </Button>

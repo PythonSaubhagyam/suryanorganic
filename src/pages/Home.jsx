@@ -403,7 +403,7 @@ export default function Home() {
              borderColor:"brand.500",
             textDecoration: "none",
           }}
-          href={"/shop?page=1&category=492&category_name=Sugar%20Free"}
+          href={"/shop?page=1&category=492&category_name=Healthy Sweets"}
         >
           View more 
         </Button>

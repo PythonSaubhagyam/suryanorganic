@@ -313,7 +313,7 @@ export default function ProductDetails() {
                 <Flex
                   justify="center"
                   direction={"column"}
-                  gap={3}
+                  gap={2}
                   align={{ base: "flex-start", md: "flex-start" }}
 
                   //mt={{md:16}}

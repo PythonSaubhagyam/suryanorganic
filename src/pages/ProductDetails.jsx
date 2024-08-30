@@ -52,6 +52,8 @@ import ProductImageSection from "../components/ProductImageSection";
 import StarRating from "../components/StarRatings";
 import ScrollToTop from "../components/ScrollToTop";
 
+
+
 function ButtonIncrement(props) {
   return (
     <Button
@@ -66,6 +68,8 @@ function ButtonIncrement(props) {
     </Button>
   );
 }
+
+
 
 function ButtonDecrement(props) {
   return (
@@ -92,6 +96,8 @@ export default function ProductDetails() {
     rating: 1,
     review: null,
   });
+
+ 
   const [productData, setProductData] = useState(null);
   const [avgRating, setAvgRating] = useState(null);
   const [nobenefits, setNoBenefits] = useState("");
@@ -177,6 +183,13 @@ export default function ProductDetails() {
       });
   }
 
+  // const modifiedDescription = productData && productData.description
+  // .replace(/<h1>/g, '<h1 style="color:#436131; font-weight:bold;">')
+  // .replace(/<h2>/g, '<h2 style="color:#436131; font-weight:bold;">')
+  // .replace(/<h3>/g, '<h3 style="color:#436131; font-weight:bold;">')
+  // .replace(/<h4>/g, '<h4 style="color:#436131; font-weight:bold;">')
+  // .replace(/<h5>/g, '<h5 style="color:#436131; font-weight:bold;">')
+  // .replace(/<h6>/g, '<h6 style="color:#436131; font-weight:bold;">');
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -228,8 +241,18 @@ export default function ProductDetails() {
       //   "Sorry! You are not allowed to review this product since you haven't login"
       // );
       navigate("/login");
+      //navigate("/login");
+      toast({
+        title: "Please login to write a review!",
+        status: "info",
+        duration: 3000,
+        position: "top-right",
+        isClosable: true,
+      });
     }
   };
+
+  
   const handleWishlistChange = async (id) => {
     const wishlistResponse = await AddOrRemoveInWishlist(id);
     if (wishlistResponse.status === true) {
@@ -267,37 +290,36 @@ export default function ProductDetails() {
             </Box>
           </Container>
 
-          <Container maxW={"8xl"} alignItems={"baseline"}>
+          <Container maxW={"8xl"} px={8} alignItems={"baseline"}>
             <Flex
               position={"relative"}
               direction={{ base: "column", sm: "row" }}
-              justify-content= {"space-between" }
+              justify-content={"space-between"}
               gap={15}
               mb={8}
              
-                //gap={{ base: 30, md: 20 }}
+              //gap={{ base: 30, md: 20 }}
               // pt={{ base: 18, md: 10 }}
               // pb={{ base: 18, md: 0 }}
-              alignItems={{ base: "center",md:"flex-start" }}
+              alignItems={{ base: "center", md: "flex-start" }}
             >
-              <Box width={{md:"50%"}} >
-                <Skeleton isLoaded={!loading} >
+              <Box width={{ md: "50%" }}>
+                <Skeleton isLoaded={!loading}>
                   <ProductImageSection images={productData?.images ?? []} />
                 </Skeleton>
               </Box>
 
-              <Stack spacing={{ base: 6, md: 10 }} width={{md:"50%"}} >
+              <Stack spacing={{ base: 6, md: 10 }}   width={{ md: "50%" }}>
                 <Flex
                   justify="center"
                   direction={"column"}
-                  gap={2}
+                  gap={3}
                   align={{ base: "flex-start", md: "flex-start" }}
+
                   //mt={{md:16}}
-                  
                 >
                   <Heading
-                  
-                  // mb={2}
+                    // mb={2}
                     as={"header"}
                     lineHeight={1.1}
                     fontWeight={"normal"}
@@ -345,6 +367,7 @@ export default function ProductDetails() {
                           color={"black"}
                           fontWeight={"500"}
                         >
+                          Brand{" "}:{"  "}
                           {productData.brand_name}
                         </Text>
                       )}
@@ -374,9 +397,9 @@ export default function ProductDetails() {
                       //pl={2}
                       fontWeight={500}
                       fontSize={"lg"}
-                      color={"brand.50"}
+                      color={"brand.500"}
                       textDecoration="none"
-                      _hover={{ color: "text.50" }}
+                      _hover={{ color: "text.500" }}
                       //as={RouterLink}
                       to={"/products"}
                       // onClick={() => {
@@ -444,7 +467,7 @@ export default function ProductDetails() {
                     <Text
                       fontSize={{
                         base: "20px",
-                        lg: "22px",
+                        lg: "18px",
                       }}
                       // color={"brand.500"}
                       color={"black"}
@@ -460,6 +483,7 @@ export default function ProductDetails() {
                         base: "16px",
                         lg: "20px",
                       }}
+                     // height={130}
                       // lineHeight={1.5}
                       fontWeight={"400"}
                       textAlign="justify"
@@ -467,7 +491,7 @@ export default function ProductDetails() {
                       color={"black"}
                     >
                       {productData?.benefits.map((benefit, index) => (
-                        <li key={index}>{benefit}</li>
+                        <li key={index} style={{fontSize:"16px"}}>{benefit}</li>
                       ))}
                     </Box>
                   </>
@@ -491,7 +515,7 @@ export default function ProductDetails() {
                     </Text>
                   </Skeleton>
 
-                  <SimpleGrid spacing={{ base: 8, md: 10 }} zIndex={0} pb={3} pt={5}>
+                  <SimpleGrid spacing={{ base: 8, md: 8 }}  zIndex={0} pt={5}>
                     {totalQuantity?.Quantity !== 0 && (
                       <ButtonGroup
                         as={Flex}
@@ -537,7 +561,8 @@ export default function ProductDetails() {
                         <Button
                           id="addToCartButton"
                           as={Flex}
-                          textAlign={"center"}
+                          //textAlign={"center"}
+                          
                           gap={2}
                           colorScheme="brand"
                           size="sm"
@@ -547,11 +572,13 @@ export default function ProductDetails() {
                             bg: "brand.500",
                             cursor: "pointer",
                           }}
-                          me={3}
+                          //pt={2}
+                          //me={3}
                           onClick={() => AddToCart(productData?.id, counter)}
                         >
                           <FaShoppingCart />
-                          ADD TO CART
+                          <Text mt={1}>ADD TO CART</Text>
+                          
                         </Button>
                       )}
 
@@ -560,7 +587,7 @@ export default function ProductDetails() {
                         as={Flex}
                         gap={3}
                         size="sm"
-                        style={{marginLeft:0}}
+                        style={{ marginLeft: 0 }}
                         _hover={
                           isWished
                             ? {
@@ -576,99 +603,88 @@ export default function ProductDetails() {
                         }
                         onClick={() => handleWishlistChange(productData?.id)}
                       >
-                        <AiFillHeart />
-                        {isWished ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}
+                        <AiFillHeart /><Text mt={1}>
+                        {isWished ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}</Text>
                       </Button>
                     </ButtonGroup>
                   </SimpleGrid>
                 </Flex>
               </Stack>
             </Flex>
-            <Box pr={{md:10}} mx={{md:8,base:3}}>
+            <Box pr={{ md: 10 }} mx={{ md: 8, base: 3 }}>
               <Skeleton isLoaded={!loading}>
                 <Box
                   //whiteSpace={"pre-line"}
                   lineHeight={1.8}
+
+                  
                   textAlign="justify"
                   mt={1}
                   dangerouslySetInnerHTML={{
                     // __html: dompurify.sanitize(productData?.description),
-                    __html: productData?.description,
+                    __html:productData.description,
                   }}
                 />
               </Skeleton>
             </Box>
             {/* </Container> */}
-           
           </Container>
           {reviews && (
-              <Container
-              mt={3}
-                maxW="8xl"
-                id="review-area"
-                px={0}
+            <Container mt={3} maxW="8xl" id="review-area" px={0}>
+              <Text
+                fontSize={{ base: "xl", sm: "2xl" }}
+                bgColor={"bg.500"}
+                px={{ base: 2, md: 8 }}
+                py={4}
               >
-             
-                  <Text
-                    fontSize={{ base: "xl", sm: "2xl" }}
-                    bgColor={"bg.500"}
-                    px={{ base: 2, md: 8 }}
-                    py={4}
-                  >
-                    Product Reviews
-                  </Text>
-                  <Flex direction="column" mb={4} id="reviews">
-                    {reviews &&
-                      reviews.map((review) => (
-                        <Skeleton isLoaded={!loading}>
-                          <Card
-                            direction={"column"}
-                            overflow="hidden"
-                            variant="outline"
-                            border={"none"}
-                          >
-                            <CardBody pb={0}>
-                              <Heading size="sm">{review.name}</Heading>
-                              <Text fontSize="xs" color="gray.700">
-                                Published at{" "}
-                                {new Date(
-                                  review.published_at
-                                ).toLocaleDateString()}
-                              </Text>
-                              <ReactStars
-                                count={5}
-                                value={review.rating}
-                                edit={false}
-                                size={28}
-                                color1={"black"}
-                                color2={"#ffc107"}
-                              />
-                            </CardBody>
-                            <CardFooter pt={0} pb={4}>
-                              <Text maxW="75%">{review.review}</Text>
-                            </CardFooter>
-                          </Card>
-                          <Divider h="2.5px" bg={"green.400"} m={0} />
-                        </Skeleton>
-                      ))}
-                    {noOfReviews - 3 >= 1 && (
-                      <Button
-                        w={{ base: "75%", md: "20vw" }}
-                        mx="auto"
-                        mt={4}
-                        colorScheme="brand"
-                        onClick={() =>
-                          navigate(`/products/${productId}/reviews`)
-                        }
+                Product Reviews
+              </Text>
+              <Flex direction="column" mb={4} id="reviews">
+                {reviews &&
+                  reviews.map((review) => (
+                    <Skeleton isLoaded={!loading}>
+                      <Card
+                        direction={"column"}
+                        overflow="hidden"
+                        variant="outline"
+                        border={"none"}
                       >
-                        View all reviews
-                      </Button>
-                    )}
-                  </Flex>
-               
-              </Container>
-            )}
-
+                        <CardBody pb={0}>
+                          <Heading size="sm">{review.name}</Heading>
+                          <Text fontSize="xs" color="gray.700">
+                            Published at{" "}
+                            {new Date(review.published_at).toLocaleDateString()}
+                          </Text>
+                          <ReactStars
+                            count={5}
+                            value={review.rating}
+                            edit={false}
+                            size={28}
+                            color1={"black"}
+                            color2={"#ffc107"}
+                          />
+                        </CardBody>
+                        <CardFooter pt={0} pb={4}>
+                          <Text maxW="75%">{review.review}</Text>
+                        </CardFooter>
+                      </Card>
+                      <Divider h="2.5px" bg={"green.400"} m={0} />
+                    </Skeleton>
+                  ))}
+                {noOfReviews - 3 >= 1 && (
+                  <Button
+                    w={{ base: "75%", md: "20vw" }}
+                    mx="auto"
+                    mt={4}
+                    colorScheme="brand"
+                    onClick={() => navigate(`/products/${productId}/reviews`)}
+                  >
+                    View all reviews
+                  </Button>
+                )}
+              </Flex>
+            </Container>
+          )}
 
           <ProductListSection
             title="Related Products"

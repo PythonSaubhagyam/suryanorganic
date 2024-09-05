@@ -117,7 +117,7 @@ export default function Carousel({
         {banners.map((bannerData, index) => (
           <>
             {textBanners === true ? (
-              <Box key={index} textAlign="center" w="0vw" mx={"auto"} pb={4}>
+              <Box key={index} textAlign="center" w="50vw" mx={"auto"} pb={4}>
                 {/* <Text fontSize="md" mb={4}>
                   {bannerData?.content}
                 </Text> */}

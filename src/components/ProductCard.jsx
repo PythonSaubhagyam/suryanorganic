@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
   const navigate = useNavigate();
   return (
     <Card
-      w={{ base: "80vw", sm: "3xs", lg: "18vw" }}
+      //w={{ base: "80vw", sm: "3xs", lg: "18vw" }}
       border="1px"
       borderColor="brand.100"
       borderRadius={"lg"}

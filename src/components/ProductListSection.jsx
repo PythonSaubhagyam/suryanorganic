@@ -123,9 +123,9 @@ export default function ProductListSection({ title, products, loading, type }) {
                   </Box>
                 ))
               : products?.map((product) => (
-                // <Box key={product.id} px={{base:"20px",md:"30px"}} >
+                <Box key={product.id} px={{base:"20px",md:"20px"}} >
                   <ProductCard key={product.id} product={product} />
-                  // </Box>
+                   </Box>
                 ))}
           </Slider>
         ) : (
@@ -142,7 +142,7 @@ export default function ProductListSection({ title, products, loading, type }) {
             direction={{ base: "column", md: "row" }}
             // wrap={"wrap"}
             wrap={{ md: "wrap", lg: "nowrap" }}
-            //gap={6}
+            gap={6}
           >
             {loading === true ? (
               <>

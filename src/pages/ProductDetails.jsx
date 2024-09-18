@@ -362,6 +362,7 @@ export default function ProductDetails() {
                           color={"#2C4C03"}
                           fontWeight={"500"}
                           cursor={"pointer"}
+                          mr={2}
                           onClick={()=>navigate(`/shop?page=1&brand=${productData.brand}&brand_name=${productData.brand_name}`)}
                         >
                           Brand{" "}:{"  "}

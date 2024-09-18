@@ -50,7 +50,7 @@ export default function Shop() {
   const [productFoamsArray, setProductFoamsArray] = useState();
   const [brandArray, setBrandArray] = useState();
   const [productFoam, setProductFoam] = useState(null);
-  const [brandWise, setBrandWise] = useState(null);
+  //const [brandWise, setBrandWise] = useState(null);
   const [banners, setBanners] = useState({
     bannerWeb: null,
     bannerMobile: null,
@@ -68,6 +68,7 @@ export default function Shop() {
   const prod_search = searchPar.get("search");
   const page = searchPar.get("page") ? searchPar.get("page") : 1;
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
     limits: {
@@ -246,6 +247,12 @@ export default function Shop() {
         category: categoryId,
         category_name: category_name,
       });
+    }else if(searchPar.get("brand")){
+      setSearchParams({
+        page: nextPage,
+        brand : brandWise.value,
+        brand_name : brandWise.label
+      });
     } else {
       setSearchParams({
         page: nextPage,
@@ -282,7 +289,7 @@ export default function Shop() {
           align="center"
           mb={6}
         >
-          {category_name ?? `All Products`}
+          {brandWise?.label ? brandWise?.label : category_name ? category_name :`All Products`}
         </Heading>
 
         <Flex
@@ -348,7 +355,7 @@ export default function Shop() {
                   ]}
                 ></Select>
 
-                <Heading size="sm" my={2} fontFamily={"inter"}>
+                {/* <Heading size="sm" my={2} fontFamily={"inter"}>
                   Brand Wise
                 </Heading>
                 <Select
@@ -379,7 +386,7 @@ export default function Shop() {
                   variant={"outline"}
                   onChange={(e) => setBrandWise(e)}
                   options={brandArray}
-                ></Select>
+                ></Select> */}
                 <Heading size="sm" my={2} fontFamily={"inter"}>
                   Tag wise
                 </Heading>

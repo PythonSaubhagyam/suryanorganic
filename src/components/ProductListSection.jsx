@@ -101,7 +101,7 @@ export default function ProductListSection({ title, products, loading, type }) {
           {title}
         </Text>
 
-        {type === "carousal" && products.length > 4 ? (
+        {type === "carousal" && products && products.length > 4 ? (
           <Slider {...settings}>
             {loading === true
               ? [0, 1, 2, 3, 4].map((index) => (

@@ -650,9 +650,10 @@ export default function Home() {
       <Container maxW={"container.xl"} px={30}>
         <Grid
           templateColumns={{
-            base: "repeat(1, 1fr)",
+            base: "repeat(2, 1fr)",
             md: "repeat(5, 1fr)",
           }}
+          gap={{base:2,md:2}}
         >
           {NaturalProduct?.map((data) => (
             <>
@@ -686,40 +687,47 @@ export default function Home() {
         title="New Arrival : VAMA - Herbal & Natural Beauty Care"
         loading={loading}
         products={homeData?.new_arrival_gir_gauveda}
+        type={isMobile && "carousal"}
       />
 
       <ProductListSection
         title="Must Try: Gir Gau Ayurvedic Products"
         loading={loading}
         products={homeData?.must_try_gir_gau_ayurvedic_products}
+        type={isMobile && "carousal"}
       />
 
       <ProductListSection
         title="Must Try: Natural Products"
         loading={loading}
         products={homeData?.must_try_natural_products}
+        type={isMobile && "carousal"}
       />
       <ProductListSection
         title="Try Our New Products"
         loading={loading}
         products={homeData?.new_arrival}
+        type={isMobile && "carousal"}
       />
       <ProductListSection
         title="Instant Mixes"
         loading={loading}
         products={homeData?.instant_mix}
+        type={isMobile && "carousal"}
       />
 
       <ProductListSection
         title="Best of the Month"
         loading={loading}
         products={homeData?.best_of_the_month}
+        type={isMobile && "carousal"}
       />
 
       <ProductListSection
         title="All Time Best Sellers"
         loading={loading}
         products={homeData?.best_seller_of_all_time}
+        type={isMobile && "carousal"}
       />
 
       {/* <ProductListSection

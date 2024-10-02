@@ -607,7 +607,7 @@ export default function Home() {
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
           py={4}
-          mb={2}
+          
           textAlign={{ base: "center", md: "start" }}
           fontWeight={500}
         >
@@ -1329,7 +1329,7 @@ export default function Home() {
         <Container maxW={"container.xl"} mb={5} px={0} centerContent>
           <Image
             src={
-              require("../../public/001.jpg")
+              "/001.jpg"
             }
             w={"container.xl"}
             alt=""

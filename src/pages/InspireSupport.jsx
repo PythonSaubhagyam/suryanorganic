@@ -114,7 +114,9 @@ export default function InspireSupport() {
         </Box>
         <Box>
           <Image
-            src={"./Suryan Organic/inspire-support/download.jpg"}
+            src={
+              "/001.jpg"
+            }
             w={"100%"}
             alt="Ayurveda"
           />

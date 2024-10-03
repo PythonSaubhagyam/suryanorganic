@@ -394,9 +394,9 @@ const AboutUs = () => {
         </Box>
         <Container maxW={"container.xl"} mb={5} px={0} centerContent>
           <Image
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/01.jpg"
-            }
+           src={
+            "/001.jpg"
+          }
             w={"container.xl"}
             alt=""
             style={{

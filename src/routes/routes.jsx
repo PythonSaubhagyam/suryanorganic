@@ -43,6 +43,8 @@ import Bussiness from "../pages/Bussiness";
 import Export from "../pages/Export";
 import Gifting from "../pages/Gifting";
 import PrivacyPolicy from "../pages/PrivacyPolicy"
+import Event from "../pages/Event";
+import EventDetails from "../pages/EventDetails";
 
 const Router = createBrowserRouter([
   {
@@ -63,6 +65,16 @@ const Router = createBrowserRouter([
   {
     path: "/products/:productId/reviews",
     element: <Reviews />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/event",
+    element: <Event />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/event/:id",
+    element: <EventDetails />,
     errorElement: <ErrorPage />,
   },
   {

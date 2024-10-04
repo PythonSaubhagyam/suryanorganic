@@ -112,6 +112,10 @@ const Links = [
     name: "Contact Us",
     location: "/contact-us",
   },
+  {
+    name: "Events",
+    location: "/event",
+  },
 
   // { name: "Natural Products", location: "/shop" },
 
@@ -184,8 +188,8 @@ const mainLinks = [
     categoryId: 253,
   },
   {
-    name: "Rakhi Festival",
-    categoryId: 277,
+    name: "Diwali Festival",
+    categoryId: 990,
   },
   {
     name: "Gifting",
@@ -960,12 +964,13 @@ export default function Navbar() {
               colSpan={9}
               display={"flex"}
               // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+              sx={{ whiteSpace: "nowrap" }}
             >
               <Flex
                 as={"nav"}
-                gap={4}
+                gap={3}
                 display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl:13, md: 9 }}
+                fontSize={{ lg: 11, xl:14, md: 9 }}
                 alignItems={"center"}
                
               >
@@ -999,7 +1004,7 @@ export default function Navbar() {
               as={"nav"}
              gap={3}
               display={{ base: "flex", lg: "flex" }}
-              fontSize={{ xl: 16, lg: 14 }}
+              fontSize={{ xl: 14, lg: 14 }}
               alignItems={"center"}
             >
               <CartAndWishlistButtons />

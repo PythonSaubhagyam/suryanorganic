@@ -97,11 +97,21 @@ const rakhiItems = [
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-06.jpg",
   },
 
-  // {
-  //   id: 8661,
-  //   imageSrc:
-  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
-  // },
+  {
+    id: 9305,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_2.jpg",
+  },
+  {
+    id: 9310,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_1.jpg",
+  },
+  {
+    id: 9303,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_3.jpg",
+  },
 ];
 
 const brands = [

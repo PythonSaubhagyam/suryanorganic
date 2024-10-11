@@ -67,6 +67,21 @@ const productItems = [
 
 const rakhiItems = [
   {
+    id: 9305,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_2.jpg",
+  },
+  {
+    id: 9310,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_1.jpg",
+  },
+  {
+    id: 9303,
+    imageSrc:
+      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_3.jpg",
+  },
+  {
     id: 9232,
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-01.jpg",
@@ -97,21 +112,7 @@ const rakhiItems = [
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-06.jpg",
   },
 
-  {
-    id: 9305,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_2.jpg",
-  },
-  {
-    id: 9310,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_1.jpg",
-  },
-  {
-    id: 9303,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_3.jpg",
-  },
+ 
 ];
 
 const brands = [

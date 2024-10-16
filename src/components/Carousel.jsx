@@ -114,7 +114,7 @@ export default function Carousel({
       )}
       {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {banners.map((bannerData, index) => (
+        {banners?.length > 0 && banners.map((bannerData, index) => (
           <>
             {textBanners === true ? (
               <Box key={index} textAlign="center" w="50vw" mx={"auto"} pb={4}>

@@ -208,6 +208,7 @@ export default function Home() {
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
   const height = useBreakpointValue({ base: "300", lg: "400" });
   const [banners, setBanners] = useState([]);
+  const [middleBanners , SetMiddleBanners] = useState([])
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
   const [homeData, setHome] = useState({});
@@ -218,16 +219,42 @@ export default function Home() {
   useEffect(() => {
     CheckOrSetUDID();
     getHomePageData();
+    getBanners();
     getBlogs();
   }, []);
 
   async function getHomePageData() {
     const response = await client.get("/home");
     if (response.data.status === true) {
-      setBanners(response.data.banners);
+      //setBanners(response.data.banners);
       setHome(response.data);
     }
     setLoading(false);
+  }
+  async function getBanners() {
+    const promise1 = await client.get(
+         "/ecommerce/banners/?sequence=Upper"
+    );
+    const promise2 = await client.get("/ecommerce/banners/?sequence=Middle");
+   
+   
+
+    Promise.all([promise1, promise2])
+      .then(function (responses) {
+        if (responses[0].data.status === true) {
+         setBanners(responses[0].data?.banner)
+        }
+        if (responses[1].data.status === true) {
+          SetMiddleBanners(responses[1].data?.banner)
+        }
+        
+
+        setLoading(false);
+      })
+      .catch(function (error) {
+        setLoading(false);
+        console.error("Error fetching data:", error);
+      });
   }
   async function getBlogs() {
     const params = {};
@@ -355,7 +382,7 @@ export default function Home() {
         {loading === true ? (
           <Skeleton h={489}></Skeleton>
         ) : (
-          <Carousel banners={banners} />
+          <Carousel banners={banners?.length > 0 && banners} />
         )}
       </Container>
       <Container maxW={"container.xl"} mb={5} centerContent>

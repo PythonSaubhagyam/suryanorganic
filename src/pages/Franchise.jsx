@@ -41,7 +41,7 @@ export default function Franchise() {
   zIndex="1"
   // Optional: Add background to improve text readability
 >
-  About Us
+  {/* About Us */}
 </Text>
      
         <Container maxW={"container.xl"} px={20}>

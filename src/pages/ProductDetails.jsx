@@ -51,8 +51,7 @@ import BreadCrumbCom from "../components/BreadCrumbCom";
 import ProductImageSection from "../components/ProductImageSection";
 import StarRating from "../components/StarRatings";
 import ScrollToTop from "../components/ScrollToTop";
-
-
+import LoginModal from "../components/LoginModal";
 
 function ButtonIncrement(props) {
   return (
@@ -68,8 +67,6 @@ function ButtonIncrement(props) {
     </Button>
   );
 }
-
-
 
 function ButtonDecrement(props) {
   return (
@@ -97,7 +94,6 @@ export default function ProductDetails() {
     review: null,
   });
 
- 
   const [productData, setProductData] = useState(null);
   const [avgRating, setAvgRating] = useState(null);
   const [nobenefits, setNoBenefits] = useState("");
@@ -107,6 +103,7 @@ export default function ProductDetails() {
   const [otherProducts, setOtherProducts] = useState([]);
   const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
   const [isWished, setWished] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [counter, setCounter] = useState(1);
   const [totalQuantity, setTotalQuantity] = useState({});
   const [loading, setLoading] = useState(true);
@@ -137,7 +134,6 @@ export default function ProductDetails() {
   }, [productId]);
 
   useEffect(() => {
-   
     getProductsList(productId); // eslint-disable-next-line
   }, [productId]);
 
@@ -148,27 +144,29 @@ export default function ProductDetails() {
         headers: headers,
       }
     );
-    const promise2 = await client.get(`/web/single/product/other/${productId}/`, {
-      headers: headers,
-    });
+    const promise2 = await client.get(
+      `/web/single/product/other/${productId}/`,
+      {
+        headers: headers,
+      }
+    );
     const promise3 = await client.get(
       `/web/single/product/recently-viewed/${productId}/`,
       {
         headers: headers,
       }
     );
-   
 
     Promise.all([promise1, promise2, promise3])
       .then(function (responses) {
         if (responses[0].data.status === true) {
-         setRelatedProducts(responses[0].data?.data)
+          setRelatedProducts(responses[0].data?.data);
         }
         if (responses[1].data.status === true) {
-          setOtherProducts(responses[1].data?.data)
+          setOtherProducts(responses[1].data?.data);
         }
         if (responses[2].data.status === true) {
-         setRecentlyViewedProducts(responses[2].data?.data)
+          setRecentlyViewedProducts(responses[2].data?.data);
         }
 
         //setLoading(false);
@@ -187,12 +185,13 @@ export default function ProductDetails() {
       })
       .then((response) => {
         if (response.data.status) {
-          setTotalQuantity(
-            response.data.data?.available_stock_quantity
-          );
+          setTotalQuantity(response.data.data?.available_stock_quantity);
 
           setProductData(response.data.data);
-          if (response.data.data?.average_rating?.average_rating > MINIMUM_RATING_THRESHOLD) {
+          if (
+            response.data.data?.average_rating?.average_rating >
+            MINIMUM_RATING_THRESHOLD
+          ) {
             setAvgRating(response.data.data.average_rating?.average_rating);
           }
           if (response.data.data.rating_review_data !== null) {
@@ -202,7 +201,7 @@ export default function ProductDetails() {
             setNoOfReviews(response.data.data?.average_rating?.review_count);
           }
           setWished(response.data.data?.is_wished);
-         
+
           window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           setLoading(false);
         } else {
@@ -218,8 +217,12 @@ export default function ProductDetails() {
       });
   }
 
-  const modifiedDescription = productData && productData.description
-   .replace(/<h6>/g, '<h6 style="color:#2C4C03; font-weight:bold; font-size:18px;">');
+  const modifiedDescription =
+    productData &&
+    productData.description.replace(
+      /<h6>/g,
+      '<h6 style="color:#2C4C03; font-weight:bold; font-size:18px;">'
+    );
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -270,7 +273,7 @@ export default function ProductDetails() {
       // window.alert(
       //   "Sorry! You are not allowed to review this product since you haven't login"
       // );
-      navigate("/login");
+       setIsLoginModalOpen(true)
       //navigate("/login");
       toast({
         title: "Please login to write a review!",
@@ -282,7 +285,6 @@ export default function ProductDetails() {
     }
   };
 
-  
   const handleWishlistChange = async (id) => {
     const wishlistResponse = await AddOrRemoveInWishlist(id);
     if (wishlistResponse.status === true) {
@@ -327,7 +329,6 @@ export default function ProductDetails() {
               justify-content={"space-between"}
               gap={15}
               mb={8}
-             
               //gap={{ base: 30, md: 20 }}
               // pt={{ base: 18, md: 10 }}
               // pb={{ base: 18, md: 0 }}
@@ -339,7 +340,7 @@ export default function ProductDetails() {
                 </Skeleton>
               </Box>
 
-              <Stack spacing={{ base: 6, md: 10 }}   width={{ md: "50%" }}>
+              <Stack spacing={{ base: 6, md: 10 }} width={{ md: "50%" }}>
                 <Flex
                   justify="center"
                   direction={"column"}
@@ -387,23 +388,26 @@ export default function ProductDetails() {
                       <Text fontSize={16}>{avgRating}</Text>
                       <Icon as={AiFillStar} marginTop={1} boxSize={4} />
                     </Badge> */}
-                    {productData?.brand_name &&
-                      (
-                        <Text
-                          fontSize={{
-                            base: "14px",
-                            lg: "18px",
-                          }}
-                          color={"#2c4c03"}
-                          fontWeight={"500"}
-                          mr={2}
-                          cursor={"pointer"}
-                          onClick={()=>navigate(`/shop?page=1&brand=${productData.brand}&brand_name=${productData.brand_name}`)}
-                        >
-                          Brand{" "}:{"  "}
-                          {productData?.brand_name}
-                        </Text>
-                      )}
+                    {productData?.brand_name && (
+                      <Text
+                        fontSize={{
+                          base: "14px",
+                          lg: "18px",
+                        }}
+                        color={"#2c4c03"}
+                        fontWeight={"500"}
+                        mr={2}
+                        cursor={"pointer"}
+                        onClick={() =>
+                          navigate(
+                            `/shop?page=1&brand=${productData.brand}&brand_name=${productData.brand_name}`
+                          )
+                        }
+                      >
+                        Brand :{"  "}
+                        {productData?.brand_name}
+                      </Text>
+                    )}
                     {/* <Box
                       // as="ul"
                       whiteSpace={"pre-line"}
@@ -516,7 +520,7 @@ export default function ProductDetails() {
                         base: "16px",
                         lg: "20px",
                       }}
-                     // height={130}
+                      // height={130}
                       // lineHeight={1.5}
                       fontWeight={"400"}
                       textAlign="justify"
@@ -524,7 +528,9 @@ export default function ProductDetails() {
                       color={"black"}
                     >
                       {productData?.benefits.map((benefit, index) => (
-                        <li key={index} style={{fontSize:"16px"}}>{benefit}</li>
+                        <li key={index} style={{ fontSize: "16px" }}>
+                          {benefit}
+                        </li>
                       ))}
                     </Box>
                   </>
@@ -548,7 +554,7 @@ export default function ProductDetails() {
                     </Text>
                   </Skeleton>
 
-                  <SimpleGrid spacing={{ base: 8, md: 7 }}  zIndex={0} pt={5}>
+                  <SimpleGrid spacing={{ base: 8, md: 7 }} zIndex={0} pt={5}>
                     {totalQuantity !== 0 && (
                       <ButtonGroup
                         as={Flex}
@@ -564,9 +570,7 @@ export default function ProductDetails() {
                           <Display message={counter} />
                         </Button>
                         <ButtonIncrement
-                          disabled={
-                            totalQuantity === counter ? true : false
-                          }
+                          disabled={totalQuantity === counter ? true : false}
                           onClickFunc={incrementCounter}
                         />
                       </ButtonGroup>
@@ -595,7 +599,7 @@ export default function ProductDetails() {
                           id="addToCartButton"
                           as={Flex}
                           //textAlign={"center"}
-                          
+
                           gap={2}
                           colorScheme="brand"
                           size="sm"
@@ -611,7 +615,6 @@ export default function ProductDetails() {
                         >
                           <FaShoppingCart />
                           <Text mt={1}>ADD TO CART</Text>
-                          
                         </Button>
                       )}
 
@@ -636,8 +639,12 @@ export default function ProductDetails() {
                         }
                         onClick={() => handleWishlistChange(productData?.id)}
                       >
-                        <AiFillHeart /><Text mt={1}>
-                        {isWished ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}</Text>
+                        <AiFillHeart />
+                        <Text mt={1}>
+                          {isWished
+                            ? "REMOVE FROM WISHLIST"
+                            : "ADD TO WISHLIST"}
+                        </Text>
                       </Button>
                     </ButtonGroup>
                   </SimpleGrid>
@@ -649,13 +656,11 @@ export default function ProductDetails() {
                 <Box
                   //whiteSpace={"pre-line"}
                   lineHeight={1.8}
-
-
                   textAlign="justify"
                   mt={1}
                   dangerouslySetInnerHTML={{
                     // __html: dompurify.sanitize(productData?.description),
-                    __html:modifiedDescription,
+                    __html: modifiedDescription,
                   }}
                 />
               </Skeleton>
@@ -802,8 +807,14 @@ export default function ProductDetails() {
               </form>
             </ModalContent>
           </Modal>
-
+          {!checkLogin().isLoggedIn && (
+            <LoginModal
+              isOpen={isLoginModalOpen}
+              onClose={() => setIsLoginModalOpen(false)}
+            />
+          )}
           {/* </Flex> */}
+          
           <ScrollToTop />
         </>
       )}

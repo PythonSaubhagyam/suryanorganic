@@ -39,7 +39,7 @@ import CheckOrSetUDID from "../utils/checkOrSetUDID";
 import checkLogin from "../utils/checkLogin";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
-
+import LoginModal from "../components/LoginModal";
 
 export default function Cart() {
   const messageRef = useRef(null);
@@ -52,6 +52,7 @@ export default function Cart() {
   const [grandTotal, setGrandTotal] = useState(0.0);
   const [isGift, setIsGift] = useState(false);
   const [cartRemoveLoading, setCartRemoveLoading] = useState();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   // const [useGiftWrap, setUseGiftWrap] = useState(false);
   const [giftMessage, setGiftMessage] = useState("");
   const [giftMaterials, setGiftMaterials] = useState([]);
@@ -153,7 +154,6 @@ export default function Cart() {
       setGrandTotal(response.data.final_total);
       localStorage.setItem("cart_counter", response.data.cart_counter);
       localStorage.setItem("product_total", response.data.final_total);
-
     } else
       toast({
         title: response.data.error,
@@ -162,8 +162,8 @@ export default function Cart() {
         duration: 4000,
         isClosable: true,
       });
-      setVoucherCode("")
-      setVoucherApplied(false);
+    setVoucherCode("");
+    setVoucherApplied(false);
   };
 
   async function handleQuantityChange(
@@ -199,7 +199,7 @@ export default function Cart() {
             isClosable: true,
           });
         }
-        setVoucherCode("")
+        setVoucherCode("");
         setVoucherApplied(false);
         getCart();
       } else {
@@ -256,7 +256,7 @@ export default function Cart() {
         });
       }
     } else {
-      navigate("/login");
+      setIsLoginModalOpen(true);
       toast({
         title: "Please login to place an order!",
         status: "info",
@@ -655,7 +655,13 @@ export default function Cart() {
           </>
         )}
       </Container>
-      <ScrollToTop/>
+      {!checkLogin().isLoggedIn && (
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
+      )}
+      <ScrollToTop />
       <Footer />
     </>
   );

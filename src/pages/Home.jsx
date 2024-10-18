@@ -35,171 +35,8 @@ import CheckOrSetUDID from "../utils/checkOrSetUDID";
 import { useNavigate, NavLink as RouterLink } from "react-router-dom";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
-
-const productItems = [
-  // {
-  //   id: 7565,
-  //   imageSrc:
-  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/rakhi.jpg",
-  // },
-  {
-    id: 8659,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_website.jpg",
-  },
-  {
-    id: 9249,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/imgpsh_fullsize_anim_sose_image.jpg",
-  },
-  {
-    id: 9248,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/baby_cream.jpg",
-  },
-
-  // {
-  //   id: 8661,
-  //   imageSrc:
-  //     "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/new_arri/Almond+Oats.jpg",
-  // },
-];
-
-const rakhiItems = [
-  {
-    id: 9305,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_2.jpg",
-  },
-  {
-    id: 9310,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_1.jpg",
-  },
-  {
-    id: 9303,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/gifthamper_3.jpg",
-  },
-  {
-    id: 9232,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-01.jpg",
-  },
-  {
-    id: 9231,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-02.jpg",
-  },
-  {
-    id: 9233,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-03.jpg",
-  },
-  {
-    id: 9230,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-04.jpg",
-  },
-  {
-    id: 9237,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-05.jpg",
-  },
-  {
-    id: 9241,
-    imageSrc:
-      "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-06.jpg",
-  },
-];
-
-const brands = [
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/01.png",
-    alt: "Gir Gauveda",
-    href: "/shop?page=1&category=278",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/02.png",
-    alt: "So Good",
-    href: "/shop?page=1&category=317",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/03.png",
-    alt: "Spices Board",
-    href: "/shop?page=1&category=975",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/04.png",
-    alt: "Himalayan Mountain",
-    href: "/shop?page=1&category=330",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/05.png",
-    alt: "CoffeeCo",
-    href: "/shop?page=1&search=cof",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/06.png",
-    alt: "Shishu veda",
-    href: "/shop?page=1&search=yashoda",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/07.png",
-    alt: "Vama Herbal",
-    href: "/shop?page=1&search=VAMA",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/08.png",
-    alt: "Kapita",
-    href: "/shop?page=1&search=Kapita",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/09.png",
-    alt: "Pureco",
-    href: "/shop?page=1&search=pureco",
-  },
-  // {
-  //   src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/10.png",
-  //   alt: "Cocoa",
-  //   href: "/shop?page=1&search=cocoa",
-  // },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/11.png",
-    alt: "Choci Logo",
-    href: "/shop?page=1&search=choci=758",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/12.png",
-    alt: "D'SOSE Logo",
-    href: "/shop?page=1&search=d%27sose=771",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/18.webp",
-    alt: "So Millet",
-    href: "/shop?page=1&category=585&category_name=SO+Millet",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/14.png",
-    alt: "OGS Logo",
-    href: "/shop?page=1&category=288&category_name=Gifting",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/15.png",
-    alt: "Sidha Kisan Se",
-    href: "/shop?page=1&search=Sidha%20kisan%20se=767",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/16.png",
-    alt: "Sose Pure Nature",
-    href: "/shop?page=1&category=492&category_name=SOSE Pure Nature",
-  },
-  {
-    src: "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/brands/17.png",
-    alt: "Sweekies Logo",
-    href: "/shop?page=1&search=sweekies=896",
-  },
-];
+import LoginModal from "../components/LoginModal";
+import checkLogin from "../utils/checkLogin";
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
@@ -236,6 +73,11 @@ export default function Home() {
   const [error, setError] = useState(null);
   // let [isFull] = useMediaQuery("(max-width:1920px)");
   const [blogs, setBlogs] = useState([]);
+  const loginInfo = checkLogin();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(
+    sessionStorage.getItem("hasShownPopup")
+  );
   const isMobiles = width <= 768;
   const navigate = useNavigate();
   useEffect(() => {
@@ -246,6 +88,9 @@ export default function Home() {
     getProductListSection();
     getBlogs();
     getLowerSection();
+    if (showPopup === null && !loginInfo.isLoggedIn) {
+      setIsLoginModalOpen(true);
+    }
   }, []);
 
   async function getHomePageData() {
@@ -772,7 +617,6 @@ export default function Home() {
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
           py={4}
-          
           textAlign={{ base: "center", md: "start" }}
           fontWeight={500}
         >
@@ -1531,7 +1375,12 @@ export default function Home() {
             />
           </Container>
         )}
-
+      {!checkLogin().isLoggedIn && (
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
+      )}
       <ScrollToTop />
       <Footer />
     </>

@@ -26,24 +26,21 @@ export default function Franchise() {
         <BreadCrumbCom second={"Franchise"} secondUrl={"/franchise"} />
       </Container>
       <Container maxW={"container.xl"} py={1} px={{ base: 4, lg: 0 }}>
-      <Image src={require("../../public/Franchies banner_161024.jpg")}/>
+        <Image src="/Franchies banner_161024.jpg" />
 
-<Text
-  pb={2}
-  color={"brand.100"}
-  textAlign={"center"}
-  fontSize={{ lg: "7xl", md: "5xl", base: "xl" }}
-  fontWeight="600"
-  position="absolute"
-  top="50%"
-  left="50%"
-  transform="translate(-50%, -50%)"
-  zIndex="1"
-  // Optional: Add background to improve text readability
->
-  {/* About Us */}
-</Text>
-     
+        <Text
+          pb={2}
+          color={"brand.100"}
+          textAlign={"center"}
+          fontSize={{ lg: "7xl", md: "5xl", base: "xl" }}
+          fontWeight="600"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="1"
+        ></Text>
+
         <Container maxW={"container.xl"} px={20}>
           <Heading
             size={"xl"}

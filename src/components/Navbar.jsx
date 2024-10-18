@@ -379,7 +379,7 @@ export default function Navbar() {
   useEffect(() => {
     CheckOrSetUDID();
     getCategories();
-    getMegaCategories();
+    //getMegaCategories();
   }, []);
 
   const getMegaCategories = async () => {

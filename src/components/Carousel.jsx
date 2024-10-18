@@ -113,68 +113,76 @@ export default function Carousel({
         </>
       )}
       {/* Slider */}
-      <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {banners?.length > 0 && banners.map((bannerData, index) => (
-          <>
-            {textBanners === true ? (
-              <Box key={index} textAlign="center" w="50vw" mx={"auto"} pb={4}>
-                {/* <Text fontSize="md" mb={4}>
+      <Slider
+        {...settings}
+        ref={(slider) => {
+          if (slider !== null) {
+            setSlider(slider);
+          }
+        }}
+      >
+        {banners?.length > 0 &&
+          banners.map((bannerData, index) => (
+            <>
+              {textBanners === true ? (
+                <Box key={index} textAlign="center" w="50vw" mx={"auto"} pb={4}>
+                  {/* <Text fontSize="md" mb={4}>
                   {bannerData?.content}
                 </Text> */}
-                <Text
-                  display={"inline-block"}
-                  fontSize={"20px"}
-                  fontWeight={600}
-                >
-                  <span
-                    style={{
-                      fontSize: "1rem",
-                      color: "#436131",
-                      fontWeight: 900,
-                    }}
+                  <Text
+                    display={"inline-block"}
+                    fontSize={"20px"}
+                    fontWeight={600}
                   >
-                    &#8220;
-                  </span>{" "}
-                  {bannerData?.content}
-                  <span
-                    style={{
-                      color: "#436131",
-                      fontSize: "1rem",
-                      fontWeight: 900,
-                    }}
+                    <span
+                      style={{
+                        fontSize: "1rem",
+                        color: "#436131",
+                        fontWeight: 900,
+                      }}
+                    >
+                      &#8220;
+                    </span>{" "}
+                    {bannerData?.content}
+                    <span
+                      style={{
+                        color: "#436131",
+                        fontSize: "1rem",
+                        fontWeight: 900,
+                      }}
+                    >
+                      &#8221;
+                    </span>
+                  </Text>
+                  <Text
+                    color={"gray"}
+                    fontSize={"18px"}
+                    fontWeight={600}
+                    mt={4}
+                    mb={8}
                   >
-                    &#8221;
-                  </span>
-                </Text>
-                <Text
-                  color={"gray"}
-                  fontSize={"18px"}
-                  fontWeight={600}
-                  mt={4}
-                  mb={8}
-                >
-                  -{bannerData.title}
-                </Text>
-              </Box>
-            ) : (
-              <Image
-                cursor={bannerData?.image_url ? "pointer" : ""}
-                key={index}
-                src={bannerData.image}
-                alt={bannerData.alt_text}
-                onClick={() =>
-                  bannerData?.image_url
-                    ? navigate(`${bannerData?.image_url}`)
-                    : {}
-                }
-                //objectFit="fit"
-                 w="100%"
-                // h="60%"
-                // h={{ base: "100%", md: `${desktopHeight}px` }}
-              ></Image>
-            )}
-          </>
-        ))}
+                    -{bannerData.title}
+                  </Text>
+                </Box>
+              ) : (
+                <Image
+                  cursor={bannerData?.image_url ? "pointer" : ""}
+                  key={index}
+                  src={bannerData.image}
+                  alt={bannerData.alt_text}
+                  onClick={() =>
+                    bannerData?.image_url
+                      ? navigate(`${bannerData?.image_url}`)
+                      : {}
+                  }
+                  //objectFit="fit"
+                  w="100%"
+                  // h="60%"
+                  // h={{ base: "100%", md: `${desktopHeight}px` }}
+                ></Image>
+              )}
+            </>
+          ))}
       </Slider>
     </Box>
   );

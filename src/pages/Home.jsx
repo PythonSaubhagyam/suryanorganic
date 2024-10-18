@@ -111,8 +111,6 @@ const rakhiItems = [
     imageSrc:
       "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Assorted+sweets+label+design-06.jpg",
   },
-
- 
 ];
 
 const brands = [
@@ -208,7 +206,29 @@ export default function Home() {
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
   const height = useBreakpointValue({ base: "300", lg: "400" });
   const [banners, setBanners] = useState([]);
-  const [middleBanners , SetMiddleBanners] = useState([])
+  const [middleBanners, SetMiddleBanners] = useState([]);
+  const [brandSection, setBrandSection] = useState();
+  const [awardsSection, setAwardSection] = useState();
+  const [servicesSection, setServicesSection] = useState();
+  const [availableSection, setAvailableSection] = useState();
+  const [nonGMOSection, setNonGMOSection] = useState();
+  const [licensesSection, setLicensesSection] = useState();
+  const [giftHamperSection, setGiftHamperSection] = useState();
+  const [viewMoreSection, setViewMoreSection] = useState();
+  const [newArrivalsSection, setNewArrivalsSection] = useState();
+  const [certificateSection, setCertificateSection] = useState();
+  const [girGauProductSection, setGirGauProductSection] = useState();
+  const [shopSection, setShopSection] = useState();
+  const [groceriesSection, setGroceriesSection] = useState();
+  const [productListSections, setProductListSections] = useState([]);
+  const [newArrivalList, setNewArrivalList] = useState();
+  const [tryOurList, setTryOurList] = useState();
+  const [instantMixList, setInstantMixList] = useState();
+  const [mustTryGirList, setMustTryGirList] = useState();
+  const [mustTryNaturalList, setMustTryNaturalList] = useState();
+  const [bestOfList, setBestOfList] = useState();
+  const [allTimeList, setAllTimeList] = useState();
+
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
   const [homeData, setHome] = useState({});
@@ -222,8 +242,10 @@ export default function Home() {
     CheckOrSetUDID();
     getHomePageData();
     getBanners();
+    getUpperSection();
+    getProductListSection();
     getBlogs();
-    getImage();
+    getLowerSection();
   }, []);
 
   async function getHomePageData() {
@@ -235,22 +257,17 @@ export default function Home() {
     setLoading(false);
   }
   async function getBanners() {
-    const promise1 = await client.get(
-         "/ecommerce/banners/?sequence=Upper"
-    );
+    const promise1 = await client.get("/ecommerce/banners/?sequence=Upper");
     const promise2 = await client.get("/ecommerce/banners/?sequence=Middle");
-   
-   
 
     Promise.all([promise1, promise2])
       .then(function (responses) {
         if (responses[0].data.status === true) {
-         setBanners(responses[0].data?.banner)
+          setBanners(responses[0].data?.banner);
         }
         if (responses[1].data.status === true) {
-          SetMiddleBanners(responses[1].data?.banner)
+          SetMiddleBanners(responses[1].data?.banner);
         }
-        
 
         setLoading(false);
       })
@@ -269,17 +286,99 @@ export default function Home() {
     }
   }
 
-  async function getImage() {
+  async function getLowerSection() {
     const params = {};
-    const response = await client.get("/lower-section", {
+    const response = await client.get("/lower-section/", {
       params: params,
     });
     if (response.data.status === true) {
       setSections(response.data.data);
+      const ourAwardsSection = response.data.data?.filter(
+        (section) => section.id === 1
+      );
+      const ourServicesSection = response.data.data?.filter(
+        (section) => section.id === 2
+      );
+      const availableAtSection = response.data.data?.filter(
+        (section) => section.id === 3
+      );
+      const licensesSection = response.data.data?.filter(
+        (section) => section.id === 4
+      );
+      const brandSection = response.data.data?.filter(
+        (section) => section.id === 9
+      );
+      const nonGMOSection = response.data.data?.filter(
+        (section) => section.id === 8
+      );
+      setAwardSection(ourAwardsSection);
+      setServicesSection(ourServicesSection);
+      setAvailableSection(availableAtSection);
+      setLicensesSection(licensesSection);
+      setBrandSection(brandSection);
+      setNonGMOSection(nonGMOSection);
     }
   }
 
-
+  const getProductListSection = async () => {
+    const response = await client.get("/product-section/");
+    if (response.data.status === true) {
+      setProductListSections(response.data.data);
+      const newArrival = response.data.data?.filter(
+        (section) => section.id === 1
+      );
+      const tryOur = response.data.data?.filter((section) => section.id === 2);
+      const instantMix = response.data.data?.filter(
+        (section) => section.id === 3
+      );
+      const mustTryGir = response.data.data?.filter(
+        (section) => section.id === 4
+      );
+      const mustTryNatural = response.data.data?.filter(
+        (section) => section.id === 5
+      );
+      const bestOf = response.data.data?.filter((section) => section.id === 6);
+      const allTime = response.data.data?.filter((section) => section.id === 7);
+      setNewArrivalList(newArrival);
+      setTryOurList(tryOur);
+      setInstantMixList(instantMix);
+      setMustTryGirList(mustTryGir);
+      setMustTryNaturalList(mustTryNatural);
+      setBestOfList(bestOf);
+      setAllTimeList(allTime);
+    }
+  };
+  const getUpperSection = async () => {
+    const response = await client.get("/upper-section/");
+    if (response.data.status === true) {
+      const giftHamper = response.data.data?.filter(
+        (section) => section.id === 1
+      );
+      const viewMore = response.data.data?.filter(
+        (section) => section.id === 2
+      );
+      const newArrivals = response.data.data?.filter(
+        (section) => section.id === 3
+      );
+      const certificate = response.data.data?.filter(
+        (section) => section.id === 4
+      );
+      const girGauProduct = response.data.data?.filter(
+        (section) => section.id === 5
+      );
+      const shop = response.data.data?.filter((section) => section.id === 6);
+      const groceries = response.data.data?.filter(
+        (section) => section.id === 7
+      );
+      setGiftHamperSection(giftHamper);
+      setViewMoreSection(viewMore);
+      setNewArrivalsSection(newArrivals);
+      setCertificateSection(certificate);
+      setGirGauProductSection(girGauProduct);
+      setShopSection(shop);
+      setGroceriesSection(groceries);
+    }
+  };
 
   const NaturalProduct = [
     {
@@ -400,121 +499,134 @@ export default function Home() {
           <Carousel banners={banners?.length > 0 && banners} />
         )}
       </Container>
-      <Container maxW={"container.xl"} mb={5} centerContent>
-        <LazyLoadImage
-          src={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/Rakhi+Hamper-02.jpg"
-          }
-          alt=""
-          style={{
-            opacity: 1,
-            transition: "opacity 0.7s", // Note the corrected syntax here
-          }}
-        />
-        <Grid
-          templateColumns={{
-            base: "repeat(2, 1fr)",
-            md: "repeat(3, 1fr)",
-          }}
-          gap={6}
-          my={6}
-          px={15}
-        >
-          {rakhiItems?.map((product) => (
-            <GridItem
-              key={product.id}
-              onClick={() => {
-                if (product.id) {
-                  navigate(`/products/${product.id}`);
-                }
+      {giftHamperSection?.length > 0 &&
+        giftHamperSection[0]?.is_visible_on_website === true && (
+          <Container maxW={"container.xl"} mb={5} centerContent>
+            <LazyLoadImage
+              src={giftHamperSection?.length > 0 && giftHamperSection[0]?.image}
+              alt=""
+              style={{
+                opacity: 1,
+                transition: "opacity 0.7s", // Note the corrected syntax here
               }}
-              cursor={product.id ? "pointer" : "default"}
+            />
+            <Grid
+              templateColumns={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+              }}
+              gap={6}
+              my={6}
+              px={15}
             >
-              <LazyLoadImage
-                src={product.imageSrc}
-                style={{
-                  opacity: 1,
-                  transition: "opacity 0.7s",
-                }}
-              />
-            </GridItem>
-          ))}
-        </Grid>
-        <Button
-          as={Link}
-          mb={8}
-          mt={3}
-          size={"lg"}
-          border={"1px"}
-          borderRadius={"8px"}
-          variant='solid'
-          colorScheme="brand"
-          _hover={{
-             color:"brand.500",
-             bgColor:"#fff",
-             border:"1px",
-             borderColor:"brand.500",
-            textDecoration: "none",
-          }}
-          href={"/shop?page=1&category=492&category_name=Healthy Sweets"}
-        >
-          View more 
-        </Button>
-      </Container>
+              {giftHamperSection[0]?.images?.length > 0 &&
+                giftHamperSection[0]?.images?.map((product) => (
+                  <GridItem
+                    key={product.id}
+                    onClick={() => {
+                      if (product.id) {
+                        navigate(`/products/${product.product}`);
+                      }
+                    }}
+                    cursor={product.id ? "pointer" : "default"}
+                  >
+                    <LazyLoadImage
+                      src={product.image}
+                      style={{
+                        opacity: 1,
+                        transition: "opacity 0.7s",
+                      }}
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+            {viewMoreSection?.length > 0 &&
+              viewMoreSection[0]?.images?.length > 0 && (
+                <Button
+                  as={Link}
+                  mb={8}
+                  mt={3}
+                  size={"lg"}
+                  border={"1px"}
+                  borderRadius={"8px"}
+                  variant="solid"
+                  colorScheme="brand"
+                  _hover={{
+                    color: "brand.500",
+                    bgColor: "#fff",
+                    border: "1px",
+                    borderColor: "brand.500",
+                    textDecoration: "none",
+                  }}
+                  href={`/shop?page=1&category=${viewMoreSection[0]?.images[0]?.category}&category_name=${viewMoreSection[0]?.images[0]?.category_name}`}
+                >
+                  {viewMoreSection[0]?.label}
+                </Button>
+              )}
+          </Container>
+        )}
 
-
-      <Container maxW={"container.xl"} mb={5} centerContent>
-        <LazyLoadImage
-          src={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/image/sose_newarrival.jpg"
-          }
-          alt=""
-          style={{
-            opacity: 1,
-            transition: "opacity 0.7s", // Note the corrected syntax here
-          }}
-        />
-        <Grid
-          templateColumns={{
-            base: "repeat(1, 1fr)",
-            md: "repeat(3, 1fr)",
-            lg: "repeat(3, 1fr)",
-          }}
-          gap={6}
-          my={6}
-          px={15}
-        >
-          {productItems?.map((product) => (
-            <GridItem
-              key={product.id}
-              onClick={() => {if(product.id){navigate(`/products/${product.id}`)};}}
-              cursor={product.id ? "pointer" : "default"}
+      {newArrivalsSection?.length > 0 &&
+        newArrivalsSection[0]?.is_visible_on_website === true && (
+          <Container maxW={"container.xl"} mb={5} centerContent>
+            <LazyLoadImage
+              src={
+                newArrivalsSection?.length > 0 && newArrivalsSection[0]?.image
+              }
+              alt=""
+              style={{
+                opacity: 1,
+                transition: "opacity 0.7s", // Note the corrected syntax here
+              }}
+            />
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(3, 1fr)",
+              }}
+              gap={6}
+              my={6}
+              px={15}
             >
-              <LazyLoadImage
-                src={product.imageSrc}
-                style={{
-                  opacity: 1,
-                  transition: "opacity 0.7s",
-                }}
-              />
-            </GridItem>
-          ))}
-        </Grid>
-      </Container>
+              {newArrivalsSection[0]?.images?.length > 0 &&
+                newArrivalsSection[0]?.images?.map((product) => (
+                  <GridItem
+                    key={product.id}
+                    onClick={() => {
+                      if (product.id) {
+                        navigate(`/products/${product.product}`);
+                      }
+                    }}
+                    cursor={product.product ? "pointer" : "default"}
+                  >
+                    <LazyLoadImage
+                      src={product.image}
+                      style={{
+                        opacity: 1,
+                        transition: "opacity 0.7s",
+                      }}
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+          </Container>
+        )}
 
-      <Container mb={5} px={0} maxW={"container.xl"} centerContent>
-        <LazyLoadImage
-          src={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/03.jpg"
-          }
-          alt=""
-          style={{
-            opacity: 1,
-            transition: "opacity 0.7s", // Note the corrected syntax here
-          }}
-        />
-      </Container>
-
+      {certificateSection?.length > 0 &&
+        certificateSection[0]?.is_visible_on_website === true && (
+          <Container mb={5} px={0} maxW={"container.xl"} centerContent>
+            <LazyLoadImage
+              src={
+                certificateSection?.length > 0 && certificateSection[0]?.image
+              }
+              alt=""
+              style={{
+                opacity: 1,
+                transition: "opacity 0.7s", // Note the corrected syntax here
+              }}
+            />
+          </Container>
+        )}
       <Container maxW={"6xl"} mb={5}>
         <Grid
           templateColumns={{
@@ -655,7 +767,7 @@ export default function Home() {
       </Container> */}
 
       <Container maxW={"container.xl"} px={0}>
-      <Text
+        <Text
           fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
@@ -666,26 +778,7 @@ export default function Home() {
         >
           {"Ethical and Natural Sweets"}
         </Text>
-        <Carousel
-          banners={[
-            {
-              image: "./Suryan Organic/home/gulkand_dry_fruit.jpg",
-              alt_text: "sweet1",
-              image_url: "/shop?page=1&category=492",
-            },
-            {
-              image: "./Suryan Organic/home/kaju-katari.webp",
-              alt_text: "sweet2",
-              image_url: "/shop?page=1&category=492",
-            },
-
-            {
-              image: "./Suryan Organic/home/sugarFree.jpg",
-              alt_text: "sweet4",
-              image_url: "/shop?page=1&category=492",
-            },
-          ]}
-        />
+        <Carousel banners={middleBanners?.length > 0 && middleBanners} />
       </Container>
 
       <Container maxW={"container.xl"} centerContent>
@@ -706,7 +799,7 @@ export default function Home() {
             base: "repeat(2, 1fr)",
             md: "repeat(5, 1fr)",
           }}
-          gap={{base:2,md:2}}
+          gap={{ base: 2, md: 2 }}
         >
           {NaturalProduct?.map((data) => (
             <>
@@ -736,53 +829,67 @@ export default function Home() {
         </Grid>
       </Container>
 
-      <ProductListSection
-        title="New Arrival : VAMA - Herbal & Natural Beauty Care"
-        loading={loading}
-        products={homeData?.new_arrival_gir_gauveda}
-        type={isMobile && "carousal"}
-      />
+      {newArrivalList?.length > 0 && (
+        <ProductListSection
+          title={newArrivalList?.length > 0 && newArrivalList[0]?.label}
+          loading={loading}
+          products={newArrivalList?.length > 0 && newArrivalList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
 
-      <ProductListSection
-        title="Must Try: Gir Gau Ayurvedic Products"
-        loading={loading}
-        products={homeData?.must_try_gir_gau_ayurvedic_products}
-        type={isMobile && "carousal"}
-      />
+      {mustTryGirList?.length > 0 && (
+        <ProductListSection
+          title={mustTryGirList?.length > 0 && mustTryGirList[0]?.label}
+          loading={loading}
+          products={mustTryGirList?.length > 0 && mustTryGirList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
 
-      <ProductListSection
-        title="Must Try: Natural Products"
-        loading={loading}
-        products={homeData?.must_try_natural_products}
-        type={isMobile && "carousal"}
-      />
-      <ProductListSection
-        title="Try Our New Products"
-        loading={loading}
-        products={homeData?.new_arrival}
-        type={isMobile && "carousal"}
-      />
-      <ProductListSection
-        title="Instant Mixes"
-        loading={loading}
-        products={homeData?.instant_mix}
-        type={isMobile && "carousal"}
-      />
+      {mustTryNaturalList?.length > 0 && (
+        <ProductListSection
+          title={mustTryNaturalList?.length > 0 && mustTryNaturalList[0]?.label}
+          loading={loading}
+          products={
+            mustTryNaturalList?.length > 0 && mustTryNaturalList[0]?.images
+          }
+          type={isMobile && "carousal"}
+        />
+      )}
+      {tryOurList?.length > 0 && (
+        <ProductListSection
+          title={tryOurList?.length > 0 && tryOurList[0]?.label}
+          loading={loading}
+          products={tryOurList?.length > 0 && tryOurList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
+      {instantMixList?.length > 0 && (
+        <ProductListSection
+          title={instantMixList?.length > 0 && instantMixList[0]?.label}
+          loading={loading}
+          products={instantMixList?.length > 0 && instantMixList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
+      {bestOfList?.length > 0 && (
+        <ProductListSection
+          title={bestOfList?.length > 0 && bestOfList[0]?.label}
+          loading={loading}
+          products={bestOfList?.length > 0 && bestOfList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
 
-      <ProductListSection
-        title="Best of the Month"
-        loading={loading}
-        products={homeData?.best_of_the_month}
-        type={isMobile && "carousal"}
-      />
-
-      <ProductListSection
-        title="All Time Best Sellers"
-        loading={loading}
-        products={homeData?.best_seller_of_all_time}
-        type={isMobile && "carousal"}
-      />
-
+      {allTimeList?.length > 0 && (
+        <ProductListSection
+          title={allTimeList?.length > 0 && allTimeList[0]?.label}
+          loading={loading}
+          products={allTimeList?.length > 0 && allTimeList[0]?.images}
+          type={isMobile && "carousal"}
+        />
+      )}
       {/* <ProductListSection
         title="Best Of The Year"
         loading={loading}
@@ -1040,7 +1147,7 @@ export default function Home() {
         </Grid>
       </Container>
       <Container maxW={"container.xl"}>
-      <Box
+        <Box
           w="100%"
           backgroundImage={
             "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
@@ -1049,18 +1156,18 @@ export default function Home() {
           backgroundPosition="50% 100%"
           backgroundRepeat={"no-repeat"}
         >
-        <Heading
-          color="brand.500"
-          fontSize={{ md: 33, base: 24 }}
-          fontWeight={"500"}
-          mx="auto"
-          align={"center"}
-          mt={3}
-          pb={"10px"}
-        >
-          BLOGS
-        </Heading>
-        </Box>  
+          <Heading
+            color="brand.500"
+            fontSize={{ md: 33, base: 24 }}
+            fontWeight={"500"}
+            mx="auto"
+            align={"center"}
+            mt={3}
+            pb={"10px"}
+          >
+            BLOGS
+          </Heading>
+        </Box>
         <Grid
           templateColumns={{
             base: "repeat(1,1fr)",
@@ -1165,229 +1272,267 @@ export default function Home() {
           </Stat>
         </SimpleGrid>
       </Container>
-      <Container maxW={{ base: "100vw", md: "container.xl" }}>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="text.500"
-            fontSize={{ md: 33, base: 24 }}
-            fontWeight={"500"}
-            mx="auto"
-            mt={8}
-            align={"center"}
-            mb={"5"}
-            pb={"10px"}
-          >
-            BRAND PARTNERS
-          </Heading>
-        </Box>
-        <Grid
-          templateColumns={{
-            base: "repeat(2,1fr)",
-            md: "repeat(3,1fr)",
-            xl: "repeat(6,1fr)",
-          }}
-          spacing={{ base: 10, md: 14 }}
-          py={3}
-          px={{ base: 15, md: 20, lg: 20 }}
-        >
-          {brands?.map((brand, index) => (
-            <GridItem as={RouterLink} to={brand?.href ?? "#"}>
-              <Image
-                as={LazyLoadImage}
-                key={index}
-                src={brand.src}
-                boxSize={{
-                  base: "150px",
-                  md: "150px",
-                  lg: "180px",
-                }}
-                alt={brand.alt}
-                cursor={"pointer"}
+      {brandSection?.length > 0 &&
+        brandSection[0]?.is_visible_on_website === true && (
+          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+            <Box
+              w="100%"
+              backgroundImage={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              backgroundSize="100%"
+              backgroundPosition="50% 100%"
+              backgroundRepeat={"no-repeat"}
+            >
+              <Heading
+                color="text.500"
+                fontSize={{ md: 33, base: 24 }}
+                fontWeight={"500"}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {brandSection?.length > 0 && brandSection[0]?.label}
+              </Heading>
+            </Box>
+            <Grid
+              templateColumns={{
+                base: "repeat(2,1fr)",
+                md: "repeat(3,1fr)",
+                xl: "repeat(6,1fr)",
+              }}
+              spacing={{ base: 10, md: 14 }}
+              py={3}
+              px={{ base: 15, md: 20, lg: 24 }}
+            >
+              {brandSection?.length > 0 &&
+                brandSection[0]?.images?.map((brand, index) => (
+                  <GridItem
+                    as={RouterLink}
+                    to={`/shop?page=1&category=${brand.category}` ?? "#"}
+                  >
+                    <Image
+                      as={LazyLoadImage}
+                      key={index}
+                      src={brand.image}
+                      boxSize={{
+                        base: "150px",
+                        md: "150px",
+                        lg: "180px",
+                      }}
+                      alt={brand.category_name}
+                      style={{
+                        opacity: 1,
+                        transition: "opacity 0.7s", // Note the corrected syntax here
+                      }}
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+          </Container>
+        )}
+      {awardsSection?.length > 0 &&
+        awardsSection[0]?.is_visible_on_website === true && (
+          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+            <Box
+              w="100%"
+              backgroundImage={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              backgroundSize="100%"
+              backgroundPosition="50% 100%"
+              backgroundRepeat={"no-repeat"}
+            >
+              <Heading
+                color="text.500"
+                fontSize={{ md: 33, base: 24 }}
+                fontWeight={"500"}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {awardsSection?.length > 0 && awardsSection[0]?.label}
+              </Heading>
+            </Box>
+            <Text my={5} textAlign={"center"} color="text.300">
+              We are committed to quality and each of our facilities is
+              independently certified by an industry-accredited agency.
+            </Text>
+            <Flex
+              justifyContent="space-evenly"
+              direction={{ base: "column", md: "row" }}
+              align="center"
+              gap={12}
+              pt={1}
+              pb={6}
+            >
+              <LazyLoadImage
+                src={
+                  awardsSection[0]?.images?.length > 0 &&
+                  awardsSection[0]?.images[0]?.image
+                }
+                alt="global-certificate"
                 style={{
                   opacity: 1,
                   transition: "opacity 0.7s", // Note the corrected syntax here
                 }}
               />
-            </GridItem>
-          ))}
-        </Grid>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="text.500"
-            fontSize={{ md: 33, base: 24 }}
-            fontWeight={"500"}
-            mx="auto"
-            align={"center"}
-            mt={3}
-            pb={"10px"}
-          >
-            {sections?.length >0 && sections[0].label}
-          </Heading>
-        </Box>
-        <Text mb={9} mt={3} textAlign={"center"} color={"text.300"}>
-          “We are committed to quality and each of our facilities is
-          independently certified by an industry-accredited agency.”
-        </Text>
-        <Flex
-          justifyContent="space-evenly"
-          direction={{ base: "column", md: "row" }}
-          align="center"
-          gap={12}
-          pt={1}
-          pb={9}
-        >
-          <LazyLoadImage
-            src= {sections?.length > 0 && sections[0]?.images[0].image}
-            alt="global-certificate"
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s",
-            }}
-          />
-          <LazyLoadImage
-            src= {sections?.length > 0 && sections[0]?.images[1].image}
-            alt="ciolook-certificate"
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s",
-            }}
-          />
-        </Flex>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="text.500"
-            fontSize={{ md: 33, base: 24 }}
-            fontWeight={"500"}
-            align={"center"}
-            mb={"5"}
-            pb={"10px"}
-          >
-            LICENSES & AFFILIATIONS
-          </Heading>
-        </Box>
-        <Flex justify="center" align="center" gap={10} pb={10}>
-          <LazyLoadImage
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/license.jpg"
-            }
-            width={"85%"}
-            alt="Coffee Board"
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s",
-            }}
-          />
-        </Flex>
-        <Image
-          w="100%"
-          src={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-        />
-        <Container maxW={"container.xl"} centerContent>
-          <Image
-            w={{ md: "70%" }}
-            mt={12}
-            mb={12}
-            src={"./Suryan Organic/home/suryan_organic.jpg"}
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s",
-            }}
-          />
-        </Container>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="text.500"
-            fontSize={{ md: 33, base: 20 }}
-            fontWeight={500}
-            mx="auto"
-            align={"center"}
-            mt={10}
-          >
-           {sections?.length >0 && sections[1].label}
-          </Heading>
-        </Box>
-        <Container maxW={"container.xl"} px={0}>
-          <Image
-             src= {sections?.length > 0 && sections[1]?.images[0].image}
-            w={"100%"}
-            alt=""
-            py={4}
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s", // Note the corrected syntax here
-            }}
-          />
-        </Container>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="brand.500"
-            fontSize={{ md: 33, base: 24 }}
-            fontWeight={500}
-            mx="auto"
-            align={"center"}
-            my={"5"}
-            pb={"10px"}
-          >
-            {sections?.length >0 && sections[2].label}
-          </Heading>
-        </Box>
-        <Container maxW={"container.xl"} mb={5} px={0} centerContent>
-          <Image
-            src={
-              "/001.jpg"
-            }
-            w={"container.xl"}
-            alt=""
-            style={{
-              opacity: 1,
-              transition: "opacity 0.7s",
-            }}
-          />
-        </Container>
-      </Container>
-      <ScrollToTop/>
+              <LazyLoadImage
+                src={
+                  awardsSection[0]?.images?.length > 0 &&
+                  awardsSection[0]?.images[1]?.image
+                }
+                alt="ciolook-certificate"
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s", // Note the corrected syntax here
+                }}
+              />
+            </Flex>
+          </Container>
+        )}
+      {licensesSection?.length > 0 &&
+        licensesSection[0]?.is_visible_on_website === true && (
+          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+            <Box
+              w="100%"
+              backgroundImage={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              backgroundSize="100%"
+              backgroundPosition="50% 100%"
+              backgroundRepeat={"no-repeat"}
+            >
+              <Heading
+                color="text.500"
+                fontSize={{ md: 33, base: 24 }}
+                fontWeight={"500"}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {licensesSection?.length > 0 && licensesSection[0].label}
+              </Heading>
+            </Box>
+            <Flex justify="center" align="center" gap={10} pt={1} pb={10}>
+              <LazyLoadImage
+                src={licensesSection?.length > 0 && licensesSection[0].image}
+                alt="Coffee Board"
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s", // Note the corrected syntax here
+                }}
+              />
+            </Flex>
+            <LazyLoadImage
+              w="100%"
+              src={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              mx="auto"
+              style={{
+                opacity: 1,
+                transition: "opacity 0.7s", // Note the corrected syntax here
+              }}
+            />
+          </Container>
+        )}
+      {nonGMOSection?.length > 0 &&
+        nonGMOSection[0]?.is_visible_on_website === true && (
+          <Container maxW={"container.xl"} centerContent pt={10} pb={8}>
+            <Image
+              w={{ md: "70%" }}
+              src={nonGMOSection?.length > 0 && nonGMOSection[0].image}
+            />
+          </Container>
+        )}
+
+      {servicesSection?.length > 0 &&
+        servicesSection[0]?.is_visible_on_website === true && (
+          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+            <Box
+              w="100%"
+              backgroundImage={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              backgroundSize="100%"
+              backgroundPosition="50% 100%"
+              backgroundRepeat={"no-repeat"}
+            >
+              <Heading
+                color="text.500"
+                fontSize={{ md: 33, base: 24 }}
+                fontWeight={"500"}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {servicesSection?.length > 0 && servicesSection[0].label}
+              </Heading>
+            </Box>
+            <Box display={"flex"} justifyContent={"center"}>
+              <LazyLoadImage
+                src={
+                  servicesSection?.length > 0 &&
+                  servicesSection[0]?.images[0].image
+                }
+                w={{ base: "100%", md: "100%" }}
+                alt=""
+                py={4}
+                style={{
+                  opacity: 1,
+                  transition: "opacity 0.7s", // Note the corrected syntax here
+                }}
+              />
+            </Box>
+          </Container>
+        )}
+
+      {availableSection?.length > 0 &&
+        availableSection[0]?.is_visible_on_website === true && (
+          <Container maxW={"container.xl"} mb={5} px={0} centerContent>
+            <Box
+              w="100%"
+              backgroundImage={
+                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+              }
+              backgroundSize="100%"
+              backgroundPosition="50% 100%"
+              backgroundRepeat={"no-repeat"}
+            >
+              <Heading
+                color="text.500"
+                fontSize={{ md: 33, base: 24 }}
+                fontWeight={"500"}
+                mx="auto"
+                align={"center"}
+                mt={3}
+                pb={"10px"}
+              >
+                {availableSection?.length > 0 && availableSection[0].label}
+              </Heading>
+            </Box>
+            <Image
+              src={
+                availableSection?.length > 0 &&
+                availableSection[0]?.images[0].image
+              }
+              w={"container.xl"}
+              mt={3}
+              alt=""
+              style={{
+                opacity: 1,
+                transition: "opacity 0.7s", // Note the corrected syntax here
+              }}
+            />
+          </Container>
+        )}
+
+      <ScrollToTop />
       <Footer />
     </>
   );

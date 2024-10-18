@@ -212,6 +212,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
   const [homeData, setHome] = useState({});
+  const [sections, setSections] = useState([]);
+  const [error, setError] = useState(null);
   // let [isFull] = useMediaQuery("(max-width:1920px)");
   const [blogs, setBlogs] = useState([]);
   const isMobiles = width <= 768;
@@ -221,6 +223,7 @@ export default function Home() {
     getHomePageData();
     getBanners();
     getBlogs();
+    getImage();
   }, []);
 
   async function getHomePageData() {
@@ -265,6 +268,18 @@ export default function Home() {
       setBlogs(response.data.blogs);
     }
   }
+
+  async function getImage() {
+    const params = {};
+    const response = await client.get("/lower-section", {
+      params: params,
+    });
+    if (response.data.status === true) {
+      setSections(response.data.data);
+    }
+  }
+
+
 
   const NaturalProduct = [
     {
@@ -1222,7 +1237,7 @@ export default function Home() {
             mt={3}
             pb={"10px"}
           >
-            OUR CERTIFICATIONS & AWARDS
+            {sections?.length >0 && sections[0].label}
           </Heading>
         </Box>
         <Text mb={9} mt={3} textAlign={"center"} color={"text.300"}>
@@ -1238,9 +1253,7 @@ export default function Home() {
           pb={9}
         >
           <LazyLoadImage
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/global-certificate.jpg"
-            }
+            src= {sections?.length > 0 && sections[0]?.images[0].image}
             alt="global-certificate"
             style={{
               opacity: 1,
@@ -1248,9 +1261,7 @@ export default function Home() {
             }}
           />
           <LazyLoadImage
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/ciolook-certificate.jpg"
-            }
+            src= {sections?.length > 0 && sections[0]?.images[1].image}
             alt="ciolook-certificate"
             style={{
               opacity: 1,
@@ -1326,14 +1337,12 @@ export default function Home() {
             align={"center"}
             mt={10}
           >
-            OUR SERVICES ARE AVAILABLE IN
+           {sections?.length >0 && sections[1].label}
           </Heading>
         </Box>
         <Container maxW={"container.xl"} px={0}>
           <Image
-            src={
-              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/Map.webp"
-            }
+             src= {sections?.length > 0 && sections[1]?.images[0].image}
             w={"100%"}
             alt=""
             py={4}
@@ -1361,7 +1370,7 @@ export default function Home() {
             my={"5"}
             pb={"10px"}
           >
-            AVAILABLE AT
+            {sections?.length >0 && sections[2].label}
           </Heading>
         </Box>
         <Container maxW={"container.xl"} mb={5} px={0} centerContent>

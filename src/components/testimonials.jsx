@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import Slider from "react-slick";
 import { FaQuoteRight } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa";
@@ -11,6 +11,7 @@ import {
   Flex,
   Card,
 } from "@chakra-ui/react";
+import client from "../setup/axiosClient";
 
 const testimonialsData = {
   testimonials: [
@@ -133,6 +134,23 @@ function SamplePrevArrow(props) {
   );
 }
 const Testimonials = () => {
+
+  const [testimonials , setTestimonials] = useState([])
+
+  useEffect(()=>{
+    getTestimonials()
+  },[])
+
+  async function getTestimonials() {
+    const params = {};
+    const response = await client.get("/testimonials-section/", {
+      params: params,
+    });
+    if (response.data.status === true) {
+      setTestimonials(response?.data?.data);
+    }
+  }
+
   var settings = {
     dots: false,
     infinite: true,
@@ -185,7 +203,7 @@ const Testimonials = () => {
       </Box>
         <Box px={10} maxW={"100%"} h={"100%"}>
           <Slider {...settings}>
-            {testimonialsData?.testimonials.map((testimonial, index) => (
+            {testimonials?.length > 0 && testimonials.map((testimonial, index) => (
               <Box
                 boxShadow={"rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}
                 maxW={{ md: "100%", base: "100%" }}
@@ -225,7 +243,7 @@ const Testimonials = () => {
                     >
                       &#8220;
                     </span>{" "}
-                    {testimonial.quote.slice(0, 150)}...
+                    {testimonial.description.slice(0, 150)}...
                     <span
                       style={{
                         color: "#436131",
@@ -238,7 +256,7 @@ const Testimonials = () => {
                   </Text>
 
                   <Text color={"brand.500"} height={"100%"} fontWeight={600}>
-                    -{testimonial.author}
+                    -{testimonial.author_name}
                   </Text>
 
                 </Flex>

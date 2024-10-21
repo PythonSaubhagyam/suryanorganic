@@ -65,9 +65,9 @@ import { FaApple, FaFacebookF, FaGooglePlay, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
 import CartEmitter from "./EventEmitter";
+import LoginModal from "./LoginModal";
 
 const Links = [
-  
   {
     name: "Consult Our Vaidya",
     location: "/consult-our-vaidya",
@@ -286,6 +286,7 @@ export default function Navbar() {
   const [megaCategories, setMegaCategories] = useState([]);
   const menuRef = useRef(null);
   const [topCategory, setTopCategory] = useState([]);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const handleScroll = (direction) => {
     const menu = menuRef.current;
     const scrollAmount = 100; // Adjust this value based on how much you want to scroll
@@ -487,7 +488,7 @@ export default function Navbar() {
   const Logout = () => {
     localStorage.clear();
     CartEmitter.emit("updateCartCount", 0);
-    CartEmitter.emit("updateProductTotal",0);
+    CartEmitter.emit("updateProductTotal", 0);
     toast({
       title: "Logged out successfully!",
       status: "success",
@@ -658,8 +659,7 @@ export default function Navbar() {
                     _hover={{ bg: "brand.500" }}
                   > */}
                   <MenuItem
-                    as={Link}
-                    href="/login"
+                    onClick={() => setIsLoginModalOpen(true)}
                     cursor={"pointer"}
                     _hover={{ textDecoration: "none" }}
                   >
@@ -932,7 +932,6 @@ export default function Navbar() {
       </Container>
       <Container
         maxW={"container.xl"}
-       
         style={{
           boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
           position: "sticky",
@@ -950,49 +949,48 @@ export default function Navbar() {
             // style={{ borderBottom: "0.5px solid #b7b7b7" }}
           >
             <Link as={ReactRouterLink} to="/">
-            <Image
-                  boxSize="100px"
-                  objectFit="contain"
-                  src="/Suryan Organic/Suryan Organic.png"
-                  alt="SOSE Logo"
-                  w={"100%"}
-                  mt={4}
-                />
+              <Image
+                boxSize="100px"
+                objectFit="contain"
+                src="/Suryan Organic/Suryan Organic.png"
+                alt="SOSE Logo"
+                w={"100%"}
+                mt={4}
+              />
             </Link>
           </GridItem>
           <GridItem
-              colSpan={9}
-              display={"flex"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
-              sx={{ whiteSpace: "nowrap" }}
+            colSpan={9}
+            display={"flex"}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            sx={{ whiteSpace: "nowrap" }}
+          >
+            <Flex
+              as={"nav"}
+              gap={3}
+              display={{ base: "flex", lg: "flex" }}
+              fontSize={{ lg: 11, xl: 14, md: 9 }}
+              alignItems={"center"}
             >
-              <Flex
-                as={"nav"}
-                gap={3}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl:14, md: 9 }}
-                alignItems={"center"}
-               
-              >
-                {Links.map((link) => (
-                  <>
-                    <Link
-                      as={ReactRouterLink}
-                      to={link.location}
-                      className={link.name === "SOSE Elite" ? "new-link" : ""}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "brand.900",
-                      }}
-                      // fontWeight={600}
-                      onMouseEnter={handleClose}
-                    >
-                      {link.name}
-                    </Link>
-                  </>
-                ))}
-              </Flex>
-            </GridItem>
+              {Links.map((link) => (
+                <>
+                  <Link
+                    as={ReactRouterLink}
+                    to={link.location}
+                    className={link.name === "SOSE Elite" ? "new-link" : ""}
+                    _hover={{
+                      textDecoration: "none",
+                      color: "brand.900",
+                    }}
+                    // fontWeight={600}
+                    onMouseEnter={handleClose}
+                  >
+                    {link.name}
+                  </Link>
+                </>
+              ))}
+            </Flex>
+          </GridItem>
 
           <GridItem
             colSpan={2}
@@ -1002,7 +1000,7 @@ export default function Navbar() {
           >
             <Flex
               as={"nav"}
-             gap={3}
+              gap={3}
               display={{ base: "flex", lg: "flex" }}
               fontSize={{ xl: 14, lg: 14 }}
               alignItems={"center"}
@@ -1042,7 +1040,7 @@ export default function Navbar() {
                     }}
                     fontWeight={500}
                     fontSize={{ md: "14px" }}
-                    onClick={() => navigate("/login")}
+                    onClick={() => setIsLoginModalOpen(true)}
                   >
                     Login
                   </Link>
@@ -1397,6 +1395,12 @@ export default function Navbar() {
           </GridItem>
         </Grid>
       </Container>
+      {!checkLogin().isLoggedIn && (
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
+      )}
     </>
   );
 }

@@ -22,7 +22,7 @@ import BreadCrumbCom from "../components/BreadCrumbCom";
 import { useState } from "react";
 import CarouselOurVaidhya from "../components/CarouselOurVaidhya";
 import ScrollToTop from "../components/ScrollToTop";
-
+import LoginModal from "../components/LoginModal";
 import { useLocation } from "react-router-dom";
 
 
@@ -30,6 +30,7 @@ export default function ConsultOurVaidya() {
   let { search } = useLocation();
     const searchParams = new URLSearchParams(search);
      const IsMobileView = searchParams.get("mobile") ?? "false";
+     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function ConsultOurVaidya() {
         duration: 3000,
         isClosable: true,
       });
-      navigate("/login");
+      setIsLoginModalOpen(true)
     }
   }
 
@@ -475,6 +476,12 @@ export default function ConsultOurVaidya() {
           }}
         />
       </Container>
+      {!checkLogin().isLoggedIn && (
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
+      )}
       <ScrollToTop/>
       {IsMobileView !== "true" && <Footer />}
 

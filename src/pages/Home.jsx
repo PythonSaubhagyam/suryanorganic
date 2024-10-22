@@ -436,6 +436,7 @@ export default function Home() {
                   align={{ base: "justify" }}
                   mt={4}
                   fontSize={{ base: "14px", lg: "16px" }}
+                  whiteSpace={"pre-line"}
                 >
                   {/* <span>Suryan Organic </span> is founded by a family of farmers who
               are engaged in Bharat's traditional & fully natural farming
@@ -498,6 +499,7 @@ export default function Home() {
                   mt={3}
                   lineHeight={7}
                   fontSize={{ base: "14px", lg: "16px" }}
+                  whiteSpace={"pre-line"}
                 >
                   {/* <b>​Bansi Gir Gaushala​ </b> was established in 2006 by{" "}
               <b>
@@ -543,22 +545,8 @@ export default function Home() {
                   align={{ base: "justify" }}
                   mt={3}
                   fontSize={{ base: "14", lg: "16" }}
+                  whiteSpace={"pre-line"}
                 >
-                  {/* Supporting <b>'SOSE-Sidha Kisan Se' </b> : ‘Samruddh Kisan,
-              Samruddh Bharat’ (Prosperous farmers, prosperous Bharat) - Under
-              this initiative we facilitate the supply of authentic natural farm
-              produces from our network of thousands of trusted farmers. This
-              helps farmers to find a ready market with steady revenue, while
-              consumers can find authentic natural farm products at a reasonable
-              price.
-              <br />
-              Supporting <b>'Gir Gauveda' </b> : ‘Swasth Parivar, Swasth Bharat’
-              ( Healthy family, healthy Bharat) - Gir Gauveda exploits the
-              synergies between Vedic Gopalan and Ayurveda following the highest
-              traditions of ancient Gau Adharit Ayurveda. Our Ethical and Herbal
-              Products like Ghee, Medicated Ghee, Herbal Supplements & Medicines
-              and Herbal Beauty products have helped bring lasting health to
-              thousands of people over the last few years. */}
                   {missionSection?.length > 0 && missionSection[0]?.description}
                 </Text>
               </GridItem>

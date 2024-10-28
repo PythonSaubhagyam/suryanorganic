@@ -234,6 +234,88 @@ export default function Shop() {
       console.error("Error fetching data:", error);
     }
   }
+
+  const handleSoryKeyChange = (e) =>{
+    setSortKey(e);
+    setCurrentPage(1);
+    const params = {
+      page: 1,
+    };
+
+    if (categoryId) {
+      params.category = categoryId;
+      
+    }
+    if(category_name){
+      params.category_name = category_name;
+    }
+    if (searchPar.get("brand")) {
+      params.brand = brand;
+      params.brand_name = brand_name;
+    }
+
+    if (prod_search !== null) {
+      params.search = prod_search;
+    }
+
+    setSearchParams(params);
+
+  }
+
+  const handleTagWiseChange=(e)=>{
+    setTagWise(e)
+    setCurrentPage(1);
+    const params = {
+      page: 1,
+    };
+
+    if (categoryId) {
+      params.category = categoryId;
+      
+    }
+    if(category_name){
+      params.category_name = category_name;
+    }
+    if (searchPar.get("brand")) {
+      params.brand = brand;
+      params.brand_name = brand_name;
+    }
+
+    if (prod_search !== null) {
+      params.search = prod_search;
+    }
+
+    setSearchParams(params);
+
+
+  }
+
+  const handleProductFoamChange =(e)=>{
+    setProductFoam(e)
+    setCurrentPage(1);
+    const params = {
+      page: 1,
+    };
+
+    if (categoryId) {
+      params.category = categoryId;
+      
+    }
+    if(category_name){
+      params.category_name = category_name;
+    }
+    if (searchPar.get("brand")) {
+      params.brand = brand;
+      params.brand_name = brand_name;
+    }
+
+    if (prod_search !== null) {
+      params.search = prod_search;
+    }
+
+    setSearchParams(params);
+
+  }
   // useEffect(() => {
   //   const filtered = categories.filter((item) => item.id === categoryId);
   //   setFilteredData(filtered);
@@ -342,7 +424,7 @@ export default function Shop() {
                   value={sortKey}
                   sx={{ padding: "0 10px" }}
                   variant={"outline"}
-                  onChange={(e) => setSortKey(e)}
+                  onChange={(e) => handleSoryKeyChange(e)}
                   placeholder="Select Option"
                   options={[
                     {
@@ -417,7 +499,7 @@ export default function Shop() {
                   value={tagWise}
                   sx={{ padding: "0 10px" }}
                   variant={"outline"}
-                  onChange={(e) => setTagWise(e)}
+                  onChange={(e) => handleTagWiseChange(e)}
                   options={tagsArray}
                 ></Select>
                 <Heading size="sm" my={2} fontFamily={"inter"}>
@@ -449,7 +531,7 @@ export default function Shop() {
                   value={productFoam}
                   sx={{ padding: "0 10px" }}
                   variant={"outline"}
-                  onChange={(e) => setProductFoam(e)}
+                  onChange={(e) => handleProductFoamChange(e)}
                   options={productFoamsArray}
                 ></Select>
               </Box>

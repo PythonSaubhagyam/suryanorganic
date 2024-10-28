@@ -32,6 +32,7 @@ export default function Footer() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   const [isMobiles, setIsMobiles] = useState(window.innerWidth <= 600);
   const loginInfo = checkLogin();
+  const [isLoggedIn, setIsLoggedIn] = useState(checkLogin().isLoggedIn);
   const checkOrSetUDIDInfo = CheckOrSetUDID();
   let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
 
@@ -47,6 +48,20 @@ export default function Footer() {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateLoginStatus = () => {
+      const loginInfo = checkLogin();
+      setIsLoggedIn(loginInfo.isLoggedIn);
+    };
+
+    const loginInterval = setInterval(updateLoginStatus, 1000);
+
+    return () => {
+      //window.removeEventListener("resize", handleResize);
+      clearInterval(loginInterval);
     };
   }, []);
   const navigate = useNavigate();
@@ -402,7 +417,7 @@ export default function Footer() {
           </Text>
         </Box>
       </Container>
-      {loginInfo.isLoggedIn && <CartPopUp />}
+      {isLoggedIn && <CartPopUp />}
       <WhatsUp />
       
 

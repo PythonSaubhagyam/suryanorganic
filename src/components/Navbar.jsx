@@ -503,6 +503,29 @@ export default function Navbar() {
 
   return (
     <>
+      <Container
+        textAlign={"center"}
+        maxW={"container.xl"}
+        fontSize={{ md: "14px", base: "12px" }}
+        bg={"brand.500"}
+        py={2}
+        color={"white"}
+        style={{
+          position: "sticky",
+          overFlow: "hidden",
+          top: 0,
+          zIndex: 99,
+        }}
+        className="scrolling-text-container"
+      >
+        <Text className="scrolling-text" fontWeight={600}>
+          Due to Diwali Holidays (30<sup>th</sup> - Oct - 2024 to 05
+          <sup>th</sup> - Nov - 2024), there may be delays in processing and
+          delivering orders. We apologize for any inconvenience and appreciate
+          your understanding.
+        </Text>
+      </Container>
+      <Box position="sticky" top={{base:8 , md:9}} backgroundColor="white" zIndex={999}>
       <Flex justify="center" display={isMobile ? "flex" : "none"}>
         <Link as={ReactRouterLink} to="/">
           <Image
@@ -932,14 +955,14 @@ export default function Navbar() {
       </Container>
       <Container
         maxW={"container.xl"}
-        style={{
-          boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
-          position: "sticky",
-          overFlow: "hidden",
-          backgroundColor: "white",
-          top: 0,
-          zIndex: 9,
-        }}
+        // style={{
+        //   boxShadow: "rgba(0, 0, 0, 0.15) 0px 1.95px 0px",
+        //   position: "sticky",
+        //   overFlow: "hidden",
+        //   backgroundColor: "white",
+        //   top: 0,
+        //   zIndex: 9,
+        // }}
         display={isMobile ? "none" : "block"}
       >
         <Grid templateRows="repeat(2, 1fr)" templateColumns={"repeat(12, 1fr)"}>
@@ -1395,6 +1418,7 @@ export default function Navbar() {
           </GridItem>
         </Grid>
       </Container>
+      </Box>
       {!checkLogin().isLoggedIn && (
         <LoginModal
           isOpen={isLoginModalOpen}

@@ -50,7 +50,7 @@ export default function ChangePassword() {
         });
         localStorage.clear();
         setIsLoginModalOpen(true)
-        checkOrSetUDID();
+        await checkOrSetUDID();
       } else {
         toast({
           title: `${response.data.message}`,

@@ -34,11 +34,11 @@ export default function Footer() {
   const loginInfo = checkLogin();
   const [isLoggedIn, setIsLoggedIn] = useState(checkLogin().isLoggedIn);
   const checkOrSetUDIDInfo = CheckOrSetUDID();
-  let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
+  //let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
 
-  if (loginInfo.isLoggedIn === true) {
-    headers = { Authorization: `token ${loginInfo.token}` };
-  }
+  // if (loginInfo.isLoggedIn === true) {
+  //   headers = { Authorization: `token ${loginInfo.token}` };
+  // }
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);

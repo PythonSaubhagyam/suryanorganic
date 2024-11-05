@@ -112,20 +112,14 @@ export default function ProductDetails() {
   // const maxWidth = useBreakpointValue({ base: "100%", lg: "container.xl" });
   // const boxWidth = useBreakpointValue({ base: "100%", lg: "75%" });
   const loginInfo = checkLogin();
-  const checkOrSetUDIDInfo = CheckOrSetUDID();
+ 
   const MINIMUM_RATING_THRESHOLD = 0.0;
   const incrementCounter = () => setCounter(counter + 1);
   let decrementCounter = () => setCounter(counter - 1);
   if (counter <= 1) {
     decrementCounter = () => setCounter(1);
   }
-
-  let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
-  if (loginInfo.isLoggedIn === true) {
-    headers = {
-      Authorization: `token ${loginInfo.token}`,
-    };
-  }
+ 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { productId } = useParams();
 
@@ -178,6 +172,13 @@ export default function ProductDetails() {
   }
 
   async function getProductDetails() {
+    const checkOrSetUDIDInfo = await CheckOrSetUDID();
+    let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
+    if (loginInfo.isLoggedIn === true) {
+      headers = {
+        Authorization: `token ${loginInfo.token}`,
+      };
+    }
     setLoading(true);
     client
       .get(`web/single/product/${productId}/`, {

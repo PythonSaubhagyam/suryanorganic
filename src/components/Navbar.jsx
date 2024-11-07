@@ -507,7 +507,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Container
+      {/* <Container
         textAlign={"center"}
         maxW={"container.xl"}
         fontSize={{ md: "14px", base: "12px" }}
@@ -528,8 +528,8 @@ export default function Navbar() {
           delivering orders. We apologize for any inconvenience and appreciate
           your understanding.
         </Text>
-      </Container>
-      <Box position="sticky" top={{base:8 , md:9}} backgroundColor="white" zIndex={999}>
+      </Container> */}
+      <Box position="sticky" top={0} backgroundColor="white" zIndex={999}>
       <Flex justify="center" display={isMobile ? "flex" : "none"}>
         <Link as={ReactRouterLink} to="/">
           <Image

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Box,
   IconButton,
@@ -20,7 +20,8 @@ export default function Carousel({
   textBanners = false,
 }) {
   const navigate = useNavigate();
-  // Settings for the slider
+
+  // Slider settings
   const settings = {
     dots: true,
     arrows: false,
@@ -32,9 +33,8 @@ export default function Carousel({
     slidesToScroll: 1,
   };
 
-  // As we have used custom buttons, we need a reference variable to
-  // change the state
-  const [slider, setSlider] = useState(Slider | null);
+  // Use a ref to store the slider instance
+  const sliderRef = useRef(null);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -59,7 +59,6 @@ export default function Carousel({
       height={{ base: "100%", md: "50%" }}
       width={fullWidth ? "100vw" : "100%"}
       bg={textBanners && "bg.500"}
-      //  overflow={"hidden"}
     >
       {/* CSS files for react-slick */}
       <link
@@ -87,11 +86,9 @@ export default function Carousel({
             top={"50%"}
             transform={"translate(50%, -50%)"}
             zIndex={2}
-            display={{ base: "block", md: "block" }}
-            onClick={() => slider?.slickPrev()}
+            onClick={() => sliderRef.current?.slickPrev()}
             _hover={"background:#ffffff00"}
             borderRadius={"40px"}
-            style={{ display: { base: "none", md: "" } }}
           />
           {/* Right Icon */}
           <IconButton
@@ -105,30 +102,19 @@ export default function Carousel({
             top={"50%"}
             transform={"translate(-50%, -50%)"}
             zIndex={2}
-            display={{ base: "block", md: "block" }}
-            onClick={() => slider?.slickNext()}
+            onClick={() => sliderRef.current?.slickNext()}
             _hover={"background:#ffffff00 "}
             borderRadius={"40px"}
           />
         </>
       )}
       {/* Slider */}
-      <Slider
-        {...settings}
-        ref={(slider) => {
-          if (slider !== null) {
-            setSlider(slider);
-          }
-        }}
-      >
+      <Slider {...settings} ref={sliderRef}>
         {banners?.length > 0 &&
-          banners.map((bannerData, index) => (
-            <>
-              {textBanners === true ? (
-                <Box key={index} textAlign="center" w="50vw" mx={"auto"} pb={4}>
-                  {/* <Text fontSize="md" mb={4}>
-                  {bannerData?.content}
-                </Text> */}
+          banners?.map((bannerData, index) => (
+            <div key={index}>
+              {textBanners ? (
+                <Box textAlign="center" w="50vw" mx={"auto"} pb={4}>
                   <Text
                     display={"inline-block"}
                     fontSize={"20px"}
@@ -167,12 +153,11 @@ export default function Carousel({
               ) : (
                 <Image
                   cursor={
-                    bannerData?.category_id === null &&
-                    bannerData?.product_id === null
-                      ? ""
-                      : "pointer"
+                    bannerData?.category_id !== null ||
+                    bannerData?.product_id !== null
+                      ? "pointer"
+                      : ""
                   }
-                  key={index}
                   src={bannerData.image}
                   alt={bannerData.alt_text}
                   onClick={() => {
@@ -181,7 +166,9 @@ export default function Carousel({
                       bannerData?.product_id !== null
                     ) {
                       if (bannerData?.category_id !== null) {
-                        navigate(`/shop?page=1&category=${bannerData?.category_id}`);
+                        navigate(
+                          `/shop?page=1&category=${bannerData?.category_id}`
+                        );
                       } else {
                         navigate(`/products/${bannerData?.product_id}`);
                       }
@@ -189,11 +176,9 @@ export default function Carousel({
                   }}
                   objectFit="fit"
                   w="100%"
-                  // h="60%"
-                  // h={{ base: "100%", md: `${desktopHeight}px` }}
-                ></Image>
+                />
               )}
-            </>
+            </div>
           ))}
       </Slider>
     </Box>

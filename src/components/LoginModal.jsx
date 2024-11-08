@@ -377,7 +377,7 @@ const LoginModal = ({ isOpen, onClose, onOpen }) => {
   const handleTabChange = (index) => {
     // Update data based on the selected tab index
     if (index === 0) {
-      setPhoneNumber();
+      setPhoneNumber("");
       setCode();
       setShow(false);
       setResponseMessage();

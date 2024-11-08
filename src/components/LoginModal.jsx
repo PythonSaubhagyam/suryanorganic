@@ -383,8 +383,8 @@ const LoginModal = ({ isOpen, onClose, onOpen }) => {
       setResponseMessage();
       setResponseStatus();
     } else if (index === 1) {
-      setEmail(null);
-      setPassword(null);
+      setEmail("");
+      setPassword("");
     }
   };
 
@@ -633,6 +633,7 @@ const LoginModal = ({ isOpen, onClose, onOpen }) => {
                               borderColor={"brand.900"}
                               placeholder="Email"
                               autoComplete="username"
+                              value={email}
                               onChange={(e) => setEmail(e.target.value)}
                             />
                           </FormControl>
@@ -647,6 +648,7 @@ const LoginModal = ({ isOpen, onClose, onOpen }) => {
                                 borderColor={"brand.900"}
                                 placeholder="Password"
                                 autoComplete="current-password"
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                               />
                               <InputRightElement width="4.5rem">

@@ -183,8 +183,9 @@ const Event = () => {
                         fontWeight: "600",
                         fontSize: "small",
                         textAlign: "center",
-                        borderRadius: "40px",
-                        width: "50px",
+                        borderRadius: "50%",
+                        width: "80px",
+                        //height:"50px",
                         boxShadow:
                           "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
                       }}

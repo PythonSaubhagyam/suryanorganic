@@ -980,11 +980,11 @@ export default function Home() {
                       as={LazyLoadImage}
                       key={index}
                       src={brand.image}
-                      boxSize={{
-                        base: "150px",
-                        md: "150px",
-                        lg: "180px",
-                      }}
+                      // boxSize={{
+                      //   base: "150px",
+                      //   md: "150px",
+                      //   lg: "180px",
+                      // }}
                       alt={brand.category_name}
                       style={{
                         opacity: 1,

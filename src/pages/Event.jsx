@@ -38,7 +38,7 @@ const Event = () => {
    const IsMobileView = searchParams.get("mobile") ?? "false";
 
   const [events, setEvents] = useState([]);
-  const [status, setStatus] = useState("all_events");
+  const [status, setStatus] = useState("upcoming_events");
   const [category, setCategory] = useState("Physical Event");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

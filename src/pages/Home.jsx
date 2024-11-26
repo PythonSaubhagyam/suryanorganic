@@ -966,7 +966,7 @@ export default function Home() {
                 md: "repeat(3,1fr)",
                 xl: "repeat(6,1fr)",
               }}
-              spacing={{ base: 10, md: 14 }}
+              gap={{base:10,md:20,lg:24}}
               py={3}
               px={{ base: 15, md: 20, lg: 24 }}
             >
@@ -980,11 +980,11 @@ export default function Home() {
                       as={LazyLoadImage}
                       key={index}
                       src={brand.image}
-                      // boxSize={{
-                      //   base: "150px",
-                      //   md: "150px",
-                      //   lg: "180px",
-                      // }}
+                      boxSize={{
+                        base: "130px",
+                        md: "150px",
+                        lg: "180px",
+                      }}
                       alt={brand.category_name}
                       style={{
                         opacity: 1,

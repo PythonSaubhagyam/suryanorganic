@@ -20,6 +20,7 @@ import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import AddToCart from "../utils/addToCart";
 import React from "react";
 import { Fragment } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const BestSellerImg = require("/best seller1.png");
 
@@ -30,6 +31,7 @@ export default function ShopProductCard({
   displayWishlistButton = true,
 }) {
   //console.log(productDetails);
+  const navigate = useNavigate();
   return (
     <LinkBox
       as={Card}
@@ -48,53 +50,52 @@ export default function ShopProductCard({
         padding={"none"}
         position={"absolute"}
       >
-          {productDetails.product_tag_list
-            .filter(
-              (tag) =>
-                tag === "Sugar Free" ||
-                tag === "Best Seller" ||
-                tag === "New Products"
-            )
-            .sort((a, b) => (a === "Best Seller" ? -1 : 1))
-            .map((tag, index) => (
-              <React.Fragment key={index}>
-                {tag === "Best Seller" && (
-                  <Image
-                    src={BestSellerImg}
-                    alt="Best Seller"
-                    height={"4rem"}
-                    width={"4rem"}
-                    ml={"-2px"}
-                    mt={"-11px"}
-                  />
-                )}
-                {(tag === "Sugar Free" || tag === "New Products") && (
-                  <Flex
-                    justifyContent={"space-between"}
-                    align={"baseline"}
-                    gap={1}
+        {productDetails.product_tag_list
+          .filter(
+            (tag) =>
+              tag === "Sugar Free" ||
+              tag === "Best Seller" ||
+              tag === "New Products"
+          )
+          .sort((a, b) => (a === "Best Seller" ? -1 : 1))
+          .map((tag, index) => (
+            <React.Fragment key={index}>
+              {tag === "Best Seller" && (
+                <Image
+                  src={BestSellerImg}
+                  alt="Best Seller"
+                  height={"4rem"}
+                  width={"4rem"}
+                  ml={"-2px"}
+                  mt={"-11px"}
+                />
+              )}
+              {(tag === "Sugar Free" || tag === "New Products") && (
+                <Flex
+                  justifyContent={"space-between"}
+                  align={"baseline"}
+                  gap={1}
+                >
+                  <Badge
+                    bgColor="brand.500"
+                    color={"#fff"}
+                    borderRadius={"8px"}
+                    paddingX={"8px"}
+                    py={1}
+                    fontSize={11}
+                    textTransform={"none"}
+                    opacity={0.8}
+                    m={0}
+                    height={"1.6rem"}
                   >
-                    <Badge
-                      bgColor="brand.500"
-                      color={"#fff"}
-                      borderRadius={"8px"}
-                      paddingX={"8px"}
-                      py={1}
-                      fontSize={11}
-                      textTransform={"none"}
-                      opacity={0.8}
-                      m={0}
-                      height={"1.6rem"}
-                    >
-                      {tag}
-                    </Badge>
-                  </Flex>
-                )}
-              </React.Fragment>
-            ))}
+                    {tag}
+                  </Badge>
+                </Flex>
+              )}
+            </React.Fragment>
+          ))}
       </CardHeader>
       <CardBody align="center" h={{ md: 300 }} py={1} flex={"none"}>
-
         {/* <Flex position="relative">
           <Flex position={"absolute"} >
             {productDetails.product_tag_list.map((tag, index) => (
@@ -140,7 +141,8 @@ export default function ShopProductCard({
           //position={"absolute"}
         >
           <LinkOverlay
-            href={`/products/${productDetails.id}`}
+            // href={`/products/${productDetails.id}`}
+            onClick={() => navigate(`/products/${productDetails.id}`)}
             fontSize="xs"
             fontWeight={600}
             color={"brand.500"}

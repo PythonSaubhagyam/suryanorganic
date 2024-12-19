@@ -135,7 +135,7 @@ export default function BlogList() {
           </Text>
         </Flex> */}
       </Container>
-      
+
       <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/news and event.jpg" />
 
@@ -172,7 +172,7 @@ export default function BlogList() {
               {blogs.map((blog) => (
                 <Box key={blog.id}>
                   <LinkBox my={4}>
-                    <LinkOverlay href={`/blogs/${blog.id}/`}>
+                    <LinkOverlay onClick={() => navigate(`/blogs/${blog.id}/`)}>
                       <Heading size="lg" fontWeight={"600"} color="brand.500">
                         {blog.title}
                       </Heading>
@@ -373,7 +373,7 @@ export default function BlogList() {
           </Box>
         </Flex>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

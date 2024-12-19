@@ -35,6 +35,8 @@ import BreadCrumbCom from "../components/BreadCrumbCom";
 import { Select } from "chakra-react-select";
 import CapitalizeLetter from "../utils/CommanFunction";
 import ScrollToTop from "../components/ScrollToTop";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFilters } from "../slice/shopApi";
 
 // import Paginator from "../components/Paginator";
 
@@ -46,9 +48,9 @@ export default function Shop() {
   const [filteredData, setFilteredData] = useState([]);
   const [sortKey, setSortKey] = useState(null);
   const [tagWise, setTagWise] = useState(null);
-  const [tagsArray, setTagsArray] = useState();
-  const [productFoamsArray, setProductFoamsArray] = useState();
-  const [brandArray, setBrandArray] = useState();
+  // const [tagsArray, setTagsArray] = useState();
+  // const [productFoamsArray, setProductFoamsArray] = useState();
+  // const [brandArray, setBrandArray] = useState();
   const [productFoam, setProductFoam] = useState(null);
   const [banners, setBanners] = useState({
     bannerWeb: null,
@@ -67,8 +69,17 @@ export default function Shop() {
   const prod_search = searchPar.get("search");
   const page = searchPar.get("page") ? searchPar.get("page") : 1;
   const [isMobile] = useMediaQuery("(max-width: 768px)");
-  const brand =searchPar.get("brand")
-  const brand_name =searchPar.get("brand_name")
+  const brand = searchPar.get("brand");
+  const brand_name = searchPar.get("brand_name");
+  const dispatch = useDispatch();
+
+  // Select filters from Redux store
+  const {
+    tagsArray = [],
+    productFoamsArray = [],
+    brandArray = [],
+    loading: filterLoading,
+  } = useSelector((state) => state.filters || {});
   // const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
@@ -79,21 +90,25 @@ export default function Shop() {
     initialState: { currentPage: 1 },
   });
   const category_name = new URLSearchParams(search).get("category_name");
- 
+
   let name = [
     localStorage.getItem("first_name"),
     localStorage.getItem("last_name"),
   ].join(" ");
 
   useEffect(() => {
-    getFilter();
+    // getFilter();
     const init = async () => {
       await CheckOrSetUDID();
-       };
-  
+    };
+
     init();
-    getProducts(); // eslint-disable-next-line
+    getProducts();
   }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
+
+  useEffect(() => {
+    dispatch(fetchFilters());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   getCategories();
@@ -240,7 +255,7 @@ export default function Shop() {
     }
   }
 
-  const handleSoryKeyChange = (e) =>{
+  const handleSoryKeyChange = (e) => {
     setSortKey(e);
     setCurrentPage(1);
     const params = {
@@ -249,9 +264,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -264,11 +278,10 @@ export default function Shop() {
     }
 
     setSearchParams(params);
+  };
 
-  }
-
-  const handleTagWiseChange=(e)=>{
-    setTagWise(e)
+  const handleTagWiseChange = (e) => {
+    setTagWise(e);
     setCurrentPage(1);
     const params = {
       page: 1,
@@ -276,9 +289,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -291,12 +303,10 @@ export default function Shop() {
     }
 
     setSearchParams(params);
+  };
 
-
-  }
-
-  const handleProductFoamChange =(e)=>{
-    setProductFoam(e)
+  const handleProductFoamChange = (e) => {
+    setProductFoam(e);
     setCurrentPage(1);
     const params = {
       page: 1,
@@ -304,9 +314,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -319,8 +328,7 @@ export default function Shop() {
     }
 
     setSearchParams(params);
-
-  }
+  };
   // useEffect(() => {
   //   const filtered = categories.filter((item) => item.id === categoryId);
   //   setFilteredData(filtered);
@@ -335,11 +343,11 @@ export default function Shop() {
         category: categoryId,
         category_name: category_name,
       });
-    }else if(searchPar.get("brand")){
+    } else if (searchPar.get("brand")) {
       setSearchParams({
         page: nextPage,
-        brand : brand,
-        brand_name : brand_name
+        brand: brand,
+        brand_name: brand_name,
       });
     } else {
       setSearchParams({
@@ -377,7 +385,11 @@ export default function Shop() {
           align="center"
           mb={6}
         >
-          {brand_name ? brand_name : category_name ? category_name :`All Products`}
+          {brand_name
+            ? brand_name
+            : category_name
+            ? category_name
+            : `All Products`}
         </Heading>
 
         <Flex
@@ -695,7 +707,7 @@ export default function Shop() {
           </div>
         </div> */}
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

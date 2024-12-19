@@ -3,6 +3,16 @@ import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
+import {
+  fetchBanners,
+  fetchBlogs,
+  fetchLowerSection,
+  fetchMiddleBanners,
+  fetchProductSections,
+  fetchStatistics,
+  fetchUpperSection,
+  fetchVideos,
+} from "../slice/homeApi";
 import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
@@ -37,48 +47,49 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
 import LoginModal from "../components/LoginModal";
 import checkLogin from "../utils/checkLogin";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
   const height = useBreakpointValue({ base: "300", lg: "400" });
-  const [banners, setBanners] = useState([]);
-  const [middleBanners, SetMiddleBanners] = useState([]);
-  const [brandSection, setBrandSection] = useState();
-  const [awardsSection, setAwardSection] = useState();
+  // const [banners, setBanners] = useState([]);
+  // const [middleBanners, SetMiddleBanners] = useState([]);
+  // const [brandSection, setBrandSection] = useState();
+  // const [awardsSection, setAwardSection] = useState();
   const [servicesSection, setServicesSection] = useState();
-  const [availableSection, setAvailableSection] = useState();
+  // const [availableSection, setAvailableSection] = useState();
   const [nonGMOSection, setNonGMOSection] = useState();
   const [licensesSection, setLicensesSection] = useState();
-  const [giftHamperSection, setGiftHamperSection] = useState();
-  const [viewMoreSection, setViewMoreSection] = useState();
-  const [newArrivalsSection, setNewArrivalsSection] = useState();
-  const [certificateSection, setCertificateSection] = useState();
-  const [girGauProductSection, setGirGauProductSection] = useState();
-  const [shopSection, setShopSection] = useState();
-  const [groceriesSection, setGroceriesSection] = useState();
+  // const [giftHamperSection, setGiftHamperSection] = useState();
+  // const [viewMoreSection, setViewMoreSection] = useState();
+  // const [newArrivalsSection, setNewArrivalsSection] = useState();
+  // const [certificateSection, setCertificateSection] = useState();
+  // const [girGauProductSection, setGirGauProductSection] = useState();
+  // const [shopSection, setShopSection] = useState();
+  // const [groceriesSection, setGroceriesSection] = useState();
   const [productListSections, setProductListSections] = useState([]);
-  const [newArrivalList, setNewArrivalList] = useState();
-  const [tryOurList, setTryOurList] = useState();
-  const [instantMixList, setInstantMixList] = useState();
-  const [mustTryGirList, setMustTryGirList] = useState();
-  const [mustTryNaturalList, setMustTryNaturalList] = useState();
-  const [bestOfList, setBestOfList] = useState();
-  const [allTimeList, setAllTimeList] = useState();
+  // const [newArrivalList, setNewArrivalList] = useState();
+  // const [tryOurList, setTryOurList] = useState();
+  // const [instantMixList, setInstantMixList] = useState();
+  // const [mustTryGirList, setMustTryGirList] = useState();
+  // const [mustTryNaturalList, setMustTryNaturalList] = useState();
+  // const [bestOfList, setBestOfList] = useState();
+  // const [allTimeList, setAllTimeList] = useState();
   const [masalaIamgeSection, setMasalaImageSection] = useState();
-  const [videos, setVideos] = useState([]);
-  const [statisticsSection , setStatisticsSection ] = useState([])
+  // const [videos, setVideos] = useState([]);
+  const [statisticsSection, setStatisticsSection] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
-  const [whoSection, setWhoSection] = useState();
-  const [inspireSection, setInspireSection] = useState();
-  const [missionSection, setMissionSection] = useState();
+  // const [whoSection, setWhoSection] = useState();
+  // const [inspireSection, setInspireSection] = useState();
+  // const [missionSection, setMissionSection] = useState();
   const [homeData, setHome] = useState({});
   const [sections, setSections] = useState([]);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   // let [isFull] = useMediaQuery("(max-width:1920px)");
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
   const loginInfo = checkLogin();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(
@@ -86,26 +97,252 @@ export default function Home() {
   );
   const isMobiles = width <= 768;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    banners,
+    middleBanners,
+    loader,
+    error,
+    upperSection,
+    productSections,
+    blogs,
+    lowerSection,
+    videos,
+    statistics,
+  } = useSelector((state) => state.banners);
+  console.log(statistics, "sss");
+
+  // Destructure upperSection for easier access
+  const {
+    giftHamperSection,
+    viewMoreSection,
+    newArrivalsSection,
+    certificateSection,
+    girGauProductSection,
+    shopSection,
+    groceriesSection,
+    whoSection,
+    inspireSection,
+    missionSection,
+  } = upperSection;
+
+  const { awardsSection, availableSection, brandSection } = lowerSection;
+
+  // Destructure productSections for easier access
+  const {
+    newArrivalList,
+    tryOurList,
+    instantMixList,
+    mustTryGirList,
+    mustTryNaturalList,
+    bestOfList,
+    allTimeList,
+  } = productSections;
+  // useEffect(() => {
+  //   // Dispatch actions to fetch banners and middle banners
+  //   dispatch(fetchBanners());
+  //   dispatch(fetchMiddleBanners());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await CheckOrSetUDID();
+
+  //     try {
+  //       // API 1: Banners
+  //       // let bannersResponse;
+  //       // try {
+  //       //   bannersResponse = await client.get(
+  //       //     "/ecommerce/banners/?sequence=Upper"
+  //       //   );
+  //       //   if (bannersResponse.data.status === true) {
+  //       //     setBanners(bannersResponse.data?.banner);
+  //       //   }
+  //       // } catch (error) {
+  //       //   console.error("Error fetching banners:", error);
+  //       // }
+
+  //       // API 2: Upper Section
+  //       let upperSectionResponse;
+  //       try {
+  //         upperSectionResponse = await client.get("/upper-section/");
+  //         if (upperSectionResponse.data.status === true) {
+  //           const giftHamper = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 1
+  //           );
+  //           const viewMore = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 2
+  //           );
+  //           const newArrivals = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 3
+  //           );
+  //           const certificate = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 4
+  //           );
+  //           const girGauProduct = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 5
+  //           );
+  //           const shop = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 6
+  //           );
+  //           const groceries = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 13
+  //           );
+  //           const whoSection = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 10
+  //           );
+  //           const inspireSection = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 11
+  //           );
+  //           const missionSection = upperSectionResponse.data.data?.filter(
+  //             (section) => section.id === 12
+  //           );
+
+  //           setGiftHamperSection(giftHamper);
+  //           setViewMoreSection(viewMore);
+  //           setNewArrivalsSection(newArrivals);
+  //           setCertificateSection(certificate);
+  //           setGirGauProductSection(girGauProduct);
+  //           setShopSection(shop);
+  //           setGroceriesSection(groceries);
+  //           setWhoSection(whoSection);
+  //           setInspireSection(inspireSection);
+  //           setMissionSection(missionSection);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching upper section:", error);
+  //       }
+
+  //       // API 3: Product List
+  //       let productListResponse;
+  //       try {
+  //         productListResponse = await client.get("/product-section/");
+  //         if (productListResponse.data.status === true) {
+  //           setProductListSections(productListResponse.data.data);
+  //           const newArrival = productListResponse.data.data?.filter(
+  //             (section) => section.id === 1
+  //           );
+  //           const tryOur = productListResponse.data.data?.filter(
+  //             (section) => section.id === 2
+  //           );
+  //           const instantMix = productListResponse.data.data?.filter(
+  //             (section) => section.id === 3
+  //           );
+  //           const mustTryGir = productListResponse.data.data?.filter(
+  //             (section) => section.id === 4
+  //           );
+  //           const mustTryNatural = productListResponse.data.data?.filter(
+  //             (section) => section.id === 5
+  //           );
+  //           const bestOf = productListResponse.data.data?.filter(
+  //             (section) => section.id === 6
+  //           );
+  //           const allTime = productListResponse.data.data?.filter(
+  //             (section) => section.id === 7
+  //           );
+  //           setNewArrivalList(newArrival);
+  //           setTryOurList(tryOur);
+  //           setInstantMixList(instantMix);
+  //           setMustTryGirList(mustTryGir);
+  //           setMustTryNaturalList(mustTryNatural);
+  //           setBestOfList(bestOf);
+  //           setAllTimeList(allTime);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching product list:", error);
+  //       }
+
+  //       // API 4: Middle Banner
+  //       // let middleBannerResponse;
+  //       // try {
+  //       //   middleBannerResponse = await client.get(
+  //       //     "/ecommerce/banners/?sequence=Middle"
+  //       //   );
+  //       //   if (middleBannerResponse.data.status === true) {
+  //       //     SetMiddleBanners(middleBannerResponse.data?.bannerMiddle);
+  //       //   }
+  //       // } catch (error) {
+  //       //   console.error("Error fetching middle banner:", error);
+  //       // }
+
+  //       // API 5: Blogs
+  //       let blogsResponse;
+  //       try {
+  //         blogsResponse = await client.get("/home/blogs/");
+  //         if (blogsResponse.data.status === true) {
+  //           setBlogs(blogsResponse.data.blogs);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching blogs:", error);
+  //       }
+
+  //       // API 6: Lower Section
+  //       let lowerSectionResponse;
+  //       try {
+  //         lowerSectionResponse = await client.get("/lower-section/");
+  //         if (lowerSectionResponse.data.status === true) {
+  //           setSections(lowerSectionResponse.data.data);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching lower section:", error);
+  //       }
+
+  //       // API 7: Videos
+  //       let videosResponse;
+  //       try {
+  //         videosResponse = await client.get("/youtubevideo-section/");
+  //         if (videosResponse.data.status === true) {
+  //           setVideos(videosResponse.data.data);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching videos:", error);
+  //       }
+
+  //       // API 8: Statistics
+  //       let statisticsResponse;
+  //       try {
+  //         statisticsResponse = await client.get("/statistics-section/");
+  //         if (statisticsResponse.data.status === true) {
+  //           setStatisticsSection(statisticsResponse.data.data);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching statistics:", error);
+  //       }
+
+  //       // Set loading to false once all data is fetched
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error during initialization:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   init();
+  //   if (showPopup === null && !loginInfo.isLoggedIn) {
+  //     setIsLoginModalOpen(true);
+  //   }
+  // }, []);
   useEffect(() => {
-   
-    getBanners();
-    getUpperSection();
-    getProductListSection();
     const init = async () => {
       await CheckOrSetUDID();
-       };
-  
+
+      dispatch(fetchBanners());
+      dispatch(fetchUpperSection());
+      dispatch(fetchMiddleBanners());
+      dispatch(fetchProductSections());
+      dispatch(fetchVideos());
+      dispatch(fetchBlogs());
+      dispatch(fetchLowerSection());
+
+      dispatch(fetchStatistics());
+    };
+
     init();
-    //getHomePageData();
-    getBlogs();
-    getLowerSection();
-    getVideos();
-    getStatisticsSection() 
+
     if (showPopup === null && !loginInfo.isLoggedIn) {
       setIsLoginModalOpen(true);
     }
-  }, []);
-
+  }, [dispatch]);
   async function getVideos() {
     const params = {};
     const response = await client.get("/youtubevideo-section/", {
@@ -126,150 +363,148 @@ export default function Home() {
     }
   }
 
-  async function getBanners() {
-    const promise1 = await client.get("/ecommerce/banners/?sequence=Upper");
-    const promise2 = await client.get("/ecommerce/banners/?sequence=Middle");
+  // async function getBanners() {
+  //   const promise1 = await client.get("/ecommerce/banners/?sequence=Upper");
+  //   const promise2 = await client.get("/ecommerce/banners/?sequence=Middle");
 
-    Promise.all([promise1, promise2])
-      .then(function (responses) {
-        if (responses[0].data.status === true) {
-          setBanners(responses[0].data?.banner);
-        }
-        if (responses[1].data.status === true) {
-          SetMiddleBanners(responses[1].data?.banner);
-        }
+  //   Promise.all([promise1, promise2])
+  //     .then(function (responses) {
+  //       if (responses[0].data.status === true) {
+  //         setBanners(responses[0].data?.banner);
+  //       }
+  //       if (responses[1].data.status === true) {
+  //         SetMiddleBanners(responses[1].data?.banner);
+  //       }
 
-        setLoading(false);
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.error("Error fetching data:", error);
-      });
-  }
-  async function getBlogs() {
-    const params = {};
-    const response = await client.get("/home/blogs/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setBlogs(response.data.blogs);
-    }
-  }
+  //       setLoading(false);
+  //     })
+  //     .catch(function (error) {
+  //       setLoading(false);
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }
+  // async function getBlogs() {
+  //   const params = {};
+  //   const response = await client.get("/home/blogs/", {
+  //     params: params,
+  //   });
+  //   if (response.data.status === true) {
+  //     setBlogs(response.data.blogs);
+  //   }
+  // }
 
-  async function getLowerSection() {
-    const params = {};
-    const response = await client.get("/lower-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setSections(response.data.data);
-      const ourAwardsSection = response.data.data?.filter(
-        (section) => section.id === 1
-      );
-      const ourServicesSection = response.data.data?.filter(
-        (section) => section.id === 2
-      );
-      const availableAtSection = response.data.data?.filter(
-        (section) => section.id === 3
-      );
-      const licensesSection = response.data.data?.filter(
-        (section) => section.id === 4
-      );
-      const brandSection = response.data.data?.filter(
-        (section) => section.id === 9
-      );
-      const nonGMOSection = response.data.data?.filter(
-        (section) => section.id === 8
-      );
-      const masalaImage = response.data.data?.filter(
-        (section) => section.id === 11
-      );
-      setAwardSection(ourAwardsSection);
-      setServicesSection(ourServicesSection);
-      setAvailableSection(availableAtSection);
-      setLicensesSection(licensesSection);
-      setBrandSection(brandSection);
-      setNonGMOSection(nonGMOSection);
-      setMasalaImageSection(masalaImage);
-    }
-  }
+  // async function getLowerSection() {
+  //   const params = {};
+  //   const response = await client.get("/lower-section/", {
+  //     params: params,
+  //   });
+  //   if (response.data.status === true) {
+  //     setSections(response.data.data);
+  //     const ourAwardsSection = response.data.data?.filter(
+  //       (section) => section.id === 1
+  //     );
+  //     const ourServicesSection = response.data.data?.filter(
+  //       (section) => section.id === 2
+  //     );
+  //     const availableAtSection = response.data.data?.filter(
+  //       (section) => section.id === 3
+  //     );
+  //     const licensesSection = response.data.data?.filter(
+  //       (section) => section.id === 4
+  //     );
+  //     const brandSection = response.data.data?.filter(
+  //       (section) => section.id === 9
+  //     );
+  //     const nonGMOSection = response.data.data?.filter(
+  //       (section) => section.id === 8
+  //     );
+  //     const masalaImage = response.data.data?.filter(
+  //       (section) => section.id === 11
+  //     );
+  //     setAwardSection(ourAwardsSection);
+  //     setServicesSection(ourServicesSection);
+  //     setAvailableSection(availableAtSection);
+  //     setLicensesSection(licensesSection);
+  //     setBrandSection(brandSection);
+  //     setNonGMOSection(nonGMOSection);
+  //     setMasalaImageSection(masalaImage);
+  //   }
+  // }
 
-  const getProductListSection = async () => {
-    const response = await client.get("/product-section/");
-    if (response.data.status === true) {
-      setProductListSections(response.data.data);
-      const newArrival = response.data.data?.filter(
-        (section) => section.id === 1
-      );
-      const tryOur = response.data.data?.filter((section) => section.id === 2);
-      const instantMix = response.data.data?.filter(
-        (section) => section.id === 3
-      );
-      const mustTryGir = response.data.data?.filter(
-        (section) => section.id === 4
-      );
-      const mustTryNatural = response.data.data?.filter(
-        (section) => section.id === 5
-      );
-      const bestOf = response.data.data?.filter((section) => section.id === 6);
-      const allTime = response.data.data?.filter((section) => section.id === 7);
-      setNewArrivalList(newArrival);
-      setTryOurList(tryOur);
-      setInstantMixList(instantMix);
-      setMustTryGirList(mustTryGir);
-      setMustTryNaturalList(mustTryNatural);
-      setBestOfList(bestOf);
-      setAllTimeList(allTime);
-    }
-  };
-  const getUpperSection = async () => {
-    const response = await client.get("/upper-section/");
-    if (response.data.status === true) {
-      const giftHamper = response.data.data?.filter(
-        (section) => section.id === 1
-      );
-      const viewMore = response.data.data?.filter(
-        (section) => section.id === 2
-      );
-      const newArrivals = response.data.data?.filter(
-        (section) => section.id === 3
-      );
-      const certificate = response.data.data?.filter(
-        (section) => section.id === 4
-      );
-      const girGauProduct = response.data.data?.filter(
-        (section) => section.id === 5
-      );
-      const shop = response.data.data?.filter((section) => section.id === 6);
-      const groceries = response.data.data?.filter(
-        (section) => section.id === 13
-      );
-      const whoSection = response.data.data?.filter(
-        (section) => section.id === 10
-      );
-      const inspireSection = response.data.data?.filter(
-        (section) => section.id === 11
-      );
-      const missionSection = response.data.data?.filter(
-        (section) => section.id === 12
-      );
+  // const getProductListSection = async () => {
+  //   const response = await client.get("/product-section/");
+  //   if (response.data.status === true) {
+  //     setProductListSections(response.data.data);
+  //     const newArrival = response.data.data?.filter(
+  //       (section) => section.id === 1
+  //     );
+  //     const tryOur = response.data.data?.filter((section) => section.id === 2);
+  //     const instantMix = response.data.data?.filter(
+  //       (section) => section.id === 3
+  //     );
+  //     const mustTryGir = response.data.data?.filter(
+  //       (section) => section.id === 4
+  //     );
+  //     const mustTryNatural = response.data.data?.filter(
+  //       (section) => section.id === 5
+  //     );
+  //     const bestOf = response.data.data?.filter((section) => section.id === 6);
+  //     const allTime = response.data.data?.filter((section) => section.id === 7);
+  //     setNewArrivalList(newArrival);
+  //     setTryOurList(tryOur);
+  //     setInstantMixList(instantMix);
+  //     setMustTryGirList(mustTryGir);
+  //     setMustTryNaturalList(mustTryNatural);
+  //     setBestOfList(bestOf);
+  //     setAllTimeList(allTime);
+  //   }
+  // };
 
-      setGiftHamperSection(giftHamper);
-      setViewMoreSection(viewMore);
-      setNewArrivalsSection(newArrivals);
-      setCertificateSection(certificate);
-      setGirGauProductSection(girGauProduct);
-      setShopSection(shop);
-      setGroceriesSection(groceries);
-      setWhoSection(whoSection);
-      setInspireSection(inspireSection);
-      setMissionSection(missionSection);
-    }
-  };
+  // const getUpperSection = async () => {
+  //   const response = await client.get("/upper-section/");
+  //   if (response.data.status === true) {
+  //     const giftHamper = response.data.data?.filter(
+  //       (section) => section.id === 1
+  //     );
+  //     const viewMore = response.data.data?.filter(
+  //       (section) => section.id === 2
+  //     );
+  //     const newArrivals = response.data.data?.filter(
+  //       (section) => section.id === 3
+  //     );
+  //     const certificate = response.data.data?.filter(
+  //       (section) => section.id === 4
+  //     );
+  //     const girGauProduct = response.data.data?.filter(
+  //       (section) => section.id === 5
+  //     );
+  //     const shop = response.data.data?.filter((section) => section.id === 6);
+  //     const groceries = response.data.data?.filter(
+  //       (section) => section.id === 13
+  //     );
+  //     const whoSection = response.data.data?.filter(
+  //       (section) => section.id === 10
+  //     );
+  //     const inspireSection = response.data.data?.filter(
+  //       (section) => section.id === 11
+  //     );
+  //     const missionSection = response.data.data?.filter(
+  //       (section) => section.id === 12
+  //     );
 
-  
+  //     setGiftHamperSection(giftHamper);
+  //     setViewMoreSection(viewMore);
+  //     setNewArrivalsSection(newArrivals);
+  //     setCertificateSection(certificate);
+  //     setGirGauProductSection(girGauProduct);
+  //     setShopSection(shop);
+  //     setGroceriesSection(groceries);
+  //     setWhoSection(whoSection);
+  //     setInspireSection(inspireSection);
+  //     setMissionSection(missionSection);
+  //   }
+  // };
 
- 
   return (
     <>
       {/* {loading === true ? (
@@ -280,7 +515,12 @@ export default function Home() {
         <> */}
       <Navbar />
       <Container maxW={"container.xl"} px={0}>
-        {loading === true ? (
+        {/* {loading === true ? (
+          <Skeleton h={489}></Skeleton>
+        ) : (
+          <Carousel banners={banners?.length > 0 && banners} />
+        )} */}
+        {loader === true ? (
           <Skeleton h={489}></Skeleton>
         ) : (
           <Carousel banners={banners?.length > 0 && banners} />
@@ -410,7 +650,7 @@ export default function Home() {
               style={{
                 opacity: 1,
                 transition: "opacity 0.7s", // Note the corrected syntax here
-                width:"100%"
+                width: "100%",
               }}
             />
           </Container>
@@ -575,6 +815,7 @@ export default function Home() {
         >
           {"Ethical and Natural Sweets"}
         </Text>
+
         <Carousel banners={middleBanners?.length > 0 && middleBanners} />
       </Container>
 
@@ -635,7 +876,7 @@ export default function Home() {
       {newArrivalList?.length > 0 && (
         <ProductListSection
           title={newArrivalList?.length > 0 && newArrivalList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={newArrivalList?.length > 0 && newArrivalList[0]?.images}
           type={isMobile && "carousal"}
         />
@@ -644,7 +885,7 @@ export default function Home() {
       {mustTryGirList?.length > 0 && (
         <ProductListSection
           title={mustTryGirList?.length > 0 && mustTryGirList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={mustTryGirList?.length > 0 && mustTryGirList[0]?.images}
           type={isMobile && "carousal"}
         />
@@ -653,7 +894,7 @@ export default function Home() {
       {mustTryNaturalList?.length > 0 && (
         <ProductListSection
           title={mustTryNaturalList?.length > 0 && mustTryNaturalList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={
             mustTryNaturalList?.length > 0 && mustTryNaturalList[0]?.images
           }
@@ -663,7 +904,7 @@ export default function Home() {
       {tryOurList?.length > 0 && (
         <ProductListSection
           title={tryOurList?.length > 0 && tryOurList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={tryOurList?.length > 0 && tryOurList[0]?.images}
           type={isMobile && "carousal"}
         />
@@ -671,7 +912,7 @@ export default function Home() {
       {instantMixList?.length > 0 && (
         <ProductListSection
           title={instantMixList?.length > 0 && instantMixList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={instantMixList?.length > 0 && instantMixList[0]?.images}
           type={isMobile && "carousal"}
         />
@@ -679,7 +920,7 @@ export default function Home() {
       {bestOfList?.length > 0 && (
         <ProductListSection
           title={bestOfList?.length > 0 && bestOfList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={bestOfList?.length > 0 && bestOfList[0]?.images}
           type={isMobile && "carousal"}
         />
@@ -688,14 +929,14 @@ export default function Home() {
       {allTimeList?.length > 0 && (
         <ProductListSection
           title={allTimeList?.length > 0 && allTimeList[0]?.label}
-          loading={loading}
+          loading={loader}
           products={allTimeList?.length > 0 && allTimeList[0]?.images}
           type={isMobile && "carousal"}
         />
       )}
       {/* <ProductListSection
         title="Best Of The Year"
-        loading={loading}
+        loading={loader}
         products={homeData?.best_of_the_year}
       /> */}
 
@@ -832,7 +1073,6 @@ export default function Home() {
                 )}
               </>
             ))}
-         
         </Grid>
       </Container>
       <Container maxW={"container.xl"}>
@@ -885,7 +1125,8 @@ export default function Home() {
                   />
                   <LinkOverlay
                     _hover={{ color: "text.500" }}
-                    href={`/blogs/${blog.id}/`}
+                    // href={`/blogs/${blog.id}/`}
+                    onClick={() => navigate(`/blogs/${blog.id}/`)}
                   >
                     <Heading size="sm" fontWeight={500} m={2}>
                       {blog.title}
@@ -916,26 +1157,30 @@ export default function Home() {
         </Grid>
       </Container>
       <Testimonials />
-     {statisticsSection?.length>0 && <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
-        <SimpleGrid
-          columns={[2, 3, null, 6]}
-          px={6}
-          maxW={"container.xl"}
-          my={6}
-          backgroundColor={"bg.500"}
-          align="center"
-          spacingX={{ base: "10vw", md: "30px" }}
-          spacingY="40px"
-        >
-          {statisticsSection?.length >0 && statisticsSection?.map((data)=>(
-             <Stat>
-             <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>{data?.value}</StatNumber>
-             <StatHelpText color="gray.600">{data?.name}</StatHelpText>
-           </Stat>
-          ))}
-       
-        </SimpleGrid>
-      </Container>}
+      {statistics?.length > 0 && (
+        <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
+          <SimpleGrid
+            columns={[2, 3, null, 6]}
+            px={6}
+            maxW={"container.xl"}
+            my={6}
+            backgroundColor={"bg.500"}
+            align="center"
+            spacingX={{ base: "10vw", md: "30px" }}
+            spacingY="40px"
+          >
+            {statisticsSection?.length > 0 &&
+              statisticsSection?.map((data) => (
+                <Stat>
+                  <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
+                    {data?.value}
+                  </StatNumber>
+                  <StatHelpText color="gray.600">{data?.name}</StatHelpText>
+                </Stat>
+              ))}
+          </SimpleGrid>
+        </Container>
+      )}
       {brandSection?.length > 0 &&
         brandSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
@@ -966,7 +1211,7 @@ export default function Home() {
                 md: "repeat(3,1fr)",
                 xl: "repeat(6,1fr)",
               }}
-              gap={{base:10,md:20,lg:24}}
+              gap={{ base: 10, md: 20, lg: 24 }}
               py={3}
               px={{ base: 15, md: 20, lg: 24 }}
             >

@@ -34,13 +34,18 @@ function Blog() {
     const response = await client.get(`/blogs/${blogId}/`);
     if (response.data.status === true) {
       setBlogData(response.data.blogData);
+      
       if (response.data.nextPost) {
         setNextPost(response.data.nextPost);
+
       } else {
         setNextPost(null);
       }
     }
   }
+  const handleClick = () => {
+    navigate(`/blogs/${nextPost?.id}`);
+  };
 
   return (
     <>
@@ -59,7 +64,7 @@ function Blog() {
         </Text>
         <Image
           src={blogData?.banner_url}
-           w="100%"
+          w="100%"
           //  maxH="400px"
           my={3}
           objectFit={"cover"}
@@ -91,11 +96,13 @@ function Blog() {
             }}
           />
           <Flex direction={"column"} gap={16}>
-            <Box borderLeft={"1px"} borderColor={"brand.900"} p={3} >
+            <Box borderLeft={"1px"} borderColor={"brand.900"} p={3}>
               <Image
-                src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/suryan organic inline.png"}
+                src={
+                  "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/suryan organic inline.png"
+                }
               />
-              <Text fontSize={"xs"} color="gray.500" mt={2}> 
+              <Text fontSize={"xs"} color="gray.500" mt={2}>
                 {blogData?.published_at &&
                   new Intl.DateTimeFormat("en-CA", {
                     dateStyle: "long",
@@ -109,12 +116,15 @@ function Blog() {
                 borderBottom={"1px"}
                 borderColor="gray.300"
                 pb={4}
-              
               >
                 SHARE THIS POST
               </Heading>
-               <ButtonGroup p={4} gap={2}>
-                <a href="https://www.facebook.com/soseorganic/" target="_blank" rel="noopener noreferrer">
+              <ButtonGroup p={4} gap={2}>
+                <a
+                  href="https://www.facebook.com/soseorganic/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IconButton
                     isRound
                     border="1px"
@@ -151,7 +161,11 @@ function Blog() {
           width="fit-content"
           maxW={{ base: "95vw", lg: "50vw" }}
         >
-          <Box as={Link} to={`/blogs/${nextPost?.id}`}>
+          <Box
+            // as={Link}
+            // to={`/blogs/${nextPost?.id}`}
+            onClick={() => handleClick()}
+          >
             <Text
               bg="brand.500"
               color="white"
@@ -169,7 +183,7 @@ function Blog() {
           </AspectRatio>
         </Box>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

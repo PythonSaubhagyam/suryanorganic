@@ -938,7 +938,7 @@ export default function Home() {
       </Container>}
       {brandSection?.length > 0 &&
         brandSection[0]?.is_visible_on_website === true && (
-          <Container maxW={{ base: "100vw", md: "container.xl" }}>
+          <Container maxW={{ base: "100vw", md: "container.xl" }} overflowX={"hidden"} my={7}>
             <Box
               w="100%"
               backgroundImage={

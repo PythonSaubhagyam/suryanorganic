@@ -48,6 +48,11 @@ const CartPopUp = () => {
         setCartCount(cartRes.data.data.cart_counter);
         localStorage.setItem("product_total", cartRes.data.data.final_total);
         setTotal(cartRes.data.data.final_total);
+      }else {
+        // Clear cart state if no items
+        setCartCount(0);
+        localStorage.removeItem("product_total");
+        setTotal(0);
       }
     };
 

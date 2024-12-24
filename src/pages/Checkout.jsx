@@ -63,8 +63,16 @@ export default function Checkout({ getDetails }) {
   const [formData, setFormData] = useState(initialFormData);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log("formdata", formData);
-
+  const [isPayment, setPayment] = useState(false);
+  const [CartCount, setCartCount] = useState(
+    localStorage.getItem("cart_counter") ?? 0
+  );
+  // const [total, setTotal] = useState(
+  //   localStorage.getItem("product_total") === null ||
+  //     localStorage.getItem("product_total") === undefined
+  //     ? 0
+  //     : localStorage.getItem("product_total")
+  // );
   const [paymentInProgress, setPaymentInProgress] = useState(false);
 
   const location = useLocation();
@@ -80,7 +88,33 @@ export default function Checkout({ getDetails }) {
 
   useEffect(() => {
     getAddresses(); // eslint-disable-next-line
+    getEliteUser();
   }, []);
+
+  const getEliteUser = async () => {
+    try {
+      const response = await client.get("/user/elite_check/", {
+        headers: { Authorization: `token ${loginInfo.token}` },
+      });
+
+      if (response.data.status === true) {
+        localStorage.setItem(
+          "is_sose_elite_user",
+          response.data.is_sose_elite_user
+        );
+      }
+    } catch (err) {
+      setLoading(false);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later!",
+        position: "top-right",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   async function getAddresses() {
     try {
@@ -93,6 +127,7 @@ export default function Checkout({ getDetails }) {
         const defaultAddress = response.data.data.filter(
           (address) => address.is_default === true
         );
+        console.log(defaultAddress);
 
         if (response.data.data[0]?.city_obj.name === "Ahmedabad") {
           setFormData({
@@ -134,6 +169,7 @@ export default function Checkout({ getDetails }) {
   }
 
   const placeOrder = async (e) => {
+    setPayment(true);
     e.preventDefault();
     setLoading(true);
     try {
@@ -167,7 +203,7 @@ export default function Checkout({ getDetails }) {
         localStorage.removeItem("isAGift");
         localStorage.removeItem("giftMessage");
         localStorage.setItem("cart_counter", 0);
-        localStorage.setItem("product_total",0);
+        localStorage.setItem("product_total", 0);
         navigate("/profile#orders", { relative: true });
       }
     } catch (error) {
@@ -181,15 +217,18 @@ export default function Checkout({ getDetails }) {
     }
 
     setLoading(false);
+    setPayment(false);
   };
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
-
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+    // navigate("/");
+  };
   async function updateDeliveryOptions(addressId) {
-    console.log("test ");
-
     let selectedAddress = addresses.find(
       (address) => address.id === parseInt(addressId)
     );
@@ -210,68 +249,133 @@ export default function Checkout({ getDetails }) {
     }
   }
 
+  // async function handleOnlinePayment() {
+  //   setPayment(true);
+  //   if (formData.billingAddress === null) {
+  //     toast({
+  //       title: "Please select billing address!",
+  //       status: "error",
+  //       position: "top-right",
+  //       duration: 4000,
+  //       isClosable: true,
+  //     });
+  //   } else {
+  //     let data = {};
+  //     data.txnid = new Date().getTime().toString();
+  //     data.amount = `${location.state.grandTotal + formData.shipping_amt}`;
+  //     data.productinfo = location.state.isAGift ? "Gift" : "SOSE";
+  //     data.billing_address = formData.billingAddress;
+  //     data.shipping_amount = formData.shipping_amt;
+  //     data.tax_amount = location.state.taxes;
+  //     data.is_a_gift = location.state.isAGift;
+  //     data.giftMessage = location.state.giftMessage;
+  //     data.voucherCode = location.state?.voucherCode;
+  //     const res = await client.post(
+  //       "/get-order-payment-link/",
+  //       {
+  //         ...data,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `token ${checkLogin().token}`,
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     var txt_new = res.data.txn_id;
+  //     if (res.data.status === true) {
+  //       setTxt_new_id(res.data.txn_id);
+  //       // setPaymentInProgress(true);
+  //       // window.open(, "_top");
+  //       const options =
+  //         "location=yes,height=570,width=520,scrollbars=yes,status=yes";
+  //       // openInNewTab(res.data.payment_url);
+  //       setTimeout(() => {
+  //         window.open(res.data.payment_url, "_top", options);
+  //       });
+  //       // const checkPayment = setInterval(async function () {
+  //       //   const res = await getPaymentDetails(txt_new);
+  //       //   if (res.data.status === true) {
+  //       //     setPaymentInProgress(false);
+  //       //     localStorage.removeItem("isAGift");
+  //       //     localStorage.removeItem("giftMessage");
+  //       //     // toast({
+  //       //     //   title: "Your order has been placed!",
+  //       //     //   status: "success",
+  //       //     //   position: "top-right",
+  //       //     //   duration: 5000,
+  //       //     //   isClosable: true,
+  //       //     // });
+  //       //     navigate("/profile#orders");
+  //       //     clearInterval(checkPayment);
+  //       //     localStorage.setItem("cart_counter", 0);
+  //       //   } else {
+  //       //     // setPaymentInProgress(false);
+  //       //     // navigate("/");
+  //       //   }
+  //       // }, 3000);
+  //     } else {
+  //     }
+
+  //     setPayment(false);
+  //   }
+  // }
   async function handleOnlinePayment() {
-    console.log(formData);
-    if (formData.billingAddress === null) {
+    setPayment(true);
+    if (!formData.billingAddress) {
       toast({
-        title: "Please select billing address!",
+        title: "Please select a billing address!",
         status: "error",
         position: "top-right",
         duration: 4000,
         isClosable: true,
       });
-    } else {
-      let data = {};
-      data.txnid = new Date().getTime().toString();
-      data.amount = `${location.state.grandTotal + formData.shipping_amt}`;
-      data.productinfo = location.state.isAGift ? "Gift" : "SOSE";
-      data.billing_address = formData.billingAddress;
-      data.shipping_amount = formData.shipping_amt;
-      data.tax_amount = location.state.taxes;
-      data.is_a_gift = location.state.isAGift;
-      data.giftMessage = location.state.giftMessage;
-      data.voucherCode = location.state?.voucherCode;
-      const res = await client.post(
-        "/get-order-payment-link/",
-        {
-          ...data,
+      return;
+    }
+
+    const data = {
+      txnid: new Date().getTime().toString(),
+      amount: `${location.state.grandTotal + formData.shipping_amt}`,
+      productinfo: location.state.isAGift ? "Gift" : "SOSE",
+      billing_address: formData.billingAddress,
+      shipping_amount: formData.shipping_amt,
+      tax_amount: location.state.taxes,
+      is_a_gift: location.state.isAGift,
+      giftMessage: location.state.giftMessage,
+      voucherCode: location.state?.voucherCode,
+    };
+
+    try {
+      const res = await client.post("/get-order-payment-link/", data, {
+        headers: {
+          Authorization: `token ${checkLogin().token}`,
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: {
-            Authorization: `token ${checkLogin().token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      var txt_new = res.data.txn_id;
+      });
+
       if (res.data.status === true) {
         setTxt_new_id(res.data.txn_id);
-        // setPaymentInProgress(true);
-        window.open(res.data.payment_url, "_self");
-        // const checkPayment = setInterval(async function () {
-        //   const res = await getPaymentDetails(txt_new);
-        //   if (res.data.status === true) {
-        //     setPaymentInProgress(false);
-        //     localStorage.removeItem("isAGift");
-        //     localStorage.removeItem("giftMessage");
-        //     // toast({
-        //     //   title: "Your order has been placed!",
-        //     //   status: "success",
-        //     //   position: "top-right",
-        //     //   duration: 5000,
-        //     //   isClosable: true,
-        //     // });
-        //     navigate("/profile#orders");
-        //     clearInterval(checkPayment);
-        //     localStorage.setItem("cart_counter", 0);
-        //   } else {
-        //     // setPaymentInProgress(false);
-        //     // navigate("/");
-        //   }
-        // }, 3000);
-      } else {
+        localStorage.setItem("cart_counter", 0); // Clear cart count
+        setCartCount(0);
+        // setTotal(0);
+        const options =
+          "location=yes,height=570,width=520,scrollbars=yes,status=yes";
+        window.open(res.data.payment_url, "_top", options);
+        setTimeout(() => {
+          window.open(res.data.payment_url, "_top", options);
+        });
       }
-      navigate("/");
+    } catch (error) {
+      console.error("Payment Error:", error);
+      toast({
+        title: "Payment failed! Please try again.",
+        status: "error",
+        position: "top-right",
+        duration: 4000,
+        isClosable: true,
+      });
+    } finally {
+      setPayment(false);
     }
   }
 
@@ -285,6 +389,7 @@ export default function Checkout({ getDetails }) {
     return (
       <>
         <Navbar />
+
         {loading ? (
           <Center h="75vh">
             <Loader site={true} />
@@ -483,6 +588,8 @@ export default function Checkout({ getDetails }) {
                   mx="auto"
                   colorScheme="brand"
                   onClick={handleOnlinePayment}
+                  isLoading={isPayment}
+                  loadingText="Processing..."
                 >
                   Pay online
                 </Button>

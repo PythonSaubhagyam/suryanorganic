@@ -192,6 +192,10 @@ const mainLinks = [
     categoryId: 990,
   },
   {
+    name: "Uttarayan Festival",
+    categoryId: 1011,
+  },
+  {
     name: "Gifting",
     categoryId: 288,
   },

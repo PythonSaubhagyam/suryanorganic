@@ -30,12 +30,12 @@ import client from "../setup/axiosClient";
 import Loader from "../components/Loader";
 // import { Select } from "chakra-react-select";
 import { useLocation } from "react-router-dom";
-
+import MetaTags from "../context/MetaTagsContext";
 
 const Event = () => {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const IsMobileView = searchParams.get("mobile") ?? "false";
 
   const [events, setEvents] = useState([]);
   const [status, setStatus] = useState("upcoming_events");
@@ -56,10 +56,12 @@ const Event = () => {
     setLoading(false);
   }
   console.log(events);
+  const pageUrl = "/event";
 
   return (
     <>
-     {IsMobileView !== "true" && <Navbar />}
+      <MetaTags pageUrl={pageUrl} />
+      {IsMobileView !== "true" && <Navbar />}
 
       <Container
         maxW="container.xl"
@@ -144,79 +146,82 @@ const Event = () => {
           </Center>
         ) : (
           <>
-          {events?.length > 0 ?
-            <Grid
-              templateColumns={{
-                md: "repeat(2, 1fr)",
-                base: "repeat(1, 1fr)",
-                lg: "repeat(3, 1fr)",
-              }}
-              gap={6}
-            >
-              {events?.map((data) => (
-                <Box
-                  maxW="sm"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  background={"gray.100"}
-                  cursor={"pointer"}
-                  boxShadow={
-                    "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
-                  }
-                  onClick={() => navigate(`/event/${data.id}`)}
-                >
-                  <Box position="relative">
-                    <Image
-                      src={data.event_image}
-                      alt="cyber security"
-                      h={"210px"}
-                      w={"100%"}
-                      borderRadius="lg"
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "18px", // Adjusted to move the div to the top
-                        right: "18px", // Keep it on the right side
-                        backgroundColor: "#edf2f7",
-                        padding: "6px",
-                        fontWeight: "600",
-                        fontSize: "small",
-                        textAlign: "center",
-                        borderRadius: "50%",
-                        width: "80px",
-                        //height:"50px",
-                        boxShadow:
-                          "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
-                      }}
-                    >
-                      {moment(data.start_datetime).format("MMMM")} <br />
-                      {moment(data.start_datetime).format("D")}
-                    </div>{" "}
+            {events?.length > 0 ? (
+              <Grid
+                templateColumns={{
+                  md: "repeat(2, 1fr)",
+                  base: "repeat(1, 1fr)",
+                  lg: "repeat(3, 1fr)",
+                }}
+                gap={6}
+              >
+                {events?.map((data) => (
+                  <Box
+                    maxW="sm"
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    background={"gray.100"}
+                    cursor={"pointer"}
+                    boxShadow={
+                      "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+                    }
+                    onClick={() => navigate(`/event/${data.id}`)}
+                  >
+                    <Box position="relative">
+                      <Image
+                        src={data.event_image}
+                        alt="cyber security"
+                        h={"210px"}
+                        w={"100%"}
+                        borderRadius="lg"
+                      />
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "18px", // Adjusted to move the div to the top
+                          right: "18px", // Keep it on the right side
+                          backgroundColor: "#edf2f7",
+                          padding: "6px",
+                          fontWeight: "600",
+                          fontSize: "small",
+                          textAlign: "center",
+                          borderRadius: "50%",
+                          width: "80px",
+                          //height:"50px",
+                          boxShadow:
+                            "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+                        }}
+                      >
+                        {moment(data.start_datetime).format("MMMM")} <br />
+                        {moment(data.start_datetime).format("D")}
+                      </div>{" "}
+                    </Box>
+                    <Box p="6">
+                      <Stack spacing="3">
+                        <Heading fontSize="xl">{data.title}</Heading>
+                        <Text fontSize="sm">
+                          {moment(data.start_datetime).format(
+                            "MMMM D, YYYY - h:mm A"
+                          )}
+                        </Text>
+                        {/* <Text>(America/Martinique)</Text> */}
+                      </Stack>
+                    </Box>
                   </Box>
-                  <Box p="6">
-                    <Stack spacing="3">
-                      <Heading fontSize="xl">{data.title}</Heading>
-                      <Text fontSize="sm">
-                        {moment(data.start_datetime).format(
-                          "MMMM D, YYYY - h:mm A"
-                        )}
-                      </Text>
-                      {/* <Text>(America/Martinique)</Text> */}
-                    </Stack>
-                  </Box>
-                </Box>
-              ))}{" "}
-            </Grid>
-            :  <Flex justifyContent="center" my={6}>
-            <Text color="gray.400" fontWeight={600}>No events added!</Text>
-          </Flex> }
+                ))}{" "}
+              </Grid>
+            ) : (
+              <Flex justifyContent="center" my={6}>
+                <Text color="gray.400" fontWeight={600}>
+                  No events added!
+                </Text>
+              </Flex>
+            )}
           </>
         )}
       </Container>
 
       {IsMobileView !== "true" && <Footer />}
-
     </>
   );
 };

@@ -30,6 +30,7 @@ import {
   useParams,
 } from "react-router-dom";
 import Actions from "../components/Actions";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function Checkout({ getDetails }) {
   function onEditClick(id, address) {
@@ -385,9 +386,12 @@ export default function Checkout({ getDetails }) {
     });
     return res;
   }
+  const pageUrl = "/checkout/";
+
   if (location.state !== null) {
     return (
       <>
+        <MetaTags pageUrl={pageUrl} />
         <Navbar />
 
         {loading ? (

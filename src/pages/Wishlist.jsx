@@ -29,19 +29,19 @@ import CheckOrSetUDID from "../utils/checkOrSetUDID";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import Loader from "../components/Loader";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function Addtocart() {
   const [loading, setLoading] = useState(true);
   const [removeLoading, setRemoveLoading] = useState();
   const [wishlistItems, setWishlistItems] = useState([]);
   const loginInfo = checkLogin();
- 
 
   useEffect(() => {
     async function getWishlist() {
       const checkOrSetUDIDInfo = await CheckOrSetUDID();
       let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
-    
+
       if (loginInfo.isLoggedIn === true) {
         headers = { Authorization: `token ${loginInfo.token}` };
       }
@@ -73,8 +73,11 @@ export default function Addtocart() {
       setRemoveLoading();
     }
   };
+  const pageUrl = "/wishlist";
+
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       <Navbar />
       <Container maxW="container.xl">
         <BreadCrumbCom second={"My WishList"} secondUrl={"/wishlist"} />
@@ -173,7 +176,7 @@ export default function Addtocart() {
           </Flex>
         )}
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

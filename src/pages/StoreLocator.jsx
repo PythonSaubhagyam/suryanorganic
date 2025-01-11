@@ -29,13 +29,14 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaStreetView } from "react-icons/fa";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 import { useLocation } from "react-router-dom";
 
 export default function StoreLocator() {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const IsMobileView = searchParams.get("mobile") ?? "false";
 
   const [storeData, setStoreData] = useState([]);
   const [cities, setCities] = useState([]);
@@ -62,12 +63,12 @@ export default function StoreLocator() {
     const hour = +hourString % 24;
     return (hour % 12 || 12) + ":" + minute + (hour < 12 ? " AM" : " PM");
   }
+  const pageUrl = "/store-locator";
 
   return (
     <>
-       {IsMobileView !== "true" && <Navbar />}
-
-
+      <MetaTags pageUrl={pageUrl} />
+      {IsMobileView !== "true" && <Navbar />}
 
       <Container maxW="container.xl" alignContent={"flex-start"}>
         <BreadCrumbCom second={"Store Locator"} secondUrl={"/store-locator"} />
@@ -90,7 +91,7 @@ export default function StoreLocator() {
           textShadow={"0px 0px 100px lightgreen"}
           // Optional: Add background to improve text readability
         >
-            Store Locator
+          Store Locator
         </Text>
       </Container>
       <Container maxW={"6xl"} px={0} mb={10}>
@@ -393,9 +394,8 @@ export default function StoreLocator() {
           {/* </Container> */}
         </Flex>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
-
     </>
   );
 }

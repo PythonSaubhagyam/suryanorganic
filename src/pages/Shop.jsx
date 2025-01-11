@@ -35,6 +35,7 @@ import BreadCrumbCom from "../components/BreadCrumbCom";
 import { Select } from "chakra-react-select";
 import CapitalizeLetter from "../utils/CommanFunction";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 // import Paginator from "../components/Paginator";
 
@@ -67,8 +68,8 @@ export default function Shop() {
   const prod_search = searchPar.get("search");
   const page = searchPar.get("page") ? searchPar.get("page") : 1;
   const [isMobile] = useMediaQuery("(max-width: 768px)");
-  const brand =searchPar.get("brand")
-  const brand_name =searchPar.get("brand_name")
+  const brand = searchPar.get("brand");
+  const brand_name = searchPar.get("brand_name");
   // const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
@@ -79,7 +80,7 @@ export default function Shop() {
     initialState: { currentPage: 1 },
   });
   const category_name = new URLSearchParams(search).get("category_name");
- 
+
   let name = [
     localStorage.getItem("first_name"),
     localStorage.getItem("last_name"),
@@ -89,8 +90,8 @@ export default function Shop() {
     getFilter();
     const init = async () => {
       await CheckOrSetUDID();
-       };
-  
+    };
+
     init();
     getProducts(); // eslint-disable-next-line
   }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
@@ -240,7 +241,7 @@ export default function Shop() {
     }
   }
 
-  const handleSoryKeyChange = (e) =>{
+  const handleSoryKeyChange = (e) => {
     setSortKey(e);
     setCurrentPage(1);
     const params = {
@@ -249,9 +250,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -264,11 +264,10 @@ export default function Shop() {
     }
 
     setSearchParams(params);
+  };
 
-  }
-
-  const handleTagWiseChange=(e)=>{
-    setTagWise(e)
+  const handleTagWiseChange = (e) => {
+    setTagWise(e);
     setCurrentPage(1);
     const params = {
       page: 1,
@@ -276,9 +275,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -291,12 +289,10 @@ export default function Shop() {
     }
 
     setSearchParams(params);
+  };
 
-
-  }
-
-  const handleProductFoamChange =(e)=>{
-    setProductFoam(e)
+  const handleProductFoamChange = (e) => {
+    setProductFoam(e);
     setCurrentPage(1);
     const params = {
       page: 1,
@@ -304,9 +300,8 @@ export default function Shop() {
 
     if (categoryId) {
       params.category = categoryId;
-      
     }
-    if(category_name){
+    if (category_name) {
       params.category_name = category_name;
     }
     if (searchPar.get("brand")) {
@@ -319,8 +314,7 @@ export default function Shop() {
     }
 
     setSearchParams(params);
-
-  }
+  };
   // useEffect(() => {
   //   const filtered = categories.filter((item) => item.id === categoryId);
   //   setFilteredData(filtered);
@@ -335,11 +329,11 @@ export default function Shop() {
         category: categoryId,
         category_name: category_name,
       });
-    }else if(searchPar.get("brand")){
+    } else if (searchPar.get("brand")) {
       setSearchParams({
         page: nextPage,
-        brand : brand,
-        brand_name : brand_name
+        brand: brand,
+        brand_name: brand_name,
       });
     } else {
       setSearchParams({
@@ -362,8 +356,12 @@ export default function Shop() {
       setProducts(temp);
     }
   };
+  const pageUrl = "/shop";
+
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
+
       <Navbar />
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Shop"} secondUrl={"/shop"} />
@@ -377,7 +375,11 @@ export default function Shop() {
           align="center"
           mb={6}
         >
-          {brand_name ? brand_name : category_name ? category_name :`All Products`}
+          {brand_name
+            ? brand_name
+            : category_name
+            ? category_name
+            : `All Products`}
         </Heading>
 
         <Flex
@@ -695,7 +697,7 @@ export default function Shop() {
           </div>
         </div> */}
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

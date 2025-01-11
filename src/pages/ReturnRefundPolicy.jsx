@@ -8,19 +8,22 @@ import {
   Link,
   Box,
   Text,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function ReturnRefundPolicy() {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const pageUrl = "/return-and-refund-policy";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       {IsMobileView !== "true" && <Navbar />}
       <Container maxW="container.xl">
         <BreadCrumbCom
@@ -28,7 +31,7 @@ export default function ReturnRefundPolicy() {
           secondUrl={"/return-and-refund-policy"}
         />
       </Container>
-    
+
       <Container maxW={"container.xl"} py={8} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/organic-living/refund.jpg" />
 
@@ -45,7 +48,7 @@ export default function ReturnRefundPolicy() {
           zIndex="1"
           // Optional: Add background to improve text readability
         >
-           Refund & Return Policy
+          Refund & Return Policy
         </Text>
       </Container>
       <Container maxW={"6xl"} py={10}>
@@ -96,7 +99,7 @@ export default function ReturnRefundPolicy() {
           </ListItem>
         </UnorderedList>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
     </>
   );

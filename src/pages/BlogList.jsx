@@ -33,6 +33,7 @@ import {
 } from "@ajna/pagination";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
@@ -110,9 +111,11 @@ export default function BlogList() {
       </option>
     ));
   }
+  const pageUrl = "/blogs";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       <Navbar />
 
       <Container maxW="container.xl">
@@ -135,7 +138,7 @@ export default function BlogList() {
           </Text>
         </Flex> */}
       </Container>
-      
+
       <Container maxW={"container.xl"} py={1} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/news and event.jpg" />
 
@@ -373,7 +376,7 @@ export default function BlogList() {
           </Box>
         </Flex>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

@@ -22,6 +22,7 @@ import { AsyncSelect } from "chakra-react-select";
 import checkLogin from "../utils/checkLogin";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import { useLocation } from "react-router-dom";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function ContactUs() {
   let { search } = useLocation();
@@ -37,12 +38,12 @@ export default function ContactUs() {
     inquiry_description: "",
     age_group: "00 to 06",
   });
-  
+
   const width = useBreakpointValue({ md: "340px", base: "300px" });
   const [formData, setFormData] = useState(initialFormData);
   const [countries, setCountries] = useState([]);
   const [callingCode, setCallingCode] = useState("");
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const loginInfo = checkLogin();
 
@@ -70,7 +71,7 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       formData.country = formData.country.value;
       const response = await client.post("/inquiries/", {
@@ -78,7 +79,7 @@ export default function ContactUs() {
         phone: "+" + callingCode + formData.phone,
       });
       if (response.data.status === true) {
-        setLoading(false)
+        setLoading(false);
         toast({
           title: response.data.message,
           status: "success",
@@ -88,7 +89,7 @@ export default function ContactUs() {
         });
         setFormData(initialFormData);
       } else {
-        setLoading(false)
+        setLoading(false);
         toast({
           title: response.data.message,
           status: "error",
@@ -98,7 +99,7 @@ export default function ContactUs() {
         });
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       toast({
         title: error.response.data.message,
         status: "error",
@@ -130,8 +131,12 @@ export default function ContactUs() {
     }
     return Options;
   };
+
+  const pageUrl = "/contact-us";
+
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       {IsMobileView !== "true" && <Navbar />}
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Contact Us"} secondUrl={"/contact-us"} />
@@ -292,8 +297,8 @@ export default function ContactUs() {
               chakraStyles={{
                 inputContainer: (provided) => ({
                   ...provided,
-                  maxWidth:width,
-                  minWidth:width,
+                  maxWidth: width,
+                  minWidth: width,
                 }),
               }}
               variant={"outline"}
@@ -439,7 +444,12 @@ export default function ContactUs() {
             />
           </FormControl>
           <Container maxW={"lg"} p="0">
-          <Button type="submit" isLoading={loading} loadingText={"Sending"} colorScheme={"brand"}>
+            <Button
+              type="submit"
+              isLoading={loading}
+              loadingText={"Sending"}
+              colorScheme={"brand"}
+            >
               Send
             </Button>
           </Container>

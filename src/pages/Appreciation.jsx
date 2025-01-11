@@ -11,11 +11,14 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 
 const Appreciation = () => {
+  const pageUrl = "/appreciation";
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       <Navbar />
       <Container maxW="container.xl">
         <BreadCrumbCom second={"Appreciation"} secondUrl={"/appreciation"} />
@@ -47,7 +50,9 @@ const Appreciation = () => {
           // align="center"
         >
           <Image
-            src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/appreciation.jpeg"}
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/appreciation.jpeg"
+            }
             alt="Appreciation"
             width={{ base: "100%", lg: "350px" }}
             maxW={"800px"}
@@ -82,15 +87,45 @@ const Appreciation = () => {
           </div>
         </Flex>
         <SimpleGrid columns={[1, 2, null, 3]} spacing={8} mt={100}>
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap1.jpeg"} alt="Appreciation" />
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap2.jpeg"} alt="Appreciation" />
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap3.jpeg"} alt="Appreciation" />
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap4.jpeg"} alt="Appreciation" />
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap5.jpeg"} alt="Appreciation" />
-          <Image src={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap6.jpeg"} alt="Appreciation" />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap1.jpeg"
+            }
+            alt="Appreciation"
+          />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap2.jpeg"
+            }
+            alt="Appreciation"
+          />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap3.jpeg"
+            }
+            alt="Appreciation"
+          />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap4.jpeg"
+            }
+            alt="Appreciation"
+          />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap5.jpeg"
+            }
+            alt="Appreciation"
+          />
+          <Image
+            src={
+              "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/appreciation/ap6.jpeg"
+            }
+            alt="Appreciation"
+          />
         </SimpleGrid>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Footer />
     </>
   );

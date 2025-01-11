@@ -14,13 +14,14 @@ import Carousel from "../components/Carousel";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import { IoMdOpen } from "react-icons/io";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 import { useLocation } from "react-router-dom";
 
 export default function OrganicLiving() {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-   const IsMobileView = searchParams.get("mobile") ?? "false";
+  const IsMobileView = searchParams.get("mobile") ?? "false";
 
   const banners = [
     {
@@ -52,12 +53,12 @@ export default function OrganicLiving() {
 
   const width = useBreakpointValue({ base: "100%", lg: "1200" });
   const height = useBreakpointValue({ base: "300", lg: "600" });
+  const pageUrl = "/organic-living";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       {IsMobileView !== "true" && <Navbar />}
-
-
 
       <Container maxW={"container.xl"} alignContent={"flex-start"}>
         <BreadCrumbCom
@@ -70,7 +71,7 @@ export default function OrganicLiving() {
         {/* {" "} */}
         <Carousel banners={banners} transparentBtn={false}></Carousel>{" "}
         {/* </Container> */}
-        <Container maxW={"6xl"} >
+        <Container maxW={"6xl"}>
           <Image
             //maxW={"6xl"}
             src={
@@ -412,9 +413,8 @@ export default function OrganicLiving() {
           </Text>
         </Container>
       </Container>
-      <ScrollToTop/>
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
-
     </>
   );
 }

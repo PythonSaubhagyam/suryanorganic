@@ -1,4 +1,4 @@
- import React,{useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
@@ -30,6 +30,7 @@ import Router from "../routes/routes";
 import ScrollToTop from "../components/ScrollToTop";
 import { useLocation } from "react-router-dom";
 import LoginModal from "../components/LoginModal";
+import MetaTags from "../context/MetaTagsContext";
 
 const testimonials = [
   {
@@ -64,9 +65,11 @@ function SubscriptionPlans() {
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const pageUrl = "/subscription-plans";
 
   return (
     <>
+      <MetaTags pageUrl={pageUrl} />
       {IsMobileView !== "true" && <Navbar />}
 
       {/* <Image src=""></Image> */}
@@ -219,7 +222,7 @@ function SubscriptionPlans() {
           <Button
             colorScheme="brand"
             size="lg"
-            onClick={() =>setIsLoginModalOpen(true)}
+            onClick={() => setIsLoginModalOpen(true)}
           >
             Login to join SOSE Elite
           </Button>

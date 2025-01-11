@@ -61,9 +61,8 @@ const MetaTags = ({ pageUrl }) => {
       <title>Suryan Organic</title>
       <meta
         name="description"
-        content="Suryan Organic is on a mission to serve humanity by offering
-          highly potent Ayurvedic supplements by exploiting synergies of Cow
-          (“Gau” or “Go”) rearing and Ayurveda."
+        content="Suryan Organic is founded by a family of farmers who are engaged in Bharat's traditional
+         & fully natural farming practices for at least the last 11 generations."
       />
       <meta name="keywords" content="girgauveda,contact us,SOSE Elite" />
     </Helmet>

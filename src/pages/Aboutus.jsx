@@ -14,13 +14,29 @@ import {
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
+// import useMetaTags from "../hooks/useMetaTags";
+// import { Helmet } from "react-helmet";
+import MetaTags from "../context/MetaTagsContext";
+
 const AboutUs = () => {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const IsMobileView = searchParams.get("mobile") ?? "false";
+  // const metaTags = useMetaTags("/about-us");
+  // if (!metaTags) {
+  //   return <div>Loading...</div>; // Optional: Add a spinner or skeleton
+  // }
+  const pageUrl = "/about-us";
   return (
     <>
-   {IsMobileView !== "true" && <Navbar />}
+      {/* <Helmet>
+        <title>{metaTitle}</title>
+        {/* <meta name="description" content={metaTags?.description} />
+        <meta name="keywords" content={metaTags?.keywords} />
+        <meta name="robots" content={metaTags?.robots} /> */}
+      {/* </Helmet> */}
+      <MetaTags pageUrl={pageUrl} />
+      {IsMobileView !== "true" && <Navbar />}
 
       <Container maxW={"container.xl"} py={8} px={0} position="relative">
         <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/aboutUs.jpg" />
@@ -343,10 +359,13 @@ const AboutUs = () => {
             want our farmers and consumers to be happy and healthy. Our
             commitment to natural sourcing springs from our mission to revive
             Bharat’s ancient roots, our Vedic “Gau Sanskriti”, and our vision of
-            “Swasth Nagarik, Swasth Parivar, Swasth Bharat”. <b>We often go out of
-            our way, often at a significant cost to us and beyond regulatory or
-            legal requirements to determine if the products we offer are truly
-            natural</b>. We don’t just go by the letter of law and ask for organic
+            “Swasth Nagarik, Swasth Parivar, Swasth Bharat”.{" "}
+            <b>
+              We often go out of our way, often at a significant cost to us and
+              beyond regulatory or legal requirements to determine if the
+              products we offer are truly natural
+            </b>
+            . We don’t just go by the letter of law and ask for organic
             certification from our suppliers. We insist on solid proof that what
             they are supplying is truly in nature. In case of any suspicion, we
             often get the products tested in an independent, certified,
@@ -358,19 +377,26 @@ const AboutUs = () => {
           </Text>
 
           <Text fontWeight={"400"} mt={5} fontSize={"14.5"}>
-            b) Creative knowledge partners are <b>to help consumers enhance their
-            well-being in line with Bharat’s ancient Vedic traditions. We are
-            inspired by Bansi Gir Gaushala, and taking full knowledge of The
-            Gaushala’s rich knowledge base and experience of Vedic nutritional &
-            medical practices to help consumers</b>. We design new products which
-            are in line with ancient Ayurvedic philosophy, while still being
-            appealing to modern youth. <b>We also distribute the Gaushala’s full
-            range products, including “Gau Veda” herbal medicines and
-            supplements that exploit synergies between Gopalan and Ayurveda. We
-            also wish to influence a change in society, to rouse in people a
-            curiosity for what they have inherited from their ancient
-            forefathers, but have so far failed to appreciate. We work to make a
-            positive difference to the way people think about food</b>.
+            b) Creative knowledge partners are{" "}
+            <b>
+              to help consumers enhance their well-being in line with Bharat’s
+              ancient Vedic traditions. We are inspired by Bansi Gir Gaushala,
+              and taking full knowledge of The Gaushala’s rich knowledge base
+              and experience of Vedic nutritional & medical practices to help
+              consumers
+            </b>
+            . We design new products which are in line with ancient Ayurvedic
+            philosophy, while still being appealing to modern youth.{" "}
+            <b>
+              We also distribute the Gaushala’s full range products, including
+              “Gau Veda” herbal medicines and supplements that exploit synergies
+              between Gopalan and Ayurveda. We also wish to influence a change
+              in society, to rouse in people a curiosity for what they have
+              inherited from their ancient forefathers, but have so far failed
+              to appreciate. We work to make a positive difference to the way
+              people think about food
+            </b>
+            .
           </Text>
         </Container>
 
@@ -394,9 +420,7 @@ const AboutUs = () => {
         </Box>
         <Container maxW={"container.xl"} mb={5} px={0} centerContent>
           <Image
-           src={
-            "/001.jpg"
-          }
+            src={"/001.jpg"}
             w={"container.xl"}
             alt=""
             style={{
@@ -406,10 +430,9 @@ const AboutUs = () => {
           />
         </Container>
       </Container>
-      <ScrollToTop/>
-      
-     {IsMobileView !== "true" && <Footer />}
+      <ScrollToTop />
 
+      {IsMobileView !== "true" && <Footer />}
     </>
   );
 };

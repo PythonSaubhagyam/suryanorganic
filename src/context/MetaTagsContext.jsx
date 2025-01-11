@@ -58,10 +58,10 @@ const MetaTags = ({ pageUrl }) => {
 
   return (
     <Helmet>
-      <title>Suryan Or</title>
+      <title>Suryan Organic</title>
       <meta
         name="description"
-        content="Bansi Suryan Organic is on a mission to serve humanity by offering
+        content="Suryan Organic is on a mission to serve humanity by offering
           highly potent Ayurvedic supplements by exploiting synergies of Cow
           (“Gau” or “Go”) rearing and Ayurveda."
       />

@@ -76,7 +76,7 @@ export default function InspireSupport() {
 
   return (
     <>
-      const pageUrl = "/inspire-and-support";
+      <MetaTags pageUrl={pageUrl} />
 
       {IsMobileView !== "true" && <Navbar />}
 

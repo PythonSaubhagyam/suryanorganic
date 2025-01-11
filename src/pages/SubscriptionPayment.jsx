@@ -4,6 +4,7 @@ import checkLogin from "../utils/checkLogin";
 import Router from "../routes/routes";
 import Loader from "../components/Loader";
 import { Center, Box, Text } from "@chakra-ui/react";
+import MetaTags from "../context/MetaTagsContext";
 
 function SubscriptionPayment() {
   const txnId = useRef(new Date().getTime().toString());
@@ -63,9 +64,10 @@ function SubscriptionPayment() {
       setPaymentInProgress(true);
     }
   }
-
+  const pageUrl = "/subscription-plans";
   return (
     <>
+     <MetaTags pageUrl={pageUrl} />
       <Center h="75vh" flexDirection="column" gap={6}>
         <Loader site={true} />
         <Box align="center">

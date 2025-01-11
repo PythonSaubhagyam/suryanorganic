@@ -21,6 +21,7 @@ import checkLogin from "../../utils/checkLogin";
 import client from "../../setup/axiosClient";
 import { AsyncSelect, Select } from "chakra-react-select";
 import CapitalizeLetter from "../../utils/CommanFunction";
+import MetaTags from "../../context/MetaTagsContext";
 
 export default function CreateAddress() {
   const location = useLocation();
@@ -305,8 +306,11 @@ export default function CreateAddress() {
     }
   };
 
+  const pageUrl = "/profile/addresses/add";
+
   return (
     <>
+    <MetaTags pageUrl={pageUrl} />
       <Navbar />
       <Flex
         as={"form"}

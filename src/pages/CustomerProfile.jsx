@@ -42,6 +42,7 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import { RiCloseCircleFill } from "react-icons/ri";
 import Loader from "../components/Loader";
 import ScrollToTop from "../components/ScrollToTop";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function CustomerProfile() {
   const [details, setDetails] = useState([]);
@@ -257,8 +258,10 @@ export default function CustomerProfile() {
     });
   }
 
+  const pageUrl = "/profile";
   return (
     <>
+     <MetaTags pageUrl={pageUrl} />
       <Navbar />
       <Container maxW={"container.lg"} py={12}>
         <Tabs isLazy>

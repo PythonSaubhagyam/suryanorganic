@@ -5,6 +5,7 @@ import { Container, Box, Text,Image } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
 import { useLocation } from "react-router-dom";
+import MetaTags from "../context/MetaTagsContext";
 
 export default function FAQS() {
   
@@ -193,9 +194,11 @@ export default function FAQS() {
     },
   ];
 
+  const pageUrl = "/faq";
+
   return (
     <>
-     
+      <MetaTags pageUrl={pageUrl} />
     {IsMobileView !== "true" && <Navbar />}
 
 

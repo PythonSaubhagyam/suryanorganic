@@ -37,6 +37,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import Testimonials from "../components/testimonials";
 import LoginModal from "../components/LoginModal";
 import checkLogin from "../utils/checkLogin";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
@@ -67,7 +68,7 @@ export default function Home() {
   const [allTimeList, setAllTimeList] = useState();
   const [masalaIamgeSection, setMasalaImageSection] = useState();
   const [videos, setVideos] = useState([]);
-  const [statisticsSection , setStatisticsSection ] = useState([])
+  const [statisticsSection, setStatisticsSection] = useState([])
 
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
@@ -87,20 +88,20 @@ export default function Home() {
   const isMobiles = width <= 768;
   const navigate = useNavigate();
   useEffect(() => {
-   
+
     getBanners();
     getUpperSection();
     getProductListSection();
     const init = async () => {
       await CheckOrSetUDID();
-       };
-  
+    };
+
     init();
     //getHomePageData();
     getBlogs();
     getLowerSection();
     getVideos();
-    getStatisticsSection() 
+    getStatisticsSection()
     if (showPopup === null && !loginInfo.isLoggedIn) {
       setIsLoginModalOpen(true);
     }
@@ -267,11 +268,20 @@ export default function Home() {
     }
   };
 
-  
 
- 
+
+
   return (
     <>
+     <Helmet>
+        <title>Suryan Organic - Home</title> {/* Set default title */}
+        <meta
+          name="description"
+          content="Suryan Organic is founded by a family of farmers who are engaged in Bharat's traditional
+         & fully natural farming practices for at least the last 11 generations."
+        />
+        {/* You can add other meta tags for SEO */}
+      </Helmet> 
       {/* {loading === true ? (
         <Center h="100vh" w="100vw" backgroundColor={"bg.500"}>
           <Loader site={true} />
@@ -410,7 +420,7 @@ export default function Home() {
               style={{
                 opacity: 1,
                 transition: "opacity 0.7s", // Note the corrected syntax here
-                width:"100%"
+                width: "100%"
               }}
             />
           </Container>
@@ -728,7 +738,7 @@ export default function Home() {
                         borderColor={"text.500"}
                         //cursor={"pointer"}
                         src={data.image}
-                        //onClick={() => navigate(data?.href)}
+                      //onClick={() => navigate(data?.href)}
                       />
                       <GridItem align={"center"} mt={2} fontSize={18}>
                         {data.label}
@@ -832,7 +842,7 @@ export default function Home() {
                 )}
               </>
             ))}
-         
+
         </Grid>
       </Container>
       <Container maxW={"container.xl"}>
@@ -916,7 +926,7 @@ export default function Home() {
         </Grid>
       </Container>
       <Testimonials />
-     {statisticsSection?.length>0 && <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
+      {statisticsSection?.length > 0 && <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
         <SimpleGrid
           columns={[2, 3, null, 6]}
           px={6}
@@ -927,13 +937,13 @@ export default function Home() {
           spacingX={{ base: "10vw", md: "30px" }}
           spacingY="40px"
         >
-          {statisticsSection?.length >0 && statisticsSection?.map((data)=>(
-             <Stat>
-             <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>{data?.value}</StatNumber>
-             <StatHelpText color="gray.600">{data?.name}</StatHelpText>
-           </Stat>
+          {statisticsSection?.length > 0 && statisticsSection?.map((data) => (
+            <Stat>
+              <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>{data?.value}</StatNumber>
+              <StatHelpText color="gray.600">{data?.name}</StatHelpText>
+            </Stat>
           ))}
-       
+
         </SimpleGrid>
       </Container>}
       {brandSection?.length > 0 &&
@@ -966,7 +976,7 @@ export default function Home() {
                 md: "repeat(3,1fr)",
                 xl: "repeat(6,1fr)",
               }}
-              gap={{base:10,md:20,lg:24}}
+              gap={{ base: 10, md: 20, lg: 24 }}
               py={3}
               px={{ base: 15, md: 20, lg: 24 }}
             >

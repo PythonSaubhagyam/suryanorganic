@@ -36,6 +36,8 @@ import { Select } from "chakra-react-select";
 import CapitalizeLetter from "../utils/CommanFunction";
 import ScrollToTop from "../components/ScrollToTop";
 import MetaTags from "../context/MetaTagsContext";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFilters } from "../slice/shopApi";
 
 // import Paginator from "../components/Paginator";
 
@@ -47,9 +49,9 @@ export default function Shop() {
   const [filteredData, setFilteredData] = useState([]);
   const [sortKey, setSortKey] = useState(null);
   const [tagWise, setTagWise] = useState(null);
-  const [tagsArray, setTagsArray] = useState();
-  const [productFoamsArray, setProductFoamsArray] = useState();
-  const [brandArray, setBrandArray] = useState();
+  // const [tagsArray, setTagsArray] = useState();
+  // const [productFoamsArray, setProductFoamsArray] = useState();
+  // const [brandArray, setBrandArray] = useState();
   const [productFoam, setProductFoam] = useState(null);
   const [banners, setBanners] = useState({
     bannerWeb: null,
@@ -70,6 +72,15 @@ export default function Shop() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const brand = searchPar.get("brand");
   const brand_name = searchPar.get("brand_name");
+  const dispatch = useDispatch();
+
+  // Select filters from Redux store
+  const {
+    tagsArray = [],
+    productFoamsArray = [],
+    brandArray = [],
+    loading: filterLoading,
+  } = useSelector((state) => state.filters || {});
   // const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
@@ -87,14 +98,18 @@ export default function Shop() {
   ].join(" ");
 
   useEffect(() => {
-    getFilter();
+    // getFilter();
     const init = async () => {
       await CheckOrSetUDID();
     };
 
     init();
-    getProducts(); // eslint-disable-next-line
+    getProducts();
   }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
+
+  useEffect(() => {
+    dispatch(fetchFilters());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   getCategories();

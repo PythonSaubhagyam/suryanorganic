@@ -11,96 +11,11 @@ import {
   Flex,
   Card,
 } from "@chakra-ui/react";
-import client from "../setup/axiosClient";
+import {
+  initializeAppData
+} from "../slice/homeApi";
+import { useDispatch, useSelector } from "react-redux";
 
-const testimonialsData = {
-  testimonials: [
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "SOSE ORGANICS has been my destination to healthy and fresh produce. They deal in with a variety of products ranging from nutritious fruits, vegetables , cereals , pulses , oil , ghee and what not . One looking for an healthier alternative can have an visit at their store and be amazed by the quality and variety of offerings the store has. “Health and happiness is what all we need to have an well balanced life.” Thank you for making it a little more simpler and accessible.",
-      author: "Jaimin Tarak",
-      location: "Mumbai",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Sose Organic has been my go to place for every product whether for the kitchen or beauty or health and wellness. Highly recommended and trustworthy, I have endorsed the brand proudly among all my friends and acquaintances. Having spoken to Gopalbhai personally, I know the amount of effort and genuineness that is put behind every single product here. I’m a very happy customer and will remain so forever. The staff at the store are also friendly, and guide you beautifully. Overall it’s a lovely experience right from when you walk in to after you have consumed/used the product. You will keep going back. It’s time we support such brands that believe in sustainability and let the local brands come forth with more.",
-      author: "Tanvi Joshi",
-      location: "Ahmedabad",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "All products are 100% pure and organic. Edible oils, medicines,medicated ghee for nasya, vegetables and fruits I buy regularly from SOSE and I am fully satisfied with these organic products.",
-      author: "Usha Acharya",
-      location: "Surat",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "SOSE is the pure nature n best store .. it's Beard oil is best product n it's a Aayurvedic beard oil which made in organic ingredients.",
-      author: "Karan Chaudhari",
-      location: "Bhavnagar",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Treated for gas, acidity and pain in hands & legs since last few weeks. Seen significant relief with Sunthamrut capsule, Drakshavaleh, Kabjamrut Churna and Asthi Churna",
-      author: "Bharti Ben",
-      location: "Ahmedabad",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Started Mother's treatment few weeks back for joint & back pain. Treated with Asthigir Ghrit, Asthi Churna, Kabjamrut capsule, Sunthamrut capsule and Gir Nasya. See significant relief in join & back pains.",
-      author: "Rita Ben",
-      location: "Ahmedabad",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Suffered from serious left ventricle dysfunction and injection projection, was admitted to ICU and adviced 3 months rest thereafter. Started Gauveda medicines Arjun Ghrit, Dhavalamrut, Arjun Chai and Phalamrut with daily Pranayam. Experience significant relief and improvement in 2D echo report.",
-      author: "Akash Dave",
-      location: "Rajkot",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Suffering from a neurological disease, experiencing 50% relief in symptoms, with lower stress & better sleep even after stopping allopathic medicines. Taking Asthi Churna, Nasya, 21 Aushadhiya Ark and Shilajit.",
-      author: "Jashwantbhai Prajapati",
-      location: "Rajkot",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "13-year old physically less developed son with low immunity. Started Gir Phalamrut capsule, Nasya, Drakshavaleh and Go-Vita. See significant improvement in just few weeks",
-      author: "Prashant M",
-      location: "Mumbai",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "Regularly use Kamdhenu Asav for 2 daughters aged 6 & 8 years whenever there catch cold, see complete relief without the use of any other medicines.",
-      author: "Nilam R Patel",
-      location: "Mumbai",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "I have been using nasya from last 6 months and it really effects on my migraine problem , And I’m aslo using gir pranda churan and it has solved my constipation problem form root.all products are best and effective and reasonable too",
-      author: "Smit Chauhan",
-      location: "Ahmedabad",
-    },
-    {
-      quoteIconColor: "#436131",
-      quote:
-        "I am extremely happy with the quality of milk they are providing. I have tried many brands and milk types of Gir cows but was not satisfied like this ever before they are genuinely serving the society by providing authentic milk.",
-      author: "Namrata Singh",
-      location: "Ahmedabad",
-    },
-  ],
-};
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -135,21 +50,31 @@ function SamplePrevArrow(props) {
 }
 const Testimonials = () => {
 
-  const [testimonials , setTestimonials] = useState([])
+  const dispatch = useDispatch();
+  // const [testimonials , setTestimonials] = useState([])
+  const {
+    testimonials,
+    hasFetched
+  } = useSelector((state) => state.banners);
+  
 
-  useEffect(()=>{
-    getTestimonials()
-  },[])
 
-  async function getTestimonials() {
-    const params = {};
-    const response = await client.get("/testimonials-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setTestimonials(response?.data?.data);
+  useEffect(() => {
+    if (!hasFetched) {
+      dispatch(initializeAppData());
     }
-  }
+  }, [dispatch, hasFetched]);
+
+
+  // async function getTestimonials() {
+  //   const params = {};
+  //   const response = await client.get("/testimonials-section/", {
+  //     params: params,
+  //   });
+  //   if (response.data.status === true) {
+  //     setTestimonials(response?.data?.data);
+  //   }
+  // }
 
   var settings = {
     dots: false,

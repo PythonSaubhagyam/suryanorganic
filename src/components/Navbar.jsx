@@ -66,6 +66,8 @@ import { FiInstagram } from "react-icons/fi";
 import { debounce } from "lodash";
 import CartEmitter from "./EventEmitter";
 import LoginModal from "./LoginModal";
+import { fetchCategories } from "../slice/categoryApi";
+import { useDispatch, useSelector } from "react-redux";
 
 const Links = [
   {
@@ -322,7 +324,7 @@ export default function Navbar() {
   const handleCloseCategory = (index) => {
     setOpenCategory();
   };
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [categoriesLastIndex, setCategoriesLastIndex] = useState(0);
   const [subCategories, setSubCategories] = useState([]);
   const [openOuterAccordion, setOpenOuterAccordion] = useState(false);
@@ -341,6 +343,18 @@ export default function Navbar() {
   const [openSections, setOpenSections] = useState([]);
   const [openSubSections, setOpenSubSections] = useState([]);
   const [all, setAll] = useState(false);
+  const dispatch = useDispatch();
+
+  const { categories, mergedCategories,hasFetched } = useSelector(
+    (state) => state.category
+  );
+
+  useEffect(() => {
+    if (!hasFetched) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch]);
+
   const toggleSection = (index, section) => {
     setAll(false);
     if (section.children.length !== 0) {
@@ -381,15 +395,15 @@ export default function Navbar() {
 
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
-  useEffect(() => {
-    const init = async () => {
-      await CheckOrSetUDID();
-    };
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await CheckOrSetUDID();
+  //      };
 
-    init();
-    getCategories();
-    //getMegaCategories();
-  }, []);
+  //   init();
+  //   getCategories();
+  //   //getMegaCategories();
+  // }, []);
 
   const getMegaCategories = async () => {
     const response = await client.get("/categories/?mega_menu=mega_menu", {
@@ -407,16 +421,16 @@ export default function Navbar() {
       return result;
     }, []);
 
-  const getCategories = async () => {
-    const response = await client.get("/categories/", {
-      params: { list: true },
-    });
+  // const getCategories = async () => {
+  //   const response = await client.get("/categories/", {
+  //     params: { list: true },
+  //   });
 
-    if (response.data.status === true) {
-      setCategories(response.data.categories);
-      setTopCategory(mergeArraysById(mainLinks, response.data.categories));
-    }
-  };
+  //   if (response.data.status === true) {
+  //     setCategories(response.data.categories);
+  //     setTopCategory(mergeArraysById(mainLinks, response.data.categories));
+  //   }
+  // };
 
   useEffect(() => {
     if (didMount.current === true) {
@@ -576,7 +590,11 @@ export default function Navbar() {
             />
           </Link>
         </Flex>
-        <Container maxW={"container.xl"} my={2} display={isMobile ? "" : "none"}>
+        <Container
+          maxW={"container.xl"}
+          my={2}
+          display={isMobile ? "" : "none"}
+        >
           <Flex
             h={16}
             alignItems={"center"}
@@ -652,7 +670,7 @@ export default function Navbar() {
                                 lg: "75%",
                               }}
                             >
-                              <LinkOverlay href={`/products/${result.id}`}>
+                              <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
                                 {result.name}
                               </LinkOverlay>
                             </Text>
@@ -1003,7 +1021,10 @@ export default function Navbar() {
           // }}
           display={isMobile ? "none" : "block"}
         >
-          <Grid templateRows="repeat(2, 1fr)" templateColumns={"repeat(12, 1fr)"}>
+          <Grid
+            templateRows="repeat(2, 1fr)"
+            templateColumns={"repeat(12, 1fr)"}
+          >
             <GridItem
               rowSpan={2}
               colSpan={1}
@@ -1210,7 +1231,7 @@ export default function Navbar() {
                             lg: "75%",
                           }}
                         >
-                          <LinkOverlay href={`/products/${result.id}`}>
+                          <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
                             {result.name}
                           </LinkOverlay>
                         </Text>
@@ -1346,7 +1367,7 @@ export default function Navbar() {
             >
               Gifting
             </Link> */}
-              {topCategory?.map((data, index) => (
+              {mergedCategories?.map((data, index) => (
                 <>
                   <Menu
                     isOpen={openCategory === index}

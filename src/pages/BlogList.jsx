@@ -175,7 +175,7 @@ export default function BlogList() {
               {blogs.map((blog) => (
                 <Box key={blog.id}>
                   <LinkBox my={4}>
-                    <LinkOverlay href={`/blogs/${blog.id}/`}>
+                    <LinkOverlay onClick={() => navigate(`/blogs/${blog.id}/`)}>
                       <Heading size="lg" fontWeight={"600"} color="brand.500">
                         {blog.title}
                       </Heading>

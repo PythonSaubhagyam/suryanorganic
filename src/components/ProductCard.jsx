@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardBody,
@@ -12,6 +11,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/products/${product.id}`);
+  };
   return (
     <Card
       //w={{ base: "80vw", sm: "3xs", lg: "18vw" }}
@@ -19,7 +22,7 @@ export default function ProductCard({ product }) {
       borderColor="brand.100"
       borderRadius={"lg"}
       onClick={() => {
-        window.location.href = `/products/${product.id}`;
+        // window.location.href = `/products/${product.id}`;
         // navigate(),
         //   window.scrollTo({
         //     top: 0,
@@ -27,6 +30,7 @@ export default function ProductCard({ product }) {
         //     behavior: "smooth",
 
         //   });
+        handleClick();
       }}
       cursor={"pointer"}
     >
@@ -64,8 +68,9 @@ export default function ProductCard({ product }) {
           </Heading>
         </Box>
         <Button
-          as={Link}
-          to={`/products/${product.id}`}
+          // as={Link}
+          // to={`/products/${product.id}`}
+          onClick={() => handleClick()}
           fontSize="sm"
           w={{ base: "100%", lg: "80%" }}
           mx="auto"

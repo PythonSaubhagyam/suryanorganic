@@ -123,7 +123,11 @@ const CartPopUp = () => {
             fontSize={13}
           >
             Upgrade to{" "}
-            <Link href="/subscription-plans" fontWeight={700} fontSize={"sm"}>
+            <Link
+              onClick={() => navigate(`/subscription-plans`)}
+              fontWeight={700}
+              fontSize={"sm"}
+            >
               SOSE Elite
             </Link>{" "}
             now for complimentary delivery and elevate your shopping experience!

@@ -341,19 +341,16 @@ export default function Navbar() {
   const [all, setAll] = useState(false);
   const dispatch = useDispatch();
 
-  const { categories, mergedCategories } = useSelector(
+  const { categories, mergedCategories,hasFetched } = useSelector(
     (state) => state.category
   );
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    if (!hasFetched) {
+      dispatch(fetchCategories());
+    }
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (categories.length > 0) {
-  //     setCategories(mergeArraysById(mainLinks, categories));
-  //   }
-  // }, [categories]);
   const toggleSection = (index, section) => {
     setAll(false);
     if (section.children.length !== 0) {
@@ -639,7 +636,7 @@ export default function Navbar() {
                                 lg: "75%",
                               }}
                             >
-                              <LinkOverlay href={`/products/${result.id}`}>
+                              <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
                                 {result.name}
                               </LinkOverlay>
                             </Text>
@@ -750,15 +747,15 @@ export default function Navbar() {
                         style={
                           all
                             ? {
-                                background: "#436131",
-                                color: "white",
-                                borderRadius: 5,
-                              }
+                              background: "#436131",
+                              color: "white",
+                              borderRadius: 5,
+                            }
                             : {
-                                background: "white",
-                                color: "black",
-                                borderRadius: 5,
-                              }
+                              background: "white",
+                              color: "black",
+                              borderRadius: 5,
+                            }
                         }
                       >
                         <Box
@@ -999,7 +996,7 @@ export default function Navbar() {
             <GridItem
               rowSpan={2}
               colSpan={1}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
               <Link as={ReactRouterLink} to="/">
                 <Image
@@ -1118,7 +1115,7 @@ export default function Navbar() {
               colSpan={8}
               display={"flex"}
               alignItems={"center"}
-              // style={{ borderBottom: "0.5px solid #b7b7b7" }}
+            // style={{ borderBottom: "0.5px solid #b7b7b7" }}
             >
               <InputGroup size="sm" width={"100%"}>
                 <Input
@@ -1202,7 +1199,7 @@ export default function Navbar() {
                             lg: "75%",
                           }}
                         >
-                          <LinkOverlay href={`/products/${result.id}`}>
+                          <LinkOverlay as={ReactRouterLink} to={`/products/${result.id}`}>
                             {result.name}
                           </LinkOverlay>
                         </Text>
@@ -1325,7 +1322,7 @@ export default function Navbar() {
               fontSize={15}
               py={2}
               overflowX={"scroll"}
-              // maxWidth={"95vw"}
+            // maxWidth={"95vw"}
             >
               {/* <Link
               _hover={{
@@ -1364,8 +1361,7 @@ export default function Navbar() {
                       onClick={() => {
                         handleHoverCategory(index),
                           navigate(
-                            `/shop?page=1&category=${
-                              data.id
+                            `/shop?page=1&category=${data.id
                             }&category_name=${encodeURIComponent(data?.name)}`
                           );
                       }}
@@ -1406,8 +1402,7 @@ export default function Navbar() {
                                 onClick={() => {
                                   handleCloseCategory(index);
                                   navigate(
-                                    `/shop?page=1&category=${
-                                      section.id
+                                    `/shop?page=1&category=${section.id
                                     }&category_name=${encodeURIComponent(
                                       section?.name
                                     )}`
@@ -1424,8 +1419,7 @@ export default function Navbar() {
                                   onClick={() => {
                                     handleCloseCategory(index);
                                     navigate(
-                                      `/shop?page=1&category=${
-                                        section.id
+                                      `/shop?page=1&category=${section.id
                                       }&category_name=${encodeURIComponent(
                                         section?.name
                                       )}`

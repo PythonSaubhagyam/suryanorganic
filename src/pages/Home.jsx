@@ -4,14 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import {
-  fetchBanners,
-  fetchBlogs,
-  fetchLowerSection,
-  fetchMiddleBanners,
-  fetchProductSections,
-  fetchStatistics,
-  fetchUpperSection,
-  fetchVideos,
+  initializeAppData,
 } from "../slice/homeApi";
 import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -53,43 +46,12 @@ export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
   const width = useBreakpointValue({ base: "100%", lg: "100%" });
   const height = useBreakpointValue({ base: "300", lg: "400" });
-  // const [banners, setBanners] = useState([]);
-  // const [middleBanners, SetMiddleBanners] = useState([]);
-  // const [brandSection, setBrandSection] = useState();
-  // const [awardsSection, setAwardSection] = useState();
-  const [servicesSection, setServicesSection] = useState();
-  // const [availableSection, setAvailableSection] = useState();
-  const [nonGMOSection, setNonGMOSection] = useState();
-  const [licensesSection, setLicensesSection] = useState();
-  // const [giftHamperSection, setGiftHamperSection] = useState();
-  // const [viewMoreSection, setViewMoreSection] = useState();
-  // const [newArrivalsSection, setNewArrivalsSection] = useState();
-  // const [certificateSection, setCertificateSection] = useState();
-  // const [girGauProductSection, setGirGauProductSection] = useState();
-  // const [shopSection, setShopSection] = useState();
-  // const [groceriesSection, setGroceriesSection] = useState();
   const [productListSections, setProductListSections] = useState([]);
-  // const [newArrivalList, setNewArrivalList] = useState();
-  // const [tryOurList, setTryOurList] = useState();
-  // const [instantMixList, setInstantMixList] = useState();
-  // const [mustTryGirList, setMustTryGirList] = useState();
-  // const [mustTryNaturalList, setMustTryNaturalList] = useState();
-  // const [bestOfList, setBestOfList] = useState();
-  // const [allTimeList, setAllTimeList] = useState();
-  const [masalaIamgeSection, setMasalaImageSection] = useState();
-  // const [videos, setVideos] = useState([]);
-  const [statisticsSection, setStatisticsSection] = useState([]);
-
+  // const [statisticsSection, setStatisticsSection] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isMobile] = useMediaQuery("(max-width: 480px)");
-  // const [whoSection, setWhoSection] = useState();
-  // const [inspireSection, setInspireSection] = useState();
-  // const [missionSection, setMissionSection] = useState();
   const [homeData, setHome] = useState({});
   const [sections, setSections] = useState([]);
-  // const [error, setError] = useState(null);
-  // let [isFull] = useMediaQuery("(max-width:1920px)");
-  // const [blogs, setBlogs] = useState([]);
   const loginInfo = checkLogin();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(
@@ -109,9 +71,9 @@ export default function Home() {
     lowerSection,
     videos,
     statistics,
+    hasFetched,
   } = useSelector((state) => state.banners);
-  console.log(statistics, "sss");
-
+  
   // Destructure upperSection for easier access
   const {
     giftHamperSection,
@@ -125,8 +87,18 @@ export default function Home() {
     inspireSection,
     missionSection,
   } = upperSection;
-
-  const { awardsSection, availableSection, brandSection } = lowerSection;
+  
+  // Destructure lowerSection for easier access
+  const { 
+    awardsSection, 
+    availableSection, 
+    brandSection, 
+    nonGMOSection, 
+    servicesSection, 
+    licenseSection, 
+    masalaImageSection 
+  } = lowerSection;
+  console.log(middleBanners, "sss");
 
   // Destructure productSections for easier access
   const {
@@ -138,203 +110,11 @@ export default function Home() {
     bestOfList,
     allTimeList,
   } = productSections;
-  // useEffect(() => {
-  //   // Dispatch actions to fetch banners and middle banners
-  //   dispatch(fetchBanners());
-  //   dispatch(fetchMiddleBanners());
-  // }, [dispatch]);
 
-  // useEffect(() => {
-  //   const init = async () => {
-  //     await CheckOrSetUDID();
-
-  //     try {
-  //       // API 1: Banners
-  //       // let bannersResponse;
-  //       // try {
-  //       //   bannersResponse = await client.get(
-  //       //     "/ecommerce/banners/?sequence=Upper"
-  //       //   );
-  //       //   if (bannersResponse.data.status === true) {
-  //       //     setBanners(bannersResponse.data?.banner);
-  //       //   }
-  //       // } catch (error) {
-  //       //   console.error("Error fetching banners:", error);
-  //       // }
-
-  //       // API 2: Upper Section
-  //       let upperSectionResponse;
-  //       try {
-  //         upperSectionResponse = await client.get("/upper-section/");
-  //         if (upperSectionResponse.data.status === true) {
-  //           const giftHamper = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 1
-  //           );
-  //           const viewMore = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 2
-  //           );
-  //           const newArrivals = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 3
-  //           );
-  //           const certificate = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 4
-  //           );
-  //           const girGauProduct = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 5
-  //           );
-  //           const shop = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 6
-  //           );
-  //           const groceries = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 13
-  //           );
-  //           const whoSection = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 10
-  //           );
-  //           const inspireSection = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 11
-  //           );
-  //           const missionSection = upperSectionResponse.data.data?.filter(
-  //             (section) => section.id === 12
-  //           );
-
-  //           setGiftHamperSection(giftHamper);
-  //           setViewMoreSection(viewMore);
-  //           setNewArrivalsSection(newArrivals);
-  //           setCertificateSection(certificate);
-  //           setGirGauProductSection(girGauProduct);
-  //           setShopSection(shop);
-  //           setGroceriesSection(groceries);
-  //           setWhoSection(whoSection);
-  //           setInspireSection(inspireSection);
-  //           setMissionSection(missionSection);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching upper section:", error);
-  //       }
-
-  //       // API 3: Product List
-  //       let productListResponse;
-  //       try {
-  //         productListResponse = await client.get("/product-section/");
-  //         if (productListResponse.data.status === true) {
-  //           setProductListSections(productListResponse.data.data);
-  //           const newArrival = productListResponse.data.data?.filter(
-  //             (section) => section.id === 1
-  //           );
-  //           const tryOur = productListResponse.data.data?.filter(
-  //             (section) => section.id === 2
-  //           );
-  //           const instantMix = productListResponse.data.data?.filter(
-  //             (section) => section.id === 3
-  //           );
-  //           const mustTryGir = productListResponse.data.data?.filter(
-  //             (section) => section.id === 4
-  //           );
-  //           const mustTryNatural = productListResponse.data.data?.filter(
-  //             (section) => section.id === 5
-  //           );
-  //           const bestOf = productListResponse.data.data?.filter(
-  //             (section) => section.id === 6
-  //           );
-  //           const allTime = productListResponse.data.data?.filter(
-  //             (section) => section.id === 7
-  //           );
-  //           setNewArrivalList(newArrival);
-  //           setTryOurList(tryOur);
-  //           setInstantMixList(instantMix);
-  //           setMustTryGirList(mustTryGir);
-  //           setMustTryNaturalList(mustTryNatural);
-  //           setBestOfList(bestOf);
-  //           setAllTimeList(allTime);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching product list:", error);
-  //       }
-
-  //       // API 4: Middle Banner
-  //       // let middleBannerResponse;
-  //       // try {
-  //       //   middleBannerResponse = await client.get(
-  //       //     "/ecommerce/banners/?sequence=Middle"
-  //       //   );
-  //       //   if (middleBannerResponse.data.status === true) {
-  //       //     SetMiddleBanners(middleBannerResponse.data?.bannerMiddle);
-  //       //   }
-  //       // } catch (error) {
-  //       //   console.error("Error fetching middle banner:", error);
-  //       // }
-
-  //       // API 5: Blogs
-  //       let blogsResponse;
-  //       try {
-  //         blogsResponse = await client.get("/home/blogs/");
-  //         if (blogsResponse.data.status === true) {
-  //           setBlogs(blogsResponse.data.blogs);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching blogs:", error);
-  //       }
-
-  //       // API 6: Lower Section
-  //       let lowerSectionResponse;
-  //       try {
-  //         lowerSectionResponse = await client.get("/lower-section/");
-  //         if (lowerSectionResponse.data.status === true) {
-  //           setSections(lowerSectionResponse.data.data);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching lower section:", error);
-  //       }
-
-  //       // API 7: Videos
-  //       let videosResponse;
-  //       try {
-  //         videosResponse = await client.get("/youtubevideo-section/");
-  //         if (videosResponse.data.status === true) {
-  //           setVideos(videosResponse.data.data);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching videos:", error);
-  //       }
-
-  //       // API 8: Statistics
-  //       let statisticsResponse;
-  //       try {
-  //         statisticsResponse = await client.get("/statistics-section/");
-  //         if (statisticsResponse.data.status === true) {
-  //           setStatisticsSection(statisticsResponse.data.data);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching statistics:", error);
-  //       }
-
-  //       // Set loading to false once all data is fetched
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error during initialization:", error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   init();
-  //   if (showPopup === null && !loginInfo.isLoggedIn) {
-  //     setIsLoginModalOpen(true);
-  //   }
-  // }, []);
   useEffect(() => {
     const init = async () => {
       await CheckOrSetUDID();
-
-      dispatch(fetchBanners());
-      dispatch(fetchUpperSection());
-      dispatch(fetchMiddleBanners());
-      dispatch(fetchProductSections());
-      dispatch(fetchVideos());
-      dispatch(fetchBlogs());
-      dispatch(fetchLowerSection());
-
-      dispatch(fetchStatistics());
+     
     };
 
     init();
@@ -343,167 +123,15 @@ export default function Home() {
       setIsLoginModalOpen(true);
     }
   }, [dispatch]);
-  async function getVideos() {
-    const params = {};
-    const response = await client.get("/youtubevideo-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setVideos(response?.data?.data);
+  
+  useEffect(() => {
+    if (!hasFetched) {
+      dispatch(initializeAppData());
     }
-  }
+  }, [dispatch, hasFetched]);
 
-  async function getStatisticsSection() {
-    const params = {};
-    const response = await client.get("/statistics-section/", {
-      params: params,
-    });
-    if (response.data.status === true) {
-      setStatisticsSection(response?.data?.data);
-    }
-  }
 
-  // async function getBanners() {
-  //   const promise1 = await client.get("/ecommerce/banners/?sequence=Upper");
-  //   const promise2 = await client.get("/ecommerce/banners/?sequence=Middle");
 
-  //   Promise.all([promise1, promise2])
-  //     .then(function (responses) {
-  //       if (responses[0].data.status === true) {
-  //         setBanners(responses[0].data?.banner);
-  //       }
-  //       if (responses[1].data.status === true) {
-  //         SetMiddleBanners(responses[1].data?.banner);
-  //       }
-
-  //       setLoading(false);
-  //     })
-  //     .catch(function (error) {
-  //       setLoading(false);
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }
-  // async function getBlogs() {
-  //   const params = {};
-  //   const response = await client.get("/home/blogs/", {
-  //     params: params,
-  //   });
-  //   if (response.data.status === true) {
-  //     setBlogs(response.data.blogs);
-  //   }
-  // }
-
-  // async function getLowerSection() {
-  //   const params = {};
-  //   const response = await client.get("/lower-section/", {
-  //     params: params,
-  //   });
-  //   if (response.data.status === true) {
-  //     setSections(response.data.data);
-  //     const ourAwardsSection = response.data.data?.filter(
-  //       (section) => section.id === 1
-  //     );
-  //     const ourServicesSection = response.data.data?.filter(
-  //       (section) => section.id === 2
-  //     );
-  //     const availableAtSection = response.data.data?.filter(
-  //       (section) => section.id === 3
-  //     );
-  //     const licensesSection = response.data.data?.filter(
-  //       (section) => section.id === 4
-  //     );
-  //     const brandSection = response.data.data?.filter(
-  //       (section) => section.id === 9
-  //     );
-  //     const nonGMOSection = response.data.data?.filter(
-  //       (section) => section.id === 8
-  //     );
-  //     const masalaImage = response.data.data?.filter(
-  //       (section) => section.id === 11
-  //     );
-  //     setAwardSection(ourAwardsSection);
-  //     setServicesSection(ourServicesSection);
-  //     setAvailableSection(availableAtSection);
-  //     setLicensesSection(licensesSection);
-  //     setBrandSection(brandSection);
-  //     setNonGMOSection(nonGMOSection);
-  //     setMasalaImageSection(masalaImage);
-  //   }
-  // }
-
-  // const getProductListSection = async () => {
-  //   const response = await client.get("/product-section/");
-  //   if (response.data.status === true) {
-  //     setProductListSections(response.data.data);
-  //     const newArrival = response.data.data?.filter(
-  //       (section) => section.id === 1
-  //     );
-  //     const tryOur = response.data.data?.filter((section) => section.id === 2);
-  //     const instantMix = response.data.data?.filter(
-  //       (section) => section.id === 3
-  //     );
-  //     const mustTryGir = response.data.data?.filter(
-  //       (section) => section.id === 4
-  //     );
-  //     const mustTryNatural = response.data.data?.filter(
-  //       (section) => section.id === 5
-  //     );
-  //     const bestOf = response.data.data?.filter((section) => section.id === 6);
-  //     const allTime = response.data.data?.filter((section) => section.id === 7);
-  //     setNewArrivalList(newArrival);
-  //     setTryOurList(tryOur);
-  //     setInstantMixList(instantMix);
-  //     setMustTryGirList(mustTryGir);
-  //     setMustTryNaturalList(mustTryNatural);
-  //     setBestOfList(bestOf);
-  //     setAllTimeList(allTime);
-  //   }
-  // };
-
-  // const getUpperSection = async () => {
-  //   const response = await client.get("/upper-section/");
-  //   if (response.data.status === true) {
-  //     const giftHamper = response.data.data?.filter(
-  //       (section) => section.id === 1
-  //     );
-  //     const viewMore = response.data.data?.filter(
-  //       (section) => section.id === 2
-  //     );
-  //     const newArrivals = response.data.data?.filter(
-  //       (section) => section.id === 3
-  //     );
-  //     const certificate = response.data.data?.filter(
-  //       (section) => section.id === 4
-  //     );
-  //     const girGauProduct = response.data.data?.filter(
-  //       (section) => section.id === 5
-  //     );
-  //     const shop = response.data.data?.filter((section) => section.id === 6);
-  //     const groceries = response.data.data?.filter(
-  //       (section) => section.id === 13
-  //     );
-  //     const whoSection = response.data.data?.filter(
-  //       (section) => section.id === 10
-  //     );
-  //     const inspireSection = response.data.data?.filter(
-  //       (section) => section.id === 11
-  //     );
-  //     const missionSection = response.data.data?.filter(
-  //       (section) => section.id === 12
-  //     );
-
-  //     setGiftHamperSection(giftHamper);
-  //     setViewMoreSection(viewMore);
-  //     setNewArrivalsSection(newArrivals);
-  //     setCertificateSection(certificate);
-  //     setGirGauProductSection(girGauProduct);
-  //     setShopSection(shop);
-  //     setGroceriesSection(groceries);
-  //     setWhoSection(whoSection);
-  //     setInspireSection(inspireSection);
-  //     setMissionSection(missionSection);
-  //   }
-  // };
 
   return (
     <>
@@ -940,13 +568,13 @@ export default function Home() {
         products={homeData?.best_of_the_year}
       /> */}
 
-      {masalaIamgeSection?.length > 0 && (
+      {masalaImageSection?.length > 0 && (
         <>
           {" "}
           <Container maxW={"container.xl"} px={"3.8%"}>
             <Image
               src={
-                masalaIamgeSection?.length > 0 && masalaIamgeSection[0]?.image
+                masalaImageSection?.length > 0 && masalaImageSection[0]?.image
               }
               alt=""
             />
@@ -958,8 +586,8 @@ export default function Home() {
                 md: "repeat(5, 1fr)",
               }}
             >
-              {masalaIamgeSection[0]?.images?.length > 0 &&
-                masalaIamgeSection[0]?.images?.map((data) => (
+              {masalaImageSection[0]?.images?.length > 0 &&
+                masalaImageSection[0]?.images?.map((data) => (
                   <>
                     <GridItem align={"center"}>
                       <Image
@@ -969,7 +597,7 @@ export default function Home() {
                         borderColor={"text.500"}
                         //cursor={"pointer"}
                         src={data.image}
-                        //onClick={() => navigate(data?.href)}
+                      //onClick={() => navigate(data?.href)}
                       />
                       <GridItem align={"center"} mt={2} fontSize={18}>
                         {data.label}
@@ -1169,8 +797,8 @@ export default function Home() {
             spacingX={{ base: "10vw", md: "30px" }}
             spacingY="40px"
           >
-            {statisticsSection?.length > 0 &&
-              statisticsSection?.map((data) => (
+            {statistics?.length > 0 &&
+              statistics?.map((data) => (
                 <Stat>
                   <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
                     {data?.value}
@@ -1302,8 +930,8 @@ export default function Home() {
             </Flex>
           </Container>
         )}
-      {licensesSection?.length > 0 &&
-        licensesSection[0]?.is_visible_on_website === true && (
+      {licenseSection?.length > 0 &&
+        licenseSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
             <Box
               w="100%"
@@ -1323,12 +951,12 @@ export default function Home() {
                 mt={3}
                 pb={"10px"}
               >
-                {licensesSection?.length > 0 && licensesSection[0].label}
+                {licenseSection?.length > 0 && licenseSection[0].label}
               </Heading>
             </Box>
             <Flex justify="center" align="center" gap={10} pt={1} pb={10}>
               <LazyLoadImage
-                src={licensesSection?.length > 0 && licensesSection[0].image}
+                src={licenseSection?.length > 0 && licenseSection[0].image}
                 alt="Coffee Board"
                 style={{
                   opacity: 1,

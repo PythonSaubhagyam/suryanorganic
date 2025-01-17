@@ -1,12 +1,55 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import client from "../setup/axiosClient";
 
-// Initial state for banners
+export const initializeAppData = createAsyncThunk(
+  "app/initializeData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const [
+        bannersResponse,
+        middleBanners,
+        upperSection,
+        productSections,
+        lowerSection,
+        blogs,
+        videos,
+        statistics,
+        testimonials,
+      ] = await Promise.all([
+        client.get("/ecommerce/banners/?sequence=Upper"),
+        client.get("/ecommerce/banners/?sequence=Middle"),
+        client.get("/upper-section/"),
+        client.get("/product-section/"),
+        client.get("/lower-section/"),
+        client.get("/home/blogs/"),
+        client.get("/youtubevideo-section/"),
+        client.get("/statistics-section/"),
+        client.get("/testimonials-section/"),
+      ]);
+
+      return {
+        banners: bannersResponse.data.banner || [],
+        middleBanners: middleBanners.data.banner || [],
+        upperSection: upperSection.data.data || [],
+        productSections: productSections.data.data || [],
+        lowerSection: lowerSection.data.data || [],
+        blogs: blogs.data.blogs || [],
+        videos: videos.data.data || [],
+        statistics: statistics.data.data || [],
+        testimonials: testimonials.data.data || [],
+      };
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
 const initialState = {
   banners: [],
   middleBanners: [],
   loader: false,
   error: null,
+  hasFetched: false,
   upperSection: {
     giftHamperSection: [],
     viewMoreSection: [],
@@ -33,75 +76,16 @@ const initialState = {
     awardsSection: [],
     availableSection: [],
     brandSection: [],
+    licenseSection: [],
+    nonGMOSection: [],
+    servicesSection: [],
+    masalaImageSection: [],
   },
   blogs: [],
-  // lowerSection: [],
   videos: [],
   statistics: [],
+  testimonials: [],
 };
-
-const getResponseData = (response, key) => {
-  if (!response || !response.status) return [];
-  return response[key] || response.data || [];
-};
-// Async thunk for fetching banners
-export const fetchBanners = createAsyncThunk(
-  "banners/fetchBanners",
-  async () => {
-    const response = await client.get("/ecommerce/banners/?sequence=Upper");
-    return response.data;
-  }
-);
-
-export const fetchMiddleBanners = createAsyncThunk(
-  "banners/fetchMiddleBanners",
-  async () => {
-    const response = await client.get("/ecommerce/banners/?sequence=Middle");
-    return response.data;
-  }
-);
-
-export const fetchUpperSection = createAsyncThunk(
-  "home/fetchUpperSection",
-  async () => {
-    const response = await client.get("/upper-section/");
-    return response.data;
-  }
-);
-
-export const fetchProductSections = createAsyncThunk(
-  "home/fetchProductSections",
-  async () => {
-    const response = await client.get("/product-section/");
-    return response.data;
-  }
-);
-
-export const fetchBlogs = createAsyncThunk("home/fetchBlogs", async () => {
-  const response = await client.get("/home/blogs/");
-  return response.data;
-});
-
-export const fetchLowerSection = createAsyncThunk(
-  "home/fetchLowerSection",
-  async () => {
-    const response = await client.get("/lower-section/");
-    return response.data;
-  }
-);
-
-export const fetchVideos = createAsyncThunk("home/fetchVideos", async () => {
-  const response = await client.get("/youtubevideo-section/");
-  return response.data;
-});
-
-export const fetchStatistics = createAsyncThunk(
-  "home/fetchStatistics",
-  async () => {
-    const response = await client.get("/statistics-section/");
-    return response.data;
-  }
-);
 
 const bannerSlice = createSlice({
   name: "banners",
@@ -109,152 +93,72 @@ const bannerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBanners.pending, (state) => {
+      .addCase(initializeAppData.pending, (state) => {
         state.loader = true;
       })
-      .addCase(fetchBanners.fulfilled, (state, action) => {
+      .addCase(initializeAppData.fulfilled, (state, action) => {
         state.loader = false;
-        if (action.payload.status === true) {
-          state.banners = getResponseData(action.payload, "banner");
-        }
-      })
-      .addCase(fetchBanners.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
+        const {
+          banners,
+          middleBanners,
+          upperSection,
+          productSections,
+          lowerSection,
+          blogs,
+          videos,
+          statistics,
+          testimonials,
+        } = action.payload;
 
-      // Middle Banners
-      .addCase(fetchMiddleBanners.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchMiddleBanners.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          state.middleBanners = getResponseData(action.payload, "bannerMiddle");
-        }
-      })
-      .addCase(fetchMiddleBanners.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
+        state.banners = banners;
+        state.middleBanners = middleBanners;
 
-      // Upper Section
-      .addCase(fetchUpperSection.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchUpperSection.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          const data = getResponseData(action.payload, "data");
-          state.upperSection = {
-            giftHamperSection: data.filter((section) => section.id === 1),
-            viewMoreSection: data.filter((section) => section.id === 2),
-            newArrivalsSection: data.filter((section) => section.id === 3),
-            certificateSection: data.filter((section) => section.id === 4),
-            girGauProductSection: data.filter((section) => section.id === 5),
-            shopSection: data.filter((section) => section.id === 6),
-            groceriesSection: data.filter((section) => section.id === 13),
-            whoSection: data.filter((section) => section.id === 10),
-            inspireSection: data.filter((section) => section.id === 11),
-            missionSection: data.filter((section) => section.id === 12),
-          };
-        }
-      })
-      .addCase(fetchUpperSection.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
+        state.upperSection = {
+          giftHamperSection: upperSection.filter((section) => section.id === 1),
+          viewMoreSection: upperSection.filter((section) => section.id === 2),
+          newArrivalsSection: upperSection.filter((section) => section.id === 3),
+          certificateSection: upperSection.filter((section) => section.id === 4),
+          girGauProductSection: upperSection.filter((section) => section.id === 5),
+          shopSection: upperSection.filter((section) => section.id === 6),
+          whoSection: upperSection.filter((section) => section.id === 10),
+          inspireSection: upperSection.filter((section) => section.id === 11),
+          missionSection: upperSection.filter((section) => section.id === 12),
+          groceriesSection: upperSection.filter((section) => section.id === 13),
+        };
 
-      // Product Sections
-      .addCase(fetchProductSections.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchProductSections.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          const data = getResponseData(action.payload, "data");
-          state.productSections = {
-            all: data,
-            newArrivalList: data.filter((section) => section.id === 1),
-            tryOurList: data.filter((section) => section.id === 2),
-            instantMixList: data.filter((section) => section.id === 3),
-            mustTryGirList: data.filter((section) => section.id === 4),
-            mustTryNaturalList: data.filter((section) => section.id === 5),
-            bestOfList: data.filter((section) => section.id === 6),
-            allTimeList: data.filter((section) => section.id === 7),
-          };
-        }
-      })
-      .addCase(fetchProductSections.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
+        state.productSections = {
+          all: productSections,
+          newArrivalList: productSections.filter((section) => section.id === 1),
+          tryOurList: productSections.filter((section) => section.id === 2),
+          instantMixList: productSections.filter((section) => section.id === 3),
+          mustTryGirList: productSections.filter((section) => section.id === 4),
+          mustTryNaturalList: productSections.filter((section) => section.id === 5),
+          bestOfList: productSections.filter((section) => section.id === 6),
+          allTimeList: productSections.filter((section) => section.id === 7),
+        };
 
-      // Blogs
-      .addCase(fetchBlogs.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchBlogs.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          state.blogs = getResponseData(action.payload, "blogs");
-        }
-      })
-      .addCase(fetchBlogs.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
+        state.lowerSection = {
+          awardsSection: lowerSection.filter((section) => section.id === 1),
+          servicesSection: lowerSection.filter((section) => section.id === 2),
+          availableSection: lowerSection.filter((section) => section.id === 3),
+          licenseSection: lowerSection.filter((section) => section.id === 4),
+          nonGMOSection: lowerSection.filter((section) => section.id === 8),
+          brandSection: lowerSection.filter((section) => section.id === 9),
+          masalaImageSection: lowerSection.filter((section) => section.id === 11),
+        };
 
-      // Lower Section
-      .addCase(fetchLowerSection.pending, (state) => {
-        state.loader = true;
+        state.blogs = blogs;
+        state.videos = videos;
+        state.statistics = statistics;
+        state.testimonials = testimonials;
+        state.hasFetched = true;
       })
-      .addCase(fetchLowerSection.fulfilled, (state, action) => {
+      .addCase(initializeAppData.rejected, (state, action) => {
         state.loader = false;
-        if (action.payload.status === true) {
-          const data = getResponseData(action.payload, "data");
-          state.lowerSection = {
-            awardsSection: data.filter((section) => section.id === 1),
-            availableSection: data.filter((section) => section.id === 2),
-            brandSection: data.filter((section) => section.id === 3),
-          };
-        }
-      })
-      .addCase(fetchLowerSection.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
-
-      // Videos
-      .addCase(fetchVideos.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchVideos.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          state.videos = getResponseData(action.payload, "data");
-        }
-      })
-      .addCase(fetchVideos.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
-      })
-
-      // Statistics
-      .addCase(fetchStatistics.pending, (state) => {
-        state.loader = true;
-      })
-      .addCase(fetchStatistics.fulfilled, (state, action) => {
-        state.loader = false;
-        if (action.payload.status === true) {
-          state.statistics = getResponseData(action.payload, "data");
-        }
-      })
-      .addCase(fetchStatistics.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
 
 export default bannerSlice.reducer;
+

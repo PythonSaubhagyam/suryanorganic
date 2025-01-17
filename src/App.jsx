@@ -11,10 +11,10 @@ import { HelmetProvider } from "react-helmet-async";
 export default function App() {
   moment.tz.setDefault("Asia/Kolkata");
 
-  useEffect(() => {
+  /*useEffect(() => {
     // eslint-disable-next-line
     const response = client.post("/visit-counter/");
-  }, []);
+  }, []);*/
 
   return (
     <ChakraProvider theme={theme}>

@@ -10,6 +10,7 @@ import CarouselWithLinks from "../components/CarouselWithLinks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
+import MetaTags from "../context/MetaTagsContext";
 import {
   Container,
   Flex,
@@ -42,6 +43,7 @@ import LoginModal from "../components/LoginModal";
 import checkLogin from "../utils/checkLogin";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
+import MetaHome from "../components/MetaHome";
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
@@ -74,7 +76,7 @@ export default function Home() {
     statistics,
     hasFetched,
   } = useSelector((state) => state.banners);
-  
+
   // Destructure upperSection for easier access
   const {
     giftHamperSection,
@@ -88,18 +90,17 @@ export default function Home() {
     inspireSection,
     missionSection,
   } = upperSection;
-  
+
   // Destructure lowerSection for easier access
-  const { 
-    awardsSection, 
-    availableSection, 
-    brandSection, 
-    nonGMOSection, 
-    servicesSection, 
-    licenseSection, 
-    masalaImageSection 
+  const {
+    awardsSection,
+    availableSection,
+    brandSection,
+    nonGMOSection,
+    servicesSection,
+    licenseSection,
+    masalaImageSection
   } = lowerSection;
-  console.log(middleBanners, "sss");
 
   // Destructure productSections for easier access
   const {
@@ -115,7 +116,7 @@ export default function Home() {
   useEffect(() => {
     const init = async () => {
       await CheckOrSetUDID();
-     
+
     };
 
     init();
@@ -124,33 +125,18 @@ export default function Home() {
       setIsLoginModalOpen(true);
     }
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (!hasFetched) {
       dispatch(initializeAppData());
     }
   }, [dispatch, hasFetched]);
 
-
-
+  const pageUrl = "/"
 
   return (
     <>
-     <Helmet>
-        <title>Suryan Organic - Home</title> {/* Set default title */}
-        <meta
-          name="description"
-          content="Suryan Organic is founded by a family of farmers who are engaged in Bharat's traditional
-         & fully natural farming practices for at least the last 11 generations."
-        />
-        {/* You can add other meta tags for SEO */}
-      </Helmet> 
-      {/* {loading === true ? (
-        <Center h="100vh" w="100vw" backgroundColor={"bg.500"}>
-          <Loader site={true} />
-        </Center>
-      ) : (
-        <> */}
+      <MetaHome pageUrl={pageUrl} />
       <Navbar />
       <Container maxW={"container.xl"} px={0}>
         {/* {loading === true ? (

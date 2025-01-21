@@ -75,12 +75,7 @@ export default function Shop() {
   const dispatch = useDispatch();
 
   // Select filters from Redux store
-  const {
-    tagsArray = [],
-    productFoamsArray = [],
-    brandArray = [],
-    loading: filterLoading,
-  } = useSelector((state) => state.filters || {});
+  const { tagsArray, productFoamsArray, brandArray } = useSelector((state) => state.shop);
   // const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
@@ -220,41 +215,41 @@ export default function Shop() {
     }
   }
 
-  async function getFilter() {
-    try {
-      const [tagsResponse, foamsResponse, brandResponse] = await Promise.all([
-        client.get("/web/product-tags/list/"),
-        client.get("/web/product-foams/list/"),
-        client.get("/web/brand/list/"),
-      ]);
-      let TagsArray = [];
-      tagsResponse?.data?.data?.map((data) =>
-        TagsArray.push({
-          label: CapitalizeLetter(data.name),
-          value: data.id,
-        })
-      );
-      setTagsArray(TagsArray);
-      let ProductFoamsArray = [];
-      foamsResponse?.data?.data?.map((data) =>
-        ProductFoamsArray.push({
-          label: CapitalizeLetter(data.name),
-          value: data.id,
-        })
-      );
-      setProductFoamsArray(ProductFoamsArray);
-      let BrandArray = [];
-      brandResponse?.data?.data?.map((data) =>
-        BrandArray.push({
-          label: CapitalizeLetter(data.name),
-          value: data.id,
-        })
-      );
-      setBrandArray(BrandArray);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
+  // async function getFilter() {
+  //   try {
+  //     const [tagsResponse, foamsResponse, brandResponse] = await Promise.all([
+  //       client.get("/web/product-tags/list/"),
+  //       client.get("/web/product-foams/list/"),
+  //       client.get("/web/brand/list/"),
+  //     ]);
+  //     let TagsArray = [];
+  //     tagsResponse?.data?.data?.map((data) =>
+  //       TagsArray.push({
+  //         label: CapitalizeLetter(data.name),
+  //         value: data.id,
+  //       })
+  //     );
+  //     setTagsArray(TagsArray);
+  //     let ProductFoamsArray = [];
+  //     foamsResponse?.data?.data?.map((data) =>
+  //       ProductFoamsArray.push({
+  //         label: CapitalizeLetter(data.name),
+  //         value: data.id,
+  //       })
+  //     );
+  //     setProductFoamsArray(ProductFoamsArray);
+  //     let BrandArray = [];
+  //     brandResponse?.data?.data?.map((data) =>
+  //       BrandArray.push({
+  //         label: CapitalizeLetter(data.name),
+  //         value: data.id,
+  //       })
+  //     );
+  //     setBrandArray(BrandArray);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // }
 
   const handleSoryKeyChange = (e) => {
     setSortKey(e);

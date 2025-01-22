@@ -20,9 +20,9 @@ const MetaHome = ({ pageUrl }) => {
         getMeta();
     }, [getMeta]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <Helmet>

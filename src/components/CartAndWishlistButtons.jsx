@@ -60,7 +60,7 @@ export default function CartAndWishlistButtons() {
   }
 
   return (
-    <ButtonGroup gap={{ base: 1, md: 2 }}>
+    <ButtonGroup>
       <Flex align={"center"} as={ReactRouterLink} to="/cart">
         <BsFillCartFill color={"#436131"} />
         <Badge

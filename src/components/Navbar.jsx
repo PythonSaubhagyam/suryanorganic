@@ -75,7 +75,7 @@ const Links = [
     location: "/consult-our-vaidya",
   },
   {
-    name: "SOSE Elite",
+    name: "Elite Membership",
     location: "/subscription-plans",
   },
   {
@@ -345,7 +345,7 @@ export default function Navbar() {
   const [all, setAll] = useState(false);
   const dispatch = useDispatch();
 
-  const { categories, mergedCategories,hasFetched } = useSelector(
+  const { categories, mergedCategories, hasFetched } = useSelector(
     (state) => state.category
   );
 
@@ -394,6 +394,7 @@ export default function Navbar() {
   ].join(" ");
 
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isLp] = useMediaQuery("(max-width: 1366px)");
 
   // useEffect(() => {
   //   const init = async () => {
@@ -1051,7 +1052,8 @@ export default function Navbar() {
                 as={"nav"}
                 gap={3}
                 display={{ base: "flex", lg: "flex" }}
-                fontSize={{ lg: 11, xl: 14, md: 9 }}
+                fontSize={ isLp? { lg: 11, xl: 13, md: 9 } : { lg: 11, xl: 14, md: 9 }}
+                // fontSize={{ lg: 11, xl: 13, md: 9 }}
                 alignItems={"center"}
               >
                 {Links.map((link) => (
@@ -1474,13 +1476,14 @@ export default function Navbar() {
             </GridItem>
           </Grid>
         </Container>
-      </Box>
+      </Box >
       {!checkLogin().isLoggedIn && (
         <LoginModal
           isOpen={isLoginModalOpen}
           onClose={() => setIsLoginModalOpen(false)}
         />
-      )}
+      )
+      }
     </>
   );
 }

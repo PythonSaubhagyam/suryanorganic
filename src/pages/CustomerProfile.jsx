@@ -56,10 +56,12 @@ export default function CustomerProfile() {
   const toast = useToast();
   const loginInfo = checkLogin();
   let is_sose_elite_user = localStorage.getItem("is_sose_elite_user");
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  // const [hashValue, setHashValue] = useState(0);
   useEffect(() => {
-    // setHashValue(window.location.hash === "#orders" ? 2 : 0);
+    if (location.hash === "#orders") {
+      setActiveTabIndex(2); // Index of the "My Orders" tab
+    }
 
     getDetails();
     getOrderData();
@@ -264,7 +266,7 @@ export default function CustomerProfile() {
      <MetaTags pageUrl={pageUrl} />
       <Navbar />
       <Container maxW={"container.lg"} py={12}>
-        <Tabs isLazy>
+        <Tabs isLazy index={activeTabIndex} onChange={(index) => setActiveTabIndex(index)}>
           <TabList mb="1em">
             <Tab fontSize={{ base: "sm", md: "md" }} me={4}>
               Details

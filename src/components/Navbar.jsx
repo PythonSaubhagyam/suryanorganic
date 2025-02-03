@@ -126,159 +126,7 @@ const Links = [
   //   location: "/shop?gift=true",
   // },
 ];
-// const mainLinks = [
-//   {
-//     name: "GIR Gau Products",
-//     location: "/shop?category=278",
-//   },
-//   {
-//     name: "Health Care",
-//     location: "/shop?category=281",
-//   },
-//   {
-//     name: "Grocery",
-//     location: "/shop?category=281",
-//   },
-//   {
-//     name: "Super Food",
-//     location: "/shop?category=601",
-//   },
-//   {
-//     name: "World Foods",
-//     location: "/",
-//   },
-//   {
-//     name: "Healthy Breakfast",
-//     location: "/",
-//   },
-//   {
-//     name: "Healthy Snacks",
-//     location: "/shop?category=317",
-//   },
-//   {
-//     name: "Sweetner",
-//     location: "/",
-//   },
-//   {
-//     name: "Chocolate & Bars",
-//     location: "/",
-//   },
-//   {
-//     name: "Tea & Coffee",
-//     location: "/",
-//   },
-//   {
-//     name: "Beverages",
-//     location: "/",
-//   },
-//   {
-//     name: "Beauty Care",
-//     location: "/shop?category=491",
-//   },
-//   {
-//     name: "Personal Care",
-//     location: "/shop?category=344",
-//   },
-//   // {
-//   //   name: "Home Care",
-//   //   location: "/home-care",
-//   // },
-// ];
-const mainLinks = [
-  {
-    name: "Ethically Grown Mango",
-    categoryId: 253,
-  },
-  {
-    name: "Diwali Festival",
-    categoryId: 990,
-  },
-  {
-    name: "Uttarayan Festival",
-    categoryId: 1011,
-  },
-  {
-    name: "Gifting",
-    categoryId: 288,
-  },
-  {
-    name: "Sugar Free - Healthy Sweets",
-    categoryId: 791,
-  },
-  {
-    name: "GIR Gau Products",
-    categoryId: 278,
-  },
-  {
-    name: "Health Care",
-    categoryId: 281,
-  },
-  {
-    name: "Personal Care",
-    categoryId: 344,
-  },
-  {
-    name: "Nutrition",
-    categoryId: 788,
-  },
 
-  {
-    name: "Grocery",
-    categoryId: 291,
-  },
-  {
-    name: "Healthy Breakfast",
-    categoryId: 775,
-  },
-  {
-    name: "Healthy Snacks",
-    categoryId: 317,
-  },
-  {
-    name: "Healthy Powder",
-    categoryId: 716,
-  },
-  {
-    name: "Chocolate & Bars",
-    categoryId: 773,
-  },
-  {
-    name: "Tea & Coffee",
-    categoryId: 769,
-  },
-  // {
-  //   name: "Beverages",
-  //   categoryId: 772,
-  // },
-  {
-    name: "Seasonal Foods",
-    categoryId: 290,
-  },
-  {
-    name: "World Foods",
-    categoryId: 771,
-  },
-  {
-    name: "Natural Utensils",
-    categoryId: 354,
-  },
-  {
-    name: "Home Care",
-    categoryId: 347,
-  },
-
-  // {
-  //   name: "Super Food",
-  //   categoryId: 601,
-  // },
-
-  // {
-  //   name: "Sweetener",
-  //   categoryId: 774,
-  // },
-
-  ,
-];
 
 export default function Navbar() {
   let { search } = useLocation();
@@ -422,16 +270,6 @@ export default function Navbar() {
       return result;
     }, []);
 
-  // const getCategories = async () => {
-  //   const response = await client.get("/categories/", {
-  //     params: { list: true },
-  //   });
-
-  //   if (response.data.status === true) {
-  //     setCategories(response.data.categories);
-  //     setTopCategory(mergeArraysById(mainLinks, response.data.categories));
-  //   }
-  // };
 
   useEffect(() => {
     if (didMount.current === true) {
@@ -1051,9 +889,8 @@ export default function Navbar() {
               <Flex
                 as={"nav"}
                 gap={3}
-                display={{ base: "flex", lg: "flex" }}
-                fontSize={ isLp? { lg: 11, xl: 13, md: 9 } : { lg: 11, xl: 14, md: 9 }}
-                // fontSize={{ lg: 11, xl: 13, md: 9 }}
+                //display={{ base: "flex", lg: "flex" }}
+                fontSize={{ lg: 11, xl: 13, md: 9 }}
                 alignItems={"center"}
               >
                 {Links.map((link) => (
@@ -1086,7 +923,7 @@ export default function Navbar() {
                 as={"nav"}
                 gap={3}
                 display={{ base: "flex", lg: "flex" }}
-                fontSize={{ xl: 14, lg: 14 }}
+                fontSize={{ xl: 16, lg: 14 }}
                 alignItems={"center"}
               >
                 <CartAndWishlistButtons />

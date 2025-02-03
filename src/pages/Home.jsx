@@ -77,6 +77,11 @@ export default function Home() {
     hasFetched,
   } = useSelector((state) => state.banners);
 
+  const statisticsSectionReverse = [
+    statistics[statistics.length - 1],
+    ...statistics.slice(0, statistics.length - 1),
+  ];
+
   // Destructure upperSection for easier access
   const {
     giftHamperSection,
@@ -781,7 +786,7 @@ export default function Home() {
         </Grid>
       </Container>
       <Testimonials />
-      {statistics?.length > 0 && (
+      {statisticsSectionReverse?.length > 0 && (
         <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
           <SimpleGrid
             columns={[2, 3, null, 6]}
@@ -793,8 +798,8 @@ export default function Home() {
             spacingX={{ base: "10vw", md: "30px" }}
             spacingY="40px"
           >
-            {statistics?.length > 0 &&
-              statistics?.map((data) => (
+            {statisticsSectionReverse?.length > 0 &&
+              statisticsSectionReverse?.map((data) => (
                 <Stat>
                   <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
                     {data?.value}

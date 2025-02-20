@@ -142,7 +142,7 @@ export default function ShopProductCard({
         >
           <LinkOverlay
             // href={`/products/${productDetails.id}`}
-            onClick={() => navigate(`/products/${productDetails.id}`)}
+            onClick={() => navigate(`/products/${productDetails.id}/${productDetails.name.replace(/\s+/g, "-")}`)}
             fontSize="xs"
             fontWeight={600}
             color={"brand.500"}

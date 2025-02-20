@@ -31,6 +31,7 @@ import {
   FormControl,
   FormLabel,
   Textarea,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
@@ -110,6 +111,8 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const toast = useToast();
+  const [isMobile] = useMediaQuery("(max-width: 480px)");
+
   // const maxWidth = useBreakpointValue({ base: "100%", lg: "container.xl" });
   // const boxWidth = useBreakpointValue({ base: "100%", lg: "75%" });
   const loginInfo = checkLogin();
@@ -133,6 +136,13 @@ export default function ProductDetails() {
   }, [productId]);
 
   async function getProductsList(productId) {
+    const checkOrSetUDIDInfo = await CheckOrSetUDID();
+    let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
+    if (loginInfo.isLoggedIn === true) {
+      headers = {
+        Authorization: `token ${loginInfo.token}`,
+      };
+    }
     const promise1 = await client.get(
       `/web/single/product/related/${productId}/`,
       {
@@ -730,7 +740,9 @@ export default function ProductDetails() {
                     mx="auto"
                     mt={4}
                     colorScheme="brand"
-                    onClick={() => navigate(`/products/${productId}/reviews`)}
+                    // onClick={() => navigate(`/products/${productId}/reviews`)}
+                    onClick={() => navigate(`/products/${productId}/reviews/${productData?.name.replace(/\s+/g, "-")}`)}
+
                   >
                     View all reviews
                   </Button>
@@ -739,13 +751,15 @@ export default function ProductDetails() {
             </Container>
           )}
 
+          
+
           {relatedProducts?.length > 0 && <ProductListSection
             title="Related Products"
             products={relatedProducts}
             loading={loading}
             justify="center"
             fontSize={{ base: "sm", lg: "md" }}
-            type={"carousal"}
+            type={isMobile && "carousal"}
           />}
 
          {otherProducts?.length > 0 && <ProductListSection
@@ -754,7 +768,7 @@ export default function ProductDetails() {
             justify="center"
             loading={loading}
             fontSize={{ base: "sm", lg: "md" }}
-            type={"carousal"}
+            type={isMobile && "carousal"}
           />}
 
          {recentlyViewedProducts?.length > 0 && <ProductListSection
@@ -763,7 +777,7 @@ export default function ProductDetails() {
             justify="center"
             loading={loading}
             fontSize={{ base: "sm", lg: "md" }}
-            type={"carousal"}
+            type={isMobile && "carousal"}
           />}
 
           <Modal

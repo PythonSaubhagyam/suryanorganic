@@ -170,7 +170,7 @@ export default function Carousel({
                           `/shop?page=1&category=${bannerData?.category_id}`
                         );
                       } else {
-                        navigate(`/products/${bannerData?.product_id}`);
+                        navigate(`/products/${bannerData?.product_id}/${bannerData.products?.name.replace(/\s+/g, "-")}`);
                       }
                     }
                   }}

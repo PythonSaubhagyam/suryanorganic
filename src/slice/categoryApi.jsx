@@ -7,6 +7,10 @@ const mainLinks = [
     categoryId: 253,
   },
   {
+    name: "Holi Speacial",
+    categoryId: 282,
+  },
+  {
     name: "Diwali Festival",
     categoryId: 990,
   },

@@ -11,6 +11,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import ScrollToTop from "../components/ScrollToTop";
 import ProductListSection from "../components/ProductListSection";
 import MetaTags from "../context/MetaTagsContext";
+import CountUp from "react-countup";
+import ScrollTrigger from "react-scroll-trigger";
 import {
   Container,
   Flex,
@@ -44,6 +46,7 @@ import checkLogin from "../utils/checkLogin";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import MetaHome from "../components/MetaHome";
+import BlogSliderHome from "../components/BlogSliderHome";
 
 export default function Home() {
   const [isFullScreen] = useMediaQuery("(min-width: 768px)");
@@ -56,6 +59,7 @@ export default function Home() {
   const [homeData, setHome] = useState({});
   const [sections, setSections] = useState([]);
   const loginInfo = checkLogin();
+  const [countUp, setCountUp] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(
     sessionStorage.getItem("hasShownPopup")
@@ -77,10 +81,6 @@ export default function Home() {
     hasFetched,
   } = useSelector((state) => state.banners);
 
-  const statisticsSectionReverse = [
-    statistics[statistics.length - 1],
-    ...statistics.slice(0, statistics.length - 1),
-  ];
 
   // Destructure upperSection for easier access
   const {
@@ -181,7 +181,8 @@ export default function Home() {
                     key={product.id}
                     onClick={() => {
                       if (product.id) {
-                        navigate(`/products/${product.product}`);
+                        navigate(`/products/${product.product}/${product.product_name.replace(/\s+/g, "-")}`);
+
                       }
                     }}
                     cursor={product.id ? "pointer" : "default"}
@@ -250,7 +251,8 @@ export default function Home() {
                     key={product.id}
                     onClick={() => {
                       if (product.id) {
-                        navigate(`/products/${product.product}`);
+                        navigate(`/products/${product.product}/${product.product_name.replace(/\s+/g, "-")}`);
+
                       }
                     }}
                     cursor={product.product ? "pointer" : "default"}
@@ -507,7 +509,7 @@ export default function Home() {
           title={newArrivalList?.length > 0 && newArrivalList[0]?.label}
           loading={loader}
           products={newArrivalList?.length > 0 && newArrivalList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
 
@@ -516,7 +518,7 @@ export default function Home() {
           title={mustTryGirList?.length > 0 && mustTryGirList[0]?.label}
           loading={loader}
           products={mustTryGirList?.length > 0 && mustTryGirList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
 
@@ -527,7 +529,7 @@ export default function Home() {
           products={
             mustTryNaturalList?.length > 0 && mustTryNaturalList[0]?.images
           }
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
       {tryOurList?.length > 0 && (
@@ -535,7 +537,7 @@ export default function Home() {
           title={tryOurList?.length > 0 && tryOurList[0]?.label}
           loading={loader}
           products={tryOurList?.length > 0 && tryOurList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
       {instantMixList?.length > 0 && (
@@ -543,7 +545,7 @@ export default function Home() {
           title={instantMixList?.length > 0 && instantMixList[0]?.label}
           loading={loader}
           products={instantMixList?.length > 0 && instantMixList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
       {bestOfList?.length > 0 && (
@@ -551,7 +553,7 @@ export default function Home() {
           title={bestOfList?.length > 0 && bestOfList[0]?.label}
           loading={loader}
           products={bestOfList?.length > 0 && bestOfList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
 
@@ -560,7 +562,7 @@ export default function Home() {
           title={allTimeList?.length > 0 && allTimeList[0]?.label}
           loading={loader}
           products={allTimeList?.length > 0 && allTimeList[0]?.images}
-          type={isMobile && "carousal"}
+          type={"carousal"}
         />
       )}
       {/* <ProductListSection
@@ -611,6 +613,7 @@ export default function Home() {
         </>
       )}
 
+      {/* Videos Section */}
       <Container className="container" maxW="container.xl" centerContent>
         <Box
           w="100%"
@@ -704,89 +707,16 @@ export default function Home() {
             ))}
         </Grid>
       </Container>
-      <Container maxW={"container.xl"}>
-        <Box
-          w="100%"
-          backgroundImage={
-            "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-          }
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"}
-        >
-          <Heading
-            color="brand.500"
-            fontSize={{ md: 33, base: 24 }}
-            fontWeight={"500"}
-            mx="auto"
-            align={"center"}
-            mt={3}
-            pb={"10px"}
-          >
-            BLOGS
-          </Heading>
-        </Box>
-        <Grid
-          templateColumns={{
-            base: "repeat(1,1fr)",
-            md: "repeat(2,1fr)",
-            lg: "repeat(4,1fr)",
-          }}
-          px={2}
-          py={3}
-          spacing="40px"
-        >
-          {blogs?.slice(0, 8).map((blog) => (
-            <GridItem key={blog.id} m={4}>
-              <Card>
-                <LinkBox h={400}>
-                  <Image
-                    src={blog.banner}
-                    w="100%"
-                    h="300px"
-                    loading="lazy"
-                    objectFit={"cover"}
-                    borderRadius={5}
-                    style={{
-                      opacity: 1,
-                      transition: "opacity 0.7s", // Note the corrected syntax here
-                    }}
-                  />
-                  <LinkOverlay
-                    _hover={{ color: "text.500" }}
-                    // href={`/blogs/${blog.id}/`}
-                    onClick={() => navigate(`/blogs/${blog.id}/`)}
-                  >
-                    <Heading size="sm" fontWeight={500} m={2}>
-                      {blog.title}
-                    </Heading>
-                  </LinkOverlay>
-                </LinkBox>
-                <Flex m={2} justifyContent={"space-between"}>
-                  <Text fontSize={"sm"} color="gray.500">
-                    {new Intl.DateTimeFormat("en-CA", {
-                      dateStyle: "long",
-                      timeZone: "Asia/Kolkata",
-                    }).format(new Date(blog.published_at))}
-                  </Text>
-                  <Text
-                    fontSize={"sm"}
-                    fontWeight={600}
-                    color={"brand.500"}
-                    onClick={() => navigate(`/blogs/${blog.id}/`)}
-                    cursor={"pointer"}
-                  >
-                    Read more
-                    <ChevronRightIcon />
-                  </Text>
-                </Flex>
-              </Card>
-            </GridItem>
-          ))}
-        </Grid>
-      </Container>
+
+
+      {/* Blog Section */}
+      <BlogSliderHome blogs={blogs} />
+
+      {/* Testimonials Section */}
       <Testimonials />
-      {statisticsSectionReverse?.length > 0 && (
+
+      {/* Statistics Section */}
+      {statistics?.length > 0 && (
         <Container backgroundColor={"bg.500"} maxW={"container.xl"} py={2}>
           <SimpleGrid
             columns={[2, 3, null, 6]}
@@ -798,18 +728,33 @@ export default function Home() {
             spacingX={{ base: "10vw", md: "30px" }}
             spacingY="40px"
           >
-            {statisticsSectionReverse?.length > 0 &&
-              statisticsSectionReverse?.map((data) => (
-                <Stat>
+            {statistics.map((data, index) => {
+              const numericValue = data?.value
+                ? Number(data.value.replace(/[^\d]/g, ""))
+                : 0; // Fallback to 0 if value is undefined
+
+              return (
+                <Stat key={index}>
                   <StatNumber fontSize={{ base: "3xl", md: "3xl" }}>
-                    {data?.value}
+                    <ScrollTrigger
+                      onEnter={() => !countUp && setCountUp(true)}
+                    // Ensure it only sets once
+                    >
+                      {countUp ? (
+                        <CountUp start={0} end={numericValue} duration={3} delay={0} />
+                      ) : null}
+                      {data?.name === "Positive Feedback" ? " %+" : " +"}
+                    </ScrollTrigger>
                   </StatNumber>
-                  <StatHelpText color="gray.600">{data?.name}</StatHelpText>
+                  <StatHelpText color="gray.600">{data?.name || "N/A"}</StatHelpText>
                 </Stat>
-              ))}
+              );
+            })}
           </SimpleGrid>
         </Container>
       )}
+
+      {/* Brand Section */}
       {brandSection?.length > 0 &&
         brandSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }} overflowX={"hidden"} my={7}>
@@ -853,12 +798,13 @@ export default function Home() {
                     <Image
                       as={LazyLoadImage}
                       key={index}
+                      height={isMobile ? "130px" : "100%"}
                       src={brand.image}
-                      boxSize={{
-                        base: "130px",
-                        md: "150px",
-                        lg: "180px",
-                      }}
+                      // boxSize={{
+                      //   base: "130px",
+                      //   md: "150px",
+                      //   lg: "180px",
+                      // }}
                       alt={brand.category_name}
                       style={{
                         opacity: 1,
@@ -870,6 +816,8 @@ export default function Home() {
             </Grid>
           </Container>
         )}
+
+      {/* Award Section */}
       {awardsSection?.length > 0 &&
         awardsSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
@@ -931,6 +879,8 @@ export default function Home() {
             </Flex>
           </Container>
         )}
+
+      {/* License Section */}
       {licenseSection?.length > 0 &&
         licenseSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
@@ -978,6 +928,8 @@ export default function Home() {
             />
           </Container>
         )}
+
+      {/* NonGmo Section */}
       {nonGMOSection?.length > 0 &&
         nonGMOSection[0]?.is_visible_on_website === true && (
           <Container maxW={"container.xl"} centerContent pt={10} pb={8}>
@@ -988,6 +940,7 @@ export default function Home() {
           </Container>
         )}
 
+      {/* Service Section */}
       {servicesSection?.length > 0 &&
         servicesSection[0]?.is_visible_on_website === true && (
           <Container maxW={{ base: "100vw", md: "container.xl" }}>
@@ -1030,9 +983,10 @@ export default function Home() {
           </Container>
         )}
 
+      {/* Available Section */}
       {availableSection?.length > 0 &&
         availableSection[0]?.is_visible_on_website === true && (
-          <Container maxW={"container.xl"} mb={5} px={0} centerContent>
+          <Container maxW={"container.xl"} mb={5} px={4} centerContent>
             <Box
               w="100%"
               backgroundImage={
@@ -1069,6 +1023,7 @@ export default function Home() {
             />
           </Container>
         )}
+        
       {!checkLogin().isLoggedIn && (
         <LoginModal
           isOpen={isLoginModalOpen}

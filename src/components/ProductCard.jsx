@@ -6,6 +6,7 @@ import {
   Heading,
   Image,
   Box,
+  GridItem,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,75 +14,72 @@ export default function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/products/${product.id}`);
+    navigate(`/products/${product.id}/${product?.name.replace(/\s+/g, "-")}`);
   };
   return (
-    <Card
-      //w={{ base: "80vw", sm: "3xs", lg: "18vw" }}
-      border="1px"
-      borderColor="brand.100"
-      borderRadius={"lg"}
-      onClick={() => {
-        // window.location.href = `/products/${product.id}`;
-        // navigate(),
-        //   window.scrollTo({
-        //     top: 0,
-        //     left: 0,
-        //     behavior: "smooth",
-
-        //   });
-        handleClick();
-      }}
-      cursor={"pointer"}
-    >
-      <CardBody backgroundColor={"white"} borderRadius="lg">
-        <Image
-          src={product.home_image ? product.home_image : product.image1}
-          alt={product.name}
-          borderRadius="lg"
-          boxSize="200px"
-          objectFit={"contain"}
-          mx="auto"
-        />
-      </CardBody>
-      <CardFooter
-        align={"center"}
-        py={3}
-        flexDirection="column"
-        backgroundColor={"bg.500"}
-        borderBottomRadius="lg"
+   
+      <Card
+        // w={{ base: "80vw", sm: "3xs", lg: "2xs" }}
+        border="1px"
+        borderColor="brand.100"
+        borderRadius={"lg"}
+        onClick={() => {
+          navigate(`/products/${product?.id}/${product?.name.replace(/\s+/g, "-")}`);
+        }}
+        cursor={"pointer"}
       >
-        <Box
-          h="80px"
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
+        <CardBody backgroundColor={"white"} borderRadius="lg">
+          <Image
+            src={
+              product?.home_image
+                ? product?.home_image
+                : product?.image1
+            }
+            alt={product?.name}
+            borderRadius="lg"
+            boxSize="200px"
+            objectFit={"contain"}
+            mx="auto"
+          />
+        </CardBody>
+        <CardFooter
+          align={"center"}
+          py={3}
+          flexDirection="column"
+          backgroundColor={"bg.500"}
+          borderBottomRadius="lg"
         >
-          <Heading
-            size="sm"
-            mb={3}
-            noOfLines={3}
-            fontWeight="500"
-            title={product.name}
+          <Box
+            h="80px"
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
           >
-            {product.name}
-          </Heading>
-        </Box>
-        <Button
-          // as={Link}
-          // to={`/products/${product.id}`}
-          onClick={() => handleClick()}
-          fontSize="sm"
-          w={{ base: "100%", lg: "80%" }}
-          mx="auto"
-          backgroundColor={"brand.500"}
-          borderColor={"brand.100"}
-          color="white"
-          _hover={{ backgroundColor: "brand.900" }}
-        >
-          View Product
-        </Button>
-      </CardFooter>
-    </Card>
+            <Heading
+              size="sm"
+              mb={3}
+              noOfLines={3}
+              fontWeight="500"
+              title={name}
+            >
+              {product?.name}
+            </Heading>
+          </Box>
+          <Button
+            as={Link}
+            to={`/products/${product?.id}/${product?.name.replace(/\s+/g, "-")}`}
+            fontSize="sm"
+            w={{ base: "100%", lg: "80%" }}
+            mx="auto"
+            backgroundColor={"brand.500"}
+            borderColor={"brand.100"}
+            color="white"
+            _hover={{ backgroundColor: "brand.900" }}
+          >
+            View Product
+          </Button>
+        </CardFooter>
+      </Card>
+
   );
 }

@@ -743,7 +743,7 @@ export default function Home() {
                       {countUp ? (
                         <CountUp start={0} end={numericValue} duration={3} delay={0} />
                       ) : null}
-                      {data?.name === "Positive Feedback" ? " %+" : " +"}
+                      {data?.name === "Positive Feedback" ? "%+" : data?.name === "Generation of Farmers" ? "th" : "+"}
                     </ScrollTrigger>
                   </StatNumber>
                   <StatHelpText color="gray.600">{data?.name || "N/A"}</StatHelpText>

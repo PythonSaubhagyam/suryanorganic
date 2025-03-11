@@ -228,13 +228,6 @@ export default function Navbar() {
   }, [navigate]);
   const [isFlexVisible, setIsFlexVisible] = useState(true);
   const flexRef = useRef(null);
-  // const setCategoryFilter = async (categoryId) => {
-  //   if (JSON.parse(categoryId !== null)) {
-  //     setSearchParams({ category: categoryId });
-  //   } else {
-  //     setSearchParams({});
-  //   }
-  // };
 
   let name = [
     localStorage.getItem("first_name"),
@@ -244,15 +237,7 @@ export default function Navbar() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const [isLp] = useMediaQuery("(max-width: 1366px)");
 
-  // useEffect(() => {
-  //   const init = async () => {
-  //     await CheckOrSetUDID();
-  //      };
 
-  //   init();
-  //   getCategories();
-  //   //getMegaCategories();
-  // }, []);
 
   const getMegaCategories = async () => {
     const response = await client.get("/categories/?mega_menu=mega_menu", {
@@ -1200,7 +1185,7 @@ export default function Navbar() {
             >
               Gifting
             </Link> */}
-              {mergedCategories?.map((data, index) => (
+              {categories?.map((data, index) => (
                 <>
                   <Menu
                     isOpen={openCategory === index}

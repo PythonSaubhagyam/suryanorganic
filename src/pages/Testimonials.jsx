@@ -26,7 +26,7 @@ export default function Testimonials() {
     const pageUrl = "/testimonials";
     return (
         <>
-         <MetaTags pageUrl={pageUrl} />
+            <MetaTags pageUrl={pageUrl} />
             <Navbar />
             <Container maxW="container.xl">
                 <BreadCrumbCom
@@ -35,24 +35,24 @@ export default function Testimonials() {
                 />
             </Container>
             <Container maxW={"container.xl"} py={8} px={0} position="relative">
-        <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/testimonial.webp" />
+                <Image src="https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/testimonial.webp" />
 
-        <Text
-          pb={2}
-          color={"brand.100"}
-          textAlign={"center"}
-          fontSize={{ lg: "7xl", md: "4xl", base: "2xl" }}
-          fontWeight="600"
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          zIndex="1"
-          // Optional: Add background to improve text readability
-        >
-          Testimonials
-        </Text>
-      </Container>
+                <Text
+                    pb={2}
+                    color={"brand.100"}
+                    textAlign={"center"}
+                    fontSize={{ lg: "7xl", md: "4xl", base: "2xl" }}
+                    fontWeight="600"
+                    position="absolute"
+                    top="50%"
+                    left="50%"
+                    transform="translate(-50%, -50%)"
+                    zIndex="1"
+                // Optional: Add background to improve text readability
+                >
+                    Testimonials
+                </Text>
+            </Container>
             <Container maxW="6xl">
                 <Heading
                     textAlign={"center"}
@@ -80,7 +80,13 @@ export default function Testimonials() {
                     processes which are consistent with the best traditions of
                     Gau Adharit Ayurveda.
                 </Text>
-                <Text pb={4} textAlign={"justify"}>
+                <Text pb={4} textAlign={"justify"} backgroundImage={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+                }
+                    backgroundSize="100%"
+                    backgroundPosition="50% 100%"
+                    backgroundRepeat={"no-repeat"}
+                    paddingBottom="10"  >
                     Our supplements have helped to bring lasting health to
                     thousands of people over the last few years. Given below are
                     brief notes from experiences shared by some of these people.
@@ -96,7 +102,13 @@ export default function Testimonials() {
                 >
                     Testimonials by Products
                 </Heading>
-                <Flex gap={10} wrap="wrap" justify={"center"} pb={10}>
+                <Flex gap={10} backgroundImage={
+                    "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+                }
+                    backgroundSize="100%"
+                    backgroundPosition="50% 100%"
+                    backgroundRepeat={"no-repeat"}
+                    pb={10} wrap="wrap" justify={"center"} paddingBottom="10">
                     <iframe
                         title="YouTube video player"
                         src="https://www.youtube-nocookie.com/embed/videoseries?list=PL5bibhgUYQNU2AwLsPlYzlHgKn7mA-BzF"
@@ -107,6 +119,135 @@ export default function Testimonials() {
                         allowfullscreen
                     ></iframe>
                 </Flex>
+
+
+
+                {/* Youtube Shorts */}
+                <Flex
+                    gap={10}
+                    wrap="wrap"
+                    justify="center"
+                    marginTop={10}
+                    backgroundImage={
+                        "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+                    }
+                    backgroundSize="100%"
+                    backgroundPosition="50% 100%"
+                    backgroundRepeat={"no-repeat"}
+                    pb={10}
+                    direction={{ base: "column", md: "row" }} // Stack on small screens, side by side on larger screens
+                >
+                    {/* Left: YouTube Shorts Video */}
+                    <iframe
+                        title="YouTube Shorts player"
+                        src="https://www.youtube-nocookie.com/embed/P4TqDced5nE"
+                        width="280px"
+                        height="500px"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                    ></iframe>
+
+                    {/* Right: Text Content */}
+                    <Text
+                        maxW="600px"
+                        fontSize="lg"
+                        fontWeight="medium"
+                    >
+                        After an accident, our customer visited Bansi Gir Gaushala and consulted with the Vaidya. He was recommended a few Ayurvedic products, and soon, he noticed a remarkable improvement in his bone recovery!
+                        <br /><br />
+                        Mother Nature has its own way of healing—experience the power of Ayurveda & Gauveda! 🌿🙏
+                    </Text>
+                </Flex>
+                <Flex
+                    gap={10}
+                    wrap="wrap"
+                    justify="center"
+                    marginTop={10}
+                    backgroundImage={
+                        "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+                    }
+                    backgroundSize="100%"
+                    backgroundPosition="50% 100%"
+                    backgroundRepeat={"no-repeat"}
+                    pb={10}
+                    direction={{ base: "column", md: "row" }} // Stack on small screens, side by side on larger screens
+                >
+
+                    {/* Left: Text Content */}
+                    <Text
+                        maxW="600px"
+                        fontSize="lg"
+                        fontWeight="medium"
+                    >
+                        Suffering from back pain and stomach discomfort, she sought help at Bansi Gir Gaushala. After a consultation with the Vaidya and using Ayurvedic remedies, she finally found relief!
+                        <br /><br />
+                        Mother Nature’s healing touch works wonders—experience the benefits of Ayurveda & Gauveda today. 🌱🙏
+                        <br /><br />
+                        👉 Tap & hear it directly from her!
+                        <br />
+                        📍 Visit our store for a FREE VAIDYA CONSULTATION.
+                    </Text>
+
+
+                    {/* Right: YouTube Shorts Video */}
+                    <iframe
+                        title="YouTube Shorts player"
+                        src="https://www.youtube.com/embed/RoXjJChLcdk"
+                        width="280px"
+                        height="500px"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                    ></iframe>
+                </Flex>
+                <Flex
+                    gap={10}
+                    wrap="wrap"
+                    justify="center"
+                    marginTop={10}
+                    backgroundImage={
+                        "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
+                    }
+                    backgroundSize="100%"
+                    backgroundPosition="50% 100%"
+                    backgroundRepeat={"no-repeat"}
+                    pb={10}
+                    direction={{ base: "column", md: "row" }} // Stack on small screens, side by side on larger screens
+                >
+                    {/* Left: YouTube Shorts Video */}
+                    <iframe
+                        title="YouTube Shorts player"
+                        src="https://www.youtube.com/embed/UQdCu3POIQs"
+                        width="280px"
+                        height="500px"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                    ></iframe>
+
+                    {/* Right: Text Content */}
+                    <Text
+                        maxW="600px"
+                        fontSize="lg"
+                        fontWeight="medium"
+                    >
+                        For centuries, Ayurveda has been the foundation of holistic healing, addressing not just symptoms but the root cause of illnesses. Struggling with constant weakness, fatigue, cold, cough, and diabetes, he had tried many treatments but found no lasting relief.
+                        <br /><br />
+                        That’s when he turned to Bansi Gir Gaushala, where the Vaidya guided him towards Ayurvedic and Gauveda remedies. With the power of time-tested herbs and natural healing practices, he regained his strength, improved his immunity, and felt truly rejuvenated.
+                        <br /><br />
+                        Ayurveda is more than just medicine—it’s a way of life that has been restoring health for generations! 🌱✨
+                        <br /><br />
+
+                        👈 Watch his journey to wellness!
+                        <br />
+                        📍 Visit us for a FREE VAIDYA CONSULTATION at our nearest store.
+                    </Text>
+                </Flex>
+
+
+
+
                 <Heading
                     fontWeight={"600"}
                     color="#436131"
@@ -842,7 +983,7 @@ export default function Testimonials() {
                     </AccordionItem>
                 </Accordion>
             </Container>
-            <ScrollToTop/>
+            <ScrollToTop />
             <Footer />
         </>
     );

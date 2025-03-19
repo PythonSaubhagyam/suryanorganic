@@ -54,6 +54,7 @@ import StarRating from "../components/StarRatings";
 import ScrollToTop from "../components/ScrollToTop";
 import LoginModal from "../components/LoginModal";
 import { Helmet } from "react-helmet";
+import RelatedOther from "../components/RelatedOther";
 
 function ButtonIncrement(props) {
   return (
@@ -101,9 +102,9 @@ export default function ProductDetails() {
   const [nobenefits, setNoBenefits] = useState("");
   const [noOfReviews, setNoOfReviews] = useState(null);
   const [reviews, setReviews] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const [otherProducts, setOtherProducts] = useState([]);
-  const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
+  // const [relatedProducts, setRelatedProducts] = useState([]);
+  // const [otherProducts, setOtherProducts] = useState([]);
+  // const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
   const [isWished, setWished] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [counter, setCounter] = useState(1);
@@ -116,14 +117,14 @@ export default function ProductDetails() {
   // const maxWidth = useBreakpointValue({ base: "100%", lg: "container.xl" });
   // const boxWidth = useBreakpointValue({ base: "100%", lg: "75%" });
   const loginInfo = checkLogin();
- 
+
   const MINIMUM_RATING_THRESHOLD = 0.0;
   const incrementCounter = () => setCounter(counter + 1);
   let decrementCounter = () => setCounter(counter - 1);
   if (counter <= 1) {
     decrementCounter = () => setCounter(1);
   }
- 
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { productId } = useParams();
 
@@ -131,56 +132,56 @@ export default function ProductDetails() {
     getProductDetails(); // eslint-disable-next-line
   }, [productId]);
 
-  useEffect(() => {
-    getProductsList(productId); // eslint-disable-next-line
-  }, [productId]);
+  // useEffect(() => {
+  //   getProductsList(productId); // eslint-disable-next-line
+  // }, [productId]);
 
-  async function getProductsList(productId) {
-    const checkOrSetUDIDInfo = await CheckOrSetUDID();
-    let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
-    if (loginInfo.isLoggedIn === true) {
-      headers = {
-        Authorization: `token ${loginInfo.token}`,
-      };
-    }
-    const promise1 = await client.get(
-      `/web/single/product/related/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
-    const promise2 = await client.get(
-      `/web/single/product/other/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
-    const promise3 = await client.get(
-      `/web/single/product/recently-viewed/${productId}/`,
-      {
-        headers: headers,
-      }
-    );
+  // async function getProductsList(productId) {
+  //   const checkOrSetUDIDInfo = await CheckOrSetUDID();
+  //   let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
+  //   if (loginInfo.isLoggedIn === true) {
+  //     headers = {
+  //       Authorization: `token ${loginInfo.token}`,
+  //     };
+  //   }
+  //   const promise1 = await client.get(
+  //     `/web/single/product/related/${productId}/`,
+  //     {
+  //       headers: headers,
+  //     }
+  //   );
+  //   const promise2 = await client.get(
+  //     `/web/single/product/other/${productId}/`,
+  //     {
+  //       headers: headers,
+  //     }
+  //   );
+  //   const promise3 = await client.get(
+  //     `/web/single/product/recently-viewed/${productId}/`,
+  //     {
+  //       headers: headers,
+  //     }
+  //   );
 
-    Promise.all([promise1, promise2, promise3])
-      .then(function (responses) {
-        if (responses[0].data.status === true) {
-          setRelatedProducts(responses[0].data?.data);
-        }
-        if (responses[1].data.status === true) {
-          setOtherProducts(responses[1].data?.data);
-        }
-        if (responses[2].data.status === true) {
-          setRecentlyViewedProducts(responses[2].data?.data);
-        }
+  //   Promise.all([promise1, promise2, promise3])
+  //     .then(function (responses) {
+  //       if (responses[0].data.status === true) {
+  //         setRelatedProducts(responses[0].data?.data);
+  //       }
+  //       if (responses[1].data.status === true) {
+  //         setOtherProducts(responses[1].data?.data);
+  //       }
+  //       if (responses[2].data.status === true) {
+  //         setRecentlyViewedProducts(responses[2].data?.data);
+  //       }
 
-        //setLoading(false);
-      })
-      .catch(function (error) {
-        //setLoading(false);
-        console.error("Error fetching data:", error);
-      });
-  }
+  //       //setLoading(false);
+  //     })
+  //     .catch(function (error) {
+  //       //setLoading(false);
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }
 
   async function getProductDetails() {
     const checkOrSetUDIDInfo = await CheckOrSetUDID();
@@ -285,7 +286,7 @@ export default function ProductDetails() {
       // window.alert(
       //   "Sorry! You are not allowed to review this product since you haven't login"
       // );
-       setIsLoginModalOpen(true)
+      setIsLoginModalOpen(true)
       //navigate("/login");
       toast({
         title: "Please login to write a review!",
@@ -311,14 +312,14 @@ export default function ProductDetails() {
   };
   return (
     <>
-     <Helmet>
+      <Helmet>
         <title>{productData?.metatitle || productData?.name}</title>
         <meta name="description" content={productData?.metadescription} />
         <meta name="keywords" content={productData?.metakeywords} />
         <meta property="og:title" content={productData?.name} />
         <meta property="og:description" content={productData?.metadescription} />
         <meta property="og:price" content={productData?.base_price} />
-        <meta property="og:Rating" content={productData?.average_rating?.average_rating}/>
+        <meta property="og:Rating" content={productData?.average_rating?.average_rating} />
         <meta property="og:Stock" content={"In Stock"} />
         <meta property="og:Delivery" content={"4-7 day delivery"} />
         <meta property="og:image" content={productData?.images[0]} />
@@ -342,7 +343,7 @@ export default function ProductDetails() {
                   .split(" ")
                   .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                   .join(" ")}`}
-                // thirdUrl={`/shop?category=${categories.categoryId || ''}`}
+              // thirdUrl={`/shop?category=${categories.categoryId || ''}`}
               />
             </Box>
           </Container>
@@ -372,7 +373,7 @@ export default function ProductDetails() {
                   gap={2}
                   align={{ base: "flex-start", md: "flex-start" }}
 
-                  //mt={{md:16}}
+                //mt={{md:16}}
                 >
                   <Heading
                     // mb={2}
@@ -652,15 +653,15 @@ export default function ProductDetails() {
                         _hover={
                           isWished
                             ? {
-                                color: "white",
-                                bg: "red.600",
-                                cursor: "pointer",
-                              }
+                              color: "white",
+                              bg: "red.600",
+                              cursor: "pointer",
+                            }
                             : {
-                                color: "white",
-                                bg: "brand.900",
-                                cursor: "pointer",
-                              }
+                              color: "white",
+                              bg: "brand.900",
+                              cursor: "pointer",
+                            }
                         }
                         onClick={() => handleWishlistChange(productData?.id)}
                       >
@@ -751,9 +752,9 @@ export default function ProductDetails() {
             </Container>
           )}
 
-          
 
-          {relatedProducts?.length > 0 && <ProductListSection
+
+          {/* {relatedProducts?.length > 0 && <ProductListSection
             title="Related Products"
             products={relatedProducts}
             loading={loading}
@@ -778,7 +779,10 @@ export default function ProductDetails() {
             loading={loading}
             fontSize={{ base: "sm", lg: "md" }}
             type={isMobile && "carousal"}
-          />}
+          />} */}
+
+          <RelatedOther />
+
 
           <Modal
             size={"xl"}
@@ -843,7 +847,7 @@ export default function ProductDetails() {
             />
           )}
           {/* </Flex> */}
-          
+
           <ScrollToTop />
         </>
       )}

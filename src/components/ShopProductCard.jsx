@@ -20,7 +20,10 @@ import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import AddToCart from "../utils/addToCart";
 import React from "react";
 import { Fragment } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import {
+  Navigate, useNavigate, Link as ReactRouterLink,
+  Link,
+} from "react-router-dom";
 
 const BestSellerImg = require("/best seller1.png");
 
@@ -62,6 +65,7 @@ export default function ShopProductCard({
             <React.Fragment key={index}>
               {tag === "Best Seller" && (
                 <Image
+                  zIndex={99}
                   src={BestSellerImg}
                   alt="Best Seller"
                   height={"4rem"}
@@ -95,35 +99,13 @@ export default function ShopProductCard({
             </React.Fragment>
           ))}
       </CardHeader>
-      <CardBody align="center" h={{ md: 300 }} py={1} flex={"none"}>
-        {/* <Flex position="relative">
-          <Flex position={"absolute"} >
-            {productDetails.product_tag_list.map((tag, index) => (
-              <Badge
-                key={index} // Add a unique key for each Badge
-                bgColor="brand.500"
-                color={"#fff"}
-                borderRadius={"8px"}
-                paddingX={"8px"}
-                py={1}
-                fontSize={11}
-                textTransform={"none"}
-                //position="absolute"
-                opacity={0.7}
-                m={0}
-                // Adjust left position for each Badge
-              >
-                {tag}
-              </Badge>
-            ))}
-          </Flex>
-          <Image
-            src={productDetails.image1}
-            alt={productDetails.name}
-            objectFit="contain"
-            boxSize={"175px"}
-          />
-        </Flex> */}
+      <CardBody
+        align="center"
+        h={{ md: 300 }}
+        py={1} flex={"none"}
+        as={ReactRouterLink}
+        to={`/products/${productDetails.id}/${productDetails.name.replace(/\s+/g, "-")}`}
+      >
         <Flex marginTop={6}>
           <Image
             src={productDetails.image1}
@@ -138,11 +120,12 @@ export default function ShopProductCard({
           display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
-          //position={"absolute"}
+        //position={"absolute"}
         >
-          <LinkOverlay
+          <Link
+            as={ReactRouterLink}
             // href={`/products/${productDetails.id}`}
-            onClick={() => navigate(`/products/${productDetails.id}/${productDetails.name.replace(/\s+/g, "-")}`)}
+            to={`/products/${productDetails.id}/${productDetails.name.replace(/\s+/g, "-")}`}
             fontSize="xs"
             fontWeight={600}
             color={"brand.500"}
@@ -151,37 +134,37 @@ export default function ShopProductCard({
             noOfLines={3}
           >
             {productDetails.name}
-          </LinkOverlay>
+          </Link>
         </Box>
         {(productDetails?.average_rating?.average_rating > 0 ||
           productDetails?.average_rating?.review_count > 0) && (
-          <Flex alignItems={"center"} justifyContent={"center"}>
-            <Badge
-              as={Flex}
-              w="fit-content"
-              gap={1}
-              colorScheme="brand"
-              px={2}
-              py={0.9}
-              color="white"
-              display={"inline-flex"}
-            >
-              <Text fontSize={12}>
-                {productDetails?.average_rating?.average_rating}
+            <Flex alignItems={"center"} justifyContent={"center"}>
+              <Badge
+                as={Flex}
+                w="fit-content"
+                gap={1}
+                colorScheme="brand"
+                px={2}
+                py={0.9}
+                color="white"
+                display={"inline-flex"}
+              >
+                <Text fontSize={12}>
+                  {productDetails?.average_rating?.average_rating}
+                </Text>
+                <Icon as={AiFillStar} boxSize={4} />
+              </Badge>
+              <Text
+                as="span"
+                color="gray.500"
+                fontSize={14}
+                ms={2}
+                align={"center"}
+              >
+                {productDetails?.average_rating?.review_count + " " + "Reviews"}
               </Text>
-              <Icon as={AiFillStar} boxSize={4} />
-            </Badge>
-            <Text
-              as="span"
-              color="gray.500"
-              fontSize={14}
-              ms={2}
-              align={"center"}
-            >
-              {productDetails?.average_rating?.review_count + " " + "Reviews"}
-            </Text>
-          </Flex>
-        )}
+            </Flex>
+          )}
       </CardBody>
       <Divider />
       <CardFooter justify={"center"} gap={8} alignItems="center" py={2}>

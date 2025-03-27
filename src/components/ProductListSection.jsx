@@ -218,7 +218,7 @@ export default function ProductListSection({ title, products, loading, type }) {
             ) : (
               <>
                 {products?.map((product) => (
-                  <GridItem my={4}>
+                  <GridItem my={4} px={{ base: "40px", md: "20px" }}>
                     <ProductCard key={product.id} product={product} />
                   </GridItem>
                 ))}

@@ -3,19 +3,15 @@ import { Toast, useMediaQuery, useToast } from "@chakra-ui/react";
 import client from "../setup/axiosClient";
 import ProductListSection from "./ProductListSection";
 import { useParams } from "react-router-dom";
-// Replace with actual UDID function import
-
-const RelatedOther = () => {
+const RelatedOther = ({ recentlyViewedProducts }) => {
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [otherProducts, setOtherProducts] = useState([]);
+    const [sortedProducts, setSortedProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isMobile] = useMediaQuery("(max-width: 1024px)");
     const { productId } = useParams();
     const toast = useToast();
-
-
-
     const getProductsList = async () => {
         if (!productId) return;
 
@@ -51,27 +47,22 @@ const RelatedOther = () => {
             setLoading(false); // Stop loading after fetch
         }
     };
-
     useEffect(() => {
         getProductsList();
         // getProducts();
     }, [productId]);
 
-
-    const SITE_ID = 5;
-
-    // const filteredOtherProducts = otherProducts.filter(
-    //     (product) => product.product_websites?.includes(SITE_ID)
-    // );
-    // const filteredRelatedProducts = relatedProducts.filter(
-    //     (product) => product.product_websites?.includes(SITE_ID)
-    // );
-
-    const allowedWebsites = products.product_websites;
-    const filteredOtherProducts = otherProducts.filter((product) =>
-        !allowedWebsites.every((site) => product.product_websites.includes(site))
-    );
-
+    const { productName } = useParams();
+    const mainBrand = productName?.split("-")[0];
+    useEffect(() => {
+        if (!productName) {
+            console.error("No product name available");
+        } else {
+            const otherProductss = otherProducts.filter(p => !p.name.startsWith(mainBrand));
+            const mainBrandProducts = otherProducts.filter(p => p.name.startsWith(mainBrand));
+            setSortedProducts([...otherProductss, ...mainBrandProducts]);
+        }
+    }, [sortedProducts])
 
     return (
         <div>
@@ -88,17 +79,28 @@ const RelatedOther = () => {
                         type={"carousal"}
                     />
                 )}
-            {filteredOtherProducts &&
-                filteredOtherProducts?.length > 0 && (
+            {sortedProducts &&
+                sortedProducts?.length > 0 && (
                     <ProductListSection
                         title="Other Products"
-                        products={filteredOtherProducts}
+                        products={sortedProducts}
                         justify="center"
                         loading={loading}
                         fontSize={{ base: "sm", lg: "md" }}
                         type={"carousal"}
                     />
                 )}
+
+            {recentlyViewedProducts?.length > 0 && (
+                <ProductListSection
+                    title="Recently Viewed Products"
+                    products={recentlyViewedProducts}
+                    justify="center"
+                    loading={loading}
+                    fontSize={{ base: "sm", lg: "md" }}
+                    type={isMobile && "carousal"}
+                />
+            )}
 
 
         </div>

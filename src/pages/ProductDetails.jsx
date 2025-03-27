@@ -32,9 +32,13 @@ import {
   FormLabel,
   Textarea,
   useMediaQuery,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaCopy, FaEnvelope, FaFacebookMessenger, FaShareAlt, FaShoppingCart, FaWhatsapp } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ReactStars from "react-stars";
@@ -104,7 +108,7 @@ export default function ProductDetails() {
   const [reviews, setReviews] = useState(null);
   // const [relatedProducts, setRelatedProducts] = useState([]);
   // const [otherProducts, setOtherProducts] = useState([]);
-  // const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
+  const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
   const [isWished, setWished] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [counter, setCounter] = useState(1);
@@ -132,56 +136,31 @@ export default function ProductDetails() {
     getProductDetails(); // eslint-disable-next-line
   }, [productId]);
 
-  // useEffect(() => {
-  //   getProductsList(productId); // eslint-disable-next-line
-  // }, [productId]);
+  useEffect(() => {
+    getProductsList(productId); // eslint-disable-next-line
+  }, [productId]);
 
-  // async function getProductsList(productId) {
-  //   const checkOrSetUDIDInfo = await CheckOrSetUDID();
-  //   let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
-  //   if (loginInfo.isLoggedIn === true) {
-  //     headers = {
-  //       Authorization: `token ${loginInfo.token}`,
-  //     };
-  //   }
-  //   const promise1 = await client.get(
-  //     `/web/single/product/related/${productId}/`,
-  //     {
-  //       headers: headers,
-  //     }
-  //   );
-  //   const promise2 = await client.get(
-  //     `/web/single/product/other/${productId}/`,
-  //     {
-  //       headers: headers,
-  //     }
-  //   );
-  //   const promise3 = await client.get(
-  //     `/web/single/product/recently-viewed/${productId}/`,
-  //     {
-  //       headers: headers,
-  //     }
-  //   );
+  async function getProductsList(productId) {
+    try {
+      const checkOrSetUDIDInfo = await CheckOrSetUDID();
+      let headers = { visitor: checkOrSetUDIDInfo.visitor_id };
 
-  //   Promise.all([promise1, promise2, promise3])
-  //     .then(function (responses) {
-  //       if (responses[0].data.status === true) {
-  //         setRelatedProducts(responses[0].data?.data);
-  //       }
-  //       if (responses[1].data.status === true) {
-  //         setOtherProducts(responses[1].data?.data);
-  //       }
-  //       if (responses[2].data.status === true) {
-  //         setRecentlyViewedProducts(responses[2].data?.data);
-  //       }
+      if (loginInfo.isLoggedIn) {
+        headers = { Authorization: `token ${loginInfo.token}` };
+      }
 
-  //       //setLoading(false);
-  //     })
-  //     .catch(function (error) {
-  //       //setLoading(false);
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }
+      const response = await client.get(
+        `/web/single/product/recently-viewed/${productId}/`,
+        { headers }
+      );
+
+      if (response.data?.status === true) {
+        setRecentlyViewedProducts(response.data?.data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   async function getProductDetails() {
     const checkOrSetUDIDInfo = await CheckOrSetUDID();
@@ -310,6 +289,41 @@ export default function ProductDetails() {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
+
+  const url = window.location.href;
+  const handleCopy = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Use the Clipboard API (works on most modern browsers)
+        await navigator.clipboard.writeText(url);
+      } else {
+        // Fallback: Create an input element, copy manually
+        const textArea = document.createElement("textarea");
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy"); // Deprecated but works on older mobile browsers
+        document.body.removeChild(textArea);
+      }
+
+      toast({
+        title: "Link copied!",
+        description: "You can now share it anywhere.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Please try again manually.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -672,6 +686,58 @@ export default function ProductDetails() {
                             : "ADD TO WISHLIST"}
                         </Text>
                       </Button>
+                      <Menu>
+                        <MenuButton
+                          size="sm"
+                          style={{ marginLeft: 0 }}
+                          as={Button}
+                          background="brand.500"
+                          _hover={{ background: "brand.500" }}
+                          color="white"
+                          leftIcon={<FaShareAlt />}
+                        >
+                          Share
+                        </MenuButton>
+                        <MenuList>
+                          <MenuItem
+                            icon={<FaEnvelope size={"20px"} color="black" />}
+                            as="a"
+                            href={`mailto:?subject=Check this out&body=${encodeURIComponent(url)}`}
+                            target="_blank"
+                          >
+                            Email
+                          </MenuItem>
+                          <MenuItem
+                            icon={<FaWhatsapp size={"20px"} color="#1ad03f" />}
+                            as="a"
+                            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`}
+                            target="_blank"
+                          >
+                            WhatsApp
+                          </MenuItem>
+                          <MenuItem
+                            icon={<FaFacebookMessenger size={"20px"} color="#0866ff" />}
+                            as="a"
+                            href={`fb-messenger://share?link=${encodeURIComponent(url)}&app_id=YOUR_APP_ID`}
+                            target="_blank"
+                            onClick={(e) => {
+                              // Open Messenger Web if on desktop
+                              if (!navigator.userAgent.match(/Android|iPhone|iPad/i)) {
+                                window.open(`https://www.messenger.com/t/?link=${encodeURIComponent(url)}`, "_blank");
+                                e.preventDefault();
+                              }
+                            }}
+                          >
+                            Messenger
+                          </MenuItem>
+                          <MenuItem
+                            icon={<FaCopy size={"20px"} />}
+                            onClick={handleCopy}
+                          >
+                            Copy Link
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
                     </ButtonGroup>
                   </SimpleGrid>
                 </Flex>
@@ -781,7 +847,8 @@ export default function ProductDetails() {
             type={isMobile && "carousal"}
           />} */}
 
-          <RelatedOther />
+          <RelatedOther recentlyViewedProducts={recentlyViewedProducts} />
+
 
 
           <Modal

@@ -167,7 +167,7 @@ export default function Carousel({
                     ) {
                       if (bannerData?.category_id !== null) {
                         navigate(
-                          `/shop?page=1&category=${bannerData?.category_id}`
+                          `/shop?page=1&category=${bannerData?.category_id}&category_name=${bannerData?.category_name}`
                         );
                       } else {
                         navigate(`/products/${bannerData?.product_id}/${bannerData.products?.name.replace(/\s+/g, "-")}`);

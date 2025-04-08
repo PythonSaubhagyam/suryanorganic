@@ -8,6 +8,7 @@ export const initializeAppData = createAsyncThunk(
       const [
         bannersResponse,
         middleBanners,
+        lowerBanners,
         upperSection,
         productSections,
         lowerSection,
@@ -18,6 +19,7 @@ export const initializeAppData = createAsyncThunk(
       ] = await Promise.all([
         client.get("/ecommerce/banners/?sequence=Upper"),
         client.get("/ecommerce/banners/?sequence=Middle"),
+        client.get("/ecommerce/banners/?sequence=Lower"),
         client.get("/upper-section/"),
         client.get("/product-section/"),
         client.get("/lower-section/"),
@@ -30,6 +32,7 @@ export const initializeAppData = createAsyncThunk(
       return {
         banners: bannersResponse.data.banner || [],
         middleBanners: middleBanners.data.banner || [],
+        lowerBanners: lowerBanners.data.banner || [],
         upperSection: upperSection.data.data || [],
         productSections: productSections.data.data || [],
         lowerSection: lowerSection.data.data || [],
@@ -47,6 +50,7 @@ export const initializeAppData = createAsyncThunk(
 const initialState = {
   banners: [],
   middleBanners: [],
+  lowerBanners: [],
   loader: false,
   error: null,
   hasFetched: false,
@@ -101,6 +105,7 @@ const bannerSlice = createSlice({
         const {
           banners,
           middleBanners,
+          lowerBanners,
           upperSection,
           productSections,
           lowerSection,
@@ -112,6 +117,7 @@ const bannerSlice = createSlice({
 
         state.banners = banners;
         state.middleBanners = middleBanners;
+        state.lowerBanners = lowerBanners;
 
         state.upperSection = {
           giftHamperSection: upperSection.filter((section) => section.id === 1),
@@ -123,7 +129,7 @@ const bannerSlice = createSlice({
           whoSection: upperSection.filter((section) => section.id === 10),
           inspireSection: upperSection.filter((section) => section.id === 11),
           missionSection: upperSection.filter((section) => section.id === 12),
-          groceriesSection: upperSection.filter((section) => section.id === 13),
+          groceriesSection: upperSection.filter((section) => section.id === 7),
         };
 
         state.productSections = {

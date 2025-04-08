@@ -70,6 +70,7 @@ export default function Home() {
   const {
     banners,
     middleBanners,
+    lowerBanners,
     loader,
     error,
     upperSection,
@@ -436,7 +437,7 @@ export default function Home() {
       </Container> */}
 
       <Container maxW={"container.xl"} px={0}>
-        <Text
+        {/* <Text
           fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
@@ -445,65 +446,10 @@ export default function Home() {
           fontWeight={500}
         >
           {"Ethical and Natural Sweets"}
-        </Text>
+        </Text> */}
 
         <Carousel banners={middleBanners?.length > 0 && middleBanners} />
       </Container>
-
-      {groceriesSection?.length > 0 &&
-        groceriesSection[0]?.is_visible_on_website === true && (
-          <Container maxW={"container.xl"} px={30}>
-            <Text
-              align="center"
-              color={"text.500"}
-              fontSize={{ md: 38, base: 24 }}
-              mt={4}
-            >
-              {" "}
-              {groceriesSection?.length > 0 && groceriesSection[0]?.label}
-            </Text>
-            <Grid
-              templateColumns={{
-                base: "repeat(2, 1fr)",
-                md: "repeat(5, 1fr)",
-              }}
-              gap={{ base: 2, md: 2 }}
-            >
-              {groceriesSection[0]?.images?.length > 0 &&
-                groceriesSection[0]?.images?.map((data) => (
-                  <>
-                    <GridItem cursor={"pointer"} align={"center"}>
-                      <Image
-                        h={"70%"}
-                        mt={8}
-                        cursor={"pointer"}
-                        // transition="all 1s ease"
-                        // _hover={{
-                        //   transform: "scale(1.1)",
-                        // }}
-                        src={data.image}
-                        alt={data.category_name}
-                        onClick={() =>
-                          navigate(
-                            `/shop?page=1&category=${data.category}&category_name=${data.category_name}`
-                          )
-                        }
-                      />
-                      <GridItem
-                        align={"center"}
-                        color={"text.500"}
-                        mt={2}
-                        fontSize={"16"}
-                      >
-                        {data.category_name}
-                      </GridItem>
-                    </GridItem>
-                  </>
-                ))}
-            </Grid>
-          </Container>
-        )}
-
       {newArrivalList?.length > 0 && (
         <ProductListSection
           title={newArrivalList?.length > 0 && newArrivalList[0]?.label}
@@ -512,6 +458,99 @@ export default function Home() {
           type={"carousal"}
         />
       )}
+
+     
+{groceriesSection?.length > 0 &&
+        groceriesSection[0]?.is_visible_on_website === true && (
+          <Container maxW={"container.xl"} mb={5} px={0}>
+            <Box
+              bgColor={"bg.500"}
+              px={{ base: 2, md: 8 }}
+              py={4}
+              my={7}
+              textAlign={{ base: "center", md: "start" }}
+            >
+              <Text
+                fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
+                fontWeight={500}
+              >
+                {groceriesSection?.length > 0 && groceriesSection[0]?.label}
+              </Text>
+              <Text
+                mt={2}
+                color={"text.300"}
+                fontSize={{ base: "md", sm: "md", xl: "lg" }}
+              >
+                Choose from a wide range of ethically made natural products
+              </Text>
+            </Box>
+            <Grid
+              templateColumns={{
+                base: "repeat(3, 1fr)",
+                md: "repeat(4, 1fr)",
+                lg: "repeat(6, 1fr)",
+              }}
+              gap={4}
+              my={6}
+              px={{ base: 7, md: 15, xl: 20 }}
+            >
+              {groceriesSection[0]?.images?.length > 0 &&
+                groceriesSection[0]?.images?.map((data, index) => (
+                  <GridItem cursor={"pointer"} key={index}>
+                    <LazyLoadImage
+                      cursor={"pointer"}
+                      transition="all 1s ease"
+                      _hover={{
+                        transform: "scale(1.25)",
+                      }}
+                      src={data.image}
+                      alt={data.category_name}
+                      onClick={() =>
+                        navigate(
+                          `/shop?page=1&category=${data.category}&category_name=${data.category_name}`
+                        )
+                      }
+                      style={{
+                        opacity: 1,
+                        transition: "opacity 0.7s",
+                      }}
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+          </Container>
+        )}
+
+      {tryOurList?.length > 0 && (
+        <ProductListSection
+          title={tryOurList?.length > 0 && tryOurList[0]?.label}
+          loading={loader}
+          products={tryOurList?.length > 0 && tryOurList[0]?.images}
+          type={"carousal"}
+        />
+      )}
+      {instantMixList?.length > 0 && (
+        <ProductListSection
+          title={instantMixList?.length > 0 && instantMixList[0]?.label}
+          loading={loader}
+          products={instantMixList?.length > 0 && instantMixList[0]?.images}
+          type={"carousal"}
+        />
+      )}
+      <Container maxW={"container.xl"} px={0}>
+        <Text
+          fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
+          bgColor={"bg.500"}
+          px={{ base: 2, md: 8 }}
+          py={4}
+          textAlign={{ base: "center", md: "start" }}
+          fontWeight={500}
+        >
+          {"Summer Special"}
+        </Text>
+
+        <Carousel banners={lowerBanners?.length > 0 && lowerBanners} />
+      </Container>
 
       {mustTryGirList?.length > 0 && (
         <ProductListSection
@@ -532,22 +571,7 @@ export default function Home() {
           type={"carousal"}
         />
       )}
-      {tryOurList?.length > 0 && (
-        <ProductListSection
-          title={tryOurList?.length > 0 && tryOurList[0]?.label}
-          loading={loader}
-          products={tryOurList?.length > 0 && tryOurList[0]?.images}
-          type={"carousal"}
-        />
-      )}
-      {instantMixList?.length > 0 && (
-        <ProductListSection
-          title={instantMixList?.length > 0 && instantMixList[0]?.label}
-          loading={loader}
-          products={instantMixList?.length > 0 && instantMixList[0]?.images}
-          type={"carousal"}
-        />
-      )}
+
       {bestOfList?.length > 0 && (
         <ProductListSection
           title={bestOfList?.length > 0 && bestOfList[0]?.label}

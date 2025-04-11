@@ -27,7 +27,7 @@ import checkLogin from "../utils/checkLogin";
 import Loader from "../components/Loader";
 import { useLocation } from "react-router-dom";
 import MetaTags from "../context/MetaTagsContext";
-
+import Captcha from "../components/Captcha";
 export default function GiftVoucher() {
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
@@ -43,6 +43,7 @@ export default function GiftVoucher() {
   };
   const [loading, setLoading] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const [verified, setVerified] = useState(false);
   const giftCardTerms = [
     {
       id: 1,
@@ -374,12 +375,15 @@ export default function GiftVoucher() {
                 <Text as="sup">
                   Questions? Reach out to care@suryanorganic.com
                 </Text>
+                <Captcha onVerify={setVerified} />
                 <Flex justify={"left"} mt={8} gap={3}>
                   <Button
                     type="submit"
                     colorScheme={"brand"}
                     width={"100px"}
                     isLoading={loading}
+                    loadingText="Processing..."
+                    isDisabled={!verified}
                   >
                     Checkout
                   </Button>

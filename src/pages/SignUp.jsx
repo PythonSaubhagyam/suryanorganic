@@ -20,6 +20,7 @@ import isPasswordStrong from "../utils/passwordStrengthCheck";
 import checkLogin from "../utils/checkLogin";
 import LoginModal from "../components/LoginModal";
 import MetaTags from "../context/MetaTagsContext";
+import Captcha from "../components/Captcha";
 
 export default function SignUp() {
   const [email, setEmail] = useState(null);
@@ -31,6 +32,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const [verified, setVerified] = useState(false);
 
   const navigate = useNavigate();
 
@@ -222,7 +224,8 @@ export default function SignUp() {
                 <FormErrorMessage>Passwords do not match</FormErrorMessage>
               )}
             </FormControl>
-            <Button type="submit" colorScheme="brand" isLoading={loading}>
+            <Captcha onVerify={setVerified} />
+            <Button type="submit" colorScheme="brand" isLoading={loading} loadingText="Creating Account..." isDisabled={!verified}>
               Sign Up
             </Button>
           </Stack>

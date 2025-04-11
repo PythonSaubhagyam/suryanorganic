@@ -14,8 +14,7 @@ import {
   Button,
   useToast,
   Box,
-  Image,
-  useBreakpointValue,
+  Image, useBreakpointValue
 } from "@chakra-ui/react";
 import client from "../setup/axiosClient";
 import { AsyncSelect } from "chakra-react-select";
@@ -23,6 +22,7 @@ import checkLogin from "../utils/checkLogin";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import { useLocation } from "react-router-dom";
 import MetaTags from "../context/MetaTagsContext";
+import Captcha from "../components/Captcha";
 
 export default function ContactUs() {
   let { search } = useLocation();
@@ -38,15 +38,14 @@ export default function ContactUs() {
     inquiry_description: "",
     age_group: "00 to 06",
   });
-
-  const width = useBreakpointValue({ md: "340px", base: "300px" });
+  const [verified, setVerified] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
+  const [loading, setLoading] = useState(false)
   const [countries, setCountries] = useState([]);
   const [callingCode, setCallingCode] = useState("");
-  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const loginInfo = checkLogin();
-
+  const width = useBreakpointValue({ md: "340px", base: "300px" })
   useEffect(() => {
     getCountries(); // eslint-disable-next-line
   }, []);
@@ -71,7 +70,7 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(true)
     try {
       formData.country = formData.country.value;
       const response = await client.post("/inquiries/", {
@@ -79,7 +78,7 @@ export default function ContactUs() {
         phone: "+" + callingCode + formData.phone,
       });
       if (response.data.status === true) {
-        setLoading(false);
+        setLoading(false)
         toast({
           title: response.data.message,
           status: "success",
@@ -89,7 +88,7 @@ export default function ContactUs() {
         });
         setFormData(initialFormData);
       } else {
-        setLoading(false);
+        setLoading(false)
         toast({
           title: response.data.message,
           status: "error",
@@ -99,7 +98,7 @@ export default function ContactUs() {
         });
       }
     } catch (error) {
-      setLoading(false);
+      setLoading(false)
       toast({
         title: error.response.data.message,
         status: "error",
@@ -113,7 +112,7 @@ export default function ContactUs() {
     let Options = [];
     if (inputValue.length > 2) {
       const countryRes = await client.get(
-        `/countries/?filter_search=${inputValue}`
+        `/countries/?filter_search=${inputValue}`,
         // {
         //   headers: { Authorization: `token ${loginInfo.token}` },
         // }
@@ -131,7 +130,6 @@ export default function ContactUs() {
     }
     return Options;
   };
-
   const pageUrl = "/contact-us";
 
   return (
@@ -183,12 +181,21 @@ export default function ContactUs() {
           left="50%"
           transform="translate(-50%, -50%)"
           zIndex="1"
-          // Optional: Add background to improve text readability
+        // Optional: Add background to improve text readability
         >
-          Contact Us
+          Contact  Us
         </Text>
       </Container>
-      <Container maxW="container.lg" pb={10}>
+      <Container maxW="container.lg" pb={10} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        {/* <Text
+          pb={2}
+          size="xl"
+          fontSize="4xl"
+          fontWeight="medium"
+          color="brand.500"
+        >
+          Contact Us
+        </Text> */}
         <Text pb={2} pt={2}>
           Contact us about anything related to our company or services.
         </Text>
@@ -206,7 +213,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "170px" }}
             >
               Your Company
             </FormLabel>
@@ -235,7 +242,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "170px" }}
             >
               Your Name
             </FormLabel>
@@ -264,7 +271,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "125px" }}
             >
               Your country
             </FormLabel>
@@ -328,7 +335,7 @@ export default function ContactUs() {
               <FormLabel
                 fontSize="sm"
                 mb={0}
-                width={{ base: "auto", md: "200px" }}
+                width={{ base: "auto", md: "170px" }}
               >
                 Phone Number
               </FormLabel>
@@ -364,7 +371,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "170px" }}
             >
               Email
             </FormLabel>
@@ -393,7 +400,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "170px" }}
             >
               Subject
             </FormLabel>
@@ -423,7 +430,7 @@ export default function ContactUs() {
             <FormLabel
               fontSize="sm"
               mb={0}
-              width={{ base: "auto", md: "200px" }}
+              width={{ base: "auto", md: "170px" }}
             >
               Your Queries
             </FormLabel>
@@ -443,17 +450,21 @@ export default function ContactUs() {
               }
             />
           </FormControl>
-          <Container maxW={"lg"} p="0">
+          <Captcha onVerify={setVerified} />
+          <Container maxW="lg" p="0" display="flex" justifyContent="center" alignItems="center">
             <Button
               type="submit"
+              isDisabled={!verified}
               isLoading={loading}
-              loadingText={"Sending"}
-              colorScheme={"brand"}
+              loadingText="Sending"
+              colorScheme="brand"
             >
               Send
             </Button>
           </Container>
+
         </form>
+
       </Container>
       {IsMobileView !== "true" && <Footer />}
     </>

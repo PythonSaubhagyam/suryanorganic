@@ -1017,7 +1017,7 @@ export default function Navbar() {
                     zIndex={99}
                     w={{ base: "65vw", lg: "50.5vw" }}
                     position="absolute"
-                    top={24}
+                    top={"70%"}
                     bg={"white"}
                     borderRadius={6}
                     boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
@@ -1065,7 +1065,7 @@ export default function Navbar() {
                     zIndex={99}
                     w="50.5vw"
                     position="absolute"
-                    top={24}
+                    top={"70%"}
                     p={4}
                     bg={"white"}
                     borderRadius={6}

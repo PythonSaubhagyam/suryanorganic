@@ -329,14 +329,16 @@ export default function ProductDetails() {
       <Helmet>
         <title>{productData?.metatitle || productData?.name}</title>
         <meta name="description" content={productData?.metadescription} />
-        <meta name="keywords" content={productData?.metakeywords} />
+        <meta name="keywords" content={productData?.metakeywords || productData?.name} />
+
         <meta property="og:title" content={productData?.name} />
         <meta property="og:description" content={productData?.metadescription} />
-        <meta property="og:price" content={productData?.base_price} />
-        <meta property="og:Rating" content={productData?.average_rating?.average_rating} />
-        <meta property="og:Stock" content={"In Stock"} />
-        <meta property="og:Delivery" content={"4-7 day delivery"} />
-        <meta property="og:image" content={productData?.images[0]} />
+        <meta property="product:price:amount" content={productData?.product_price || productData?.base_price} />
+        <meta property="product:price:currency" content="INR" />
+        <meta property="product:rating:average" content={productData?.average_rating?.average_rating || "5"} />
+        <meta property="product:availability" content="in stock" />
+        <meta property="og:Delivery" content="4-7 day delivery" />
+        <meta property="og:image" content={productData?.images?.[0]} />
         <meta property="og:url" content={window.location.href} />
       </Helmet>
       <Navbar />
@@ -590,7 +592,7 @@ export default function ProductDetails() {
                       fontWeight={"bold"}
                       fontSize={"2xl"}
                     >
-                      ₹{productData?.base_price}
+                      ₹{Number(productData?.product_price || productData?.base_price || 0).toFixed(2)}
                     </Text>
                   </Skeleton>
 
@@ -746,16 +748,30 @@ export default function ProductDetails() {
             <Box pr={{ md: 10 }} mx={{ md: 8, base: 3 }}>
               <Skeleton isLoaded={!loading}>
                 <Box
-                  //whiteSpace={"pre-line"}
                   lineHeight={1.8}
                   textAlign="justify"
                   mt={1}
+                  className="responsive-html"
                   dangerouslySetInnerHTML={{
-                    // __html: dompurify.sanitize(productData?.description),
                     __html: modifiedDescription,
                   }}
                 />
               </Skeleton>
+
+              <style jsx global>{`
+                  @media screen and (max-width: 1024px) {
+                    .responsive-html .responsive-row {
+                        flex-direction: column !important;
+                        max-width: 100%;
+                    }
+                   .responsive-html .responsive-row td {
+                        margin-top: 20px;
+                        max-width: 100% !important;
+                        padding-left: 0 !important;
+                    } 
+                 }
+              `}</style>
+
             </Box>
             {/* </Container> */}
           </Container>

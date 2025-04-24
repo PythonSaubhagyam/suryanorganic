@@ -360,14 +360,14 @@ export default function Navbar() {
       isClosable: true,
     });
 
-    navigate("/", { replace: true }); 
+    navigate("/", { replace: true });
     setTimeout(() => {
-      window.location.reload(); 
+      window.location.reload();
     });
     // CheckOrSetUDID();
   };
 
-  
+
   return (
     <>
       {/* <Container
@@ -491,7 +491,7 @@ export default function Navbar() {
                               </LinkOverlay>
                             </Text>
                             <Text fontSize="sm" fontWeight="600">
-                              ₹{result.base_price}
+                              ₹{Number(result.product_price || result.base_price || 0).toFixed(2)}
                             </Text>
                           </LinkBox>
                         ))}
@@ -1054,7 +1054,7 @@ export default function Navbar() {
                           </LinkOverlay>
                         </Text>
                         <Text fontSize="sm" fontWeight="600">
-                          ₹{result.base_price}
+                          ₹{Number(result.product_price || result.base_price || 0).toFixed(2)}
                         </Text>
                       </LinkBox>
                     ))}

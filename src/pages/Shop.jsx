@@ -38,12 +38,13 @@ import ScrollToTop from "../components/ScrollToTop";
 import MetaTags from "../context/MetaTagsContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilters } from "../slice/shopApi";
+import { fetchCategories } from "../slice/categoryApi";
 
 // import Paginator from "../components/Paginator";
 
 export default function Shop() {
+  const [category, setCategory] = useState([]);
   const [totalPages, setTotalPages] = useState();
-  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -72,10 +73,10 @@ export default function Shop() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const brand = searchPar.get("brand");
   const brand_name = searchPar.get("brand_name");
-  const dispatch = useDispatch();
 
-  // Select filters from Redux store
-  const { tagsArray, productFoamsArray, brandArray } = useSelector((state) => state.shop);
+  const dispatch = useDispatch();
+  const { tagsArray, productFoamsArray, brandArray, hasFetched } = useSelector((state) => state.shop);
+  const { categories } = useSelector((state) => state.category);
   // const [brandWise, setBrandWise] = useState({value:searchPar.get("brand"),label:searchPar.get("brand_name")});
   const { currentPage, setCurrentPage, pages } = usePagination({
     pagesCount: totalPages,
@@ -103,8 +104,19 @@ export default function Shop() {
   }, [page, categoryId, sortKey, prod_search, brand, tagWise, productFoam]);
 
   useEffect(() => {
-    dispatch(fetchFilters());
-  }, [dispatch]);
+    if (!hasFetched) {
+      dispatch(fetchFilters());
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, hasFetched]);
+
+  useEffect(() => {
+    if (categories?.length > 0 && categoryId) {
+      const selectedCategory = categories.find(cat => cat.id === parseInt(categoryId));
+      setCategory(selectedCategory);
+      console.log("Selected category:", selectedCategory);
+    }
+  }, [categories, categoryId]);
 
   // useEffect(() => {
   //   getCategories();
@@ -121,9 +133,9 @@ export default function Shop() {
     try {
       let params = categoryId
         ? {
-            page: nextPage ? nextPage : page,
-            category_id: categoryId,
-          }
+          page: nextPage ? nextPage : page,
+          category_id: categoryId,
+        }
         : { page: nextPage ? nextPage : page };
 
       if (sortKey !== null) {
@@ -388,8 +400,8 @@ export default function Shop() {
           {brand_name
             ? brand_name
             : category_name
-            ? category_name
-            : `All Products`}
+              ? category_name
+              : `All Products`}
         </Heading>
 
         <Flex
@@ -556,126 +568,152 @@ export default function Shop() {
             </>
             {/* )} */}
           </Flex>
-          {loading ? (
-            <Flex
-              wrap="wrap"
-              gap={8}
-              justify={{ base: "center", lg: "flex-start" }}
-              align={{ base: "center", lg: "flex-start" }}
-              w={{ base: "100%", lg: "100%" }}
-              h="100%"
-            >
-              {[
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                18, 19,
-              ].map(() => (
-                <Box
-                  padding="4"
-                  border="1px"
-                  borderColor="gray.300"
-                  borderRadius={"8px"}
-                  bg="white"
-                  w={{
-                    base: "80vw",
-                    sm: "40vw",
-                    md: "215px",
-                  }}
-                >
-                  <Skeleton height={180} />
-                  <SkeletonText
-                    my="3"
-                    noOfLines={1}
-                    spacing="4"
-                    skeletonHeight="4"
-                  />
-                  <hr />
-                  <Flex
-                    justifyContent={"space-evenly"}
-                    flexDirection={"row"}
-                    mt={2}
+          <Box w={{ base: "100%", lg: "100%" }} >
+
+            <Skeleton isLoaded={!!category}>
+
+              {category?.web_image && (
+
+                <Image
+
+                  src={category?.web_image}
+
+                  alt={category?.name}
+
+                  w="100%"
+
+                  maxH="220px"
+
+                  objectFit="cover"
+
+                  borderRadius="md"
+
+                />
+
+              )}
+
+            </Skeleton>
+            {loading ? (
+              <Flex
+                wrap="wrap"
+                gap={8}
+                justify={{ base: "center", lg: "flex-start" }}
+                align={{ base: "center", lg: "flex-start" }}
+                w={{ base: "100%", lg: "100%" }}
+                h="100%"
+              >
+                {[
+                  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                  18, 19,
+                ].map(() => (
+                  <Box
+                    padding="4"
+                    border="1px"
+                    borderColor="gray.300"
+                    borderRadius={"8px"}
+                    bg="white"
+                    w={{
+                      base: "80vw",
+                      sm: "40vw",
+                      md: "215px",
+                    }}
                   >
-                    <Skeleton height={5} width={65} my="auto" />
-                    <Flex flexDirection={"row"} gap={2}>
-                      <Skeleton height={7} width={7} />
-                      <Skeleton height={7} width={7} />
-                    </Flex>
-                  </Flex>
-                </Box>
-              ))}
-            </Flex>
-          ) : (
-            <Flex
-              wrap="wrap"
-              gap={8}
-              justify={{ base: "center", lg: "flex-start" }}
-              align={{ base: "center", lg: "flex-start" }}
-              w={{ base: "100%", lg: "100%" }}
-              h="100%"
-            >
-              {products.length === 0 ? (
-                <Center w="75%" mt={4}>
-                  <Heading fontSize={18} color={"gray"}>
-                    No products available!
-                  </Heading>
-                </Center>
-              ) : (
-                <>
-                  <Image
-                    w="100%"
-                    h="100%"
-                    display={displayBanners ? "block" : "none"}
-                    src={banners?.bannerWeb}
-                  />
-                  {products !== null &&
-                    products.map(
-                      (product, index) => (
-                        // return product.available_stock_quantity <= 0 ? null : (
-                        <ShopProductCard
-                          key={product.id}
-                          productDetails={product}
-                          isInWishlist={product.is_wished}
-                          onClick={() => handleWishlistChange(product, index)}
-                        />
-                      )
-                      // );
-                    )}
-                  <Pagination
-                    pagesCount={totalPages}
-                    currentPage={parseInt(page)}
-                    onPageChange={handlePageChange}
-                  >
-                    <PaginationContainer
-                      gap={2}
-                      justifyContent="center"
-                      width="100%"
+                    <Skeleton height={180} />
+                    <SkeletonText
+                      my="3"
+                      noOfLines={1}
+                      spacing="4"
+                      skeletonHeight="4"
+                    />
+                    <hr />
+                    <Flex
+                      justifyContent={"space-evenly"}
+                      flexDirection={"row"}
+                      mt={2}
                     >
-                      <PaginationPrevious>Previous</PaginationPrevious>
-                      <PaginationPageGroup gap={1}>
-                        {pages.map((page) => (
-                          <PaginationPage
-                            key={`page_${page}`}
-                            page={page}
-                            p={2}
-                            _current={{
-                              bg: "brand.500",
-                              color: "white",
-                              _hover: {
+                      <Skeleton height={5} width={65} my="auto" />
+                      <Flex flexDirection={"row"} gap={2}>
+                        <Skeleton height={7} width={7} />
+                        <Skeleton height={7} width={7} />
+                      </Flex>
+                    </Flex>
+                  </Box>
+                ))}
+              </Flex>
+            ) : (
+              <Flex
+                wrap="wrap"
+                gap={8}
+                justify={{ base: "center", lg: "flex-start" }}
+                align={{ base: "center", lg: "flex-start" }}
+                w={{ base: "100%", lg: "100%" }}
+                h="100%"
+              >
+                {products.length === 0 ? (
+                  <Center w="75%" mt={4}>
+                    <Heading fontSize={18} color={"gray"}>
+                      No products available!
+                    </Heading>
+                  </Center>
+                ) : (
+                  <>
+                    <Image
+                      w="100%"
+                      h="100%"
+                      display={displayBanners ? "block" : "none"}
+                      src={banners?.bannerWeb}
+                    />
+                    {products !== null &&
+                      products.map(
+                        (product, index) => (
+                          // return product.available_stock_quantity <= 0 ? null : (
+                          <ShopProductCard
+                            key={product.id}
+                            productDetails={product}
+                            isInWishlist={product.is_wished}
+                            onClick={() => handleWishlistChange(product, index)}
+                          />
+                        )
+                        // );
+                      )}
+                    <Pagination
+                      pagesCount={totalPages}
+                      currentPage={parseInt(page)}
+                      onPageChange={handlePageChange}
+                    >
+                      <PaginationContainer
+                        gap={2}
+                        justifyContent="center"
+                        width="100%"
+                      >
+                        <PaginationPrevious>Previous</PaginationPrevious>
+                        <PaginationPageGroup gap={1}>
+                          {pages.map((page) => (
+                            <PaginationPage
+                              key={`page_${page}`}
+                              page={page}
+                              p={2}
+                              _current={{
                                 bg: "brand.500",
                                 color: "white",
-                              },
-                            }}
-                          />
-                        ))}
-                      </PaginationPageGroup>
-                      <PaginationNext isDisabled={pages.length === currentPage}>
-                        Next
-                      </PaginationNext>
-                    </PaginationContainer>
-                  </Pagination>
-                </>
-              )}
-            </Flex>
-          )}
+                                _hover: {
+                                  bg: "brand.500",
+                                  color: "white",
+                                },
+                              }}
+                            />
+                          ))}
+                        </PaginationPageGroup>
+                        <PaginationNext isDisabled={pages.length === currentPage}>
+                          Next
+                        </PaginationNext>
+                      </PaginationContainer>
+                    </Pagination>
+                  </>
+                )}
+              </Flex>
+            )}
+          </Box>
         </Flex>
         {/* )} */}
         {/* <div itemScope itemType="http://schema.org/Product">
@@ -706,7 +744,7 @@ export default function Shop() {
             <meta itemProp="priceCurrency" content="USD" />
           </div>
         </div> */}
-      </Container>
+      </Container >
       <ScrollToTop />
       <Footer />
     </>

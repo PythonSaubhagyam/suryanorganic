@@ -759,18 +759,26 @@ export default function ProductDetails() {
               </Skeleton>
 
               <style jsx global>{`
-                  @media screen and (max-width: 1024px) {
-                    .responsive-html .responsive-row {
-                        flex-direction: column !important;
-                        max-width: 100%;
-                    }
-                   .responsive-html .responsive-row td {
-                        margin-top: 20px;
-                        max-width: 100% !important;
-                        padding-left: 0 !important;
-                    } 
-                 }
-              `}</style>
+  h6 {
+    text-decoration-line: underline;
+    text-underline-offset: 7px;
+    text-decoration-color: #C18926;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .responsive-html .responsive-row {
+      flex-direction: column !important;
+      max-width: 100%;
+    }
+
+    .responsive-html .responsive-row td {
+      margin-top: 20px;
+      max-width: 100% !important;
+      padding-left: 0 !important;
+    }
+  }
+`}</style>
+
 
             </Box>
             {/* </Container> */}

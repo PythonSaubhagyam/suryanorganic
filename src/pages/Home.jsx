@@ -302,6 +302,7 @@ export default function Home() {
               </GridItem>
               <GridItem mt={6} px={{ base: 2, md: 2, lg: 5 }}>
                 <Text
+                  as={"h1"}
                   fontWeight={500}
                   align={{ base: "justify" }}
                   color="text.500"
@@ -364,6 +365,7 @@ export default function Home() {
               </GridItem>
               <GridItem mt={12} px={{ base: 2, md: 2, lg: 5 }}>
                 <Text
+                  as={"h1"}
                   fontWeight={500}
                   align={{ base: "justify" }}
                   color="text.500"
@@ -411,6 +413,7 @@ export default function Home() {
               </GridItem>
               <GridItem mt={12} px={{ base: 2, md: 2, lg: 5 }}>
                 <Text
+                as={"h1"}
                   fontWeight={500}
                   align={{ base: "justify" }}
                   color="text.500"
@@ -459,8 +462,8 @@ export default function Home() {
         />
       )}
 
-     
-{groceriesSection?.length > 0 &&
+
+      {groceriesSection?.length > 0 &&
         groceriesSection[0]?.is_visible_on_website === true && (
           <Container maxW={"container.xl"} mb={5} px={0}>
             <Box
@@ -471,6 +474,7 @@ export default function Home() {
               textAlign={{ base: "center", md: "start" }}
             >
               <Text
+              as={"h1"}
                 fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
                 fontWeight={500}
               >
@@ -539,6 +543,7 @@ export default function Home() {
       )}
       <Container maxW={"container.xl"} px={0}>
         <Text
+        as={"h1"}
           fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}
@@ -649,6 +654,7 @@ export default function Home() {
           backgroundRepeat={"no-repeat"}
         >
           <Heading
+            as={"h1"}
             color="text.500"
             fontSize={{ md: 33, base: 24 }}
             fontWeight={"500"}
@@ -687,7 +693,7 @@ export default function Home() {
                       ></iframe>
                     </GridItem>
                     <GridItem>
-                      <Text fontWeight={700} fontSize={"24px"}>
+                      <Text as={"h1"} fontWeight={700} fontSize={"24px"}>
                         {data?.name}
                       </Text>
                       <Text
@@ -703,7 +709,7 @@ export default function Home() {
                   <>
                     {/* Text on the left, video on the right */}
                     <GridItem>
-                      <Text fontWeight={700} fontSize={"24px"}>
+                      <Text as={"h1"} fontWeight={700} fontSize={"24px"}>
                         {data?.name}
                       </Text>
                       <Text
@@ -792,6 +798,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+                as={"h1"}
                 color="text.500"
                 fontSize={{ md: 33, base: 24 }}
                 fontWeight={"500"}
@@ -855,6 +862,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+                as={"h1"}
                 color="text.500"
                 fontSize={{ md: 33, base: 24 }}
                 fontWeight={"500"}
@@ -918,6 +926,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+                as={"h1"}
                 color="text.500"
                 fontSize={{ md: 33, base: 24 }}
                 fontWeight={"500"}
@@ -978,6 +987,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+                as={"h1"}
                 color="text.500"
                 fontSize={{ md: 33, base: 24 }}
                 fontWeight={"500"}
@@ -1021,6 +1031,7 @@ export default function Home() {
               backgroundRepeat={"no-repeat"}
             >
               <Heading
+                as={"h1"}
                 color="text.500"
                 fontSize={{ md: 33, base: 24 }}
                 fontWeight={"500"}
@@ -1047,7 +1058,7 @@ export default function Home() {
             />
           </Container>
         )}
-        
+
       {!checkLogin().isLoggedIn && (
         <LoginModal
           isOpen={isLoginModalOpen}

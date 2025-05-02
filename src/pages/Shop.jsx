@@ -39,6 +39,7 @@ import MetaTags from "../context/MetaTagsContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilters } from "../slice/shopApi";
 import { fetchCategories } from "../slice/categoryApi";
+import { Helmet } from "react-helmet";
 
 // import Paginator from "../components/Paginator";
 
@@ -382,7 +383,26 @@ export default function Shop() {
 
   return (
     <>
-      <MetaTags pageUrl={pageUrl} />
+      {(brand_name || category_name || category?.metatitle) ? (
+        <Helmet>
+          <title>{category?.metatitle || brand_name || category_name || "Shop – Discover Amazing Products at Great Prices"}</title>
+          <meta name="description" content={category?.metadescription || "Explore our online shop for premium products at unbeatable prices. Shop now and enjoy fast shipping and easy returns on all your favorite items!"} />
+          <meta name="keywords" content={category?.metakeywords || "shop, online shop, shopping, buy online, e-commerce, Ethical & Natural Products, Organic Products,shopping website,beauty products,Gift shop"} />
+
+          <meta property="og:title" content={category?.metatitle} />
+          <meta property="og:description" content={category?.metadescription} />
+          <meta property="product:price:currency" content="INR" />
+          <meta property="product:rating:average" content={"⭐⭐⭐⭐"} />
+          <meta property="product:availability" content="in stock" />
+          <meta property="og:Delivery" content="4-7 day delivery" />
+          <meta property="og:image" content={category?.web_image} />
+          <meta property="og:url" content={window.location.href} />
+
+        </Helmet>
+      ) : (
+        <MetaTags pageUrl={pageUrl} />
+      )}
+
 
       <Navbar />
       <Container maxW="container.xl">
@@ -568,152 +588,129 @@ export default function Shop() {
             </>
             {/* )} */}
           </Flex>
-          <Box w={{ base: "100%", lg: "100%" }} >
-
-            <Skeleton isLoaded={!!category}>
-
-              {category?.web_image && (
-
-                <Image
-
-                  src={category?.web_image}
-
-                  alt={category?.name}
-
-                  w="100%"
-
-                  maxH="220px"
-
-                  objectFit="cover"
-
-                  borderRadius="md"
-
-                />
-
-              )}
-
-            </Skeleton>
-            {loading ? (
-              <Flex
-                wrap="wrap"
-                gap={8}
-                justify={{ base: "center", lg: "flex-start" }}
-                align={{ base: "center", lg: "flex-start" }}
-                w={{ base: "100%", lg: "100%" }}
-                h="100%"
-              >
-                {[
-                  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                  18, 19,
-                ].map(() => (
-                  <Box
-                    padding="4"
-                    border="1px"
-                    borderColor="gray.300"
-                    borderRadius={"8px"}
-                    bg="white"
-                    w={{
-                      base: "80vw",
-                      sm: "40vw",
-                      md: "215px",
-                    }}
+          {loading ? (
+            <Flex
+              wrap="wrap"
+              gap={8}
+              justify={{ base: "center", lg: "flex-start" }}
+              align={{ base: "center", lg: "flex-start" }}
+              w={{ base: "100%", lg: "100%" }}
+              h="100%"
+            >
+              {[
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                18, 19,
+              ].map(() => (
+                <Box
+                  padding="4"
+                  border="1px"
+                  borderColor="gray.300"
+                  borderRadius={"8px"}
+                  bg="white"
+                  w={{
+                    base: "80vw",
+                    sm: "40vw",
+                    md: "215px",
+                  }}
+                >
+                  <Skeleton height={180} />
+                  <SkeletonText
+                    my="3"
+                    noOfLines={1}
+                    spacing="4"
+                    skeletonHeight="4"
+                  />
+                  <hr />
+                  <Flex
+                    justifyContent={"space-evenly"}
+                    flexDirection={"row"}
+                    mt={2}
                   >
-                    <Skeleton height={180} />
-                    <SkeletonText
-                      my="3"
-                      noOfLines={1}
-                      spacing="4"
-                      skeletonHeight="4"
-                    />
-                    <hr />
-                    <Flex
-                      justifyContent={"space-evenly"}
-                      flexDirection={"row"}
-                      mt={2}
-                    >
-                      <Skeleton height={5} width={65} my="auto" />
-                      <Flex flexDirection={"row"} gap={2}>
-                        <Skeleton height={7} width={7} />
-                        <Skeleton height={7} width={7} />
-                      </Flex>
+                    <Skeleton height={5} width={65} my="auto" />
+                    <Flex flexDirection={"row"} gap={2}>
+                      <Skeleton height={7} width={7} />
+                      <Skeleton height={7} width={7} />
                     </Flex>
-                  </Box>
-                ))}
-              </Flex>
-            ) : (
-              <Flex
-                wrap="wrap"
-                gap={8}
-                justify={{ base: "center", lg: "flex-start" }}
-                align={{ base: "center", lg: "flex-start" }}
-                w={{ base: "100%", lg: "100%" }}
-                h="100%"
-              >
-                {products.length === 0 ? (
-                  <Center w="75%" mt={4}>
-                    <Heading fontSize={18} color={"gray"}>
-                      No products available!
-                    </Heading>
-                  </Center>
-                ) : (
-                  <>
-                    <Image
-                      w="100%"
-                      h="100%"
-                      display={displayBanners ? "block" : "none"}
-                      src={banners?.bannerWeb}
-                    />
-                    {products !== null &&
-                      products.map(
-                        (product, index) => (
-                          // return product.available_stock_quantity <= 0 ? null : (
-                          <ShopProductCard
-                            key={product.id}
-                            productDetails={product}
-                            isInWishlist={product.is_wished}
-                            onClick={() => handleWishlistChange(product, index)}
-                          />
-                        )
-                        // );
-                      )}
-                    <Pagination
-                      pagesCount={totalPages}
-                      currentPage={parseInt(page)}
-                      onPageChange={handlePageChange}
+                  </Flex>
+                </Box>
+              ))}
+            </Flex>
+          ) : (
+            <Flex
+              wrap="wrap"
+              gap={8}
+              justify={{ base: "center", lg: "flex-start" }}
+              align={{ base: "center", lg: "flex-start" }}
+              w={{ base: "100%", lg: "100%" }}
+              h="100%"
+            >
+              {products.length === 0 ? (
+                <Center w="75%" mt={4}>
+                  <Heading fontSize={18} color={"gray"}>
+                    No products available!
+                  </Heading>
+                </Center>
+              ) : (
+                <>
+                  <Image
+                    w={isMobile ? "100%" : "88%"}
+                    maxH="220px"
+                    borderRadius="md"
+                    objectFit="cover"
+                    display={category?.web_image ? "block" : "none"}
+                    src={category?.web_image}
+                  />
+                  {products !== null &&
+                    products.map(
+                      (product, index) => (
+                        // return product.available_stock_quantity <= 0 ? null : (
+                        <ShopProductCard
+                          key={product.id}
+                          productDetails={product}
+                          isInWishlist={product.is_wished}
+                          onClick={() => handleWishlistChange(product, index)}
+                        />
+                      )
+                      // );
+                    )}
+                  <Pagination
+                    pagesCount={totalPages}
+                    currentPage={parseInt(page)}
+                    onPageChange={handlePageChange}
+                  >
+                    <PaginationContainer
+                      gap={2}
+                      justifyContent="center"
+                      width="100%"
                     >
-                      <PaginationContainer
-                        gap={2}
-                        justifyContent="center"
-                        width="100%"
-                      >
-                        <PaginationPrevious>Previous</PaginationPrevious>
-                        <PaginationPageGroup gap={1}>
-                          {pages.map((page) => (
-                            <PaginationPage
-                              key={`page_${page}`}
-                              page={page}
-                              p={2}
-                              _current={{
+                      <PaginationPrevious>Previous</PaginationPrevious>
+                      <PaginationPageGroup gap={1}>
+                        {pages.map((page) => (
+                          <PaginationPage
+                            key={`page_${page}`}
+                            page={page}
+                            p={2}
+                            _current={{
+                              bg: "brand.500",
+                              color: "white",
+                              _hover: {
                                 bg: "brand.500",
                                 color: "white",
-                                _hover: {
-                                  bg: "brand.500",
-                                  color: "white",
-                                },
-                              }}
-                            />
-                          ))}
-                        </PaginationPageGroup>
-                        <PaginationNext isDisabled={pages.length === currentPage}>
-                          Next
-                        </PaginationNext>
-                      </PaginationContainer>
-                    </Pagination>
-                  </>
-                )}
-              </Flex>
-            )}
-          </Box>
+                              },
+                            }}
+                          />
+                        ))}
+                      </PaginationPageGroup>
+                      <PaginationNext isDisabled={pages.length === currentPage}>
+                        Next
+                      </PaginationNext>
+                    </PaginationContainer>
+                  </Pagination>
+                </>
+              )}
+            </Flex>
+          )}
+
         </Flex>
         {/* )} */}
         {/* <div itemScope itemType="http://schema.org/Product">

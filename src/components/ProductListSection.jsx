@@ -63,6 +63,7 @@ export default function ProductListSection({ title, products, loading, type }) {
     <>
       <Container maxW={"container.xl"} px={0} pb={6} position={"relative"} >
         <Text
+        as={"h1"}
           fontSize={{ base: "xl", sm: "2xl", xl: "3xl" }}
           bgColor={"bg.500"}
           px={{ base: 2, md: 8 }}

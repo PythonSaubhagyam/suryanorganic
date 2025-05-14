@@ -460,35 +460,7 @@ export default function ConsultOurVaidya() {
           </Box>
         </Flex>
       </Container>
-      <Box
-        w="100%"
-        /*  backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
-          backgroundSize="100%"
-          backgroundPosition="50% 100%"
-          backgroundRepeat={"no-repeat"} */
-      >
-        <Heading
-          color="brand.500"
-          size="lg"
-          mx="auto"
-          align={"center"}
-          my={"5"}
-          pb={"10px"}
-        >
-          AVAILABLE AT
-        </Heading>
-      </Box>
-      <Container maxW={"container.xl"} mb={5} px={0} centerContent>
-        <Image
-          src={"/001.jpg"}
-          w={"container.xl"}
-          alt=""
-          style={{
-            opacity: 1,
-            transition: "opacity 0.7s", // Note the corrected syntax here
-          }}
-        />
-      </Container>
+  
       {!checkLogin().isLoggedIn && (
         <LoginModal
           isOpen={isLoginModalOpen}

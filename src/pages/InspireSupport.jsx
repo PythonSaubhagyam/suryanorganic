@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ReadMorePost from "../components/ReadMorePost";
-import { Box, Container, Text,Image,Heading } from "@chakra-ui/react";
+import { Box, Container, Text, Image, Heading } from "@chakra-ui/react";
 import BreadCrumbCom from "../components/BreadCrumbCom";
 import ScrollToTop from "../components/ScrollToTop";
 
@@ -12,7 +12,7 @@ import MetaTags from "../context/MetaTagsContext";
 
 const Posts = [
   {
-    image:"./Suryan Organic/inspire-support/b2.jpg",
+    image: "./Suryan Organic/inspire-support/b2.jpg",
     title: "Bansi Gir Gaushala",
     content: (
       <Text>
@@ -59,7 +59,7 @@ const Posts = [
     href: "https://www.sose.in/",
   },
   {
-    image:"./Suryan Organic/inspire-support/b4.jpg",
+    image: "./Suryan Organic/inspire-support/b4.jpg",
     title: "GoTirth Vidyapeeth",
     content:
       "The education philosophy of ancient India was influenced by religion itself. The aim of education was to awaken the instinct of righteousness. Education was for religion, meaning, lust and salvation. Their gradual development was the only goal of education. It was the first place of religion. Opporting religion to gain meaning was to block the path to attain salvation. Moksha was the ultimate goal of life and this was also the ultimate goal of education.",
@@ -68,11 +68,11 @@ const Posts = [
 ];
 
 export default function InspireSupport() {
-  
+
   let { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-   const IsMobileView = searchParams.get("mobile") ?? "false";
-   const pageUrl = "/inspire-and-support";
+  const IsMobileView = searchParams.get("mobile") ?? "false";
+  const pageUrl = "/inspire-and-support";
 
   return (
     <>
@@ -90,43 +90,15 @@ export default function InspireSupport() {
       </Container>
       <Container maxW={"container.xl"} mb={4} px={0}>
         <Image src={"./Suryan Organic/inspire-support/inspire.jpg"} />
-    
+
       </Container>
       <Container maxW={"6xl"} >
         {Posts.map((postDetails) => (
           <ReadMorePost postAlign="horizontal" postDetails={postDetails} />
         ))}
-        </Container>
-        <Container maxW={"container.xl"} pb={4} px={0}>
-        <Box
-           w="100%"
-           backgroundImage={"https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"}
-             backgroundSize="100%"
-             backgroundPosition="50% 100%"
-             backgroundRepeat={"no-repeat"} 
-        >
-           <Heading
-            color="brand.500"
-            size="lg"
-            mx="auto"
-            align={"center"}
-            my={"5"}
-            pb={"10px"}
-          >
-          Available At
-          </Heading>
-        </Box>
-        <Box>
-          <Image
-            src={
-              "/001.jpg"
-            }
-            w={"100%"}
-            alt="Ayurveda"
-          />
-        </Box>
       </Container>
-      <ScrollToTop/>
+     
+      <ScrollToTop />
       {IsMobileView !== "true" && <Footer />}
 
 

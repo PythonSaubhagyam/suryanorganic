@@ -271,20 +271,28 @@ export default function Home() {
           </Container>
         )}
 
-      {certificateSection?.length > 0 &&
+    {certificateSection?.length > 0 &&
         certificateSection[0]?.is_visible_on_website === true && (
-          <Container mb={5} px={0} maxW={"container.xl"} centerContent>
-            <LazyLoadImage
-              src={
-                certificateSection?.length > 0 && certificateSection[0]?.image
-              }
-              alt=""
-              style={{
-                opacity: 1,
-                transition: "opacity 0.7s", // Note the corrected syntax here
-                width: "100%",
-              }}
-            />
+          <Container px={0} maxW={"container.xl"} centerContent>
+            {certificateSection[0]?.images?.length > 0 ? (
+              loader ? (
+                <Skeleton h={489} />
+              ) : (
+                <Carousel banners={certificateSection[0].images} />
+              )
+            ) : (
+              certificateSection[0]?.image && (
+                <LazyLoadImage
+                  src={certificateSection[0].image}
+                  alt="certificate"
+                  style={{
+                    opacity: 1,
+                    transition: "opacity 0.7s",
+                    width: "100%",
+                  }}
+                />
+              )
+            )}
           </Container>
         )}
       <Container maxW={"6xl"} mb={5}>
@@ -1017,47 +1025,7 @@ export default function Home() {
           </Container>
         )}
 
-      {/* Available Section */}
-      {availableSection?.length > 0 &&
-        availableSection[0]?.is_visible_on_website === true && (
-          <Container maxW={"container.xl"} mb={5} px={4} centerContent>
-            <Box
-              w="100%"
-              backgroundImage={
-                "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/HomePage/line.png"
-              }
-              backgroundSize="100%"
-              backgroundPosition="50% 100%"
-              backgroundRepeat={"no-repeat"}
-            >
-              <Heading
-                as={"h1"}
-                color="text.500"
-                fontSize={{ md: 33, base: 24 }}
-                fontWeight={"500"}
-                mx="auto"
-                align={"center"}
-                mt={3}
-                pb={"10px"}
-              >
-                {availableSection?.length > 0 && availableSection[0].label}
-              </Heading>
-            </Box>
-            <Image
-              src={
-                availableSection?.length > 0 &&
-                availableSection[0]?.images[0].image
-              }
-              w={"container.xl"}
-              mt={3}
-              alt=""
-              style={{
-                opacity: 1,
-                transition: "opacity 0.7s", // Note the corrected syntax here
-              }}
-            />
-          </Container>
-        )}
+    
 
       {!checkLogin().isLoggedIn && (
         <LoginModal

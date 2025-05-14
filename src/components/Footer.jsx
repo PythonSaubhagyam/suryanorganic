@@ -9,6 +9,7 @@ import {
   Image,
   Flex,
   Grid,
+  Heading,
 } from "@chakra-ui/react";
 import { FaFacebookF, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
@@ -70,14 +71,14 @@ export default function Footer() {
   }, [RouterLink]);
   return (
     <>
-      <hr />
-      <Container maxW={"container.xl"}>
-        <Box className="scrolling-text-container">
+      <Container maxW={"container.xl"} pt={4} >
+        <hr />
+        <Box className="scrolling-text-container" bg={"brand.500"}>
           <Text
             align={"center"}
-            color="brand.900"
-            pt={4}
+            color="white"
             px={4}
+            py={1}
             fontSize={{ base: "sm", lg: "md" }}
             className="scrolling-text"
           >
@@ -100,6 +101,17 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
+        <Box w="100%" >
+          <Heading color="brand.500" size="lg" align="center" my={5} pb="10px">
+            AVAILABLE AT
+          </Heading>
+        </Box>
+        <Image
+          src="https://s3organicbucket.s3.amazonaws.com/website/SectionImages/visit_our_stores.jpg"
+          w="full"
+          alt="Available at"
+          transition="opacity 0.7s"
+        />
         <Container maxW={"7xl"} pt={10} pb={2}>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 5 }}
@@ -111,7 +123,7 @@ export default function Footer() {
 
             {/* <SimpleGrid columns={{ base: 1, md: 3 }}> */}
             <Stack color="text.300">
-              <Stack ml={{ lg: "auto",md:"50%"}}>
+              <Stack ml={{ lg: "auto", md: "50%" }}>
                 <ListHeader style={{ color: "#436131" }}>
                   Quick Links
                 </ListHeader>
@@ -392,7 +404,7 @@ export default function Footer() {
                 <ListHeader gap={"3"}>We accept payments via</ListHeader>
               </Stack>
               <Image
-               ml={{ base: "-15px",md:"-15px",lg:0 }}
+                ml={{ base: "-15px", md: "-15px", lg: 0 }}
                 src={
                   "https://forntend-bucket.s3.ap-south-1.amazonaws.com/sose/images/footer/payment method.png hnghngh.png"
                 }
@@ -419,7 +431,7 @@ export default function Footer() {
       </Container>
       {isLoggedIn && <CartPopUp />}
       <WhatsUp />
-      
+
 
     </>
   );
